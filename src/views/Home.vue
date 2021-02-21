@@ -4,13 +4,14 @@
 			type="text"
 			v-model="apiKeyInput"
 		>
-		<button @click="setApiKey(apiKeyInput)">Set API key</button>
+		<button @click="login(apiKeyInput)">Set API key</button>
+		<h1>Hi, {{ names[playerId] }} [{{ playerId }}]!</h1>
 	</div>
 </template>
 
 <script>
 //import HelloWorld from '@/components/HelloWorld.vue'
-import { mapMutations } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
 	name: "Home",
@@ -22,8 +23,11 @@ export default {
 			apiKeyInput: this.$store.state.apiKey,
 		};
 	},
+	computed: {
+		...mapState(["names", "playerId"])
+	},
 	methods: {
-		...mapMutations(["setApiKey"]),
+		...mapActions(["login"])
 	},
 };
 </script>
