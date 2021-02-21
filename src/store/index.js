@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import LZString from 'lz-string'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,8 @@ const store = new Vuex.Store({
 	mutations: {
 		init(state) {
 			if(localStorage.getItem('store')) {
-				const json = localStorage.getItem('store')
+				const lz = localStorage.getItem('store')
+				const json = LZString.decompressFromUTF16(lz)
 				const obj = JSON.parse(json)
 				const newState = Object.assign(state, obj)
 				this.replaceState(newState)
@@ -27,8 +29,10 @@ const store = new Vuex.Store({
 })
 
 store.subscribe((mutation, state) => {
-	console.log('STATE MODIFIED', JSON.stringify(state))
-	localStorage.setItem('store', JSON.stringify(state))
+	const json = JSON.stringify(state)
+	const lz = LZString.compressToUTF16(json)
+	localStorage.setItem('store', lz)
+	console.log(`Compressed state from ${json.length} to ${lz.length} characters.`)
 })
 
 export default store
