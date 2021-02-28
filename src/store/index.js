@@ -5,6 +5,21 @@ import tornApi from '../tornApi'
 
 Vue.use(Vuex)
 
+const LOCAL_STORAGE_KEY = 'store'
+
+function loadFromStorage() {
+	const lz = localStorage.getItem(LOCAL_STORAGE_KEY)
+	const json = LZString.decompressFromUTF16(lz)
+	return JSON.parse(json)
+}
+
+function saveToStorage(state) {
+	const json = JSON.stringify(state)
+	const lz = LZString.compressToUTF16(json)
+	localStorage.setItem(LOCAL_STORAGE_KEY, lz)
+	console.log(`[Store] Compressed state from ${json.length} to ${lz.length} (${Math.round(lz.length / json.length * 100)}%) characters.`)
+}
+
 const store = new Vuex.Store({
 	state: {
 		apiKey: null, // TORN API key
@@ -14,9 +29,7 @@ const store = new Vuex.Store({
 	mutations: {
 		init(state) {
 			if (localStorage.getItem('store')) {
-				const lz = localStorage.getItem('store')
-				const json = LZString.decompressFromUTF16(lz)
-				const obj = JSON.parse(json)
+				const obj = loadFromStorage()
 				const newState = Object.assign(state, obj)
 				this.replaceState(newState)
 			}
@@ -46,10 +59,7 @@ const store = new Vuex.Store({
 store.subscribe((mutation, state) => {
 	console.log('[Store] Mutation', mutation)
 	console.log('[Store] Saving new state', state)
-	const json = JSON.stringify(state)
-	const lz = LZString.compressToUTF16(json)
-	localStorage.setItem('store', lz)
-	console.log(`[Store] Compressed state from ${json.length} to ${lz.length} (${Math.round(lz.length / json.length * 100)}%) characters.`)
+	saveToStorage(state)
 })
 
 export default store
