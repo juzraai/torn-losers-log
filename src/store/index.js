@@ -23,6 +23,8 @@ function saveToStorage(state) {
 const store = new Vuex.Store({
 	state: {
 		apiKey: null, // TORN API key
+		lastUpdate: null,
+		losses: [],
 		names: {}, // TORN player ID->name dictionary
 		playerId: null, // TORN player ID (which the API key belongs to)
 	},
@@ -37,22 +39,41 @@ const store = new Vuex.Store({
 		setApiKey(state, apiKey) {
 			state.apiKey = apiKey
 		},
+		setLastUpdate(state) {
+			state.lastUpdate = new Date().getTime()
+		},
+		setLosses(state, losses) {
+			state.losses = losses
+		},
 		setPlayerId(state, playerId) {
 			state.playerId = playerId
 		},
 		setPlayerName(state, payload) {
 			const { player_id, name } = payload
 			state.names[player_id] = name
-		}
+		},
 	},
 	actions: {
 		async login(context, apiKey) {
 			context.commit('setApiKey', apiKey)
-			const response = await tornApi.fetchBasic(context.state.apiKey)
+			const response = await tornApi.fetchBasic(apiKey)
 			const { player_id, name } = response
 			context.commit('setPlayerId', player_id)
 			context.commit('setPlayerName', { player_id, name })
 		},
+		async fetchLosses(context) {
+			const { apiKey, playerId } = context.state
+			const response = await tornApi.fetchAttacks(apiKey)
+			const losses = response.filter(a =>
+				a.attacker_id === playerId &&
+				a.result === 'Lost'
+			).map(({ code, defender_id, timestamp_ended }) => ({
+				code, defender_id, timestamp_ended
+			}))
+			console.log(losses)
+			context.commit('setLosses', losses)
+			context.commit('setLastUpdate')
+		}
 	},
 })
 

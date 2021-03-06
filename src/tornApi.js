@@ -2,7 +2,7 @@ class TornApi {
 
 	/**
 	 * @param {String} apiKey
-	 * @returns {{}}
+	 * @returns {{attacker_id: Number, code: String, defender_id: Number, result: String, timestamp_ended: Number}[]}
 	 */
 	async fetchAttacks(apiKey) {
 		if (!apiKey) return
