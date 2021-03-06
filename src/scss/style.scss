@@ -1,2 +1,20 @@
 @import "variables";
 @import "bootstrap";
+
+html, body {
+	height: 100%;
+	position: relative;
+}
+
+.list-group {
+	@extend .shadow;
+}
+
+.nav-pills .nav-link {
+	@extend .rounded-pill;
+}
+
+.refresh-button {
+	@extend .btn, .btn-danger, .rounded-circle;
+	padding: .5rem .75rem;
+}

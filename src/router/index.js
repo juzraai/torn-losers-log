@@ -3,12 +3,19 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = [
-	{
-		path: '/',
-		name: 'Home',
-		component: () => import('../views/Home.vue')
+function r(path, name) {
+	return {
+		path,
+		name,
+		component: () => import(`../views/${name}.vue`)
 	}
+}
+
+export const routes = [
+	r('/', 'Losses'),
+	r('/sessions', 'Sessions'),
+	r('/clients', 'Clients'),
+	r('/stats', 'Stats'),
 ]
 
 const router = new VueRouter({
