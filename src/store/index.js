@@ -70,7 +70,7 @@ const store = new Vuex.Store({
 			).map(({ code, defender_id, timestamp_ended }) => ({
 				code, defender_id, timestamp_ended
 			}))
-			console.log(losses)
+			losses.reverse()
 			context.commit('setLosses', losses)
 			context.commit('setLastUpdate')
 		}
