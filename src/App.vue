@@ -2,7 +2,16 @@
 	<div class="bg-light h-100">
 		<div class="h-100 d-flex flex-column justify-content-center">
 			<div class="container">
-				<div class="row">
+				<div
+					class="row"
+					v-if="!apiKey"
+				>
+					<Login />
+				</div>
+				<div
+					class="row"
+					v-else
+				>
 					<div class="col-md-11 col-lg-10 mx-auto my-5">
 						<ul class="mb-3 nav nav-pills">
 							<li
@@ -20,7 +29,13 @@
 								<a
 									class="disabled nav-link"
 									href="#"
-								><timeago :datetime="lastUpdate" :auto-update="60" /> </a>
+								>
+									<timeago
+										:auto-update="60"
+										:datetime="lastUpdate"
+										v-if="lastUpdate"
+									/>
+								</a>
 							</li>
 							<li class="nav-item">
 								<a
@@ -42,16 +57,18 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import Login from "@/components/Login.vue";
 import { routes } from "@/router";
 
 export default {
+	components: { Login },
 	data() {
 		return {
 			routes,
 		};
 	},
 	computed: {
-		...mapState(["lastUpdate"]),
+		...mapState(["apiKey", "lastUpdate", "names", "playerId"]),
 	},
 	methods: {
 		...mapActions(["fetchLosses"]),
