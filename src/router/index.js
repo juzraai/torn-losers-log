@@ -3,19 +3,20 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-function r(path, name) {
+function r(path, name, icon) {
 	return {
 		path,
 		name,
+		icon,
 		component: () => import(`../views/${name}.vue`)
 	}
 }
 
 export const routes = [
-	r('/', 'Losses'),
-	r('/sessions', 'Sessions'),
-	r('/clients', 'Clients'),
-	r('/stats', 'Stats'),
+	r('/', 'Losses', 'fa-list'),
+	r('/sessions', 'Sessions', 'fa-layer-group'),
+	r('/clients', 'Clients', 'fa-user'),
+	r('/stats', 'Stats', 'fa-chart-bar'),
 ]
 
 const router = new VueRouter({
