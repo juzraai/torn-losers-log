@@ -1,6 +1,6 @@
 <template>
-	<div class="align-items-center d-flex list-group-item">
-		<div class="font-weight-bold mr-2">
+	<div class="align-items-center d-flex list-group-item py-2">
+		<!--<div class="font-weight-bold mr-2">
 			<span
 				class="badge badge-pill badge-danger mb-1"
 				v-if="!a.paid"
@@ -9,25 +9,23 @@
 				class="badge badge-pill badge-success mb-1"
 				v-else
 			>Paid</span>
-		</div>
+		</div>-->
 		<div>
 			You lost
-			<span
-				class="font-weight-bold"
-				v-if="a.attacks"
-			>{{ a.attacks.length }}x</span>
+			<strong v-if="a.attacks">{{ a.attacks.length }}x</strong>
 			to
 			<Player :id="a.defender_id" />
-			<a
-				class="d-inline-block mx-1 text-secondary"
-				:href="'https://www.torn.com/loader.php?sid=attackLog&ID=' + a.code"
-				target="_blank"
+			<Timeago
+				:auto-update="60"
+				:datetime="a.timestamp_ended * 1000"
+			/>
+			<span
+				class="ml-2 text-success"
+				v-if="a.paid"
 			>
-				<Timeago
-					:auto-update="60"
-					:datetime="a.timestamp_ended * 1000"
-				/>
-			</a>
+				<i class="fas fa-fw fa-dollar-sign"></i>
+				<strong>Paid</strong>
+			</span>
 		</div>
 		<div class="ml-auto">
 			<button class="btn btn-sm btn-outline-info mx-1">Proof</button>

@@ -1,5 +1,5 @@
 <template>
-	<nav class="navbar navbar-expand-sm navbar-light bg-light">
+	<nav class="navbar navbar-expand-sm navbar-light">
 		<span class="font-italic font-weight-bold navbar-brand text-muted">TORN City Losers' Log</span>
 		<button
 			class="navbar-toggler"

@@ -20,6 +20,28 @@ function saveToStorage(state) {
 	console.log(`[Store] Compressed state from ${json.length} to ${lz.length} (${Math.round(lz.length / json.length * 100)}%) characters.`)
 }
 
+function groupPredicate(a) {
+	return group => group.defender_id === a.defender_id && group.paid === a.paid
+}
+
+function newGroup(a) {
+	const { defender_id, paid, timestamp_ended } = a
+	return {
+		attacks: [a],
+		defender_id,
+		paid,
+		timestamp_ended,
+		timestamp_started: a.timestamp_ended, // sic! we are using the "ended" timestamp of attacks!
+	}
+}
+
+function updateGroup(group, a) {
+	group.attacks.push(a)
+	group.timestamp_ended = Math.max(group.timestamp_ended, a.timestamp_ended)
+	group.timestamp_started = Math.min(group.timestamp_started, a.timestamp_ended)
+	return group
+}
+
 const store = new Vuex.Store({
 	state: {
 		apiKey: null, // TORN API key
@@ -54,23 +76,24 @@ const store = new Vuex.Store({
 		},
 	},
 	getters: {
+		clients(state) {
+			return state.losses.reduce((groups, a) => {
+				const i = groups.findIndex(groupPredicate(a))
+				if (i > -1) {
+					groups[i] = updateGroup(groups[i], a)
+				} else {
+					groups.push(newGroup(a))
+				}
+				return groups
+			}, [])
+		},
 		sessions(state) {
 			return state.losses.reduce((groups, a) => {
-				let group = groups[groups.length - 1]
-				const { defender_id, paid, timestamp_ended } = a
-				if (group && group.defender_id === defender_id && group.paid === paid) {
-					group.attacks.push(a)
-					group.timestamp_ended = Math.max(group.timestamp_ended, a.timestamp_ended)
-					group.timestamp_started = Math.min(group.timestamp_started, a.timestamp_ended)
+				const group = groups[groups.length - 1]
+				if (group && groupPredicate(a)(group)) {
+					updateGroup(group, a)
 				} else {
-					const attacks = [a]
-					groups.push({
-						attacks,
-						defender_id,
-						paid,
-						timestamp_ended,
-						timestamp_started: a.timestamp_ended, // sic!
-					})
+					groups.push(newGroup(a))
 				}
 				return groups
 			}, [])

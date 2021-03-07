@@ -1,19 +1,19 @@
 <template>
-	<span class="font-weight-bold">
+	<strong>
 		<span
-			class="d-inline-block mx-1 text-secondary"
+			class="text-secondary"
 			role="button"
 			v-if="!names[id]"
 			@click="resolveName(id)"
 		>Resolve name</span>
 		<a
-			class="d-inline-block mx-1"
 			:href="'https://www.torn.com/profiles.php?XID=' + id"
+			target="_blank"
 		>
 			<span v-if="names[id]">{{ names[id] }}</span>
 			[{{ id }}]
 		</a>
-	</span>
+	</strong>
 </template>
 
 <script>

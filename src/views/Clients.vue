@@ -1,5 +1,5 @@
 <template>
-	<List :list="sessions" />
+	<List :list="clients" />
 </template>
 
 <script>
@@ -9,7 +9,7 @@ import List from "@/components/List.vue";
 export default {
 	components: { List },
 	computed: {
-		...mapGetters(["sessions"]),
+		...mapGetters(["clients"]),
 	},
 };
 </script>

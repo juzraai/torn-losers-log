@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="bg-light d-flex flex-column"
+		class="d-flex flex-column"
 		style="min-height: 100%"
 	>
 		<Navbar />
