@@ -1,6 +1,7 @@
 <template>
-	<div class="bg-light h-100">
-		<div class="h-100 d-flex flex-column justify-content-center">
+	<div class="bg-light d-flex flex-column h-100">
+		<Navbar />
+		<div class="d-flex flex-column flex-grow-1 justify-content-center">
 			<div class="container">
 				<div
 					class="row"
@@ -58,10 +59,11 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import Login from "@/components/Login.vue";
+import Navbar from "@/components/Navbar.vue";
 import { routes } from "@/router";
 
 export default {
-	components: { Login },
+	components: { Login, Navbar },
 	data() {
 		return {
 			routes,

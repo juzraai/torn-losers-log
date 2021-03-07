@@ -1,3 +1,5 @@
+import 'jquery/src/jquery.js'
+import 'bootstrap/dist/js/bootstrap.bundle.js'
 import Vue from 'vue'
 import VueTimeago from 'vue-timeago'
 import App from './App.vue'
