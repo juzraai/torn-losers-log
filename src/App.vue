@@ -4,7 +4,7 @@
 		style="min-height: 100%"
 	>
 		<Navbar />
-		<div class="d-flex flex-column flex-grow-1 justify-content-center">
+		<div class="d-flex flex-column flex-grow-1">
 			<div class="container my-5">
 				<Login v-if="!apiKey" />
 				<Pills v-else />

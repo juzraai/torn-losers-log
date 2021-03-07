@@ -6,7 +6,7 @@ html, body {
 	position: relative;
 }
 
-.card, .list-group {
+.card, .list-group, .pagination {
 	@extend .shadow;
 }
 

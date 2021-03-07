@@ -1,4 +1,5 @@
 <template>
+
 	<ul class="mb-3 nav nav-pills">
 		<li
 			class="nav-item"
@@ -7,7 +8,7 @@
 		>
 			<router-link
 				class="nav-link"
-				:class="{ active: r.path == $router.currentRoute.path }"
+				:class="{ active: r.path == $route.path }"
 				:to="r.path"
 			>
 				<i

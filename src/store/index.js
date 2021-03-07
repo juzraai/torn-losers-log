@@ -54,10 +54,26 @@ const store = new Vuex.Store({
 		},
 	},
 	getters: {
-		sessions() {
-			// TODO group consecutive losses with same defender AND same paid flag
-			// TODO return array of arrays!
-			return []
+		sessions(state) {
+			return state.losses.reduce((groups, a) => {
+				let group = groups[groups.length - 1]
+				const { defender_id, paid, timestamp_ended } = a
+				if (group && group.defender_id === defender_id && group.paid === paid) {
+					group.attacks.push(a)
+					group.timestamp_ended = Math.max(group.timestamp_ended, a.timestamp_ended)
+					group.timestamp_started = Math.min(group.timestamp_started, a.timestamp_ended)
+				} else {
+					const attacks = [a]
+					groups.push({
+						attacks,
+						defender_id,
+						paid,
+						timestamp_ended,
+						timestamp_started: a.timestamp_ended, // sic!
+					})
+				}
+				return groups
+			}, [])
 		}
 	},
 	actions: {
