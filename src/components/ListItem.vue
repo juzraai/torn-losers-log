@@ -1,5 +1,5 @@
 <template>
-	<div class="align-items-center d-flex list-group-item py-2">
+	<div class="align-items-center d-flex list-group-item py-2" :class="{ 'bg-light': a.paid }">
 		<!--<div class="font-weight-bold mr-2">
 			<span
 				class="badge badge-pill badge-danger mb-1"
@@ -36,6 +36,7 @@
 				<button
 					type="button"
 					class="btn btn-sm btn-outline-success"
+					@click="doSetPaid(!a.paid)"
 				>Paid</button>
 				<button
 					type="button"
@@ -49,11 +50,11 @@
 				<div class="dropdown-menu dropdown-menu-right">
 					<a
 						class="dropdown-item"
-						href="#"
+						href="javascript:void(0)"
 					>All previous losses to this client are paid</a>
 					<a
 						class="dropdown-item"
-						href="#"
+						href="javascript:void(0)"
 					>All previous losses are paid</a>
 				</div>
 			</div>
@@ -62,12 +63,18 @@
 </template>
 
 <script>
-// TODO proof will gen text, send it to List thru event, List will display it in a modal
+import { mapActions } from "vuex";
 import Player from "@/components/Player.vue";
 
 export default {
 	components: { Player },
 	props: ["a"],
+	methods: {
+		...mapActions(["setPaid"]),
+		doSetPaid(paid, prevsFromDefender, allPrevs) {
+			this.setPaid({ paid, attackOrGroup: this.a, prevsFromDefender, allPrevs });
+		},
+	},
 };
 </script>
 

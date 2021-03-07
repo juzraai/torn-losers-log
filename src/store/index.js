@@ -126,6 +126,24 @@ const store = new Vuex.Store({
 			const { name } = response
 			context.commit('setPlayerName', { player_id: playerId, name })
 		},
+		// TODO this way set paid is not reactive, ALSO fetchLosses overwrites paid flags
+		// TODO maybe we need a separate "paid" code array and a "losses" getter which adds the flags into attacks for the UI
+		setPaid(context, payload) {
+			const { paid, attackOrGroup, prevsFromDefender, allPrevs } = payload
+			const { losses } = context.state
+			console.log(attackOrGroup)
+			const codes = attackOrGroup.code || attackOrGroup.attacks.map(a => a.code)
+			losses.forEach((a, i) => {
+				const byCode = codes.includes(a.code)
+				const byTime = a.timestamp_ended <= attackOrGroup.timestamp_ended
+				const byDef = a.defender_id === attackOrGroup.defender_id && byTime
+				if (byCode || (allPrevs && byTime) || (prevsFromDefender && byDef && byTime)) {
+					if (paid) a.paid = true
+					else delete a.paid
+				}
+			})
+			context.commit('setLosses', losses)
+		},
 	},
 })
 
