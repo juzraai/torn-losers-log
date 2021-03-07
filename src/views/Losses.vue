@@ -1,25 +1,59 @@
 <template>
 	<div>
-		<ul class="list-group mb-3">
-			<li
-				class="list-group-item"
+		<div class="list-group mb-3">
+			<div
+				class="align-items-center d-flex list-group-item"
 				:key="a.code"
 				v-for="a in lossesOnPage"
 			>
-				You lost to
-				<Player :id="a.defender_id" />
-				<a
-					class="d-inline-block mx-1 text-secondary"
-					:href="'https://www.torn.com/loader.php?sid=attackLog&ID=' + a.code"
-					target="_blank"
-				>
-					<Timeago
-						:auto-update="60"
-						:datetime="a.timestamp_ended * 1000"
-					/>
-				</a>
-			</li>
-		</ul>
+				<div class="font-weight-bold mr-2">
+					<span class="badge badge-pill badge-danger mb-1" v-if="!paid">Unpaid</span>
+					<span class="badge badge-pill badge-success mb-1" v-else>Paid</span>
+				</div>
+				<div>
+					You lost to
+					<Player :id="a.defender_id" />
+					<a
+						class="d-inline-block mx-1 text-secondary"
+						:href="'https://www.torn.com/loader.php?sid=attackLog&ID=' + a.code"
+						target="_blank"
+					>
+						<Timeago
+							:auto-update="60"
+							:datetime="a.timestamp_ended * 1000"
+						/>
+					</a>
+				</div>
+				<div class="ml-auto">
+					<button class="btn btn-sm btn-outline-info mx-1">Proof</button>
+					<div class="btn-group mx-1" v-if="!a.paid">
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-success"
+						>Paid</button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-success dropdown-toggle dropdown-toggle-split"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+						>
+							<span class="sr-only">Paid options</span>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a
+								class="dropdown-item"
+								href="#"
+							>All previous losses to this client are paid</a>
+							<a
+								class="dropdown-item"
+								href="#"
+							>All previous losses are paid</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="d-flex justify-content-between">
 			<ul class="pagination pagination-sm">
 				<li

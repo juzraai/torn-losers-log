@@ -53,6 +53,13 @@ const store = new Vuex.Store({
 			Vue.set(state.names, player_id, name)
 		},
 	},
+	getters: {
+		sessions() {
+			// TODO group consecutive losses with same defender AND same paid flag
+			// TODO return array of arrays!
+			return []
+		}
+	},
 	actions: {
 		async login(context, apiKey) {
 			context.commit('setApiKey', apiKey)
