@@ -1,8 +1,11 @@
 <template>
-	<div class="bg-light d-flex flex-column h-100">
+	<div
+		class="bg-light d-flex flex-column"
+		style="min-height: 100%"
+	>
 		<Navbar />
 		<div class="d-flex flex-column flex-grow-1 justify-content-center">
-			<div class="container">
+			<div class="container my-5">
 				<Login v-if="!apiKey" />
 				<Pills v-else />
 				<router-view />

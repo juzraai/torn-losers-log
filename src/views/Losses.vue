@@ -22,22 +22,18 @@
 		</ul>
 		<div class="d-flex justify-content-between">
 			<ul class="pagination pagination-sm">
-				<li class="page-item"><a
+				<li
+					class="page-item"
+					:class="{ active: o == limit }"
+					:key="o"
+					v-for="o in limitOptions"
+					@click="limit = o; page = 0"
+				>
+					<a
 						class="page-link"
 						href="#"
-					>10</a></li>
-				<li class="page-item"><a
-						class="page-link"
-						href="#"
-					>20</a></li>
-				<li class="page-item"><a
-						class="page-link"
-						href="#"
-					>25</a></li>
-				<li class="page-item"><a
-						class="page-link"
-						href="#"
-					>50</a></li>
+					>{{ o }}</a>
+				</li>
 			</ul>
 			<ul class="pagination pagination-sm">
 				<li
@@ -97,6 +93,7 @@ export default {
 	data() {
 		return {
 			limit: 10,
+			limitOptions: [10, 20, 25, 50],
 			page: 0,
 		};
 	},
