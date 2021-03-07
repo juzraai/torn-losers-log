@@ -7,6 +7,7 @@
 			@click="resolveName(id)"
 		>Resolve name</span>
 		<a
+			:class="'text-' + (variant || 'dark')"
 			:href="'https://www.torn.com/profiles.php?XID=' + id"
 			target="_blank"
 		>
@@ -20,7 +21,7 @@
 import { mapActions, mapState } from "vuex";
 
 export default {
-	props: ["id"],
+	props: ["id", "variant"],
 	computed: {
 		...mapState(["names"]),
 	},

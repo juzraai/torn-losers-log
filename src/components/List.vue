@@ -7,7 +7,7 @@
 			<div class="list-group mb-3">
 				<ListItem
 					:a="a"
-					:key="a.code"
+					:key="JSON.stringify(a)"
 					v-for="a in listItemsOnPage"
 				/>
 			</div>

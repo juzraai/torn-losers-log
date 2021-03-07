@@ -1,6 +1,6 @@
 <template>
 	<nav class="navbar navbar-expand-sm navbar-light">
-		<span class="font-italic font-weight-bold navbar-brand text-muted">TORN City Losers' Log</span>
+		<span class="font-italic font-weight-bold navbar-brand text-dark">TORN City Losers' Log</span>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -20,7 +20,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown">
 					<a
-						class="font-weight-bold nav-link dropdown-toggle"
+						class="font-weight-bold nav-link dropdown-toggle text-dark"
 						href="#"
 						id="playerDropdown"
 						role="button"

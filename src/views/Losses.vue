@@ -3,13 +3,13 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import List from "@/components/List.vue";
 
 export default {
 	components: { List },
 	computed: {
-		...mapState(["losses"]),
+		...mapGetters(["losses"]),
 	},
 };
 </script>

@@ -47,7 +47,8 @@ const store = new Vuex.Store({
 		apiKey: null, // TORN API key
 		lastUpdate: null,
 		losses: [],
-		names: {}, // TORN player ID->name dictionary
+		names: {}, // TORN player ID -> name dictionary
+		paidUntil: {}, // TORN player ID -> timestamp
 		playerId: null, // TORN player ID (which the API key belongs to)
 	},
 	mutations: {
@@ -67,6 +68,10 @@ const store = new Vuex.Store({
 		setLosses(state, losses) {
 			state.losses = losses
 		},
+		setPaidUntil(state, payload) {
+			const { playerId, timestamp } = payload
+			Vue.set(state.paidUntil, playerId, timestamp)
+		},
 		setPlayerId(state, playerId) {
 			state.playerId = playerId
 		},
@@ -76,8 +81,14 @@ const store = new Vuex.Store({
 		},
 	},
 	getters: {
-		clients(state) {
-			return state.losses.reduce((groups, a) => {
+		losses(state) {
+			return state.losses.map(a => {
+				a.paid = state.paidUntil[a.defender_id] >= a.timestamp_ended
+				return a
+			})
+		},
+		clients(_, getters) {
+			return getters.losses.reduce((groups, a) => {
 				const i = groups.findIndex(groupPredicate(a))
 				if (i > -1) {
 					groups[i] = updateGroup(groups[i], a)
@@ -87,8 +98,8 @@ const store = new Vuex.Store({
 				return groups
 			}, [])
 		},
-		sessions(state) {
-			return state.losses.reduce((groups, a) => {
+		sessions(_, getters) {
+			return getters.losses.reduce((groups, a) => {
 				const group = groups[groups.length - 1]
 				if (group && groupPredicate(a)(group)) {
 					updateGroup(group, a)
@@ -117,6 +128,10 @@ const store = new Vuex.Store({
 				code, defender_id, timestamp_ended
 			}))
 			losses.reverse()
+			// TODO auto-clean paidUntil dict:
+			// 1) map losses to defID array
+			// 2) filter paidUntil keys to those not included
+			// 3) delete these keys from paidUntil
 			context.commit('setLosses', losses)
 			context.commit('setLastUpdate')
 		},
@@ -126,23 +141,14 @@ const store = new Vuex.Store({
 			const { name } = response
 			context.commit('setPlayerName', { player_id: playerId, name })
 		},
-		// TODO this way set paid is not reactive, ALSO fetchLosses overwrites paid flags
-		// TODO maybe we need a separate "paid" code array and a "losses" getter which adds the flags into attacks for the UI
-		setPaid(context, payload) {
-			const { paid, attackOrGroup, prevsFromDefender, allPrevs } = payload
-			const { losses } = context.state
-			console.log(attackOrGroup)
-			const codes = attackOrGroup.code || attackOrGroup.attacks.map(a => a.code)
-			losses.forEach((a, i) => {
-				const byCode = codes.includes(a.code)
-				const byTime = a.timestamp_ended <= attackOrGroup.timestamp_ended
-				const byDef = a.defender_id === attackOrGroup.defender_id && byTime
-				if (byCode || (allPrevs && byTime) || (prevsFromDefender && byDef && byTime)) {
-					if (paid) a.paid = true
-					else delete a.paid
-				}
-			})
-			context.commit('setLosses', losses)
+		markAsPaid(context, attackOrGroup) {
+			const { defender_id: playerId, timestamp_ended: timestamp } = attackOrGroup
+			context.commit('setPaidUntil', { playerId, timestamp })
+		},
+		markAsUnpaid(context, attackOrGroup) {
+			const { defender_id: playerId, timestamp_ended, timestamp_started } = attackOrGroup
+			const timestamp = (timestamp_started || timestamp_ended) - 1
+			context.commit('setPaidUntil', { playerId, timestamp })
 		},
 	},
 })
