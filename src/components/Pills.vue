@@ -9,7 +9,9 @@
 			<router-link
 				class="nav-link"
 				:class="{ active: r.path == $route.path }"
+				:title="r.tooltip"
 				:to="r.path"
+				v-b-tooltip.hover.bottom
 			>
 				<i
 					class="fas fa-fw mr-lg-1"
