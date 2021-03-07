@@ -6,8 +6,10 @@
 				:key="a.code"
 				v-for="a in lossesOnPage"
 			>
-				You lost to {{ a.defender_id }}
+				You lost to
+				<Player :id="a.defender_id" />
 				<a
+					class="d-inline-block mx-1 text-secondary"
 					:href="'https://www.torn.com/loader.php?sid=attackLog&ID=' + a.code"
 					target="_blank"
 				>
@@ -27,8 +29,10 @@
 
 <script>
 import { mapState } from "vuex";
+import Player from "@/components/Player.vue";
 
 export default {
+	components: { Player },
 	data() {
 		return {
 			page: 0,

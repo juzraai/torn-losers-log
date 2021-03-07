@@ -50,7 +50,7 @@ const store = new Vuex.Store({
 		},
 		setPlayerName(state, payload) {
 			const { player_id, name } = payload
-			state.names[player_id] = name
+			Vue.set(state.names, player_id, name)
 		},
 	},
 	actions: {
@@ -73,7 +73,13 @@ const store = new Vuex.Store({
 			losses.reverse()
 			context.commit('setLosses', losses)
 			context.commit('setLastUpdate')
-		}
+		},
+		async resolveName(context, playerId) {
+			const { apiKey } = context.state
+			const response = await tornApi.fetchBasic(apiKey, playerId)
+			const { name } = response
+			context.commit('setPlayerName', { player_id: playerId, name })
+		},
 	},
 })
 
