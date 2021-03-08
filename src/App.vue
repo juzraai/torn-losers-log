@@ -7,8 +7,10 @@
 		<div class="d-flex flex-column flex-grow-1">
 			<div class="container my-5">
 				<Login v-if="!apiKey" />
-				<Pills v-else />
-				<router-view />
+				<div v-else>
+					<Pills />
+					<router-view />
+				</div>
 			</div>
 		</div>
 	</div>

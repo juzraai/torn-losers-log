@@ -23,6 +23,7 @@
 			<div class="card-footer text-right">
 				<button
 					class="btn btn-primary"
+					:disabled="!apiKeyInput"
 					@click="doLogin"
 				>Login</button>
 			</div>

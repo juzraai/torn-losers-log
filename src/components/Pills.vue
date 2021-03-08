@@ -1,5 +1,4 @@
 <template>
-
 	<ul class="mb-3 nav nav-pills">
 		<li
 			class="nav-item"
