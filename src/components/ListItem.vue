@@ -3,7 +3,7 @@
 		class="align-items-center d-flex list-group-item px-2 py-1"
 		:class="{ 'bg-light': a.paid, 'text-muted': a.paid }"
 	>
-		<small class="mr-2 text-muted">
+		<small class="mr-3 text-muted">
 			{{ formatTimestamp(a.timestamp_ended) }}
 			<span v-if="a.timestamp_started">
 				<br>
@@ -15,30 +15,26 @@
 			You lost
 			<strong v-if="a.attacks">{{ a.attacks.length }}x</strong>
 			to
+			<br class="d-md-none">
 			<Player
 				:id="a.defender_id"
 				:variant="a.paid ? 'muted' :'dark'"
 			/>
-			<span
-				class="ml-2 text-success"
-				v-if="a.paid"
-			>
-				<i class="fas fa-fw fa-dollar-sign"></i>
-				<strong>Paid</strong>
-			</span>
 		</div>
 		<div class="ml-auto my-1">
 			<!--<button class="btn btn-sm btn-outline-info mx-1">Proof</button>-->
-			<button
-				class="btn btn-sm btn-outline-success mx-1"
+			<span
+				class="font-weight-bold mx-1 text-danger"
+				role="button"
 				v-if="!a.paid"
 				@click="markAsPaid(a)"
-			>Paid</button>
-			<button
-				class="btn btn-sm btn-outline-danger mx-1"
+			>Unpaid</span>
+			<span
+				class="font-weight-bold mx-1 text-success"
+				role="button"
 				v-else
 				@click="markAsUnpaid(a)"
-			>Unpaid</button>
+			>Paid</span>
 		</div>
 	</div>
 </template>
