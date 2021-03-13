@@ -24,6 +24,9 @@
 				class="navbar-nav ml-auto"
 				v-if="apiKey"
 			>
+				<li class="nav-item mr-3">
+					<span class="disabled nav-link text-secondary">{{ time }} TCT </span>
+				</li>
 				<li class="nav-item dropdown">
 					<a
 						class="font-weight-bold nav-link dropdown-toggle text-dark"
@@ -67,8 +70,21 @@
 import { mapState } from "vuex";
 
 export default {
+	data() {
+		return {
+			time: this.getTctTime(),
+		};
+	},
 	computed: {
 		...mapState(["apiKey", "names", "playerId"]),
+	},
+	methods: {
+		getTctTime() {
+			return new Date().toISOString().replace("T", " @ ").split(".")[0];
+		},
+	},
+	mounted() {
+		setInterval(() => (this.time = this.getTctTime()), 500);
 	},
 };
 </script>

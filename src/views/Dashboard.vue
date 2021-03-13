@@ -5,10 +5,10 @@
 				<RefreshWidget />
 			</div>
 			<div class="col-sm-6 col-lg-3">
-				<TodaysCountWidget />
+				<RecentClientsWidget />
 			</div>
 			<div class="col-sm-6 col-lg-3">
-				<RecentClientsWidget />
+				<TodaysCountWidget />
 			</div>
 			<div class="col-sm-6 col-lg-3">
 				<DailyCountsWidget />
