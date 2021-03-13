@@ -87,6 +87,13 @@ const store = new Vuex.Store({
 				return a
 			})
 		},
+		days(_, getters) {
+			return getters.losses.reduce((days, a) => {
+				const day = new Date(a.timestamp_ended * 1000).toISOString().split('T')[0]
+				days[day] = (days[day] || 0) + 1
+				return days
+			}, {})
+		},
 		clients(_, getters) {
 			return getters.losses.reduce((groups, a) => {
 				const i = groups.findIndex(groupPredicate(a))

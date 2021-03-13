@@ -5,7 +5,7 @@
 	>
 		<Navbar />
 		<div class="d-flex flex-column flex-grow-1">
-			<div class="container-fluid my-5">
+			<div class="container my-5">
 				<router-view />
 			</div>
 		</div>
