@@ -1,5 +1,5 @@
 <template>
-	<strong>
+	<span>
 		<span
 			class="text-secondary"
 			role="button"
@@ -16,7 +16,7 @@
 			<span v-if="names[id]">{{ names[id] }}</span>
 			[{{ id }}]
 		</a>
-	</strong>
+	</span>
 </template>
 
 <script>

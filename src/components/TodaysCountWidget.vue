@@ -1,8 +1,14 @@
 <template>
-	<KpiWidget
-		:labels="['Losses today', 'yesterday', 'average']"
-		:values="daysKpiValues"
-	/>
+	<KpiWidget>
+		<template slot="mainLabel">Losses today</template>
+		<template slot="mainValue">{{ todaysLosses || 0 }}</template>
+
+		<template slot="subLabel1">yesterday</template>
+		<template slot="subValue1">{{ yesterdaysLosses || 0 }}</template>
+
+		<template slot="subLabel2">average</template>
+		<template slot="subValue2">{{ avgLossesPerDay }}</template>
+	</KpiWidget>
 </template>
 
 <script>
@@ -13,12 +19,15 @@ export default {
 	components: { KpiWidget },
 	computed: {
 		...mapGetters(["avgLossesPerDay", "days"]),
-		daysKpiValues() {
+		todaysLosses() {
+			const today = new Date().toISOString().split("T")[0];
+			return this.days[today];
+		},
+		yesterdaysLosses() {
 			const d = new Date();
-			const today = d.toISOString().split("T")[0];
 			d.setDate(d.getDate() - 1);
 			const yesterday = d.toISOString().split("T")[0];
-			return [this.days[today], this.days[yesterday], this.avgLossesPerDay];
+			return this.days[yesterday];
 		},
 	},
 };

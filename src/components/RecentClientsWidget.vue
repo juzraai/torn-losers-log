@@ -1,16 +1,33 @@
 <template>
-	<KpiWidget
-		:labels="clientsKpiLabels"
-		:values="clientsKpiValues"
-	/>
+	<KpiWidget>
+		<template slot="mainLabel">
+			<Player
+				:id="clients[0].defender_id"
+				:variant="clients[0].paid ? 'success' : null"
+			/>
+		</template>
+		<template slot="mainValue">{{ clients[0].attacks.length }}</template>
+
+		<template v-for="i in 2">
+			<template :slot="'subLabel' + i">
+				<Player
+					:key="i"
+					:id="clients[i].defender_id"
+					:variant="clients[i].paid ? 'success' : null"
+				/>
+			</template>
+			<template :slot="'subValue' + i">{{ clients[i].attacks.length }}</template>
+		</template>s
+	</KpiWidget>
 </template>
 
 <script>
 import { mapGetters, mapState } from "vuex";
 import KpiWidget from "@/components/KpiWidget.vue";
+import Player from "@/components/Player.vue";
 
 export default {
-	components: { KpiWidget },
+	components: { KpiWidget, Player },
 	computed: {
 		...mapGetters(["clients"]),
 		...mapState(["names"]),
