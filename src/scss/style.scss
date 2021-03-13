@@ -7,11 +7,6 @@ html, body {
 	position: relative;
 }
 
-.nav-pills .nav-link {
-	@extend .rounded-pill;
-}
-
-.refresh-button {
-	@extend .btn, .btn-danger, .rounded-circle;
-	padding: .5rem .75rem;
+.tooltip {
+	top: 0;
 }

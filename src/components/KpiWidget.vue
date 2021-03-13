@@ -28,6 +28,7 @@
 </template>
 
 <script>
+// TODO instead of props we should use named slots so i can inject Player component
 import Widget from "@/components/Widget.vue";
 
 export default {

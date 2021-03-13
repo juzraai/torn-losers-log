@@ -17,10 +17,9 @@
 import { mapState } from "vuex";
 import Login from "@/components/Login.vue";
 import Navbar from "@/components/Navbar.vue";
-import Pills from "@/components/Pills.vue";
 
 export default {
-	components: { Login, Navbar, Pills },
+	components: { Login, Navbar },
 	computed: {
 		...mapState(["apiKey"]),
 	},
