@@ -2,6 +2,7 @@
 	<BarChartWidget
 		:avg="avgLossesPerDay"
 		:bars="bars"
+		title="Loss counts"
 	/>
 </template>
 

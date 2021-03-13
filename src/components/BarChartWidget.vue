@@ -1,5 +1,11 @@
 <template>
 	<Widget>
+		<h6
+			class="card-title"
+			v-if="title"
+		>
+			{{ title }}
+		</h6>
 		<div class="align-items-end d-flex flex-grow-1 position-relative">
 			<div
 				class="avg border border-secondary position-absolute w-100"
@@ -24,7 +30,7 @@ import Widget from "@/components/Widget.vue";
 
 export default {
 	components: { Widget },
-	props: ["avg", "bars"],
+	props: ["avg", "bars", "title"],
 	computed: {
 		max() {
 			return Math.max(...this.bars.map((b) => b.value));
