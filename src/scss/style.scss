@@ -7,10 +7,6 @@ html, body {
 	position: relative;
 }
 
-.card, .list-group, .pagination {
-	@extend .shadow;
-}
-
 .nav-pills .nav-link {
 	@extend .rounded-pill;
 }

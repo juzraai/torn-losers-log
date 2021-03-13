@@ -12,11 +12,10 @@ Vue.use(TooltipPlugin)
 
 Vue.use(VueTimeago, {})
 
+store.commit('init') // has to be called before router
+
 new Vue({
 	router,
 	store,
-	render: h => h(App),
-	beforeCreate() {
-		this.$store.commit('init')
-	}
+	render: h => h(App)
 }).$mount('#app')

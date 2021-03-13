@@ -1,6 +1,9 @@
 <template>
 	<nav class="navbar navbar-expand-sm navbar-light">
-		<span class="font-italic font-weight-bold navbar-brand text-dark">TORN City Losers' Log</span>
+		<router-link
+			class="font-italic font-weight-bold navbar-brand text-dark"
+			to="/"
+		>TORN City Losers' Log</router-link>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -17,7 +20,10 @@
 			class="collapse navbar-collapse"
 			id="navbar"
 		>
-			<ul class="navbar-nav ml-auto">
+			<ul
+				class="navbar-nav ml-auto"
+				v-if="apiKey"
+			>
 				<li class="nav-item dropdown">
 					<a
 						class="font-weight-bold nav-link dropdown-toggle text-dark"
@@ -62,7 +68,7 @@ import { mapState } from "vuex";
 
 export default {
 	computed: {
-		...mapState(["names", "playerId"]),
+		...mapState(["apiKey", "names", "playerId"]),
 	},
 };
 </script>

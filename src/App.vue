@@ -5,14 +5,11 @@
 	>
 		<Navbar />
 		<div class="d-flex flex-column flex-grow-1">
-			<div class="container my-5">
-				<Login v-if="!apiKey" />
-				<div v-else>
-					<Pills />
-					<router-view />
-				</div>
+			<div class="container-fluid my-5">
+				<router-view />
 			</div>
 		</div>
+		<div class="bg-dark text-white">footer :)</div>
 	</div>
 </template>
 
