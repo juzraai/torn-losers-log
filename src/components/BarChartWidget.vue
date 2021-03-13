@@ -36,7 +36,6 @@ export default {
 <style scoped>
 .avg {
 	left: 0;
-	margin: 0 2px;
 	opacity: 0.5;
 	transition: bottom 0.2s;
 }
@@ -45,5 +44,14 @@ export default {
 	margin: 0 2px;
 	transition: height 0.2s;
 	z-index: 1;
+}
+
+.bar:nth-child(2) {
+	/* 1st child is .avg */
+	margin-left: 0px;
+}
+
+.bar:last-child {
+	margin-right: 0px;
 }
 </style>

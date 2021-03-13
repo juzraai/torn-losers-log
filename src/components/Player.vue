@@ -3,6 +3,8 @@
 		<span
 			class="text-secondary"
 			role="button"
+			title="1 API call"
+			v-b-tooltip.hover.bottom
 			v-if="!names[id]"
 			@click="resolveName(id)"
 		>Resolve name</span>

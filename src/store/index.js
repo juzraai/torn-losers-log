@@ -94,6 +94,13 @@ const store = new Vuex.Store({
 				return days
 			}, {})
 		},
+		avgLossesPerDay(_, getters) {
+			const counts = Object.values(getters.days);
+			counts.shift(); // removing newest day as it's likely incomplete
+			counts.pop(); // removing oldest day as it's likely incomplete
+			const avg = counts.reduce((sum, v) => (sum += v), 0) / counts.length;
+			return Math.round(avg * 10) / 10;
+		},
 		clients(_, getters) {
 			return getters.losses.reduce((groups, a) => {
 				const i = groups.findIndex(groupPredicate(a))
