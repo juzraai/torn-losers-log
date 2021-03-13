@@ -5,7 +5,7 @@
 			v-html="(labels || [])[0] || '&nbsp;'"
 		></h6>
 		<h1
-			class="font-weight-bold"
+			class="border-bottom font-weight-bold pb-2"
 			v-html="(values || [])[0] || '&nbsp;'"
 		></h1>
 		<div class="row">

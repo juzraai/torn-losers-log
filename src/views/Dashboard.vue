@@ -1,16 +1,16 @@
 <template>
 	<div>
 		<div class="row">
-			<div class="col-6 col-lg-3">
+			<div class="col-sm-6 col-lg-3">
 				<RefreshWidget />
 			</div>
-			<div class="col-6 col-lg-3">
+			<div class="col-sm-6 col-lg-3">
 				<KpiWidget :labels="['Losses today', 'yesterday', 'average']" />
 			</div>
-			<div class="col-6 col-lg-3">
+			<div class="col-sm-6 col-lg-3">
 				<KpiWidget />
 			</div>
-			<div class="col-6 col-lg-3">
+			<div class="col-sm-6 col-lg-3">
 				<KpiWidget />
 			</div>
 		</div>
