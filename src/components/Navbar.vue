@@ -31,40 +31,23 @@
 				>
 					<span class="disabled nav-link text-secondary">{{ time }} TCT </span>
 				</li>
-				<li class="nav-item dropdown">
-					<a
-						class="font-weight-bold nav-link dropdown-toggle text-dark"
-						href="#"
-						id="playerDropdown"
-						role="button"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"
+				<b-nav-item-dd right>
+					<template #button-content>
+						<strong>{{ names[playerId] }} [{{ playerId }}]</strong>
+					</template>
+					<b-dd-item
+						:href="'https://www.torn.com/profiles.php?XID=' + playerId"
+						target="_blank"
 					>
-						{{ names[playerId] }} [{{ playerId }}]
-					</a>
-					<div
-						class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="playerDropdown"
-					>
-						<a
-							class="dropdown-item"
-							:href="'https://www.torn.com/profiles.php?XID=' + playerId"
-							target="_blank"
-						>
-							<i class="fas fa-user-circle fa-fw mr-2"></i>
-							View profile
-						</a>
-						<div class="dropdown-divider"></div>
-						<a
-							class="dropdown-item text-danger"
-							href="#"
-						>
-							<i class="fas fa-trash-alt fa-fw mr-2"></i>
-							Clear data
-						</a>
-					</div>
-				</li>
+						<i class="fas fa-user-circle fa-fw mr-2"></i>
+						View profile
+					</b-dd-item>
+					<b-dd-divider></b-dd-divider>
+					<b-dd-item-button variant="danger">
+						<i class="fas fa-trash-alt fa-fw mr-2"></i>
+						Clear data
+					</b-dd-item-button>
+				</b-nav-item-dd>
 			</ul>
 		</div>
 	</nav>

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { TooltipPlugin } from 'bootstrap-vue'
+import { NavbarPlugin, TooltipPlugin } from 'bootstrap-vue'
 import VueTimeago from 'vue-timeago'
 import App from './App.vue'
 import router from './router'
@@ -8,6 +8,7 @@ import './scss/style.scss'
 
 Vue.config.productionTip = false
 
+Vue.use(NavbarPlugin)
 Vue.use(TooltipPlugin)
 
 Vue.use(VueTimeago, {})
