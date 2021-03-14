@@ -1,11 +1,5 @@
 <template>
-	<Widget>
-		<h6
-			class="card-title"
-			v-if="title"
-		>
-			{{ title }}
-		</h6>
+	<Widget :title="title">
 		<div class="align-items-end d-flex flex-grow-1 position-relative">
 			<div
 				class="avg border border-secondary position-absolute w-100"

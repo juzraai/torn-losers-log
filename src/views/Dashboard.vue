@@ -14,11 +14,17 @@
 				<DailyCountsWidget />
 			</div>
 		</div>
+		<div class="row">
+			<div class="col">
+				<LogWidget />
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
 import DailyCountsWidget from "@/components/DailyCountsWidget.vue";
+import LogWidget from "@/components/LogWidget.vue";
 import RecentClientsWidget from "@/components/RecentClientsWidget.vue";
 import RefreshWidget from "@/components/RefreshWidget.vue";
 import TodaysCountWidget from "@/components/TodaysCountWidget.vue";
@@ -26,6 +32,7 @@ import TodaysCountWidget from "@/components/TodaysCountWidget.vue";
 export default {
 	components: {
 		DailyCountsWidget,
+		LogWidget,
 		RecentClientsWidget,
 		RefreshWidget,
 		TodaysCountWidget,

@@ -32,6 +32,7 @@
 </template>
 
 <script>
+// TODO should be reworked as a view
 import { mapActions } from "vuex";
 
 export default {

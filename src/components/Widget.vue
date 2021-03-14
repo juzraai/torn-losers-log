@@ -1,7 +1,19 @@
 <template>
-	<div class="d-flex flex-column h-100">
-		<div class="card flex-grow-1 mb-4 shadow-sm" :class="cardClass">
-			<div class="card-body d-flex flex-column p-3">
+	<div class="d-flex flex-column h-100 widget">
+		<div
+			class="card flex-grow-1 mb-4 shadow-sm"
+			:class="cardClass"
+		>
+			<div
+				class="card-body d-flex flex-column"
+				:class="cardBodyClass"
+			>
+				<h6
+					class="card-title"
+					v-if="title"
+				>
+					{{ title }}
+				</h6>
 				<slot />
 			</div>
 		</div>
@@ -10,6 +22,6 @@
 
 <script>
 export default {
-	props: ["cardClass"],
+	props: ["cardClass", "cardBodyClass", "title"],
 };
 </script>

@@ -73,7 +73,6 @@
 				</ul>
 			</div>
 		</div>
-		<!-- TODO proof modal -->
 	</div>
 </template>
 

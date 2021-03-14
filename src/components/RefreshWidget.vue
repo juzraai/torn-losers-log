@@ -1,6 +1,5 @@
 <template>
-	<Widget card-class="alert-info">
-		<h6 class="card-title">Log refreshed</h6>
+	<Widget card-class="alert-info" title="Log refreshed">
 		<h5 class="mb-3">
 			<timeago
 				:auto-update="60"

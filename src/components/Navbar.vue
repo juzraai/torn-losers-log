@@ -67,6 +67,7 @@
 </template>
 
 <script>
+// TODO fix dropdown menu (Bootstrap-Vue)
 import { mapState } from "vuex";
 
 export default {

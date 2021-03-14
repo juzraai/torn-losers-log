@@ -13,6 +13,8 @@ $gray-900: #212529;
 // overrides:
 
 $body-bg: $gray-300;
+$card-spacer-x: 1rem; // .card-body padding
 $enable-responsive-font-sizes: true;
 $font-family-sans-serif: "Roboto Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $light: mix($gray-100, $gray-200);
+$nav-tabs-link-active-bg: white;
