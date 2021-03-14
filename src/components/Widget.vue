@@ -25,3 +25,9 @@ export default {
 	props: ["cardClass", "cardBodyClass", "title"],
 };
 </script>
+
+<style>
+.widget .card {
+	min-height: 160px;
+}
+</style>

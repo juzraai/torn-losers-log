@@ -3,7 +3,7 @@
 		class="align-items-center d-flex list-group-item list-group-item-action px-2 py-1"
 		:class="a.paid ? null : 'text-muted'"
 	>
-		<small class="mr-3 text-muted">
+		<small class="d-none d-sm-block mr-3 text-muted">
 			{{ formatTimestamp(a.timestamp_ended) }}
 			<span v-if="a.timestamp_started">
 				<br>
@@ -33,8 +33,8 @@
 				v-if="!a.paid"
 				@click="markAsPaid(a)"
 			>
-				<i class="fas fa-dollar-sign fa-fw"></i>
-				Mark as <strong>paid</strong>
+				<i class="fas fa-dollar-sign fa-fw mr-md-1"></i>
+				<span class="d-none d-md-inline">Mark as <strong>paid</strong></span>
 			</button>
 			<button
 				class="btn btn-sm btn-outline-danger mark-unpaid-btn"
@@ -44,11 +44,11 @@
 				v-else
 				@click="markAsUnpaid(a)"
 			>
-				<span class="fa-stack">
+				<span class="fa-stack mr-md-1">
 					<i class="fas fa-dollar-sign"></i>
 					<i class="fas fa-slash fa-stack-1x"></i>
 				</span>
-				Mark as <strong>unpaid</strong>
+				<span class="d-none d-md-inline">Mark as <strong>unpaid</strong></span>
 			</button>
 		</div>
 	</div>
@@ -74,7 +74,7 @@ export default {
 	font-size: 0.9em;
 	height: unset;
 	line-height: unset;
-	width: 1.75em;
+	width: 1.4em;
 }
 </style>
 

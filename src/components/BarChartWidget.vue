@@ -2,7 +2,7 @@
 	<Widget :title="title">
 		<div class="align-items-end d-flex flex-grow-1 position-relative">
 			<div
-				class="avg border border-secondary position-absolute w-100"
+				class="avg border border-info position-absolute w-100"
 				:style="{ bottom: avg + '%' }"
 				v-if="avg"
 			></div>
@@ -33,10 +33,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 .avg {
 	left: 0;
-	opacity: 0.5;
+	opacity: 0.3;
 	transition: bottom 0.2s;
 }
 
@@ -53,5 +57,11 @@ export default {
 
 .bar:last-child {
 	margin-right: 0px;
+}
+
+@include media-breakpoint-down(xs) {
+	.widget {
+		height: 256px !important;
+	}
 }
 </style>

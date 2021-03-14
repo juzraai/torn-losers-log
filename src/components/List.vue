@@ -77,6 +77,8 @@
 </template>
 
 <script>
+// TODO pagination restyle
+// TODO last items should be indicated as red
 import ListItem from "@/components/ListItem.vue";
 
 export default {

@@ -5,7 +5,7 @@
 				class="nav-item"
 				:key="i"
 				:title="t.tooltip"
-				v-b-tooltip.hover.bottom
+				v-b-tooltip.hover.top
 				v-for="(t, i) in tabs"
 			>
 				<span
@@ -50,7 +50,7 @@ export default {
 				tab(
 					"Sessions",
 					"fa-layer-group",
-					"Groups consecutive losses by client and payment status."
+					"Consecutive losses grouped by client and payment status."
 				),
 				tab(
 					"Clients",
@@ -69,3 +69,13 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.nav-link.active {
+	color: black;
+}
+
+.nav-link:not(.active):not(:hover) {
+	opacity: .6;
+}
+</style>
