@@ -11,7 +11,7 @@
 				<ListItem
 					:a="a"
 					:key="JSON.stringify(a)"
-					:last="i + page * limit === list.length - 1"
+					:last="i + page * limit === list.length - 1 && markLast"
 					v-for="(a, i) in listItemsOnPage"
 				/>
 			</div>
@@ -81,12 +81,11 @@
 </template>
 
 <script>
-// TODO pagination restyle
 import ListItem from "@/components/ListItem.vue";
 
 export default {
 	components: { ListItem },
-	props: ["list"],
+	props: ["list", "mark-last"],
 	data() {
 		return {
 			limit: 10,

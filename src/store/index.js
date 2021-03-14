@@ -112,6 +112,9 @@ const store = new Vuex.Store({
 				return groups
 			}, [])
 		},
+		unpaidClients(_, getters) {
+			return getters.clients.filter(g => !g.paid)
+		},
 		sessions(_, getters) {
 			return getters.losses.reduce((groups, a) => {
 				const group = groups[groups.length - 1]

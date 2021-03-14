@@ -22,7 +22,7 @@
 				</span>
 			</li>
 		</ul>
-		<List :list="list" />
+		<List :mark-last="tab < 3" :list="list" />
 	</Widget>
 </template>
 
@@ -54,17 +54,22 @@ export default {
 				),
 				tab(
 					"Clients",
-					"fa-user",
+					"fa-users",
 					"Losses aggregated by client and payment status."
+				),
+				tab(
+					"Unpaid",
+					"fa-comment-dollar",
+					"Unpaid losses aggregated by client."
 				),
 			],
 		};
 	},
 	computed: {
-		...mapGetters(["clients", "losses", "sessions"]),
+		...mapGetters(["losses", "sessions", "clients", "unpaidClients"]),
 		list() {
-			const { losses, sessions, clients } = this;
-			return [losses, sessions, clients][this.tab];
+			const { losses, sessions, clients, unpaidClients } = this;
+			return [losses, sessions, clients, unpaidClients][this.tab];
 		},
 	},
 };
@@ -76,6 +81,6 @@ export default {
 }
 
 .nav-link:not(.active):not(:hover) {
-	opacity: .6;
+	opacity: 0.6;
 }
 </style>
