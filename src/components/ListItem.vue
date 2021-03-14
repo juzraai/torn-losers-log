@@ -1,7 +1,7 @@
 <template>
 	<div
-		class="align-items-center d-flex list-group-item px-2 py-1"
-		:class="{ 'bg-light': a.paid, 'text-muted': a.paid }"
+		class="align-items-center d-flex list-group-item list-group-item-action px-2 py-1"
+		:class="a.paid ? null : 'text-muted'"
 	>
 		<small class="mr-3 text-muted">
 			{{ formatTimestamp(a.timestamp_ended) }}
@@ -11,49 +11,71 @@
 			</span>
 		</small>
 		<div>
-
 			You lost
 			<strong v-if="a.attacks">{{ a.attacks.length }}x</strong>
 			to
 			<br class="d-md-none">
 			<Player
+				class="font-weight-bold"
 				:id="a.defender_id"
 				:variant="a.paid ? 'muted' :'dark'"
 			/>
+			<span
+				class="badge alert-success ml-2 px-2"
+				v-if="a.paid"
+			>paid</span>
 		</div>
 		<div class="ml-auto my-1">
-			<!--<button class="btn btn-sm btn-outline-info mx-1">Proof</button>-->
-			<span
-				class="font-weight-bold mx-1 text-danger"
-				role="button"
+			<button
+				class="btn btn-sm btn-outline-success"
+				title="Marks this and all previous losses to this client as <strong>paid</strong>"
+				v-b-tooltip.hover.left.html
 				v-if="!a.paid"
 				@click="markAsPaid(a)"
-			>Unpaid</span>
-			<span
-				class="font-weight-bold mx-1 text-success"
+			>
+				<i class="fas fa-dollar-sign fa-fw"></i>
+				Mark as <strong>paid</strong>
+			</button>
+			<button
+				class="btn btn-sm btn-outline-danger mark-unpaid-btn"
 				role="button"
+				title="Marks this loss (or loss group) as <strong>unpaid</strong>"
+				v-b-tooltip.hover.left.html
 				v-else
 				@click="markAsUnpaid(a)"
-			>Paid</span>
+			>
+				<span class="fa-stack">
+					<i class="fas fa-dollar-sign"></i>
+					<i class="fas fa-slash fa-stack-1x"></i>
+				</span>
+				Mark as <strong>unpaid</strong>
+			</button>
 		</div>
 	</div>
 </template>
 
 <script>
-import moment from 'moment';
 import { mapActions } from "vuex";
 import Player from "@/components/Player.vue";
+import { formatTimestamp } from "@/util.js";
 
 export default {
 	components: { Player },
 	props: ["a"],
 	methods: {
 		...mapActions(["markAsPaid", "markAsUnpaid"]),
-		formatTimestamp(t) {
-			return moment(t * 1000).utcOffset(0).format('HH:mm:ss DD/MM/YY')
-		}
+		formatTimestamp,
 	},
 };
 </script>
+
+<style>
+.mark-unpaid-btn .fa-stack {
+	font-size: 0.9em;
+	height: unset;
+	line-height: unset;
+	width: 1.75em;
+}
+</style>
 
 

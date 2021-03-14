@@ -24,7 +24,11 @@
 				class="navbar-nav ml-auto"
 				v-if="apiKey"
 			>
-				<li class="nav-item mr-3">
+				<li
+					class="nav-item mr-3"
+					title="TORN City Time<br>(Same as UTC or GMT)"
+					v-b-tooltip.hover.bottom.html
+				>
 					<span class="disabled nav-link text-secondary">{{ time }} TCT </span>
 				</li>
 				<li class="nav-item dropdown">
@@ -69,6 +73,7 @@
 <script>
 // TODO fix dropdown menu (Bootstrap-Vue)
 import { mapState } from "vuex";
+import { formatTimestamp } from "@/util.js";
 
 export default {
 	data() {
@@ -81,7 +86,7 @@ export default {
 	},
 	methods: {
 		getTctTime() {
-			return new Date().toISOString().replace("T", " @ ").split(".")[0];
+			return formatTimestamp(new Date().getTime() / 1000);
 		},
 	},
 	mounted() {

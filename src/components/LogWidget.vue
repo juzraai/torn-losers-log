@@ -1,6 +1,6 @@
 <template>
 	<Widget :card-body-class="'px-0'">
-		<ul class="nav nav-tabs pl-3">
+		<ul class="nav nav-tabs pl-3 mb-1">
 			<li
 				class="nav-item"
 				:key="i"
@@ -12,6 +12,7 @@
 					class="nav-link"
 					:class="i === tab ? 'active' : null"
 					role="button"
+					@click="tab = i"
 				>
 					<i
 						class="fas fa-fw mr-lg-1"
@@ -21,11 +22,14 @@
 				</span>
 			</li>
 		</ul>
+		<List :list="list" />
 	</Widget>
 </template>
 
 <script>
 // TODO tab selection should be saved and loaded
+import { mapGetters } from "vuex";
+import List from "@/components/List.vue";
 import Widget from "@/components/Widget.vue";
 
 function tab(title, icon, tooltip) {
@@ -33,7 +37,7 @@ function tab(title, icon, tooltip) {
 }
 
 export default {
-	components: { Widget },
+	components: { List, Widget },
 	data() {
 		return {
 			tab: 0,
@@ -55,6 +59,13 @@ export default {
 				),
 			],
 		};
+	},
+	computed: {
+		...mapGetters(["clients", "losses", "sessions"]),
+		list() {
+			const { losses, sessions, clients } = this;
+			return [losses, sessions, clients][this.tab];
+		},
 	},
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<div class="card" v-if="!list.length">
-			<div class="card-body my-5 py-5 text-center">No results.</div>
+		<div class="my-5 text-center" v-if="!list.length">
+			No results.
 		</div>
 		<div v-else>
-			<div class="list-group mb-3">
+			<div class="list-group list-group-flush mb-3">
 				<ListItem
 					:a="a"
 					:key="JSON.stringify(a)"
@@ -34,7 +34,7 @@
 					>
 						<a
 							class="page-link"
-							href="#"
+							href="javascript:void(0)"
 						>First</a>
 					</li>
 					<li
@@ -44,7 +44,7 @@
 					>
 						<a
 							class="page-link"
-							href="#"
+							href="javascript:void(0)"
 						>Previous</a>
 					</li>
 					<li class="disabled page-item">
@@ -57,7 +57,7 @@
 					>
 						<a
 							class="page-link"
-							href="#"
+							href="javascript:void(0)"
 						>Next</a>
 					</li>
 					<li
@@ -67,7 +67,7 @@
 					>
 						<a
 							class="page-link"
-							href="#"
+							href="javascript:void(0)"
 						>Last</a>
 					</li>
 				</ul>
@@ -100,5 +100,10 @@ export default {
 			return this.list.slice(this.offset, this.offset + this.limit);
 		},
 	},
+	watch: {
+		list() {
+			this.page = 0
+		}
+	}
 };
 </script>
