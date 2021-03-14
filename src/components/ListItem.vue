@@ -24,6 +24,12 @@
 				class="badge alert-success ml-2 px-2"
 				v-if="a.paid"
 			>paid</span>
+			<span
+				class="badge alert-danger ml-2 px-2"
+				title="This is the last loss (or loss group) in the 1k entries, it may be incomplete and may disappear with the next refresh."
+				v-b-tooltip.hover.bottom
+				v-if="last"
+			>last</span>
 		</div>
 		<div class="ml-auto my-1">
 			<button
@@ -61,7 +67,7 @@ import { formatTimestamp } from "@/util.js";
 
 export default {
 	components: { Player },
-	props: ["a"],
+	props: ["a", "last"],
 	methods: {
 		...mapActions(["markAsPaid", "markAsUnpaid"]),
 		formatTimestamp,

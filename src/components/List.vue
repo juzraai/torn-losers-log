@@ -8,7 +8,8 @@
 				<ListItem
 					:a="a"
 					:key="JSON.stringify(a)"
-					v-for="a in listItemsOnPage"
+					:last="i + page * limit === list.length - 1"
+					v-for="(a, i) in listItemsOnPage"
 				/>
 			</div>
 			<div class="d-flex justify-content-between">
