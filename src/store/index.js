@@ -46,6 +46,7 @@ const store = new Vuex.Store({
 	state: {
 		apiKey: null, // TORN API key
 		lastUpdate: null,
+		loading: false,
 		losses: [],
 		names: {}, // TORN player ID -> name dictionary
 		paidUntil: {}, // TORN player ID -> timestamp
@@ -65,6 +66,9 @@ const store = new Vuex.Store({
 		},
 		setLastUpdate(state) {
 			state.lastUpdate = new Date().getTime()
+		},
+		setLoading(state, loading) {
+			state.loading = loading
 		},
 		setLosses(state, losses) {
 			state.losses = losses
@@ -140,6 +144,7 @@ const store = new Vuex.Store({
 			context.commit('setPlayerName', { player_id, name })
 		},
 		async fetchLosses(context) {
+			context.commit('setLoading', true)
 			const { apiKey, playerId } = context.state
 			const response = await tornApi.fetchAttacks(apiKey)
 			const losses = response.filter(a =>
@@ -155,6 +160,7 @@ const store = new Vuex.Store({
 			// 3) delete these keys from paidUntil
 			context.commit('setLosses', losses)
 			context.commit('setLastUpdate')
+			context.commit('setLoading', false)
 		},
 		async resolveName(context, playerId) {
 			const { apiKey } = context.state
@@ -176,8 +182,11 @@ const store = new Vuex.Store({
 
 store.subscribe((mutation, state) => {
 	console.log('[Store] Mutation', mutation)
-	console.log('[Store] Saving new state', state)
-	saveToStorage(state)
+	if (mutation.type === 'setLoading') return
+	const filteredState = Object.assign({}, state)
+	delete filteredState.loading
+	console.log('[Store] Saving new state', filteredState)
+	saveToStorage(filteredState)
 })
 
 export default store

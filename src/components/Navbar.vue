@@ -72,6 +72,7 @@
 
 <script>
 // TODO fix dropdown menu (Bootstrap-Vue)
+// TODO implement dropdown features
 import { mapState } from "vuex";
 import { formatTimestamp } from "@/util.js";
 

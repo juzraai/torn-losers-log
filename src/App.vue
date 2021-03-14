@@ -14,6 +14,8 @@
 </template>
 
 <script>
+// TODO implement footer
+// TODO add "censorship mode" on/off switch (into dropdown?) which blurs Player components
 import Login from "@/components/Login.vue";
 import Navbar from "@/components/Navbar.vue";
 

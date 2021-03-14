@@ -22,8 +22,6 @@
 </template>
 
 <script>
-// TODO would be nice to have a "loading" in state which is not persisted
-
 import { mapActions, mapState } from "vuex";
 import Widget from "@/components/Widget.vue";
 
