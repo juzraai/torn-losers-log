@@ -137,11 +137,13 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		async login(context, apiKey) {
+			context.commit('setLoading', true)
 			context.commit('setApiKey', apiKey)
 			const response = await tornApi.fetchBasic(apiKey)
 			const { player_id, name } = response
 			context.commit('setPlayerId', player_id)
 			context.commit('setPlayerName', { player_id, name })
+			context.commit('setLoading', false)
 		},
 		async fetchLosses(context) {
 			context.commit('setLoading', true)
@@ -163,10 +165,12 @@ const store = new Vuex.Store({
 			context.commit('setLoading', false)
 		},
 		async resolveName(context, playerId) {
+			context.commit('setLoading', true)
 			const { apiKey } = context.state
 			const response = await tornApi.fetchBasic(apiKey, playerId)
 			const { name } = response
 			context.commit('setPlayerName', { player_id: playerId, name })
+			context.commit('setLoading', false)
 		},
 		markAsPaid(context, attackOrGroup) {
 			const { defender_id: playerId, timestamp_ended: timestamp } = attackOrGroup
