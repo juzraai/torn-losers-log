@@ -1,12 +1,12 @@
 <template>
 	<KpiWidget>
-		<template slot="mainLabel">
+		<template #mainLabel>
 			<Player
 				:id="clients[0].defender_id"
 				:variant="clients[0].paid ? 'success' : null"
 			/>
 		</template>
-		<template slot="mainValue">{{ clients[0].attacks.length }}</template>
+		<template #mainValue>{{ clients[0].attacks.length }}</template>
 
 		<template v-for="i in 2">
 			<template :slot="'subLabel' + i">
@@ -17,7 +17,7 @@
 				/>
 			</template>
 			<template :slot="'subValue' + i">{{ clients[i].attacks.length }}</template>
-		</template>s
+		</template>
 	</KpiWidget>
 </template>
 

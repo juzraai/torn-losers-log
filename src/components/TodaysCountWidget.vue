@@ -1,13 +1,13 @@
 <template>
 	<KpiWidget>
-		<template slot="mainLabel">Losses today</template>
-		<template slot="mainValue">{{ todaysLosses || 0 }}</template>
+		<template #mainLabel>Losses today</template>
+		<template #mainValue>{{ todaysLosses || 0 }}</template>
 
-		<template slot="subLabel1">yesterday</template>
-		<template slot="subValue1">{{ yesterdaysLosses || 0 }}</template>
+		<template #subLabel1>yesterday</template>
+		<template #subValue1>{{ yesterdaysLosses || 0 }}</template>
 
-		<template slot="subLabel2">average</template>
-		<template slot="subValue2">
+		<template #subLabel2>average</template>
+		<template #subValue2>
 			<span
 				title="Most recent day and oldest day are both excluded as they may be incomplete."
 				v-b-tooltip.hover.top
