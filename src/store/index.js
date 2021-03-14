@@ -50,6 +50,7 @@ const store = new Vuex.Store({
 		names: {}, // TORN player ID -> name dictionary
 		paidUntil: {}, // TORN player ID -> timestamp
 		playerId: null, // TORN player ID (which the API key belongs to)
+		tab: 0, // selected tab index in LogWidget
 	},
 	mutations: {
 		init(state) {
@@ -79,6 +80,9 @@ const store = new Vuex.Store({
 			const { player_id, name } = payload
 			Vue.set(state.names, player_id, name)
 		},
+		setTab(state, tab) {
+			state.tab = tab
+		}
 	},
 	getters: {
 		losses(state) {

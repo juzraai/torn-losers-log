@@ -12,7 +12,7 @@
 					class="nav-link"
 					:class="i === tab ? 'active' : null"
 					role="button"
-					@click="tab = i"
+					@click="setTab(i)"
 				>
 					<i
 						class="fas fa-fw mr-lg-1"
@@ -22,13 +22,15 @@
 				</span>
 			</li>
 		</ul>
-		<List :mark-last="tab < 3" :list="list" />
+		<List
+			:mark-last="tab < 3"
+			:list="list"
+		/>
 	</Widget>
 </template>
 
 <script>
-// TODO tab selection should be saved and loaded
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations, mapState } from "vuex";
 import List from "@/components/List.vue";
 import Widget from "@/components/Widget.vue";
 
@@ -40,7 +42,6 @@ export default {
 	components: { List, Widget },
 	data() {
 		return {
-			tab: 0,
 			tabs: [
 				tab(
 					"Losses",
@@ -66,11 +67,15 @@ export default {
 		};
 	},
 	computed: {
+		...mapState(["tab"]),
 		...mapGetters(["losses", "sessions", "clients", "unpaidClients"]),
 		list() {
 			const { losses, sessions, clients, unpaidClients } = this;
 			return [losses, sessions, clients, unpaidClients][this.tab];
 		},
+	},
+	methods: {
+		...mapMutations(["setTab"]),
 	},
 };
 </script>
