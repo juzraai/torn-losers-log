@@ -1,10 +1,13 @@
 <template>
 	<div>
-		<div class="my-5 text-center" v-if="!list.length">
+		<div
+			class="my-5 text-center"
+			v-if="!list.length"
+		>
 			No results.
 		</div>
 		<div v-else>
-			<div class="list-group list-group-flush mb-3">
+			<div class="border-bottom list-group list-group-flush mb-4">
 				<ListItem
 					:a="a"
 					:key="JSON.stringify(a)"
@@ -12,22 +15,8 @@
 					v-for="(a, i) in listItemsOnPage"
 				/>
 			</div>
-			<div class="d-flex justify-content-between">
-				<ul class="pagination pagination-sm">
-					<li
-						class="page-item"
-						:class="{ active: o == limit }"
-						:key="o"
-						v-for="o in limitOptions"
-						@click="limit = o; page = 0"
-					>
-						<a
-							class="page-link"
-							href="#"
-						>{{ o }}</a>
-					</li>
-				</ul>
-				<ul class="pagination pagination-sm">
+			<div class="d-flex flex-wrap justify-content-center">
+				<ul class="pagination _pagination-sm">
 					<li
 						class="page-item"
 						:class="{ disabled: page <= 0 }"
@@ -72,6 +61,20 @@
 						>Last</a>
 					</li>
 				</ul>
+				<ul class="d-none d-md-flex pagination _pagination-sm ml-5">
+					<li
+						class="page-item"
+						:class="{ active: o == limit }"
+						:key="o"
+						v-for="o in limitOptions"
+						@click="limit = o; page = 0"
+					>
+						<a
+							class="page-link"
+							href="#"
+						>{{ o }}</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -79,7 +82,6 @@
 
 <script>
 // TODO pagination restyle
-// TODO last items should be indicated as red
 import ListItem from "@/components/ListItem.vue";
 
 export default {
@@ -105,8 +107,8 @@ export default {
 	},
 	watch: {
 		list() {
-			this.page = 0
-		}
-	}
+			this.page = 0;
+		},
+	},
 };
 </script>

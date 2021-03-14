@@ -1,5 +1,5 @@
 <template>
-	<Widget :card-body-class="'px-0'">
+	<Widget :card-body-class="'pb-0 px-0'">
 		<ul class="nav nav-tabs pl-3 mb-1">
 			<li
 				class="nav-item"
