@@ -1,6 +1,6 @@
 <template>
-	<Widget :card-body-class="'pb-0 px-0'">
-		<ul class="nav nav-tabs pl-3 mb-1">
+	<Widget :card-body-class="'p-0'">
+		<ul class="bg-light mb-1 nav nav-tabs pl-3 pt-3">
 			<li
 				class="nav-item"
 				:key="i"

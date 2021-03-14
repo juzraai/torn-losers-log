@@ -7,7 +7,7 @@
 			No results.
 		</div>
 		<div v-else>
-			<div class="border-bottom list-group list-group-flush mb-4">
+			<div class="border-bottom list-group list-group-flush">
 				<ListItem
 					:a="a"
 					:key="JSON.stringify(a)"
@@ -15,8 +15,8 @@
 					v-for="(a, i) in listItemsOnPage"
 				/>
 			</div>
-			<div class="d-flex flex-wrap justify-content-center">
-				<ul class="pagination _pagination-sm">
+			<div class="bg-light d-flex flex-wrap justify-content-center pt-3">
+				<ul class="pagination">
 					<li
 						class="page-item"
 						:class="{ disabled: page <= 0 }"
@@ -61,7 +61,7 @@
 						>Last</a>
 					</li>
 				</ul>
-				<ul class="d-none d-md-flex pagination _pagination-sm ml-5">
+				<ul class="d-none d-md-flex pagination ml-5">
 					<li
 						class="page-item"
 						:class="{ active: o == limit }"
