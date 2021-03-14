@@ -43,7 +43,10 @@
 						View profile
 					</b-dd-item>
 					<b-dd-divider></b-dd-divider>
-					<b-dd-item-button variant="danger">
+					<b-dd-item-button
+						variant="danger"
+						@click="clearDataWithConfirm"
+					>
 						<i class="fas fa-trash-alt fa-fw mr-2"></i>
 						Clear data
 					</b-dd-item-button>
@@ -56,7 +59,7 @@
 <script>
 // TODO fix dropdown menu (Bootstrap-Vue)
 // TODO implement dropdown features
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { formatTimestamp } from "@/util.js";
 
 export default {
@@ -69,6 +72,14 @@ export default {
 		...mapState(["apiKey", "names", "playerId"]),
 	},
 	methods: {
+		...mapActions(["clearData"]),
+		clearDataWithConfirm() {
+			if (
+				confirm("Are you sure you want to clear your TLL data in this browser?")
+			) {
+				this.clearData();
+			}
+		},
 		getTctTime() {
 			return formatTimestamp(new Date().getTime() / 1000);
 		},

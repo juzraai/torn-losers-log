@@ -55,7 +55,7 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		init(state) {
-			if (localStorage.getItem('store')) {
+			if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
 				const obj = loadFromStorage()
 				const newState = Object.assign(state, obj)
 				this.replaceState(newState)
@@ -136,6 +136,10 @@ const store = new Vuex.Store({
 		}
 	},
 	actions: {
+		clearData() {
+			localStorage.removeItem(LOCAL_STORAGE_KEY)
+			window.location.reload()
+		},
 		async login(context, apiKey) {
 			context.commit('setLoading', true)
 			context.commit('setApiKey', apiKey)
