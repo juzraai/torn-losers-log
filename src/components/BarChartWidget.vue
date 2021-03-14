@@ -8,12 +8,12 @@
 			></div>
 			<div
 				class="bar flex-grow-1"
-				:class="bar.highlight ? 'bg-info' : 'bg-primary'"
+				:class="bar.highlight ? 'bg-info' : null"
 				:key="i"
-				:style="{ height: 100 * bar.value / max + '%' }"
+				:style="{ backgroundColor: bar.color, height: 100 * bar.value / max + '%' }"
 				:title="bar.label"
 				v-b-tooltip.hover.bottom.html
-				v-for="(bar,i) in bars"
+				v-for="(bar,i) in barsAug"
 			></div>
 		</div>
 	</Widget>
@@ -26,6 +26,12 @@ export default {
 	components: { Widget },
 	props: ["avg", "bars", "title"],
 	computed: {
+		barsAug() {
+			return this.bars.map((bar) => {
+				bar.color = `rgba(0, 123, 255, ${0.25 + 0.75 * bar.value / this.max})`;
+				return bar;
+			});
+		},
 		max() {
 			return Math.max(...this.bars.map((b) => b.value));
 		},
