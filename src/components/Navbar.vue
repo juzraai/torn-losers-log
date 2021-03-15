@@ -44,6 +44,21 @@
 					</b-dd-item>
 					<b-dd-divider></b-dd-divider>
 					<b-dd-item-button
+						v-if="!hideClients"
+						@click="setHideClients(true)"
+					>
+						<i class="fas fa-eye-slash fa-fw mr-2"></i>
+						Hide clients
+					</b-dd-item-button>
+					<b-dd-item-button
+						v-else
+						@click="setHideClients(false)"
+					>
+						<i class="fas fa-eye fa-fw mr-2"></i>
+						Show clients
+					</b-dd-item-button>
+					<b-dd-divider></b-dd-divider>
+					<b-dd-item-button
 						variant="danger"
 						@click="clearDataWithConfirm"
 					>
@@ -57,7 +72,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import { formatTimestamp } from "@/util.js";
 
 export default {
@@ -67,10 +82,11 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(["apiKey", "names", "playerId"]),
+		...mapState(["apiKey", "hideClients", "names", "playerId"]),
 	},
 	methods: {
 		...mapActions(["clearData"]),
+		...mapMutations(["setHideClients"]),
 		clearDataWithConfirm() {
 			if (
 				confirm("Are you sure you want to clear your TLL data in this browser?")

@@ -16,7 +16,7 @@
 <script>
 // TODO set page title
 // TODO implement footer
-// TODO add "censorship mode" on/off switch (into dropdown?) which blurs Player components
+// TODO add "proof" feature
 import Navbar from "@/components/Navbar.vue";
 
 export default {

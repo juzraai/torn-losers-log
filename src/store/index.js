@@ -45,13 +45,16 @@ function updateGroup(group, a) {
 const store = new Vuex.Store({
 	state: {
 		apiKey: null, // TORN API key
-		lastUpdate: null,
-		loading: false,
-		losses: [],
+		lastUpdate: null, // Timestamp (Number) of last fetchLosses call
+		losses: [], // TORN attacks filtered to losses and necessary fields
 		names: {}, // TORN player ID -> name dictionary
 		paidUntil: {}, // TORN player ID -> timestamp
 		playerId: null, // TORN player ID (which the API key belongs to)
 		tab: 0, // selected tab index in LogWidget
+
+		// not persisted:
+		hideClients: false,
+		loading: false,
 	},
 	mutations: {
 		init(state) {
@@ -63,6 +66,9 @@ const store = new Vuex.Store({
 		},
 		setApiKey(state, apiKey) {
 			state.apiKey = apiKey
+		},
+		setHideClients(state, hide) {
+			state.hideClients = hide
 		},
 		setLastUpdate(state) {
 			state.lastUpdate = new Date().getTime()
@@ -190,8 +196,9 @@ const store = new Vuex.Store({
 
 store.subscribe((mutation, state) => {
 	console.log('[Store] Mutation', mutation)
-	if (mutation.type === 'setLoading') return
+	if (['setHideClients', 'setLoading'].includes(mutation.type)) return
 	const filteredState = Object.assign({}, state)
+	delete filteredState.hideClients
 	delete filteredState.loading
 	console.log('[Store] Saving new state', filteredState)
 	saveToStorage(filteredState)

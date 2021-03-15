@@ -1,5 +1,5 @@
 <template>
-	<span>
+	<span :style="{ filter: hideClients ? 'blur(1px)' : null }">
 		<span
 			class="text-secondary"
 			role="button"
@@ -7,14 +7,14 @@
 			v-b-tooltip.hover.bottom
 			v-if="!names[id]"
 			@click="resolveName(id)"
-		>Resolve name</span>
+		>{{ hideClients ? 'someone' : 'Resolve name' }}</span>
 		<a
 			:class="'text-' + (variant || 'dark')"
 			:href="'https://www.torn.com/profiles.php?XID=' + id"
 			target="_blank"
 		>
-			<span v-if="names[id]">{{ names[id] }}</span>
-			[{{ id }}]
+			<span v-if="names[id]">{{ hideClients ? 'someone' : names[id] }}</span>
+			[{{ hideClients ? '######' : id }}]
 		</a>
 	</span>
 </template>
@@ -25,7 +25,7 @@ import { mapActions, mapState } from "vuex";
 export default {
 	props: ["id", "variant"],
 	computed: {
-		...mapState(["names"]),
+		...mapState(["hideClients", "names"]),
 	},
 	methods: {
 		...mapActions(["resolveName"]),
