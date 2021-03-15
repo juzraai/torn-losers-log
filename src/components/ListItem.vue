@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="align-items-center d-flex list-group-item list-group-item-action px-2 py-1"
-		:class="a.paid ? null : 'text-muted'"
+		:class="a.paid ? 'text-muted' : null"
 	>
 		<small class="d-none d-sm-block mr-3 text-muted">
 			{{ formatTimestamp(a.timestamp_ended) }}
@@ -18,7 +18,7 @@
 			<Player
 				class="font-weight-bold"
 				:id="a.defender_id"
-				:variant="a.paid ? 'muted' :'dark'"
+				:variant="a.paid ? 'muted' : 'dark'"
 			/>
 			<span
 				class="badge alert-success ml-2 px-2"
