@@ -9,17 +9,17 @@
 				<router-view />
 			</div>
 		</div>
-		<div class="bg-dark text-white">footer :)</div>
+		<Footer />
 	</div>
 </template>
 
 <script>
 // TODO set page title
-// TODO implement footer
 // TODO add "proof" feature
+import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 
 export default {
-	components: { Navbar },
+	components: { Footer, Navbar },
 };
 </script>
