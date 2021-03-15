@@ -1,7 +1,7 @@
 <template>
 	<b-navbar
 		class="shadow-sm"
-		toggleable="sm"
+		toggleable="md"
 		type="light"
 		variant="light"
 	>
