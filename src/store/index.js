@@ -39,6 +39,7 @@ function updateGroup(group, a) {
 	group.attacks.push(a)
 	group.timestamp_ended = Math.max(group.timestamp_ended, a.timestamp_ended)
 	group.timestamp_started = Math.min(group.timestamp_started, a.timestamp_ended)
+	group.oldest |= a.oldest
 	return group
 }
 
@@ -96,7 +97,8 @@ const store = new Vuex.Store({
 	},
 	getters: {
 		losses(state) {
-			return state.losses.map(a => {
+			return state.losses.map((a, i) => {
+				a.oldest = i === state.losses.length - 1
 				a.paid = state.paidUntil[a.defender_id] >= a.timestamp_ended
 				return a
 			})

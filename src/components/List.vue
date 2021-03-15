@@ -11,8 +11,7 @@
 				<ListItem
 					:a="a"
 					:key="JSON.stringify(a)"
-					:last="i + page * limit === list.length - 1 && markLast"
-					v-for="(a, i) in listItemsOnPage"
+					v-for="a in listItemsOnPage"
 				/>
 			</div>
 			<div class="bg-light d-flex flex-wrap justify-content-center pt-3">
@@ -85,7 +84,7 @@ import ListItem from "@/components/ListItem.vue";
 
 export default {
 	components: { ListItem },
-	props: ["list", "mark-last"],
+	props: ["list"],
 	data() {
 		return {
 			limit: 10,

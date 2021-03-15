@@ -23,7 +23,6 @@
 			</li>
 		</ul>
 		<List
-			:mark-last="tab < 3"
 			:list="list"
 		/>
 	</Widget>
