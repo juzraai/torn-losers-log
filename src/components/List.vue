@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import ListItem from "@/components/ListItem.vue";
 
 export default {
@@ -93,6 +94,7 @@ export default {
 		};
 	},
 	computed: {
+		...mapState(["tab"]),
 		offset() {
 			return this.limit * this.page;
 		},
@@ -104,7 +106,7 @@ export default {
 		},
 	},
 	watch: {
-		list() {
+		tab() {
 			this.page = 0;
 		},
 	},

@@ -15,7 +15,6 @@
 
 <script>
 // TODO add "proof" feature
-// TODO bug: mark as paid/unpaid modifies list -> list watcher set page=0 - not good :)
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 
