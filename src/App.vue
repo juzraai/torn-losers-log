@@ -14,12 +14,14 @@
 </template>
 
 <script>
-// TODO set page title
 // TODO add "proof" feature
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 
 export default {
 	components: { Footer, Navbar },
+	metaInfo: {
+		titleTemplate: "%s | TORN City Losers' Log",
+	},
 };
 </script>

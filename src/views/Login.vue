@@ -37,11 +37,15 @@
 </template>
 
 <script>
+// TODO link to about page
 import { mapActions } from "vuex";
 import Widget from "@/components/Widget.vue";
 
 export default {
 	components: { Widget },
+	metaInfo: {
+		title: 'Login'
+	},
 	data() {
 		return {
 			apiKeyInput: this.$store.state.apiKey,

@@ -37,5 +37,8 @@ export default {
 		RefreshWidget,
 		TodaysCountWidget,
 	},
+	metaInfo: {
+		title: "Dashboard",
+	},
 };
 </script>
