@@ -1,24 +1,19 @@
 <template>
-	<nav class="navbar navbar-expand-sm navbar-light">
-		<router-link
-			class="font-italic font-weight-bold navbar-brand text-dark"
+	<b-navbar
+		class="shadow-sm"
+		toggleable="sm"
+		type="light"
+		variant="light"
+	>
+		<b-navbar-brand
+			_class="font-italic font-weight-bold navbar-brand text-dark"
 			to="/"
-		>TORN City Losers' Log</router-link>
-		<button
-			class="navbar-toggler"
-			type="button"
-			data-toggle="collapse"
-			data-target="#navbar"
-			aria-controls="navbar"
-			aria-expanded="false"
-			aria-label="Toggle navigation"
-		>
-			<span class="navbar-toggler-icon"></span>
-		</button>
+		>TORN City Losers' Log</b-navbar-brand>
+		<b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
 
-		<div
-			class="collapse navbar-collapse"
-			id="navbar"
+		<b-collapse
+			id="navbar-collapse"
+			is-nav
 		>
 			<ul
 				class="navbar-nav ml-auto"
@@ -67,8 +62,8 @@
 					</b-dd-item-button>
 				</b-nav-item-dd>
 			</ul>
-		</div>
-	</nav>
+		</b-collapse>
+	</b-navbar>
 </template>
 
 <script>
