@@ -80,7 +80,7 @@
 </template>
 
 <script>
-// TODO rename this to LogEntry, move out components: LogEntryTimestamp, LogEntryText, LogEntryButtons
+// TODO move out components: LogEntryTimestamp, LogEntryText, LogEntryButtons
 import { mapActions, mapState } from "vuex";
 import Player from "@/components/Player.vue";
 import ProofBox from "@/components/ProofBox.vue";

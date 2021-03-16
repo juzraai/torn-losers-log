@@ -22,15 +22,13 @@
 				</span>
 			</li>
 		</ul>
-		<List
-			:list="list"
-		/>
+		<Log :entries="entries" />
 	</Widget>
 </template>
 
 <script>
 import { mapGetters, mapMutations, mapState } from "vuex";
-import List from "@/components/List.vue";
+import Log from "@/components/Log.vue";
 import Widget from "@/components/Widget.vue";
 
 function tab(title, icon, tooltip) {
@@ -38,7 +36,7 @@ function tab(title, icon, tooltip) {
 }
 
 export default {
-	components: { List, Widget },
+	components: { Log, Widget },
 	data() {
 		return {
 			tabs: [
@@ -68,7 +66,7 @@ export default {
 	computed: {
 		...mapState(["tab"]),
 		...mapGetters(["losses", "sessions", "clients", "unpaidClients"]),
-		list() {
+		entries() {
 			const { losses, sessions, clients, unpaidClients } = this;
 			return [losses, sessions, clients, unpaidClients][this.tab];
 		},

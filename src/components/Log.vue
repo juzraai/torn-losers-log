@@ -2,16 +2,16 @@
 	<div>
 		<div
 			class="my-5 text-center"
-			v-if="!list.length"
+			v-if="!entries.length"
 		>
 			No results.
 		</div>
 		<div v-else>
 			<div class="border-bottom list-group list-group-flush">
-				<ListItem
-					:entry="a"
-					:key="entryKey(a)"
-					v-for="a in listItemsOnPage"
+				<LogEntry
+					:entry="e"
+					:key="entryKey(e)"
+					v-for="e in entriesOnPage"
 				/>
 			</div>
 			<div class="bg-light d-flex flex-wrap justify-content-center pt-3">
@@ -81,11 +81,11 @@
 
 <script>
 import { mapState } from "vuex";
-import ListItem from "@/components/ListItem.vue";
+import LogEntry from "@/components/LogEntry.vue";
 
 export default {
-	components: { ListItem },
-	props: ["list"],
+	components: { LogEntry },
+	props: ["entries"],
 	data() {
 		return {
 			limit: 10,
@@ -99,10 +99,10 @@ export default {
 			return this.limit * this.page;
 		},
 		pageCount() {
-			return Math.ceil(this.list.length / this.limit);
+			return Math.ceil(this.entries.length / this.limit);
 		},
-		listItemsOnPage() {
-			return this.list.slice(this.offset, this.offset + this.limit);
+		entriesOnPage() {
+			return this.entries.slice(this.offset, this.offset + this.limit);
 		},
 	},
 	methods: {
