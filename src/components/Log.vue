@@ -80,6 +80,8 @@
 </template>
 
 <script>
+// TODO extract LogPagination
+// TODO then maybe we can merge LogWidget and Log
 import { mapState } from "vuex";
 import LogEntry from "@/components/LogEntry.vue";
 

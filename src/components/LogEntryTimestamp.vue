@@ -1,0 +1,40 @@
+<template>
+	<div>
+		<div
+			class="align-items-center d-none d-md-flex log-entry-timestamp mr-3 small text-primary"
+			v-b-toggle="proofBoxId"
+		>
+			<div>
+				{{ formatTimestamp(entry.timestamp_ended) }}
+				<span v-if="entry.timestamp_started">
+					<br>
+					{{ formatTimestamp(entry.timestamp_started) }}
+				</span>
+			</div>
+		</div>
+		<button
+			class="btn btn-sm btn-outline-primary d-md-none mr-3"
+			v-b-toggle="proofBoxId"
+		>
+			<i class="fas fa-fw fa-clipboard-list"></i>
+		</button>
+	</div>
+</template>
+
+<script>
+import { formatTimestamp } from "@/util.js";
+
+export default {
+	props: ["entry", "proofBoxId"],
+	methods: {
+		formatTimestamp,
+	},
+};
+</script>
+
+<style>
+.log-entry-timestamp {
+	min-height: 32px;
+	outline: none;
+}
+</style>
