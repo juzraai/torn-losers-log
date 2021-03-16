@@ -1,29 +1,33 @@
-# TORN Losers' Log
+# TORN City Losers' Log (TLL)
 
-## Project setup
-```
-yarn install
-```
+This README file contains brief information for developers.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+**Please check out `ABOUT.md` and `MANUAL.md` under `docs/` for end-user documentation! :)**
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+---
 
-### Run your tests
-```
-yarn run test
-```
+**TLL** is a SPA for [TORN City](https://www.torn.com/) players.
 
-### Lints and fixes files
-```
-yarn run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Requirements
+
+- Node v12
+- Yarn
+
+
+## Commands
+
+- Setup: `yarn install`
+- Development: `yarn run serve`
+- Build: `yarn run build`
+
+
+## Nature
+
+- Vue CLI v4
+- Vue v2
+- Vue Router
+- Vuex
+- SASS
+- Bootstrap 4
+- Bootstrap-Vue
