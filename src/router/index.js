@@ -18,7 +18,7 @@ function r(path, name, requiresApiKey/*, icon, tooltip*/) {
 export const routes = [
 	r('/', 'Dashboard', true),
 	r('/login', 'Login')
-	// TODO public about page (readme like)
+	// TODO public about page (readme like) with YATA comparison pro/con
 	// TOOD maybe a help page too (not needed to be public)
 ]
 

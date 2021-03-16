@@ -9,8 +9,8 @@
 		<div v-else>
 			<div class="border-bottom list-group list-group-flush">
 				<ListItem
-					:a="a"
-					:key="JSON.stringify(a)"
+					:entry="a"
+					:key="entryKey(a)"
 					v-for="a in listItemsOnPage"
 				/>
 			</div>
@@ -103,6 +103,11 @@ export default {
 		},
 		listItemsOnPage() {
 			return this.list.slice(this.offset, this.offset + this.limit);
+		},
+	},
+	methods: {
+		entryKey(a) {
+			return "t" + this.tab + "a" + (a.code || a.attacks[0].code);
 		},
 	},
 	watch: {
