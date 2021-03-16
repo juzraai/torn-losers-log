@@ -45,7 +45,7 @@
 			<button
 				class="btn btn-sm btn-outline-danger mark-unpaid-btn"
 				role="button"
-				title="Marks this loss (or loss group) as <strong>unpaid</strong>"
+				title="Marks this and all newer losses to this client as <strong>unpaid</strong>"
 				v-b-tooltip.hover.left.html
 				v-else
 				@click="markAsUnpaid(a)"
