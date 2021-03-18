@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 const LOCAL_STORAGE_KEY = 'store'
 
+// TODO these functions must be extracted to a separate file
 function loadFromStorage() {
 	const lz = localStorage.getItem(LOCAL_STORAGE_KEY)
 	const json = LZString.decompressFromUTF16(lz)
