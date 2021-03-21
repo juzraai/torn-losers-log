@@ -68,7 +68,7 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from "vuex";
-import { formatTimestamp } from "@/util.js";
+import { formatTimestamp } from "@/services/tornFormat.js";
 
 export default {
 	data() {

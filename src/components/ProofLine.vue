@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { formatTimestamp } from "@/util.js";
+import { formatTimestamp } from "@/services/tornFormat.js";
 
 export default {
 	props: ["attack", "number"],

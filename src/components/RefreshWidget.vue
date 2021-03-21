@@ -31,7 +31,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import Widget from "@/components/Widget.vue";
-import { formatTimestamp } from "@/util.js";
+import { formatTimestamp } from "@/services/tornFormat.js";
 
 export default {
 	components: { Widget },

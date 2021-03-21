@@ -28,7 +28,6 @@
 </template>
 
 <script>
-// TODO move out components: LogEntryTimestamp, LogEntryText, LogEntryButtons
 import { mapActions } from "vuex";
 
 export default {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import storage from '../services/storage'
-import tornApi from '../tornApi'
+import tornApi from '../services/tornApi.js'
 
 Vue.use(Vuex)
 
