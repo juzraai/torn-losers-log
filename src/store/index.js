@@ -1,48 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import LZString from 'lz-string'
+import storage from '../services/storage'
 import tornApi from '../tornApi'
 
 Vue.use(Vuex)
-
-const LOCAL_STORAGE_KEY = 'store'
-
-// TODO these functions must be extracted to a separate file
-function loadFromStorage() {
-	const lz = localStorage.getItem(LOCAL_STORAGE_KEY)
-	const json = LZString.decompressFromUTF16(lz)
-	return JSON.parse(json)
-}
-
-function saveToStorage(state) {
-	const json = JSON.stringify(state)
-	const lz = LZString.compressToUTF16(json)
-	localStorage.setItem(LOCAL_STORAGE_KEY, lz)
-	console.log(`[Store] Compressed state from ${json.length} to ${lz.length} (${Math.round(lz.length / json.length * 100)}%) characters.`)
-}
-
-function groupPredicate(a) {
-	return group => group.defender_id === a.defender_id && group.paid === a.paid
-}
-
-function newGroup(a) {
-	const { defender_id, paid, timestamp_ended } = a
-	return {
-		attacks: [a],
-		defender_id,
-		paid,
-		timestamp_ended,
-		timestamp_started: a.timestamp_ended, // sic! we are using the "ended" timestamp of attacks!
-	}
-}
-
-function updateGroup(group, a) {
-	group.attacks.push(a)
-	group.timestamp_ended = Math.max(group.timestamp_ended, a.timestamp_ended)
-	group.timestamp_started = Math.min(group.timestamp_started, a.timestamp_ended)
-	group.oldest |= a.oldest
-	return group
-}
 
 const store = new Vuex.Store({
 	state: {
@@ -60,8 +21,8 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		init(state) {
-			if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
-				const obj = loadFromStorage()
+			const obj = storage.load()
+			if (obj) {
 				const newState = Object.assign(state, obj)
 				this.replaceState(newState)
 			}
@@ -147,7 +108,7 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		clearData() {
-			localStorage.removeItem(LOCAL_STORAGE_KEY)
+			storage.clear()
 			window.location.reload()
 		},
 		async login(context, apiKey) {
@@ -200,13 +161,36 @@ const store = new Vuex.Store({
 })
 
 store.subscribe((mutation, state) => {
-	console.log('[Store] Mutation', mutation)
+	//console.log('[Store] Mutation', mutation)
 	if (['setHideClients', 'setLoading'].includes(mutation.type)) return
 	const filteredState = Object.assign({}, state)
 	delete filteredState.hideClients
 	delete filteredState.loading
-	console.log('[Store] Saving new state', filteredState)
-	saveToStorage(filteredState)
+	//console.log('[Store] Saving new state', filteredState)
+	storage.save(filteredState)
 })
+
+function groupPredicate(a) {
+	return group => group.defender_id === a.defender_id && group.paid === a.paid
+}
+
+function newGroup(a) {
+	const { defender_id, paid, timestamp_ended } = a
+	return {
+		attacks: [a],
+		defender_id,
+		paid,
+		timestamp_ended,
+		timestamp_started: a.timestamp_ended, // sic! we are using the "ended" timestamp of attacks!
+	}
+}
+
+function updateGroup(group, a) {
+	group.attacks.push(a)
+	group.timestamp_ended = Math.max(group.timestamp_ended, a.timestamp_ended)
+	group.timestamp_started = Math.min(group.timestamp_started, a.timestamp_ended)
+	group.oldest |= a.oldest
+	return group
+}
 
 export default store
