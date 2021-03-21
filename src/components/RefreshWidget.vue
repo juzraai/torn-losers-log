@@ -5,9 +5,9 @@
 			losses between
 		</h6>
 		<p class="flex-grow-1">
-			{{ formatTimestamp(losses[losses.length - 1].timestamp_ended) }}
-			<br>
 			{{ formatTimestamp(losses[0].timestamp_ended) }}
+			<br>
+			{{ formatTimestamp(losses[losses.length - 1].timestamp_ended) }}
 		</p>
 		<div class="align-items-center d-flex">
 			<button
