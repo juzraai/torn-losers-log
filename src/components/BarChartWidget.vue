@@ -3,7 +3,7 @@
 		<div class="align-items-end d-flex flex-grow-1 position-relative">
 			<div
 				class="avg border border-info position-absolute w-100"
-				:style="{ bottom: avg + '%' }"
+				:style="{ bottom: (100 * avg / max) + '%' }"
 				v-if="avg"
 			></div>
 			<div
