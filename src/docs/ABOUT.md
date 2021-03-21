@@ -3,39 +3,41 @@
 **TORN City Losers' Log (TLL)** is a tool which **aims to help loss sellers** by providing them
 
 - **automatic counting**
-- **daily performance statistics**
+- **performance statistics**
 - and a **proof system**.
 
 
 
 ## Features
 
-- ⚙️ **Manages your last 5000 losses** (TORN returns the last 1000 attacks, TLL then updates incrementally)
+- ⚙️ **Manages your last 5000 losses.**
 - 📋 **Lists your losses in 4 ways:**
 	- Individual losses - just like on TORN or YATA
 	- Consecutive losses grouped by client and paid status
 	- Losses grouped by client and paid status
 	- Unpaid losses grouped by client
-- 🧾 **Lists attack log links** for losses and loss groups which **can be used for proof** when requesting payment.
+- 🧾 **Lists attack log links** for losses and loss groups.
 - 💰 **Losses or loss groups can be easily marked as "paid".**
-- 📊 **Aggregates your daily loss counts** and shows:
-	- A chart with past days' loss counts
-	- Today's loss count
-	- Yesterday's loss count
-	- Average daily loss count
-- 📞 Tooltips tell you if a button will perform an API call.
+- 📊 **Shows bar chart of daily loss counts and calculates average.**
+- 📞 Tooltips tell you if a button will use TORN API, there are no background calls.
 - 🔒 Your data stays in your browser, there's **no server-side code/database,** and no downtime.
 - 📷 You can hide client names if you want to do a screenshot to show only your stats or **TLL** features.
 
 
 
+## Screenshots
+
+**TODO**
+
+
+
 ## Compared to YATA
 
-[YATA](https://yata.yt/) provides a ton of cool features which help TORN players in various ways. That one set of functions which are relevant in this comparison are on its **[Targets -> Attacks](https://yata.yt/target/attacks)** page.
+[YATA](https://yata.yt/) provides a ton of cool features which help TORN players in various ways. That one set of its functions which are relevant in this comparison are on the **[Targets > Attacks](https://yata.yt/target/attacks)** page.
 
-**TLL** specifically targets loss sellers, so it's not a complete replacement for YATA, but may better serve loss sellers. However, in some aspects YATA can be still a better choice, that is why I'm writing this chapter and trying to be as objective as I can.
+**TLL** focuses only on loss sellers, so it's not a complete replacement for YATA, but may better serve loss sellers due to its more specific features. However, in some aspects YATA can be still a better choice, that is why I'm writing this chapter and trying to be as objective as I can.
 
-**Below comparison is written on Mar 21, 2021. If YATA gets relevant updates or you find a mistake here, please contact me.**
+*Below comparison is written on Mar 21, 2021. If YATA gets relevant updates or you find a mistake here, please contact me.*
 
 
 
@@ -45,7 +47,7 @@ TORN API can return your last 1000 attacks. So both YATA and TLL can only displa
 
 YATA stores attacks in its database and updates incrementally, with a cap of **1588 attacks.**
 
-**TLL** works in a similar way, though it only stores outgoing losses. The current cap is set to **5000 losses,** but it might change in the future.
+**TLL** works in a similar way, though it **only stores outgoing losses.** The current cap is set to **5000 losses,** but it might change in the future.
 
 
 
@@ -59,7 +61,7 @@ YATA allows you to tick a "Paid" checkbox for every attack, **individually.** Ac
 
 ### Loss counting
 
-YATA's "Breakdown" feature **counts your outgoing attacks by defender.**
+YATA's "Breakdown" feature **counts your outgoing attacks by defender.** So you have to subtract previous paid contracts to get the current unpaid one.
 
 **TLL** aggregates **by defender and paid status,** this way previous contracts of the same client won't bother you when you check your current unpaid status.
 
