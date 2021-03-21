@@ -78,8 +78,9 @@ const store = new Vuex.Store({
 		setLoading(state, loading) {
 			state.loading = loading
 		},
-		setLosses(state, losses) {
-			state.losses = losses
+		addLosses(state, newLosses) {
+			const nl = newLosses.filter(a => a.timestamp_ended > state.losses[0].timestamp_ended)
+			state.losses = [...nl, ...state.losses].slice(0, 5000)
 		},
 		setPaidUntil(state, payload) {
 			const { playerId, timestamp } = payload
@@ -169,11 +170,12 @@ const store = new Vuex.Store({
 				code, defender_id, timestamp_ended
 			}))
 			losses.reverse()
+			context.commit('addLosses', losses)
 			// TODO auto-clean paidUntil dict:
 			// 1) map losses to defID array
 			// 2) filter paidUntil keys to those not included
 			// 3) delete these keys from paidUntil
-			context.commit('setLosses', losses)
+
 			context.commit('setLastUpdate')
 			context.commit('setLoading', false)
 		},

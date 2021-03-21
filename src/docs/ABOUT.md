@@ -10,7 +10,7 @@
 
 ## Features
 
-- ⚙️ **Processes your losses among your last 1k attacks.**
+- ⚙️ **Manages your last 5000 losses** (TORN returns the last 1000 attacks, TLL then updates incrementally)
 - 📋 **Lists your losses in 4 ways:**
 	- Individual losses - just like on TORN or YATA
 	- Consecutive losses grouped by client and paid status
@@ -36,9 +36,11 @@
 
 ### Last attacks
 
-Last time I checked, YATA could list my last 1588 attacks.
+TORN API can return your last 1000 attacks. So both YATA and TLL can only display your last 1000 losses with the first fetch.
 
-**TLL** currently manages your last 1000 attacks, but I'm considering to increase the capacity.
+YATA stores attacks in its database and updates incrementally, with a cap of **1588 attacks.**
+
+**TLL** works in a similar way, though it only stores outgoing losses. The current cap is set to **5000 losses,** but it might change in the future.
 
 
 
