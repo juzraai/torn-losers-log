@@ -2,14 +2,15 @@
 
 **TORN City Losers' Log (TLL)** is a tool which **aims to help loss sellers** by providing them
 
-- **insight** into their work and performance
+- **automatic counting**
+- **daily performance statistics**
 - and a **proof system**.
 
 
 
 ## Features
 
-- ⚙️ **Processes your last 1k attacks.**
+- ⚙️ **Processes your losses among your last 1k attacks.**
 - 📋 **Lists your losses in 4 ways:**
 	- Individual losses - just like on TORN or YATA
 	- Consecutive losses grouped by client and paid status
@@ -29,7 +30,7 @@
 
 ## Compared to YATA
 
-[YATA](https://yata.yt/) provides a ton of cool features which help TORN players in various ways. That one set of functions which are relevant in this comparison are on the **[Targets -> Attacks](https://yata.yt/target/attacks)** page.
+[YATA](https://yata.yt/) provides a ton of cool features which help TORN players in various ways. That one set of functions which are relevant in this comparison are on its **[Targets -> Attacks](https://yata.yt/target/attacks)** page.
 
 
 
@@ -45,7 +46,7 @@ Last time I checked, YATA could list my last 1588 attacks.
 
 YATA is centralized, it has an own database on its server, so you can log into it from anywhere.
 
-**TLL** uses the browser's *local* storage, when you want to use it in another browser, you have to sync your data manually. Import/export features are on the way to make it easier!
+**TLL** uses the browser's *local* storage, when you want to use it in another browser, you have to sync your data manually. Import/export features are on the way to make this easier!
 
 
 

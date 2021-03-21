@@ -14,8 +14,8 @@
 </template>
 
 <script>
-// TODO import/export feature for manual syncing
-// TODO increase storage cap for maybe 5k? or more? - need to merge when we fetch + need recommendation to fetch every week for continuous log
+// TODO import/export feature for manual syncing - import on login screen too!
+// TODO increase storage cap - LS size: https://stackoverflow.com/a/15720835/2418224 - merge when fetching attacks - simply filter by timestamp + need to recommend fetch freq for user
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 
