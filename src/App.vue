@@ -16,6 +16,7 @@
 <script>
 // TODO import/export feature for manual syncing - import on login screen too!
 // TODO recommend fetch freq for user
+// TODO add build time and version to footer
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 
