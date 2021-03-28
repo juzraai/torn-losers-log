@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/juzraai/torn-losers-log/compare/v1.0.0...v1.0.1) (2021-03-28)
+
+
+### Bug Fixes
+
+* fixed handling empty array before first fetch ([48fedff](https://github.com/juzraai/torn-losers-log/commit/48fedffcf74792fcae51226355a209142d2c8e14))
+
 ## 1.0.0 (2021-03-28)
 
 
