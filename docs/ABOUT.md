@@ -81,4 +81,4 @@ YATA is centralized, it stores your data in a database on its server, so **you c
 
 YATA has a **server and a database** which serves a lot of users, who use a lot of features, often at the same time. You have to connect to the server to access your data.
 
-**TLL** is a **static website,** which means it has no server-side code or centralized database. Your browser can cache the whole site and your data lives in your browser. So, the page and your data loads faster.
+**TLL** is a **static website,** which means it has no server-side code or centralized database. Your browser can cache the whole site and your data lives in your browser. So, the page and your data loads faster, and there should be less downtime as **TLL** requires much less resources.
