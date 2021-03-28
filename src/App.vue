@@ -14,9 +14,14 @@
 </template>
 
 <script>
-// TODO import/export feature for manual syncing - import on login screen too!
 // TODO recommend fetch freq for user
 // TODO add build time and version to footer
+// TODO add help texts into app
+// TODO link about page
+// TODO release 1.0
+// TODO set up CD https://github.com/marketplace/actions/vue-to-github-pages
+// TODO import/export feature for manual syncing - import on login screen too!
+// TODO export feature could start a download, and can even send the compressed stuff
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 

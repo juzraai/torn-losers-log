@@ -2,7 +2,7 @@
 
 This README file contains brief information for developers.
 
-**Please check out `ABOUT.md` and `MANUAL.md` under `docs/` for end-user documentation! :)**
+**Please check out `ABOUT.md` under `docs/` for end-user documentation! :)**
 
 ---
 
