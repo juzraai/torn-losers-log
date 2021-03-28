@@ -15,7 +15,6 @@
 
 <script>
 // TODO add build time and version to footer
-// TODO link about page
 // TODO release 1.0
 // TODO set up CD https://github.com/marketplace/actions/vue-to-github-pages
 
@@ -23,6 +22,7 @@
 // TODO timestamp column should be constant height in list - maybe switch back to table?
 // TODO import/export feature for manual syncing - import on login screen too!
 // TODO export feature could start a download, and can even send the compressed stuff
+// TODO bar chart options for day limit: 10, 15, 21, 30
 
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
