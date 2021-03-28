@@ -1,5 +1,8 @@
 <template>
-	<div>
+	<div
+		title="Toggle proof"
+		v-b-tooltip.hover.left
+	>
 		<div
 			class="align-items-center d-none d-md-flex log-entry-timestamp mr-3 small text-primary"
 			v-b-toggle="proofBoxId"
@@ -18,7 +21,7 @@
 		>
 			<i class="fas fa-fw fa-clipboard-list"></i>
 		</button>
-	</div>
+		</div>
 </template>
 
 <script>

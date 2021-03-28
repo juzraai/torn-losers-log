@@ -2,7 +2,7 @@
 	<BarChartWidget
 		:avg="avgLossesPerDay"
 		:bars="bars"
-		title="Loss counts"
+		:cardTitle="`Loss counts (past ${bars.length} days)`"
 	/>
 </template>
 
@@ -24,6 +24,7 @@ export default {
 					if (i === 0) bar.highlight = true;
 					return bar;
 				})
+				.slice(0, 30)
 				.reverse() // now [0] is the oldest day
 				.filter((_, i) => i > 0); // removing oldest day as it's likely incomplete
 		},

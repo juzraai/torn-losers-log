@@ -1,5 +1,5 @@
 <template>
-	<Widget :title="title">
+	<Widget :cardTitle="cardTitle">
 		<div class="align-items-end d-flex flex-grow-1 position-relative">
 			<div
 				class="avg border border-info position-absolute w-100"
@@ -24,7 +24,7 @@ import Widget from "@/components/Widget.vue";
 
 export default {
 	components: { Widget },
-	props: ["avg", "bars", "title"],
+	props: ["avg", "bars", "cardTitle"],
 	computed: {
 		barsAug() {
 			return this.bars.map((bar) => {

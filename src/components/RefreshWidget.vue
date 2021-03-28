@@ -12,7 +12,7 @@
 		<div class="align-items-center d-flex">
 			<button
 				class="btn btn-info mr-3"
-				title="1 API call"
+				title="1 API call. Keep in mind that TORN API returns your last 1000 attacks, so you should update TLL regularly."
 				v-b-tooltip.hover.bottom
 				@click="fetchLosses"
 			>

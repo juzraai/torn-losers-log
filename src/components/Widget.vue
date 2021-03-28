@@ -13,9 +13,9 @@
 			>
 				<h6
 					class="card-title"
-					v-if="title"
+					v-if="cardTitle"
 				>
-					{{ title }}
+					{{ cardTitle }}
 				</h6>
 				<slot />
 			</div>
@@ -27,7 +27,7 @@
 import { mapState } from "vuex";
 
 export default {
-	props: ["cardClass", "cardBodyClass", "title"],
+	props: ["cardClass", "cardBodyClass", "cardTitle"],
 	computed: {
 		...mapState(["loading"]),
 	},

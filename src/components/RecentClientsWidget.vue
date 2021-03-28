@@ -1,5 +1,8 @@
 <template>
-	<KpiWidget>
+	<KpiWidget
+		title='Most recent clients and their counts. Green means "paid". See more on Clients tab below.'
+		v-b-tooltip.hover.top
+	>
 		<template #mainLabel>
 			<Player
 				:id="clients[0].defender_id"

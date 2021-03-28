@@ -14,14 +14,16 @@
 </template>
 
 <script>
-// TODO recommend fetch freq for user
 // TODO add build time and version to footer
-// TODO add help texts into app
 // TODO link about page
 // TODO release 1.0
 // TODO set up CD https://github.com/marketplace/actions/vue-to-github-pages
+
+// next version:
+// TODO timestamp column should be constant height in list - maybe switch back to table?
 // TODO import/export feature for manual syncing - import on login screen too!
 // TODO export feature could start a download, and can even send the compressed stuff
+
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 

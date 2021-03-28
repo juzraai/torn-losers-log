@@ -20,7 +20,7 @@
 - 💰 **Losses or loss groups can be easily marked as "paid".**
 - 📊 **Shows bar chart of daily loss counts and calculates average.**
 - 📞 Tooltips tell you if a button will use TORN API, there are no background calls.
-- 🔒 Your data stays in your browser, there's **no server-side code/database,** and no downtime.
+- 🔒 Your API key and data stays in your browser, there's **no server-side code/database,** and no downtime.
 - 📷 You can hide client names if you want to do a screenshot to show only your stats or **TLL** features.
 
 

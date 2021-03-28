@@ -15,6 +15,15 @@
 			id="navbar-collapse"
 			is-nav
 		>
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a
+						class="nav-link"
+						href="#"
+						target="_blank"
+					>About</a>
+				</li>
+			</ul>
 			<ul
 				class="navbar-nav ml-auto"
 				v-if="apiKey"
