@@ -23,6 +23,7 @@
 // TODO import/export feature for manual syncing - import on login screen too!
 // TODO export feature could start a download, and can even send the compressed stuff
 // TODO bar chart options for day limit: 10, 15, 21, 30
+// TODO mark amount of paid losses in bar chart by stacking bars?
 
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
