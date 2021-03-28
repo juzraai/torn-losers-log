@@ -7,9 +7,13 @@
 			<Player
 				:id="clients[0].defender_id"
 				:variant="clients[0].paid ? 'success' : null"
+				v-if="clients[0]"
 			/>
 		</template>
-		<template #mainValue>{{ clients[0].attacks.length }}</template>
+		<template
+			#mainValue
+			v-if="clients[0]"
+		>{{ clients[0].attacks.length }}</template>
 
 		<template v-for="i in 2">
 			<template :slot="'subLabel' + i">
@@ -17,9 +21,13 @@
 					:key="i"
 					:id="clients[i].defender_id"
 					:variant="clients[i].paid ? 'success' : null"
+					v-if="clients[i]"
 				/>
 			</template>
-			<template :slot="'subValue' + i">{{ clients[i].attacks.length }}</template>
+			<template
+				:slot="'subValue' + i"
+				v-if="clients[i]"
+			>{{ clients[i].attacks.length }}</template>
 		</template>
 	</KpiWidget>
 </template>

@@ -40,7 +40,8 @@ const store = new Vuex.Store({
 			state.loading = loading
 		},
 		addLosses(state, newLosses) {
-			const nl = newLosses.filter(a => a.timestamp_ended > state.losses[0].timestamp_ended)
+			const mostRecentWeHave = state.losses[0] ? state.losses[0].timestamp_ended : 0
+			const nl = newLosses.filter(a => a.timestamp_ended > mostRecentWeHave)
 			state.losses = [...nl, ...state.losses].slice(0, 5000)
 		},
 		setPaidUntil(state, payload) {

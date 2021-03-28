@@ -4,7 +4,7 @@
 			<strong>{{ losses.length }}</strong>
 			losses between
 		</h6>
-		<p class="flex-grow-1">
+		<p class="flex-grow-1" v-if="losses.length">
 			{{ formatTimestamp(losses[0].timestamp_ended) }}
 			<br>
 			{{ formatTimestamp(losses[losses.length - 1].timestamp_ended) }}
