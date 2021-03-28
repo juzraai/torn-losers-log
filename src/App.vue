@@ -14,7 +14,6 @@
 </template>
 
 <script>
-// TODO add build time and version to footer
 // TODO release 1.0
 // TODO set up CD https://github.com/marketplace/actions/vue-to-github-pages
 
