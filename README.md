@@ -1,4 +1,4 @@
-# TORN City Losers' Log (TLL)
+# [TORN City Losers' Log (TLL)](https://juzraai.github.io/torn-losers-log/)
 
 **TLL** is a tool which **aims to help loss sellers** by providing them
 
