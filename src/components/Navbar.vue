@@ -19,7 +19,7 @@
 				<li class="nav-item">
 					<a
 						class="nav-link"
-						href="https://github.com/juzraai/torn-losers-log/blob/main/docs/ABOUT.md"
+						href="https://github.com/juzraai/torn-losers-log/blob/main/README.md"
 						target="_blank"
 					>About</a>
 				</li>
