@@ -104,6 +104,7 @@ Commands:
 - Setup: `yarn install`
 - Development: `yarn run serve`
 - Build: `yarn run build`
+- Release: `yarn run release && git push --follow-tags origin main`
 
 
 
