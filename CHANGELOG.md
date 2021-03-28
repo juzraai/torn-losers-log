@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/juzraai/torn-losers-log/compare/v1.0.1...v1.0.2) (2021-03-28)
+
+
+### Bug Fixes
+
+* fixed about link in navbar ([aceaae0](https://github.com/juzraai/torn-losers-log/commit/aceaae008feb013844beaa5f4207303040048d68))
+
 ### [1.0.1](https://github.com/juzraai/torn-losers-log/compare/v1.0.0...v1.0.1) (2021-03-28)
 
 
