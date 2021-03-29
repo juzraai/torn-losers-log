@@ -39,17 +39,17 @@
 
 **TLL** focuses only on loss sellers, so it's not a complete replacement for YATA, but may better serve loss sellers due to its additional specific features. However, in some aspects YATA can be still a better choice, that is why I'm writing this chapter and trying to be as objective as I can.
 
-*Below comparison is written on Mar 21, 2021. If YATA gets relevant updates or you find a mistake here, please contact me.*
+*Below comparison was written on Mar 21, 2021. If YATA gets relevant updates or you find a mistake here, please contact me.*
 
 
 
 ### Limits of counting
 
-TORN API can return your last 1000 attacks. So both YATA and TLL can only display your last 1000 losses at most with the first fetch, and they can only add your last 1000 losses when you update. (So it's recommended to update them regularly.)
+TORN API can return your last 1000 attacks. So both YATA and TLL can only display losses from your last 1000 attacks with the first fetch, and they can only process your last 1000 attacks when you update. (So it's recommended to update them regularly.)
 
-YATA **stores attacks** in its database and updates incrementally, with a cap of **1588 attacks.** When the cap is reached, most recent **attacks** will kick out the oldest ones.
+YATA **stores attacks** in its database and updates incrementally, with a cap of **1588 attacks.** When the cap is reached, most recent **attacks** will kick out the oldest ones when you update.
 
-**TLL** also updates incrementally, but only **stores outgoing losses.** The current cap is set to **5000 losses,** but it might change in the future. When the cap is reached, most recent **losses** will kick out the oldest ones. (Though you still have to keep in mind TORN API's limitation mentioned above!)
+**TLL** also updates incrementally, but only **stores outgoing losses.** The current cap is set to **5000 losses,** but it might change in the future. When the cap is reached, most recent **losses** will kick out the oldest ones when you update.
 
 
 
