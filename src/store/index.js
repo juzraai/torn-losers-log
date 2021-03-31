@@ -25,6 +25,8 @@ const store = new Vuex.Store({
 			newState = newState || storage.load()
 			if (newState) {
 				if (state.apiKey) delete newState.apiKey
+				delete newState.hideClients
+				delete newState.loading
 				newState = Object.assign(state, newState)
 				this.replaceState(newState)
 			}

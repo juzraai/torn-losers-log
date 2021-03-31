@@ -9,10 +9,11 @@
 				>This will overwrite <strong>EVERYTHING</strong> in this browser's TLL instance (stored losses, paid marks, resolved names), <strong>except</strong> your API key. If you wish to overwrite your API key too, please use <em>Clear data</em> option first from the top right menu.</div>
 				<div class="my-4">
 					<b-form-file
-						v-model="file"
-						:state="Boolean(file)"
-						placeholder="Choose a file or drop it here..."
 						drop-placeholder="Drop file here..."
+						placeholder="Choose a file or drop it here..."
+						size="lg"
+						:state="Boolean(file)"
+						v-model="file"
 					></b-form-file>
 				</div>
 
@@ -27,10 +28,7 @@
 						:datetime="uploadedState.lastUpdate"
 					/>
 				</div>
-				<div
-					class="d-flex justify-content-between"
-					v-if="uploadedState"
-				>
+				<div class="d-flex justify-content-between mt-4">
 					<button
 						class="btn btn-outline-secondary"
 						@click="file=null"
@@ -39,6 +37,7 @@
 					</button>
 					<button
 						class="btn btn-primary"
+						:disabled="!uploadedState"
 						@click="doImport"
 					>
 						Import
