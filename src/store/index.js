@@ -1,3 +1,4 @@
+import moment from "moment"
 import Vue from 'vue'
 import Vuex from 'vuex'
 import storage from '../services/storage'
@@ -111,6 +112,16 @@ const store = new Vuex.Store({
 		clearData() {
 			storage.clear()
 			window.location.reload()
+		},
+		exportData() {
+			const json = storage.loadRaw()
+			const blob = new Blob([json], { type: 'text/plain' })
+			const file = window.URL.createObjectURL(blob)
+			const a = document.createElement('a')
+			a.setAttribute('href', file)
+			const ts = moment().format('YYMMDD-HHmmss')
+			a.setAttribute('download', `tll-export-${ts}.json`)
+			a.click()
 		},
 		async login(context, apiKey) {
 			context.commit('setLoading', true)
