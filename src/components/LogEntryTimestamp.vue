@@ -21,7 +21,7 @@
 		>
 			<i class="fas fa-fw fa-clipboard-list"></i>
 		</button>
-		</div>
+	</div>
 </template>
 
 <script>
@@ -35,9 +35,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 .log-entry-timestamp {
 	min-height: 32px;
 	outline: none;
+
+	@include media-breakpoint-up(md) {
+		width: 130px;
+	}
 }
 </style>

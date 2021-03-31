@@ -14,9 +14,7 @@
 </template>
 
 <script>
-// TODO timestamp column should be constant height in list - maybe switch back to table?
-// TODO import/export feature for manual syncing - import on login screen too!
-// TODO export feature could start a download, and can even send the compressed stuff
+// TODO import/export feature for manual syncing - without API key! and JSON format. start download
 // TODO bar chart options for day limit: 10, 15, 21, 30
 // TODO mark amount of paid losses in bar chart by stacking bars?
 // TODO mark a loss as "non-s**t" loss - maybe a "Hide" button and "hidden" badge which excludes it from KPIs. maybe lists could have a global option to show hidden ones, and grouping should take into account hidden state too!
