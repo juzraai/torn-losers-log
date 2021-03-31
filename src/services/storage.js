@@ -5,10 +5,17 @@ const LOCAL_STORAGE_KEY = 'store'
 class CompressedLocalStorage {
 
 	load() {
+		const json = this.loadRaw()
+		if (json) {
+			return JSON.parse(json)
+		}
+		return false
+	}
+
+	loadRaw() {
 		const lz = localStorage.getItem(LOCAL_STORAGE_KEY)
 		if (lz) {
-			const json = LZString.decompressFromUTF16(lz)
-			return JSON.parse(json)
+			return LZString.decompressFromUTF16(lz)
 		}
 		return false
 	}

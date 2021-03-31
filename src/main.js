@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueMeta from 'vue-meta'
 import VueTimeago from 'vue-timeago'
-import { CollapsePlugin, NavbarPlugin, TooltipPlugin } from 'bootstrap-vue'
+import { CollapsePlugin, FormFilePlugin, NavbarPlugin, TooltipPlugin } from 'bootstrap-vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -13,6 +13,7 @@ Vue.use(VueMeta)
 Vue.use(VueTimeago, {})
 
 Vue.use(CollapsePlugin)
+Vue.use(FormFilePlugin)
 Vue.use(NavbarPlugin)
 Vue.use(TooltipPlugin)
 

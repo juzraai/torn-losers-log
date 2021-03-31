@@ -21,6 +21,7 @@
 - 📊 **Shows bar chart of daily loss counts and calculates average.**
 - 📞 Tooltips tell you if a button will use TORN API, there are no background calls.
 - 🔒 Your API key and data stays in your browser, there's **no server-side code/database,** and no downtime.
+- 💾 You can **export and import** your TLL data anytime.
 - 📷 You can hide client names if you want to do a screenshot to show only your stats or **TLL** features.
 
 
@@ -73,7 +74,7 @@ YATA's "Breakdown" feature **counts your outgoing attacks by defender.** So you 
 
 YATA is centralized, it stores your data in a database on its server, so **you can log in from anywhere** to see your data.
 
-**TLL** uses the browser's *local* storage. When you want to use it in another browser, **you have to sync your data manually.** Import/export feature is on the way to make this easier!
+**TLL** uses the browser's *local* storage. When you want to use it in another browser, **you have to export and then import your data.**
 
 
 
