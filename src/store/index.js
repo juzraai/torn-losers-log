@@ -21,10 +21,11 @@ const store = new Vuex.Store({
 		loading: false,
 	},
 	mutations: {
-		init(state) {
-			const obj = storage.load()
-			if (obj) {
-				const newState = Object.assign(state, obj)
+		init(state, newState) {
+			newState = newState || storage.load()
+			if (newState) {
+				if (state.apiKey) delete newState.apiKey
+				newState = Object.assign(state, newState)
 				this.replaceState(newState)
 			}
 		},

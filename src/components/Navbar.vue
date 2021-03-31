@@ -24,6 +24,7 @@
 					>About</a>
 				</li>
 			</ul>
+
 			<ul
 				class="navbar-nav ml-auto"
 				v-if="apiKey"
@@ -60,13 +61,15 @@
 						<i class="fas fa-eye fa-fw mr-2"></i>
 						Show clients
 					</b-dd-item-button>
-					<b-dd-item-button
-						@click="exportData"
-					>
+					<b-dd-item-button @click="exportData">
 						<i class="fas fa-download fa-fw mr-2"></i>
 						Export data
 					</b-dd-item-button>
 					<b-dd-divider></b-dd-divider>
+					<b-dd-item to="/import">
+						<i class="fas fa-upload fa-fw mr-2"></i>
+						Import data
+					</b-dd-item>
 					<b-dd-item-button
 						variant="danger"
 						@click="clearDataWithConfirm"
@@ -75,6 +78,18 @@
 						Clear data
 					</b-dd-item-button>
 				</b-nav-item-dd>
+			</ul>
+
+			<ul
+				class="navbar-nav ml-auto"
+				v-else
+			>
+				<li class="nav-item">
+					<router-link
+						class="nav-link"
+						to="/import"
+					>Import data</router-link>
+				</li>
 			</ul>
 		</b-collapse>
 	</b-navbar>
