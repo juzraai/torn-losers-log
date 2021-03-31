@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/juzraai/torn-losers-log/compare/v1.0.2...v1.1.0) (2021-03-31)
+
+
+### Features
+
+* added export/import feature ([2c58b24](https://github.com/juzraai/torn-losers-log/commit/2c58b24dd34edac7a2f43c9f07d78a9023bb41f9))
+* version in footer now links to changelog ([7a1bf48](https://github.com/juzraai/torn-losers-log/commit/7a1bf48c460e9fb76537cdd0cdbb4e219e86ab5f))
+
+
+### Bug Fixes
+
+* fixed paid button refresh on losses tab ([0bcd911](https://github.com/juzraai/torn-losers-log/commit/0bcd911b88c9607794867309f5b7937601cc0920))
+* set same width for timestamp blocks in log entries ([2f636cc](https://github.com/juzraai/torn-losers-log/commit/2f636cc9ce54f1fe3cac40f2973221a22090e97d))
+
 ### [1.0.2](https://github.com/juzraai/torn-losers-log/compare/v1.0.1...v1.0.2) (2021-03-28)
 
 
