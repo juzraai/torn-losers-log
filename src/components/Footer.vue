@@ -1,9 +1,13 @@
 <template>
-	<div class="bg-dark text-white">
+	<div class="bg-dark text-light">
 		<div class="container my-3">
 			<div class="row">
 				<div class="col-md-4 mb-4 mb-md-0">
-					Version <strong>{{ version }}</strong>
+					Version <a
+						class="font-weight-bold text-white"
+						href="https://github.com/juzraai/torn-losers-log/blob/main/CHANGELOG.md"
+						target="_blank"
+					>{{ version }}</a>
 					<br>
 					Released
 					<timeago

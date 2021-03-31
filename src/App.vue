@@ -14,7 +14,6 @@
 </template>
 
 <script>
-// TODO link to changelog in footer
 // TODO timestamp column should be constant height in list - maybe switch back to table?
 // TODO import/export feature for manual syncing - import on login screen too!
 // TODO export feature could start a download, and can even send the compressed stuff
