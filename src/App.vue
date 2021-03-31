@@ -14,9 +14,10 @@
 </template>
 
 <script>
+// TODO app logo, brand, favicon
 // TODO bar chart options for day limit: 10, 15, 21, 30
 // TODO mark amount of paid losses in bar chart by stacking bars?
-// TODO mark a loss as "non-s**t" loss - maybe a "Hide" button and "hidden" badge which excludes it from KPIs. maybe lists could have a global option to show hidden ones, and grouping should take into account hidden state too!
+// TODO "Hide" button: exclude losses from top widgets and Unpaid tab, on other tabs it can be with lighter font color. grouping should consider "hidden" flag too
 // TODO display about and changelog markdown files in app
 
 import Footer from "@/components/Footer.vue";
