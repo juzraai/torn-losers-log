@@ -7,7 +7,7 @@
 			v-b-tooltip.hover.bottom
 			v-if="!names[id]"
 			@click="resolveName(id)"
-		>{{ hideClients ? 'someone' : 'Resolve name' }}</span>
+		>{{ hideClients ? 'someone' : 'Click to resolve name' }}</span>
 		<a
 			:class="'text-' + (variant || 'dark')"
 			:href="'https://www.torn.com/profiles.php?XID=' + id"
