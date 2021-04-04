@@ -48,7 +48,7 @@
 
 TORN API can return your last 1000 attacks. So both YATA and TLL can only display losses from your last 1000 attacks with the first fetch, and they can only process your last 1000 attacks when you update. (So it's recommended to update them regularly.)
 
-YATA **stores attacks** in its database and updates incrementally, with a cap of **1588 attacks.** When the cap is reached, most recent **attacks** will kick out the oldest ones when you update.
+YATA **stores attacks** in its database and updates incrementally, with a limitation of **one month history**.
 
 **TLL** also updates incrementally, but only **stores outgoing losses.** The current cap is set to **5000 losses,** but it might change in the future. When the cap is reached, most recent **losses** will kick out the oldest ones when you update.
 
