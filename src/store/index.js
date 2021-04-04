@@ -1,8 +1,9 @@
 import moment from "moment"
 import Vue from 'vue'
 import Vuex from 'vuex'
+import npcList from '../services/npcList'
 import storage from '../services/storage'
-import tornApi from '../services/tornApi.js'
+import tornApi from '../services/tornApi'
 
 Vue.use(Vuex)
 
@@ -69,7 +70,7 @@ const store = new Vuex.Store({
 				a.oldest = i === state.losses.length - 1
 				a.paid = state.paidUntil[a.defender_id] >= a.timestamp_ended
 				return a
-			})
+			}).filter(a => !npcList.includes(a.defender_id))
 		},
 		days(_, getters) {
 			return getters.losses.reduce((days, a) => {

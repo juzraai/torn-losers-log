@@ -1,10 +1,16 @@
 <template>
 	<Widget card-class="alert-info">
 		<h6 class="card-title">
-			<strong>{{ losses.length }}</strong>
+			<strong
+				title="This includes losses to NPCs too."
+				v-b-tooltip.hover.top
+			>{{ losses.length }}</strong>
 			losses between
 		</h6>
-		<p class="flex-grow-1" v-if="losses.length">
+		<p
+			class="flex-grow-1"
+			v-if="losses.length"
+		>
 			{{ formatTimestamp(losses[0].timestamp_ended) }}
 			<br>
 			{{ formatTimestamp(losses[losses.length - 1].timestamp_ended) }}

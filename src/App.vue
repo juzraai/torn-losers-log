@@ -17,8 +17,9 @@
 // TODO app logo, brand, favicon
 // TODO bar chart options for day limit: 10, 15, 21, 30
 // TODO mark amount of paid losses in bar chart by stacking bars?
-// TODO "Hide" button: exclude losses from top widgets and Unpaid tab, on other tabs it can be with lighter font color. grouping should consider "hidden" flag too
+// TODO "Hide" button: exclude losses from top widgets and Clients/Unpaid tabs. on other tabs it can be with lighter font color, without Paid button but with Unhide. grouping should consider "hidden" flag too
 // TODO display about and changelog markdown files in app
+// TODO display changelog in modal dialog if version is newer than previously stored
 
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
