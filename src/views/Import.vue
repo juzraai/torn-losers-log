@@ -63,6 +63,9 @@ function readUploadedFile(file) {
 
 export default {
 	components: { Widget },
+	metaInfo: {
+		title: "Import data",
+	},
 	data() {
 		return {
 			file: null,
