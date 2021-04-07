@@ -4,19 +4,18 @@ import store from '../store'
 
 Vue.use(VueRouter)
 
-function r(path, name, requiresApiKey/*, icon, tooltip*/) {
+function r(path, name, requiresApiKey) {
 	return {
 		path,
 		name,
 		meta: { requiresApiKey },
-		/*icon,
-		tooltip,*/
 		component: () => import(`../views/${name}.vue`)
 	}
 }
 
 export const routes = [
 	r('/', 'Dashboard', true),
+	r('/changelog', 'Changelog'),
 	r('/login', 'Login'),
 	r('/import', 'Import')
 ]

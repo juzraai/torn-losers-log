@@ -3,11 +3,10 @@
 		<div class="container my-3">
 			<div class="row">
 				<div class="col-md-4 mb-4 mb-md-0">
-					Version <a
+					Version <router-link
 						class="font-weight-bold text-white"
-						href="https://github.com/juzraai/torn-losers-log/blob/main/CHANGELOG.md"
-						target="_blank"
-					>{{ version }}</a>
+						to="/changelog"
+					>{{ version }}</router-link>
 					<br>
 					Released
 					<timeago
