@@ -34,7 +34,6 @@
 	</div>
 </template>
 
-
 <script>
 import VueMarkdown from "vue-markdown";
 import Widget from "@/components/Widget.vue";
