@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/juzraai/torn-losers-log/compare/v1.1.0...v1.2.0) (2021-04-07)
+
+
+### Features
+
+* added changelog view ([2af5b53](https://github.com/juzraai/torn-losers-log/commit/2af5b53ec438fbdbf6edef541e4153887b2928f5))
+* added new version notification ([eb8bc3c](https://github.com/juzraai/torn-losers-log/commit/eb8bc3cd046a415b2f70c283850afe60ef6a9deb))
+* losses to NPCs are now hidden from lists and stats ([dcc0811](https://github.com/juzraai/torn-losers-log/commit/dcc0811d12ff143c006a49d3a29c72971eda3d14))
+
+
+### Bug Fixes
+
+* added missing window title to import page ([727cdb9](https://github.com/juzraai/torn-losers-log/commit/727cdb920b7b3a25c9d0ea40628136d39a93fb3b))
+* made initial player name label more intuitive ([7207c67](https://github.com/juzraai/torn-losers-log/commit/7207c678d0d79403651d25e64af26d13be99d7c6))
+
 ## [1.1.0](https://github.com/juzraai/torn-losers-log/compare/v1.0.2...v1.1.0) (2021-03-31)
 
 
