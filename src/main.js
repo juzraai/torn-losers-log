@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueMeta from 'vue-meta'
 import VueTimeago from 'vue-timeago'
-import { CollapsePlugin, FormFilePlugin, NavbarPlugin, TooltipPlugin } from 'bootstrap-vue'
+import { AlertPlugin, CollapsePlugin, FormFilePlugin, NavbarPlugin, TooltipPlugin } from 'bootstrap-vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -12,6 +12,7 @@ Vue.config.productionTip = false
 Vue.use(VueMeta)
 Vue.use(VueTimeago, {})
 
+Vue.use(AlertPlugin)
 Vue.use(CollapsePlugin)
 Vue.use(FormFilePlugin)
 Vue.use(NavbarPlugin)

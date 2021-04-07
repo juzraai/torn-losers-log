@@ -13,6 +13,7 @@ const store = new Vuex.Store({
 		lastUpdate: null, // Timestamp (Number) of last fetchLosses call
 		losses: [], // TORN attacks filtered to losses and necessary fields
 		names: {}, // TORN player ID -> name dictionary
+		notifiedVersion: null, // last TLL version where alert dismissed
 		paidUntil: {}, // TORN player ID -> timestamp
 		playerId: null, // TORN player ID (which the API key belongs to)
 		tab: 0, // selected tab index in LogWidget
@@ -48,6 +49,9 @@ const store = new Vuex.Store({
 			const mostRecentWeHave = state.losses[0] ? state.losses[0].timestamp_ended : 0
 			const nl = newLosses.filter(a => a.timestamp_ended > mostRecentWeHave)
 			state.losses = [...nl, ...state.losses].slice(0, 5000)
+		},
+		setNotifiedVersion(state, version) {
+			state.notifiedVersion = version
 		},
 		setPaidUntil(state, payload) {
 			const { playerId, timestamp } = payload
