@@ -1,18 +1,23 @@
 <template>
-	<div class="row mb-4">
+	<div class="row">
 		<div class="col">
 			<b-alert
-				class="shadow-sm"
-				show
+				class="mb-4 shadow-sm"
+				:show="notifiedVersion != version"
 				variant="success"
 			>
 				<h4 class="alert-heading"><strong>TLL</strong> has just been updated to <strong>v{{ version }}</strong>!</h4>
 				<hr>
 				<VueMarkdown :source="changelog" />
 				<hr>
-				<button class="btn btn-success mr-3">
-					<i class="fas fa-fw fa-times mr-1"></i>
-					Close
+				<button
+					class="btn btn-success mr-3"
+					@click="dismiss"
+					title="Close notification"
+					v-b-tooltip.hover.bottom
+				>
+					<i class="fas fa-fw fa-check mr-1"></i>
+					Cool!
 				</button>
 				<router-link
 					class="btn btn-outline-success"
@@ -27,6 +32,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
 import VueMarkdown from "vue-markdown";
 
 export default {
@@ -52,6 +58,15 @@ export default {
 				.join("\n")
 				.split("#")[0],
 		};
+	},
+	computed: {
+		...mapState(["notifiedVersion"]),
+	},
+	methods: {
+		...mapMutations(["setNotifiedVersion"]),
+		dismiss() {
+			this.setNotifiedVersion(this.version);
+		},
 	},
 };
 </script>
