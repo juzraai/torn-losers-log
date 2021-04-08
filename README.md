@@ -1,3 +1,7 @@
+This tool is being developed for TORN City players. If you don't what TORN City is and wanna try it out, **[register here](https://www.torn.com/2413874)** so we can both get benefits!
+
+---
+
 # [TORN City Losers' Log (TLL)](https://juzraai.github.io/torn-losers-log/)
 
 **TLL** is a tool which **aims to help loss sellers** by providing them
