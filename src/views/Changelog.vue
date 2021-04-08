@@ -28,19 +28,18 @@
 							class="octo-body"
 						></path>
 					</svg></a>
-				<VueMarkdown :source="changelog" />
+				<div v-html="marked(changelog)"></div>
 			</Widget>
 		</div>
 	</div>
 </template>
 
 <script>
-import VueMarkdown from "vue-markdown";
+import marked from "marked";
 import Widget from "@/components/Widget.vue";
 
 export default {
 	components: {
-		VueMarkdown,
 		Widget,
 	},
 	metaInfo: {
@@ -62,6 +61,9 @@ export default {
 				})
 				.join("\n"),
 		};
+	},
+	methods: {
+		marked,
 	},
 };
 </script>

@@ -19,7 +19,6 @@
 // TODO mark amount of paid losses in bar chart by stacking bars?
 // TODO "Hide" button: exclude losses from top widgets and Clients/Unpaid tabs. on other tabs it can be with lighter font color, without Paid button but with Unhide. grouping should consider "hidden" flag too
 // TODO display about markdown file in app
-// TODO if version is newer than previously stored, display success-alert on dashboard!
 // TODO invoice generator: modal window displays unpaid clients with editable price and remove from invoice, calculates subtotals and total, formats as PRE
 
 import Footer from "@/components/Footer.vue";

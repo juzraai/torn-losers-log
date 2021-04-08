@@ -8,7 +8,7 @@
 			>
 				<h4 class="alert-heading"><strong>TLL</strong> has just been updated to <strong>v{{ version }}</strong>!</h4>
 				<hr>
-				<VueMarkdown :source="changelog" />
+				<div v-html="marked(changelog)"></div>
 				<hr>
 				<button
 					class="btn btn-success mr-3"
@@ -32,13 +32,10 @@
 </template>
 
 <script>
+import marked from "marked";
 import { mapMutations, mapState } from "vuex";
-import VueMarkdown from "vue-markdown";
 
 export default {
-	components: {
-		VueMarkdown,
-	},
 	data() {
 		return {
 			version: APP_VERSION,
@@ -63,6 +60,7 @@ export default {
 		...mapState(["notifiedVersion"]),
 	},
 	methods: {
+		marked,
 		...mapMutations(["setNotifiedVersion"]),
 		dismiss() {
 			this.setNotifiedVersion(this.version);
