@@ -15,10 +15,10 @@
 					@click="setTab(i)"
 				>
 					<i
-						class="fas fa-fw mr-lg-1"
+						class="fas fa-fw mr-md-1"
 						:class="t.icon"
 					></i>
-					{{ t.title }}
+					<span class="d-none d-md-inline">{{ t.title }}</span>
 				</span>
 			</li>
 		</ul>
