@@ -180,6 +180,7 @@ const store = new Vuex.Store({
 	},
 })
 
+let saveTimeout = null
 store.subscribe((mutation, state) => {
 	//console.log('[Store] Mutation', mutation)
 	if (['setHideClients', 'setLoading'].includes(mutation.type)) return
@@ -187,7 +188,8 @@ store.subscribe((mutation, state) => {
 	delete filteredState.hideClients
 	delete filteredState.loading
 	//console.log('[Store] Saving new state', filteredState)
-	storage.save(filteredState)
+	if (saveTimeout) clearTimeout(saveTimeout)
+	saveTimeout = setTimeout(() => { storage.save(filteredState) }, 1000)
 })
 
 function groupPredicate(a) {

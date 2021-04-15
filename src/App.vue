@@ -14,6 +14,7 @@
 </template>
 
 <script>
+// TODO upgrade to Vue CLI 4, Vue 3
 // TODO app logo, brand, favicon
 // TODO bar chart options for day limit: 10, 15, 21, 30
 // TODO mark amount of paid losses in bar chart by stacking bars?
