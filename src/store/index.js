@@ -78,7 +78,7 @@ const store = new Vuex.Store({
 		},
 		days(_, getters) {
 			return getters.losses.reduce((days, a) => {
-				const day = new Date(a.timestamp_ended * 1000).toISOString().split('T')[0]
+				const day = dayOfAttack(a)
 				days[day] = (days[day] || 0) + 1
 				return days
 			}, {})
@@ -89,6 +89,19 @@ const store = new Vuex.Store({
 			counts.pop(); // removing oldest day as it's likely incomplete
 			const avg = counts.reduce((sum, v) => (sum += v), 0) / counts.length;
 			return Math.round(avg * 10) / 10;
+		},
+		dailyClients(_, getters) {
+			return getters.losses.reduce((groups, a) => {
+				const day = dayOfAttack(a)
+				const pred = groupPredicate(a)
+				const i = groups.findIndex(g => dayOfAttack(g) == day && pred(g))
+				if (i > -1) {
+					groups[i] = updateGroup(groups[i], a)
+				} else {
+					groups.push(newGroup(a))
+				}
+				return groups
+			}, [])
 		},
 		clients(_, getters) {
 			return getters.losses.reduce((groups, a) => {
@@ -191,6 +204,10 @@ store.subscribe((mutation, state) => {
 	if (saveTimeout) clearTimeout(saveTimeout)
 	saveTimeout = setTimeout(() => { storage.save(filteredState) }, 1000)
 })
+
+function dayOfAttack(a) {
+	return new Date(a.timestamp_ended * 1000).toISOString().split('T')[0]
+}
 
 function groupPredicate(a) {
 	return group => group.defender_id === a.defender_id && group.paid === a.paid

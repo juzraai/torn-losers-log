@@ -51,6 +51,11 @@ export default {
 					"Consecutive losses grouped by client and payment status."
 				),
 				tab(
+					"Daily",
+					"fa-calendar-day",
+					"Losses aggregated by TCT date, client and payment status."
+				),
+				tab(
 					"Clients",
 					"fa-users",
 					"Losses aggregated by client and payment status."
@@ -65,10 +70,10 @@ export default {
 	},
 	computed: {
 		...mapState(["tab"]),
-		...mapGetters(["losses", "sessions", "clients", "unpaidClients"]),
+		...mapGetters(["losses", "sessions", "dailyClients", "clients", "unpaidClients"]),
 		entries() {
-			const { losses, sessions, clients, unpaidClients } = this;
-			return [losses, sessions, clients, unpaidClients][this.tab];
+			const { losses, sessions, dailyClients, clients, unpaidClients } = this;
+			return [losses, sessions, dailyClients, clients, unpaidClients][this.tab];
 		},
 	},
 	methods: {
