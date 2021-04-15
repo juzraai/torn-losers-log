@@ -15,9 +15,10 @@ This tool is being developed for TORN City players. If you don't what TORN City 
 ## Features
 
 - ⚙️ **Manages your last 5000 losses.**
-- 📋 **Lists your losses in 4 ways:**
+- 📋 **Lists your losses in 5 ways:**
 	- Individual losses - just like on TORN or YATA
 	- Consecutive losses grouped by client and paid status
+	- Losses grouped by date, client and paid status
 	- Losses grouped by client and paid status
 	- Unpaid losses grouped by client
 - 🧾 **Lists attack log links** for losses and loss groups.
