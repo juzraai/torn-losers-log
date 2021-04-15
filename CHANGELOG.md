@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/juzraai/torn-losers-log/compare/v1.2.0...v1.3.0) (2021-04-15)
+
+
+### Features
+
+* added "Daily" tab where losses are aggregated by day, client and payment status ([ca3bbd5](https://github.com/juzraai/torn-losers-log/commit/ca3bbd5e4969e6e6340ecdebf3a61163fb86a623))
+
+
+### Bug Fixes
+
+* fixed chart to show last 30 days as intended ([772bd9b](https://github.com/juzraai/torn-losers-log/commit/772bd9bc636bd9b5157de94b89b9ff0dc512c2b8))
+* fixed log tab buttons responsiveness ([7b253fd](https://github.com/juzraai/torn-losers-log/commit/7b253fd0f1346f07dd0254b0bff6bc845546befc))
+* made storage saving more effective for better UX ([86363b1](https://github.com/juzraai/torn-losers-log/commit/86363b11413b03318c3eb8c1db90e2b136cac401))
+
 ## [1.2.0](https://github.com/juzraai/torn-losers-log/compare/v1.1.0...v1.2.0) (2021-04-07)
 
 
