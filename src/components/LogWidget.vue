@@ -2,7 +2,7 @@
 	<Widget :card-body-class="'p-0'">
 		<ul class="bg-light mb-1 nav nav-tabs pl-3 pt-3">
 			<li
-				class="nav-item"
+				class="nav-item text-center"
 				:key="i"
 				:title="t.tooltip"
 				v-b-tooltip.hover.top
@@ -82,7 +82,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+	.nav-item {
+		flex-grow: 1;
+	}
+}
+
 .nav-link.active {
 	color: black;
 }
