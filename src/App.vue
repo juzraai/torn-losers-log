@@ -14,6 +14,7 @@
 </template>
 
 <script>
+// TODO save items/page setting
 // TODO invoice generator in  modal/separate page. list of unpaid clients with editable price and remove from invoice btn, calculates subtotals and total, formats as PRE, or maybe provides more format options
 // TODO upgrade to Vue CLI 4, Vue 3
 // TODO app logo, brand, favicon
