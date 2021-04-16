@@ -21,6 +21,7 @@
 // TODO promo poster to forum topic (366 or 602px width) - highlight main features, zoom circles
 // TODO settings page / widget menu - bar chart options for day limit: 10, 15, 21, 30
 // TODO settings page / widget menu - select log tabs to show
+// TODO settings page - set limit for stored losses (lower limit can improve UX)
 // TODO Hide feature A) "Hide" button in log entry: exclude losses from top widgets and Clients/Unpaid tabs. on other tabs it can be with lighter font color, without Paid button but with Unhide. grouping should consider "hidden" flag too.
 // TODO Hide feature B) "Hide" button on client level: hides that client from top widgets and all tabs. Can be unhidden on settings page.
 // TODO mark amount of paid losses in bar chart by stacking bars?
