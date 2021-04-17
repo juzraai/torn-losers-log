@@ -81,7 +81,10 @@ const store = new Vuex.Store({
 			return state.losses.map((a, i) => {
 				a.oldest = i === state.losses.length - 1
 				a.paid = state.paidUntil[a.defender_id] >= a.timestamp_ended
-				a.price = (state.prices[a.defender_id] || []).filter(p => p.timestamp <= a.timestamp_ended).reverse()[0]
+
+				const p = (state.prices[a.defender_id] || []).filter(p => p.timestamp <= a.timestamp_ended).reverse()[0]
+				a.price = p ? p.price : 0
+
 				return a
 			}).filter(a => !npcList.includes(a.defender_id))
 		},
@@ -199,6 +202,12 @@ const store = new Vuex.Store({
 			const timestamp = (timestamp_started || timestamp_ended) - 1
 			context.commit('setPaidUntil', { playerId, timestamp })
 		},
+		setPrice(context, { entry, price }) {
+			const { attacks, defender_id: player_id, timestamp_ended, timestamp_started } = entry
+			const timestamp = attacks && attacks.length ? timestamp_started : timestamp_ended
+			// TODO when in a group, previously set prices must be removed that fall into this group
+			context.commit('setPrice', { player_id, price, timestamp })
+		}
 	},
 })
 

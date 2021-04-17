@@ -109,7 +109,7 @@ export default {
 	},
 	methods: {
 		entryKey(a) {
-			return "t" + this.tab + "a" + (a.code || a.attacks[0].code) + "p" + a.paid;
+			return "t" + this.tab + "a" + (a.code || a.attacks[0].code) + "p" + a.paid + "$" + a.price;
 		},
 	},
 	watch: {

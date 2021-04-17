@@ -9,6 +9,10 @@
 				class="mr-auto"
 				:entry="entry"
 			/>
+			<button
+				class="btn btn-sm btn-outline-primary mr-3"
+				@click="doSetPrice"
+			>${{ entry.price }}</button>
 			<LogEntryPaidButton :entry="entry" />
 		</div>
 		<b-collapse :id="proofBoxId">
@@ -18,7 +22,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import LogEntryPaidButton from "@/components/LogEntryPaidButton.vue";
 import LogEntryText from "@/components/LogEntryText.vue";
 import LogEntryTimestamp from "@/components/LogEntryTimestamp.vue";
@@ -31,6 +35,15 @@ export default {
 		...mapState(["tab"]),
 		proofBoxId() {
 			return this.entry.code || this.entry.attacks[0].code;
+		},
+	},
+	methods: {
+		...mapActions(["setPrice"]),
+		doSetPrice() {
+			const { entry } = this;
+			let price = prompt("New price:");
+			if (price === null) return;
+			this.setPrice({ entry, price });
 		},
 	},
 };
