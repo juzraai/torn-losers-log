@@ -39,7 +39,6 @@
 </template>
 
 <script>
-// TODO add copy button to top-right corner
 import { mapState } from "vuex";
 import Player from "@/components/Player.vue";
 import ProofLine from "@/components/ProofLine.vue";
