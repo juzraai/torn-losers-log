@@ -2,7 +2,7 @@
 	<Widget :card-body-class="'p-0'">
 		<ul class="bg-light mb-1 nav nav-tabs pl-3 pt-3">
 			<li
-				class="nav-item text-center"
+				class="flex-grow-1 nav-item text-center"
 				:key="i"
 				:title="t.tooltip"
 				v-b-tooltip.hover.top
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+// TODO that i===4 above is not the most elegant solution i guess :)
+
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Log from "@/components/Log.vue";
 import Widget from "@/components/Widget.vue";
@@ -50,22 +52,22 @@ export default {
 				tab(
 					"Sessions",
 					"fa-layer-group",
-					"Consecutive losses grouped by client and payment status."
+					"Consecutive losses grouped by client, price and payment status."
 				),
 				tab(
 					"Daily",
 					"fa-calendar-day",
-					"Losses aggregated by TCT date, client and payment status."
+					"Losses aggregated by TCT date, client, price and payment status."
 				),
 				tab(
-					"Clients",
+					"Contracts",
 					"fa-users",
-					"Losses aggregated by client and payment status."
+					"Losses aggregated by client, price and payment status."
 				),
 				tab(
 					"Unpaid",
 					"fa-comment-dollar",
-					"Unpaid losses aggregated by client."
+					"Unpaid losses aggregated by client and price."
 				),
 			],
 		};
@@ -85,17 +87,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-
-@include media-breakpoint-down(sm) {
-	.nav-item {
-		flex-grow: 1;
-	}
-}
-
+<style scoped>
 .nav-link.active {
 	color: black;
 }

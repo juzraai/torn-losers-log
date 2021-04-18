@@ -9,7 +9,7 @@
 		<strong
 			class="d-md-none mr-1"
 			role="button"
-			title="Sets the price for <strong>this and all newer</strong> losses."
+			title="Click to set the price for <strong>this and all newer</strong> losses to this client."
 			v-b-tooltip.hover.left.html
 			@click="doSetPrice"
 		>${{ formatPrice(entry.price) }}</strong>
@@ -22,7 +22,7 @@
 		<strong
 			class="d-none d-md-inline mr-1"
 			role="button"
-			title="Sets the price for <strong>this and all newer</strong> losses."
+			title="Click to set the price for <strong>this and all newer</strong> losses to this client."
 			v-b-tooltip.hover.left.html
 			@click="doSetPrice"
 		>${{ formatPrice(entry.price) }}</strong>
