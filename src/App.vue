@@ -17,9 +17,8 @@
 // TODO save items/page setting
 
 // TODO money/hit
-// - proof should include price/loss and total price too
 // - (?) move total price to right (green=paid, red=unpaid), replace Paid button with checkbox
-// - nicer editor for price
+// - (?) nicer editor for price
 // - update README
 
 // TODO proof export
