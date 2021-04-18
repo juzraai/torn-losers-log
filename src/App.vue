@@ -19,7 +19,6 @@
 // TODO money/hit
 // - (?) move total price to right (green=paid, red=unpaid), replace Paid button with checkbox
 // - (?) nicer editor for price
-// - update README
 
 // TODO proof export
 // - buttons in top right corner
