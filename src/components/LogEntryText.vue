@@ -10,7 +10,7 @@
 			class="d-md-none mr-1"
 			role="button"
 			title="Click to set the price for <strong>this and all newer</strong> losses to this client."
-			v-b-tooltip.hover.left.html
+			v-b-tooltip.hover.right.html
 			@click="doSetPrice"
 		>${{ formatPrice(entry.price) }}</strong>
 		<Player
@@ -23,7 +23,7 @@
 			class="d-none d-md-inline mr-1"
 			role="button"
 			title="Click to set the price for <strong>this and all newer</strong> losses to this client."
-			v-b-tooltip.hover.left.html
+			v-b-tooltip.hover.right.html
 			@click="doSetPrice"
 		>${{ formatPrice(entry.price) }}</strong>
 		<span v-if="entry.attacks && entry.attacks.length">

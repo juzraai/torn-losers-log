@@ -1,6 +1,6 @@
 <template>
 	<Widget :card-body-class="'p-0'">
-		<ul class="bg-light mb-1 nav nav-tabs pl-3 pt-3">
+		<ul class="bg-light mb-1 nav nav-tabs px-3 pt-3">
 			<li
 				class="flex-grow-1 nav-item text-center"
 				:key="i"
@@ -15,7 +15,7 @@
 					@click="setTab(i)"
 				>
 					<i
-						class="fas fa-fw mr-md-1"
+						class="fas fa-fw mr-md-2"
 						:class="t.icon"
 					></i>
 					<span class="d-none d-md-inline">{{ t.title }}</span>
