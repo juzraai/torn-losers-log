@@ -6,11 +6,32 @@
 			v-if="entry.attacks"
 		>{{ entry.attacks.length }}x</strong>
 		<span class="d-none d-md-inline mr-1">to</span>
+		<strong
+			class="d-md-none mr-1"
+			role="button"
+			title="Sets the price for <strong>this and all newer</strong> losses."
+			v-b-tooltip.hover.left.html
+			@click="doSetPrice"
+		>${{ entry.price / 1000 }}k</strong>
 		<Player
 			class="font-weight-bold"
 			:id="entry.defender_id"
 			:variant="entry.paid ? 'muted' : 'dark'"
 		/>
+		<span class="d-none d-md-inline mr-1">for</span>
+		<strong
+			class="d-none d-md-inline mr-1"
+			role="button"
+			title="Sets the price for <strong>this and all newer</strong> losses."
+			v-b-tooltip.hover.left.html
+			@click="doSetPrice"
+		>${{ entry.price / 1000 }}k</strong>
+		<span v-if="entry.attacks && entry.attacks.length">
+			<span class="d-md-none">=
+				<strong>${{ formatPrice(entry.price * entry.attacks.length) }}</strong>
+			</span>
+			<span class="d-none d-md-inline">each (<strong>${{ formatPrice(entry.price * entry.attacks.length) }}</strong> total)</span>
+		</span>
 		<span
 			class="badge alert-success ml-2 px-2"
 			v-if="entry.paid"
@@ -25,10 +46,32 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Player from "@/components/Player.vue";
 
 export default {
 	components: { Player },
 	props: ["entry"],
+	methods: {
+		...mapActions(["setPrice"]),
+		doSetPrice() {
+			const { entry } = this;
+			let price = prompt(
+				"New price for this and all newer losses, in thousand TORN dollars:"
+			);
+			if (price === null) return;
+			price = 1000 * Number(price.replace(/\D/g, ""));
+			this.setPrice({ entry, price });
+		},
+		formatPrice(price) {
+			const suffixes = ["", "k", "M", "B"];
+			let i = 0;
+			while (price > 1000 && i < suffixes.length) {
+				price /= 1000;
+				i++;
+			}
+			return price + suffixes[i];
+		},
+	},
 };
 </script>
