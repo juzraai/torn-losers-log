@@ -22,11 +22,12 @@ This tool is being developed for TORN City players. If you don't what TORN City 
 	- Losses grouped by client and paid status
 	- Unpaid losses grouped by client
 - 🧾 **Lists attack log links** for losses and loss groups.
+- 🏷️ **You can set the price for losses** and loss groups, **TLL** calculates totals.
 - 💰 **Losses or loss groups can be easily marked as "paid".**
 - 📊 **Shows bar chart of daily loss counts and calculates average.**
 - 📞 Tooltips tell you if a button will use TORN API, there are no background calls.
 - 🔒 Your API key and data stays in your browser, there's **no server-side code/database,** and no downtime.
-- 💾 You can **export and import** your TLL data anytime.
+- 💾 You can **export and import** your **TLL** data anytime.
 - 📷 You can hide client names if you want to do a screenshot to show only your stats or **TLL** features.
 
 

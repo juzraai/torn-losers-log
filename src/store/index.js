@@ -16,6 +16,7 @@ const store = new Vuex.Store({
 		notifiedVersion: null, // last TLL version where alert dismissed
 		paidUntil: {}, // TORN player ID -> timestamp
 		playerId: null, // TORN player ID (which the API key belongs to)
+		prices: {}, // TORN player ID -> [{ start timestamp, price}] ordered by timestamp ASC
 		tab: 0, // selected tab index in LogWidget
 
 		// not persisted:
@@ -64,6 +65,14 @@ const store = new Vuex.Store({
 			const { player_id, name } = payload
 			Vue.set(state.names, player_id, name)
 		},
+		setPrice(state, payload) {
+			const { player_id, timestamp, price } = payload
+			const prices = (state.prices[player_id] || [])
+				.filter(p => p.timestamp < timestamp) // dropping newer entries due to "from now on" concept
+			prices.push({ timestamp, price })
+			prices.sort((a, b) => a.timestamp - b.timestamp)
+			Vue.set(state.prices, player_id, prices)
+		},
 		setTab(state, tab) {
 			state.tab = tab
 		}
@@ -73,6 +82,10 @@ const store = new Vuex.Store({
 			return state.losses.map((a, i) => {
 				a.oldest = i === state.losses.length - 1
 				a.paid = state.paidUntil[a.defender_id] >= a.timestamp_ended
+
+				const p = (state.prices[a.defender_id] || []).filter(p => p.timestamp <= a.timestamp_ended).reverse()[0]
+				a.price = p ? p.price : 0
+
 				return a
 			}).filter(a => !npcList.includes(a.defender_id))
 		},
@@ -116,6 +129,9 @@ const store = new Vuex.Store({
 		},
 		unpaidClients(_, getters) {
 			return getters.clients.filter(g => !g.paid)
+		},
+		unpaidTotal(_, getters) {
+			return getters.unpaidClients.map(g => g.attacks.length * g.price).reduce((sum, v) => sum += v)
 		},
 		sessions(_, getters) {
 			return getters.losses.reduce((groups, a) => {
@@ -190,6 +206,11 @@ const store = new Vuex.Store({
 			const timestamp = (timestamp_started || timestamp_ended) - 1
 			context.commit('setPaidUntil', { playerId, timestamp })
 		},
+		setPrice(context, { entry, price }) {
+			const { attacks, defender_id: player_id, timestamp_ended, timestamp_started } = entry
+			const timestamp = attacks && attacks.length ? timestamp_started : timestamp_ended
+			context.commit('setPrice', { player_id, price, timestamp })
+		}
 	},
 })
 
@@ -210,15 +231,18 @@ function dayOfAttack(a) {
 }
 
 function groupPredicate(a) {
-	return group => group.defender_id === a.defender_id && group.paid === a.paid
+	return group => group.defender_id === a.defender_id
+		&& group.paid === a.paid
+		&& group.price === a.price
 }
 
 function newGroup(a) {
-	const { defender_id, paid, timestamp_ended } = a
+	const { defender_id, paid, price, timestamp_ended } = a
 	return {
 		attacks: [a],
 		defender_id,
 		paid,
+		price,
 		timestamp_ended,
 		timestamp_started: a.timestamp_ended, // sic! we are using the "ended" timestamp of attacks!
 	}
@@ -226,9 +250,10 @@ function newGroup(a) {
 
 function updateGroup(group, a) {
 	group.attacks.push(a)
+	group.oldest |= a.oldest
+	group.price = a.price
 	group.timestamp_ended = Math.max(group.timestamp_ended, a.timestamp_ended)
 	group.timestamp_started = Math.min(group.timestamp_started, a.timestamp_ended)
-	group.oldest |= a.oldest
 	return group
 }
 

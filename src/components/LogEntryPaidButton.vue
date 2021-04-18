@@ -2,7 +2,7 @@
 	<div class="my-1">
 		<button
 			class="btn btn-sm btn-outline-success"
-			title="Marks this and all previous losses to this client as <strong>paid</strong>"
+			title="Marks <strong>this and all previous</strong> losses to this client as <strong>paid</strong>"
 			v-b-tooltip.hover.left.html
 			v-if="!entry.paid"
 			@click="markAsPaid(entry)"
@@ -13,7 +13,7 @@
 		<button
 			class="btn btn-sm btn-outline-danger mark-unpaid-btn"
 			role="button"
-			title="Marks this and all newer losses to this client as <strong>unpaid</strong>"
+			title="Marks <strong>this and all newer</strong> losses to this client as <strong>unpaid</strong>"
 			v-b-tooltip.hover.left.html
 			v-else
 			@click="markAsUnpaid(entry)"

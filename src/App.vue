@@ -17,18 +17,8 @@
 // TODO save items/page setting
 
 // TODO money/hit
-// - loss/loss group level
-// - replace Paid button with price + checkbox
-// - price clickable, editable (modal or inplace?)
-// - groups would show total money - on large screens: $/hit too
-// - green price is paid, red price is unpaid
-// - grouping should consider price too
-// - Clients tab can be renamed to Contracts
-// - setting price for current and newer losses to same client ("from now on")
-// - concept: "first loss: set price - last loss: mark as paid"
-// - storage: client -> starting timestamp -> price
-// - proof should include price/loss and total price too
-// - unpaid tab header could show total unpaid $$$
+// - (?) move total price to right (green=paid, red=unpaid), replace Paid button with checkbox
+// - (?) nicer editor for price
 
 // TODO proof export
 // - buttons in top right corner

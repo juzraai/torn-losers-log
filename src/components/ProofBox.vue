@@ -14,6 +14,9 @@
 			<dt>Loss count</dt>
 			<dd>{{ entry.attacks ? entry.attacks.length : 1 }}</dd>
 
+			<dt>Price</dt>
+			<dd>${{ formatPrice(entry.price) }} x {{ entry.attacks ? entry.attacks.length : 1 }} = ${{ formatPrice(entry.price * (entry.attacks ? entry.attacks.length : 1)) }} </dd>
+
 			<dt>Attack logs</dt>
 			<dd class="mb-0">
 				<ul class="list-unstyled mb-0">
@@ -42,12 +45,16 @@
 import { mapState } from "vuex";
 import Player from "@/components/Player.vue";
 import ProofLine from "@/components/ProofLine.vue";
+import { formatPrice } from "@/services/tornFormat.js";
 
 export default {
 	props: ["entry"],
 	components: { Player, ProofLine },
 	computed: {
 		...mapState(["playerId"]),
+	},
+	methods: {
+		formatPrice,
 	},
 };
 </script>

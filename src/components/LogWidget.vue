@@ -1,8 +1,8 @@
 <template>
 	<Widget :card-body-class="'p-0'">
-		<ul class="bg-light mb-1 nav nav-tabs pl-3 pt-3">
+		<ul class="bg-light mb-1 nav nav-tabs px-3 pt-3">
 			<li
-				class="nav-item text-center"
+				class="flex-grow-1 nav-item text-center"
 				:key="i"
 				:title="t.tooltip"
 				v-b-tooltip.hover.top
@@ -15,10 +15,11 @@
 					@click="setTab(i)"
 				>
 					<i
-						class="fas fa-fw mr-md-1"
+						class="fas fa-fw mr-md-2"
 						:class="t.icon"
 					></i>
 					<span class="d-none d-md-inline">{{ t.title }}</span>
+					<span class="font-weight-bold ml-1" v-if="i === 4">${{ formatPrice(unpaidTotal) }}</span>
 				</span>
 			</li>
 		</ul>
@@ -27,9 +28,12 @@
 </template>
 
 <script>
+// TODO that i===4 above is not the most elegant solution i guess :)
+
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Log from "@/components/Log.vue";
 import Widget from "@/components/Widget.vue";
+import { formatPrice } from "@/services/tornFormat.js";
 
 function tab(title, icon, tooltip) {
 	return { title, icon, tooltip };
@@ -48,29 +52,29 @@ export default {
 				tab(
 					"Sessions",
 					"fa-layer-group",
-					"Consecutive losses grouped by client and payment status."
+					"Consecutive losses grouped by client, price and payment status."
 				),
 				tab(
 					"Daily",
 					"fa-calendar-day",
-					"Losses aggregated by TCT date, client and payment status."
+					"Losses aggregated by TCT date, client, price and payment status."
 				),
 				tab(
-					"Clients",
+					"Contracts",
 					"fa-users",
-					"Losses aggregated by client and payment status."
+					"Losses aggregated by client, price and payment status."
 				),
 				tab(
 					"Unpaid",
 					"fa-comment-dollar",
-					"Unpaid losses aggregated by client."
+					"Unpaid losses aggregated by client and price."
 				),
 			],
 		};
 	},
 	computed: {
 		...mapState(["tab"]),
-		...mapGetters(["losses", "sessions", "dailyClients", "clients", "unpaidClients"]),
+		...mapGetters(["losses", "sessions", "dailyClients", "clients", "unpaidClients", "unpaidTotal"]),
 		entries() {
 			const { losses, sessions, dailyClients, clients, unpaidClients } = this;
 			return [losses, sessions, dailyClients, clients, unpaidClients][this.tab];
@@ -78,21 +82,12 @@ export default {
 	},
 	methods: {
 		...mapMutations(["setTab"]),
+		formatPrice
 	},
 };
 </script>
 
-<style lang="scss" scoped>
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-
-@include media-breakpoint-down(sm) {
-	.nav-item {
-		flex-grow: 1;
-	}
-}
-
+<style scoped>
 .nav-link.active {
 	color: black;
 }
