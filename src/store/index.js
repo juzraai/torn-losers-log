@@ -67,8 +67,9 @@ const store = new Vuex.Store({
 		},
 		setPrice(state, payload) {
 			const { player_id, timestamp, price } = payload
-			const prices = state.prices[player_id] || []
-			prices.push({ timestamp, price })
+			const prices = (state.prices[player_id] || [])
+				.filter(p => p.timestamp < timestamp) // dropping newer entries due to "from now on" concept
+			if (price > 0) prices.push({ timestamp, price })
 			prices.sort((a, b) => a.timestamp - b.timestamp)
 			Vue.set(state.prices, player_id, prices)
 		},
@@ -205,7 +206,6 @@ const store = new Vuex.Store({
 		setPrice(context, { entry, price }) {
 			const { attacks, defender_id: player_id, timestamp_ended, timestamp_started } = entry
 			const timestamp = attacks && attacks.length ? timestamp_started : timestamp_ended
-			// TODO when in a group, previously set prices must be removed that fall into this group
 			context.commit('setPrice', { player_id, price, timestamp })
 		}
 	},
