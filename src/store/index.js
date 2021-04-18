@@ -69,7 +69,7 @@ const store = new Vuex.Store({
 			const { player_id, timestamp, price } = payload
 			const prices = (state.prices[player_id] || [])
 				.filter(p => p.timestamp < timestamp) // dropping newer entries due to "from now on" concept
-			if (price > 0) prices.push({ timestamp, price })
+			prices.push({ timestamp, price })
 			prices.sort((a, b) => a.timestamp - b.timestamp)
 			Vue.set(state.prices, player_id, prices)
 		},
@@ -129,6 +129,9 @@ const store = new Vuex.Store({
 		},
 		unpaidClients(_, getters) {
 			return getters.clients.filter(g => !g.paid)
+		},
+		unpaidTotal(_, getters) {
+			return getters.unpaidClients.map(g => g.attacks.length * g.price).reduce((sum, v) => sum += v)
 		},
 		sessions(_, getters) {
 			return getters.losses.reduce((groups, a) => {

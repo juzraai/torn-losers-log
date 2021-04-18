@@ -12,7 +12,7 @@
 			title="Sets the price for <strong>this and all newer</strong> losses."
 			v-b-tooltip.hover.left.html
 			@click="doSetPrice"
-		>${{ entry.price / 1000 }}k</strong>
+		>${{ formatPrice(entry.price) }}</strong>
 		<Player
 			class="font-weight-bold"
 			:id="entry.defender_id"
@@ -25,7 +25,7 @@
 			title="Sets the price for <strong>this and all newer</strong> losses."
 			v-b-tooltip.hover.left.html
 			@click="doSetPrice"
-		>${{ entry.price / 1000 }}k</strong>
+		>${{ formatPrice(entry.price) }}</strong>
 		<span v-if="entry.attacks && entry.attacks.length">
 			<span class="d-md-none">=
 				<strong>${{ formatPrice(entry.price * entry.attacks.length) }}</strong>
@@ -48,6 +48,7 @@
 <script>
 import { mapActions } from "vuex";
 import Player from "@/components/Player.vue";
+import { formatPrice } from "@/services/tornFormat.js";
 
 export default {
 	components: { Player },
@@ -63,15 +64,7 @@ export default {
 			price = 1000 * Number(price.replace(/\D/g, ""));
 			this.setPrice({ entry, price });
 		},
-		formatPrice(price) {
-			const suffixes = ["", "k", "M", "B"];
-			let i = 0;
-			while (price > 1000 && i < suffixes.length) {
-				price /= 1000;
-				i++;
-			}
-			return price + suffixes[i];
-		},
+		formatPrice,
 	},
 };
 </script>

@@ -19,6 +19,7 @@
 						:class="t.icon"
 					></i>
 					<span class="d-none d-md-inline">{{ t.title }}</span>
+					<span class="font-weight-bold ml-1" v-if="i === 4">${{ formatPrice(unpaidTotal) }}</span>
 				</span>
 			</li>
 		</ul>
@@ -30,6 +31,7 @@
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Log from "@/components/Log.vue";
 import Widget from "@/components/Widget.vue";
+import { formatPrice } from "@/services/tornFormat.js";
 
 function tab(title, icon, tooltip) {
 	return { title, icon, tooltip };
@@ -70,7 +72,7 @@ export default {
 	},
 	computed: {
 		...mapState(["tab"]),
-		...mapGetters(["losses", "sessions", "dailyClients", "clients", "unpaidClients"]),
+		...mapGetters(["losses", "sessions", "dailyClients", "clients", "unpaidClients", "unpaidTotal"]),
 		entries() {
 			const { losses, sessions, dailyClients, clients, unpaidClients } = this;
 			return [losses, sessions, dailyClients, clients, unpaidClients][this.tab];
@@ -78,6 +80,7 @@ export default {
 	},
 	methods: {
 		...mapMutations(["setTab"]),
+		formatPrice
 	},
 };
 </script>
