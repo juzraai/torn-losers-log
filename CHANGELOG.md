@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/juzraai/torn-losers-log/compare/v1.3.0...v1.4.0) (2021-04-18)
+
+
+### Features
+
+* now you can set price for losses and totals are calculated ([4f17184](https://github.com/juzraai/torn-losers-log/commit/4f1718475ee3777e9594de4ad4a40c484046b369))
+
+
+### Bug Fixes
+
+* made tabs fill the width on small screens ([8d7aa1e](https://github.com/juzraai/torn-losers-log/commit/8d7aa1e6747d76e5d61c8ff50682b1be955fb3bc))
+
 ## [1.3.0](https://github.com/juzraai/torn-losers-log/compare/v1.2.0...v1.3.0) (2021-04-15)
 
 
