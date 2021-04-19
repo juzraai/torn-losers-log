@@ -131,7 +131,7 @@ const store = new Vuex.Store({
 			return getters.clients.filter(g => !g.paid)
 		},
 		unpaidTotal(_, getters) {
-			return getters.unpaidClients.map(g => g.attacks.length * g.price).reduce((sum, v) => sum += v)
+			return getters.unpaidClients.map(g => g.attacks.length * g.price).reduce((sum, v) => sum += v, 0)
 		},
 		sessions(_, getters) {
 			return getters.losses.reduce((groups, a) => {
