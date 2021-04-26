@@ -2,6 +2,7 @@ import moment from "moment"
 import Vue from 'vue'
 import Vuex from 'vuex'
 import npcList from '../services/npcList'
+import { tick } from '../services/perf'
 import storage from '../services/storage'
 import tornApi from '../services/tornApi'
 
@@ -79,8 +80,8 @@ const store = new Vuex.Store({
 	},
 	getters: {
 		losses(state) {
-			return state.losses.map((a, i) => {
-				a.oldest = i === state.losses.length - 1
+			const t = tick('getters.losses')
+			const r = state.losses.map(a => {
 				a.paid = state.paidUntil[a.defender_id] >= a.timestamp_ended
 
 				const p = (state.prices[a.defender_id] || []).filter(p => p.timestamp <= a.timestamp_ended).reverse()[0]
@@ -88,6 +89,9 @@ const store = new Vuex.Store({
 
 				return a
 			}).filter(a => !npcList.includes(a.defender_id))
+			r[r.length - 1].oldest = true
+			t.tock()
+			return r
 		},
 		days(_, getters) {
 			return getters.losses.reduce((days, a) => {
