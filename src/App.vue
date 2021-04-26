@@ -26,9 +26,9 @@
 // - generate and download PDF - https://github.com/bpampuch/pdfmake
 
 // TODO invoice generator in modal/separate page
-// - list of unpaid contracts ~~with editable price and~~ remove from invoice btn
+// - list of unpaid contracts with remove from invoice btn
 // - calculates ~~subtotals and~~ total
-// - formats as PRE for Discord, or maybe provides more format options
+// - formats as PRE for Discord, or maybe provides more format options (screenshot download???)
 // - combined proof download options (copy all, PDF all)
 
 // TODO upgrade to Vue CLI 4, Vue 3
