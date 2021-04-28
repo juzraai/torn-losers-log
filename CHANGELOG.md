@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/juzraai/torn-losers-log/compare/v1.4.0...v1.4.1) (2021-04-28)
+
+
+### Bug Fixes
+
+* fixed freezing bug when you mark all as paid ([404ff51](https://github.com/juzraai/torn-losers-log/commit/404ff517e95facf4306a6749f626a5641181b480))
+* optimized loss list generator, it's 30x faster now ([72b6b26](https://github.com/juzraai/torn-losers-log/commit/72b6b26e8dbed631fcc414e11770d52f0809a84e))
+
 ## [1.4.0](https://github.com/juzraai/torn-losers-log/compare/v1.3.0...v1.4.0) (2021-04-18)
 
 
