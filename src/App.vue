@@ -33,9 +33,7 @@
 
 // TODO upgrade to Vue CLI 4, Vue 3
 
-// TODO app logo, brand, favicon
-
-// TODO promo poster to forum topic
+// TODO promo banner/poster to forum topic
 // - 366 or 602px width
 // - highlight main features, zoom circles
 // - have transparent background (PNG)
@@ -50,9 +48,9 @@
 // TODO "Hide" feature
 // A) log entry level
 // - button in log entry
-// - excludes losses from top widgets and Clients/Unpaid tabs
-// - on other tabs it can be w/ lighter font color, without Paid button, but with Unhide
-// - grouping should consider "hidden" flag too
+// - excludes losses from top widgets and Sessions/Clients/Unpaid tabs
+// - on Losses tab it can be w/ lighter font color, without Paid button, but with Unhide
+// - grouping should consider "hidden" flag too - just jump over it
 // B) client level
 // - button... where?
 // - hides from top widgets and all tabs
