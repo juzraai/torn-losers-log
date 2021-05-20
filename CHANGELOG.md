@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/juzraai/torn-losers-log/compare/v1.4.1...v1.4.2) (2021-05-20)
+
+
+### Bug Fixes
+
+* timed out attacks now counted as losses (your recent timeouts will appear too when you update) ([9867d65](https://github.com/juzraai/torn-losers-log/commit/9867d654b9aea8d87d00a0b8ff7951a01c57c3ae))
+
 ### [1.4.1](https://github.com/juzraai/torn-losers-log/compare/v1.4.0...v1.4.1) (2021-04-28)
 
 
