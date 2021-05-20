@@ -48,9 +48,11 @@ const store = new Vuex.Store({
 			state.loading = loading
 		},
 		addLosses(state, newLosses) {
-			const mostRecentWeHave = state.losses[0] ? state.losses[0].timestamp_ended : 0
-			const nl = newLosses.filter(a => a.timestamp_ended > mostRecentWeHave)
-			state.losses = [...nl, ...state.losses].slice(0, 5000)
+			// we need to update past losses too, because of Timeout result fix:
+			const newIds = newLosses.map(a => a.timestamp_ended)
+			const oldLosses = state.losses.filter(a => !newIds.includes(a.timestamp_ended))
+			const losses = newLosses.concat(oldLosses)
+			state.losses = losses.sort((a, b) => b.timestamp_ended - a.timestamp_ended).slice(0, 5000)
 		},
 		setNotifiedVersion(state, version) {
 			state.notifiedVersion = version
@@ -179,7 +181,7 @@ const store = new Vuex.Store({
 			const response = await tornApi.fetchAttacks(apiKey)
 			const losses = response.filter(a =>
 				a.attacker_id === playerId &&
-				a.result === 'Lost'
+				['Lost', 'Timeout'].includes(a.result)
 			).map(({ code, defender_id, timestamp_ended }) => ({
 				code, defender_id, timestamp_ended
 			}))
