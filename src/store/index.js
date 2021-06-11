@@ -178,7 +178,7 @@ const store = new Vuex.Store({
 		async fetchLosses(context) {
 			context.commit('setLoading', true)
 			const { apiKey, playerId } = context.state
-			const response = await tornApi.fetchAttacks(apiKey)
+			const response = await tornApi.fetchAttacksfull(apiKey)
 			const losses = response.filter(a =>
 				a.attacker_id === playerId &&
 				['Lost', 'Timeout'].includes(a.result)
@@ -201,6 +201,22 @@ const store = new Vuex.Store({
 			const response = await tornApi.fetchBasic(apiKey, playerId)
 			const { name } = response
 			context.commit('setPlayerName', { player_id: playerId, name })
+			context.commit('setLoading', false)
+		},
+		async resolveNames(context) {
+			context.commit('setLoading', true)
+			const { apiKey } = context.state
+			const attacks = await tornApi.fetchAttacks(apiKey)
+			if (attacks.length) {
+				const dict = {}
+				attacks.forEach(a => {
+					dict[a.attacker_id] = a.attacker_name
+					dict[a.defender_id] = a.defender_name
+				})
+				Object.entries(dict).forEach(([player_id, name]) => {
+					context.commit('setPlayerName', { player_id, name })
+				})
+			}
 			context.commit('setLoading', false)
 		},
 		markAsPaid(context, attackOrGroup) {

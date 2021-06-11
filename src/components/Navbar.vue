@@ -61,6 +61,10 @@
 						<i class="fas fa-eye fa-fw mr-2"></i>
 						Show clients
 					</b-dd-item-button>
+					<b-dd-item-button @click="resolveNamesPrompt">
+						<i class="fas fa-tags fa-fw mr-2"></i>
+						Resolve names
+					</b-dd-item-button>
 					<b-dd-item-button @click="exportData">
 						<i class="fas fa-download fa-fw mr-2"></i>
 						Export data
@@ -109,7 +113,7 @@ export default {
 		...mapState(["apiKey", "hideClients", "names", "playerId"]),
 	},
 	methods: {
-		...mapActions(["clearData", "exportData"]),
+		...mapActions(["clearData", "exportData", "resolveNames"]),
 		...mapMutations(["setHideClients"]),
 		clearDataWithConfirm() {
 			if (
@@ -120,6 +124,15 @@ export default {
 		},
 		getTctTime() {
 			return formatTimestamp(new Date().getTime() / 1000);
+		},
+		resolveNamesPrompt() {
+			if (
+				confirm(
+					"This will use 1 API call to update your name + defenders' names from your last 100 attacks. Continue?"
+				)
+			) {
+				this.resolveNames();
+			}
 		},
 	},
 	mounted() {
