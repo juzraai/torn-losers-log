@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/juzraai/torn-losers-log/compare/v1.4.2...v1.5.0) (2021-06-11)
+
+
+### Features
+
+* added 'Resolve names' to menu, which refreshes your name + defenders' names from your last 100 attacks ([0514de2](https://github.com/juzraai/torn-losers-log/commit/0514de26fd11c027b3c27a87c0ccc022f20d5f89))
+
 ### [1.4.2](https://github.com/juzraai/torn-losers-log/compare/v1.4.1...v1.4.2) (2021-05-20)
 
 
