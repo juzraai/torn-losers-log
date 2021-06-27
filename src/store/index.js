@@ -11,6 +11,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		apiKey: null, // TORN API key
+		forumAlertDismissed: false,
 		lastUpdate: null, // Timestamp (Number) of last fetchLosses call
 		losses: [], // TORN attacks filtered to losses and necessary fields
 		names: {}, // TORN player ID -> name dictionary
@@ -37,6 +38,9 @@ const store = new Vuex.Store({
 		},
 		setApiKey(state, apiKey) {
 			state.apiKey = apiKey
+		},
+		setForumAlertDismissed(state, dismissed) {
+			state.forumAlertDismissed = dismissed
 		},
 		setHideClients(state, hide) {
 			state.hideClients = hide
