@@ -47,6 +47,9 @@ B) one array for all with extended filters
 - what about KPIs and the chart?
 
 
+## feat: income/day stats/chart
+
+
 ## feat: proof export
 
 - buttons in top right corner
