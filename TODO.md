@@ -1,6 +1,9 @@
 # TODO list
 
 
+## design: dark mode
+
+
 ## bug: chart tooltips use different date format
 
 
