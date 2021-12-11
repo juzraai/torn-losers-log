@@ -1,9 +1,10 @@
 <template>
 	<b-navbar
 		class="shadow-sm"
+		:class="dark ? 'border-bottom border-secondary' : null"
 		toggleable="md"
-		type="light"
-		variant="light"
+		:type="dark ? 'dark' : 'light'"
+		:variant="dark ? 'dark' : 'light'"
 	>
 		<b-navbar-brand
 			_class="font-italic font-weight-bold navbar-brand text-dark"
@@ -34,7 +35,10 @@
 					title="TORN City Time<br>(Same as UTC or GMT)"
 					v-b-tooltip.hover.bottom.html
 				>
-					<span class="disabled nav-link text-secondary">{{ time }} TCT </span>
+					<span
+						class="disabled nav-link text-secondary"
+						:class="dark ? 'text-light' : 'text-secondary'"
+					>{{ time }} TCT </span>
 				</li>
 				<b-nav-item-dd right>
 					<template #button-content>
@@ -47,6 +51,10 @@
 						<i class="fas fa-user-circle fa-fw mr-2"></i>
 						View profile
 					</b-dd-item>
+					<b-dd-item-button @click="toggleDark">
+						<i class="fas fa-lightbulb fa-fw mr-2"></i>
+						Toggle dark mode
+					</b-dd-item-button>
 					<b-dd-item-button
 						v-if="!hideClients"
 						@click="setHideClients(true)"
@@ -110,11 +118,11 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(["apiKey", "hideClients", "names", "playerId"]),
+		...mapState(["apiKey", "dark", "hideClients", "names", "playerId"]),
 	},
 	methods: {
 		...mapActions(["clearData", "exportData", "resolveNames"]),
-		...mapMutations(["setHideClients"]),
+		...mapMutations(["setHideClients", "toggleDark"]),
 		clearDataWithConfirm() {
 			if (
 				confirm("Are you sure you want to clear your TLL data in this browser?")

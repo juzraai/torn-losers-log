@@ -16,7 +16,7 @@
 		<Player
 			class="font-weight-bold"
 			:id="entry.defender_id"
-			:variant="entry.paid ? 'muted' : 'dark'"
+			:variant="dark ? (entry.paid ? 'secondary' : 'light') : (entry.paid ? 'muted' : 'dark')"
 		/>
 		<span class="d-none d-md-inline mr-1">for</span>
 		<strong
@@ -34,6 +34,7 @@
 		</span>
 		<span
 			class="badge alert-success ml-2 px-2"
+			:class="dark ? 'bg-success' : 'alert-success'"
 			v-if="entry.paid"
 		>paid</span>
 		<span
@@ -46,13 +47,16 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import Player from "@/components/Player.vue";
 import { formatPrice } from "@/services/tornFormat.js";
 
 export default {
 	components: { Player },
 	props: ["entry"],
+	computed: {
+		...mapState(["dark"]),
+	},
 	methods: {
 		...mapActions(["setPrice"]),
 		doSetPrice() {

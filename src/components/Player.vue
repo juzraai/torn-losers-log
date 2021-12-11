@@ -1,7 +1,7 @@
 <template>
 	<span :style="{ filter: hideClients ? 'blur(1px)' : null }">
 		<span
-			class="text-secondary"
+			:class="dark ? 'text-light' : 'text-secondary'"
 			role="button"
 			title="1 API call"
 			v-b-tooltip.hover.bottom
@@ -25,7 +25,7 @@ import { mapActions, mapState } from "vuex";
 export default {
 	props: ["id", "variant"],
 	computed: {
-		...mapState(["hideClients", "names"]),
+		...mapState(["dark", "hideClients", "names"]),
 	},
 	methods: {
 		...mapActions(["resolveName"]),

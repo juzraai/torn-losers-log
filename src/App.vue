@@ -1,6 +1,7 @@
 <template>
 	<div
 		class="d-flex flex-column"
+		:class="dark ? 'bg-dark text-light' : null"
 		style="min-height: 100%"
 	>
 		<Navbar />
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 
@@ -21,6 +23,9 @@ export default {
 	components: { Footer, Navbar },
 	metaInfo: {
 		titleTemplate: "%s | TORN City Losers' Log",
+	},
+	computed: {
+		...mapState(["dark"]),
 	},
 };
 </script>

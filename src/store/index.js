@@ -11,6 +11,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		apiKey: null, // TORN API key
+		dark: false, // dark mode
 		forumAlertDismissed: false,
 		lastUpdate: null, // Timestamp (Number) of last fetchLosses call
 		losses: [], // TORN attacks filtered to losses and necessary fields
@@ -82,7 +83,10 @@ const store = new Vuex.Store({
 		},
 		setTab(state, tab) {
 			state.tab = tab
-		}
+		},
+		toggleDark(state) {
+			state.dark = !state.dark
+		},
 	},
 	getters: {
 		losses(state) {

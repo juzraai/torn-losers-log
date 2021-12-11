@@ -3,7 +3,7 @@
 		<h6 class="card-title">
 			<slot name="mainLabel" />
 		</h6>
-		<h1 class="border-bottom font-weight-bold pb-2">
+		<h1 class="border-bottom font-weight-bold pb-2" :class="dark ? 'border-secondary' : null">
 			<slot name="mainValue" />
 		</h1>
 		<div class="row">
@@ -24,10 +24,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Widget from "@/components/Widget.vue";
 
 export default {
 	components: { Widget },
 	props: ["labels", "values"],
+	computed: {
+		...mapState(["dark"]),
+	},
 };
 </script>

@@ -7,14 +7,20 @@
 			No results.
 		</div>
 		<div v-else>
-			<div class="border-bottom list-group list-group-flush">
+			<div
+				class="border-bottom list-group list-group-flush"
+				:class="dark ? 'border-secondary' : null"
+			>
 				<LogEntry
 					:entry="e"
 					:key="entryKey(e)"
 					v-for="e in entriesOnPage"
 				/>
 			</div>
-			<div class="bg-light d-flex flex-wrap justify-content-center pt-3">
+			<div
+				class="d-flex flex-wrap justify-content-center pt-3"
+				:class="dark ? 'bg-dark' : 'bg-light'"
+			>
 				<ul class="pagination">
 					<li
 						class="page-item"
@@ -23,6 +29,7 @@
 					>
 						<a
 							class="page-link"
+							:class="dark ? 'bg-secondary border-dark text-light' : null"
 							href="javascript:void(0)"
 						>First</a>
 					</li>
@@ -33,11 +40,15 @@
 					>
 						<a
 							class="page-link"
+							:class="dark ? 'bg-secondary border-dark text-light' : null"
 							href="javascript:void(0)"
 						>Previous</a>
 					</li>
 					<li class="disabled page-item">
-						<span class="page-link">{{ page + 1 }} / {{ pageCount }}</span>
+						<span
+							class="page-link"
+							:class="dark ? 'bg-secondary border-dark text-light' : null"
+						>{{ page + 1 }} / {{ pageCount }}</span>
 					</li>
 					<li
 						class="page-item"
@@ -46,6 +57,7 @@
 					>
 						<a
 							class="page-link"
+							:class="dark ? 'bg-secondary border-dark text-light' : null"
 							href="javascript:void(0)"
 						>Next</a>
 					</li>
@@ -56,6 +68,7 @@
 					>
 						<a
 							class="page-link"
+							:class="dark ? 'bg-secondary border-dark text-light' : null"
 							href="javascript:void(0)"
 						>Last</a>
 					</li>
@@ -70,6 +83,7 @@
 					>
 						<a
 							class="page-link"
+							:class="dark && o != limit ? 'bg-dark border-secondary text-light' : null"
 							href="#"
 						>{{ o }}</a>
 					</li>
@@ -96,7 +110,7 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(["tab"]),
+		...mapState(["dark", "tab"]),
 		offset() {
 			return this.limit * this.page;
 		},
@@ -109,7 +123,16 @@ export default {
 	},
 	methods: {
 		entryKey(a) {
-			return "t" + this.tab + "a" + (a.code || a.attacks[0].code) + "p" + a.paid + "$" + a.price;
+			return (
+				"t" +
+				this.tab +
+				"a" +
+				(a.code || a.attacks[0].code) +
+				"p" +
+				a.paid +
+				"$" +
+				a.price
+			);
 		},
 	},
 	watch: {

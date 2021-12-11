@@ -1,6 +1,9 @@
 <template>
 	<Widget :card-body-class="'p-0'">
-		<ul class="bg-light mb-1 nav nav-tabs px-3 pt-3">
+		<ul
+			class="mb-1 nav nav-tabs px-3 pt-3"
+			:class="dark ? 'bg-dark border-secondary' : 'bg-light'"
+		>
 			<li
 				class="flex-grow-1 nav-item text-center"
 				:key="i"
@@ -10,7 +13,7 @@
 			>
 				<span
 					class="nav-link"
-					:class="i === tab ? 'active' : null"
+					:class="(i === tab ? 'active' : null) + ' ' + (dark && i === tab ? 'bg-secondary border-secondary text-white' : null)"
 					role="button"
 					@click="setTab(i)"
 				>
@@ -19,7 +22,10 @@
 						:class="t.icon"
 					></i>
 					<span class="d-none d-md-inline">{{ t.title }}</span>
-					<span class="font-weight-bold ml-1" v-if="i === 4">${{ formatPrice(unpaidTotal) }}</span>
+					<span
+						class="font-weight-bold ml-1"
+						v-if="i === 4"
+					>${{ formatPrice(unpaidTotal) }}</span>
 				</span>
 			</li>
 		</ul>
@@ -73,8 +79,15 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(["tab"]),
-		...mapGetters(["losses", "sessions", "dailyClients", "clients", "unpaidClients", "unpaidTotal"]),
+		...mapState(["dark", "tab"]),
+		...mapGetters([
+			"losses",
+			"sessions",
+			"dailyClients",
+			"clients",
+			"unpaidClients",
+			"unpaidTotal",
+		]),
 		entries() {
 			const { losses, sessions, dailyClients, clients, unpaidClients } = this;
 			return [losses, sessions, dailyClients, clients, unpaidClients][this.tab];
@@ -82,7 +95,7 @@ export default {
 	},
 	methods: {
 		...mapMutations(["setTab"]),
-		formatPrice
+		formatPrice,
 	},
 };
 </script>

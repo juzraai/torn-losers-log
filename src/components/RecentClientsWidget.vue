@@ -6,7 +6,7 @@
 		<template #mainLabel>
 			<Player
 				:id="clients[0].defender_id"
-				:variant="clients[0].paid ? 'success' : null"
+				:variant="clients[0].paid ? 'success' : (dark ? 'light' : null)"
 				v-if="clients[0]"
 			/>
 		</template>
@@ -20,7 +20,7 @@
 				<Player
 					:key="i"
 					:id="clients[i].defender_id"
-					:variant="clients[i].paid ? 'success' : null"
+					:variant="clients[i].paid ? 'success' : (dark ? 'light' : null)"
 					v-if="clients[i]"
 				/>
 			</template>
@@ -41,7 +41,7 @@ export default {
 	components: { KpiWidget, Player },
 	computed: {
 		...mapGetters(["clients"]),
-		...mapState(["names"]),
+		...mapState(["dark", "names"]),
 		clientsKpiLabels() {
 			return this.clients
 				.map((c) => this.names[c.defender_id] || c.defender_id)

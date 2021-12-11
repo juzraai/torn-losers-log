@@ -5,7 +5,7 @@
 	>
 		<div
 			class="card flex-grow-1 mb-4 shadow-sm"
-			:class="cardClass"
+			:class="cardClass + (dark ? ' bg-dark border-secondary text-white' : '')"
 		>
 			<div
 				class="card-body d-flex flex-column"
@@ -29,7 +29,7 @@ import { mapState } from "vuex";
 export default {
 	props: ["cardClass", "cardBodyClass", "cardTitle"],
 	computed: {
-		...mapState(["loading"]),
+		...mapState(["dark", "loading"]),
 	},
 };
 </script>

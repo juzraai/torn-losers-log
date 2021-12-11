@@ -1,5 +1,8 @@
 <template>
-	<div class="list-group-item px-2 py-1">
+	<div
+		class="list-group-item px-2 py-1"
+		:class="dark ? 'bg-dark text-light' : null"
+	>
 		<div class="align-items-center d-flex">
 			<LogEntryTimestamp
 				:entry="entry"
@@ -28,7 +31,7 @@ export default {
 	components: { LogEntryPaidButton, LogEntryText, LogEntryTimestamp, ProofBox },
 	props: ["entry"],
 	computed: {
-		...mapState(["tab"]),
+		...mapState(["dark", "tab"]),
 		proofBoxId() {
 			return this.entry.code || this.entry.attacks[0].code;
 		},

@@ -2,13 +2,14 @@
 	<Widget :cardTitle="cardTitle">
 		<div class="align-items-end d-flex flex-grow-1 position-relative">
 			<div
-				class="avg border border-info position-absolute w-100"
+				class="avg border position-absolute w-100"
+				:class="dark ? 'border-white' : 'border-info'"
 				:style="{ bottom: (100 * avg / max) + '%' }"
 				v-if="avg"
 			></div>
 			<div
 				class="bar flex-grow-1"
-				:class="bar.highlight ? 'bg-info' : null"
+				:class="bar.highlight && !dark ? 'bg-info' : null"
 				:key="i"
 				:style="{ backgroundColor: bar.color, height: 100 * bar.value / max + '%' }"
 				:title="bar.label"
@@ -20,15 +21,17 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Widget from "@/components/Widget.vue";
 
 export default {
 	components: { Widget },
 	props: ["avg", "bars", "cardTitle"],
 	computed: {
+		...mapState(["dark"]),
 		barsAug() {
 			return this.bars.map((bar) => {
-				bar.color = `rgba(0, 123, 255, ${0.25 + 0.75 * bar.value / this.max})`;
+				bar.color = `rgba(${this.dark ? '255, 255, 255' : '0, 123, 255'}, ${0.25 + 0.75 * bar.value / this.max})`;
 				return bar;
 			});
 		},

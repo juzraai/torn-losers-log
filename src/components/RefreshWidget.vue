@@ -1,5 +1,5 @@
 <template>
-	<Widget card-class="alert-info">
+	<Widget>
 		<h6 class="card-title">
 			<strong
 				title="This includes losses to NPCs too."
@@ -17,7 +17,8 @@
 		</p>
 		<div class="align-items-center d-flex">
 			<button
-				class="btn btn-info mr-3"
+				class="btn mr-3"
+				:class="dark ? 'btn-secondary' : 'btn-info'"
 				title="1 API call. Keep in mind that TORN API returns your last 1000 attacks, so you should update TLL regularly."
 				v-b-tooltip.hover.bottom
 				@click="fetchLosses"
@@ -42,7 +43,7 @@ import { formatTimestamp } from "@/services/tornFormat.js";
 export default {
 	components: { Widget },
 	computed: {
-		...mapState(["lastUpdate", "losses"]),
+		...mapState(["dark", "lastUpdate", "losses"]),
 	},
 	methods: {
 		...mapActions(["fetchLosses"]),

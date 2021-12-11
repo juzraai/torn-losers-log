@@ -5,6 +5,7 @@
 	>
 		<div
 			class="align-items-center d-none d-md-flex log-entry-timestamp mr-3 small text-primary"
+			:class="dark ? 'text-light' : 'text-primary'"
 			v-b-toggle="proofBoxId"
 		>
 			<div>
@@ -25,10 +26,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { formatTimestamp } from "@/services/tornFormat.js";
 
 export default {
 	props: ["entry", "proofBoxId"],
+	computed: {
+		...mapState(["dark"]),
+	},
 	methods: {
 		formatTimestamp,
 	},

@@ -1,5 +1,8 @@
 <template>
-	<div class="bg-dark text-light">
+	<div
+		class="bg-dark text-light"
+		:class="dark ? 'border-top border-secondary' : null"
+	>
 		<div class="container my-3">
 			<div class="row">
 				<div class="col-md-4 mb-4 mb-md-0">
@@ -40,12 +43,17 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
 	data() {
 		return {
 			buildTime: null,
 			version: APP_VERSION,
 		};
+	},
+	computed: {
+		...mapState(["dark"]),
 	},
 	mounted() {
 		const t =
