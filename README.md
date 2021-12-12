@@ -29,6 +29,7 @@ This tool is being developed for TORN City players. If you don't know what TORN 
 - 🔒 Your API key and data stays in your browser, there's **no server-side code/database,** and no downtime.
 - 💾 You can **export and import** your **TLL** data anytime.
 - 📷 You can hide client names if you want to do a screenshot to show only your stats or **TLL** features.
+- 💡 It has dark mode.
 
 
 
@@ -37,6 +38,8 @@ This tool is being developed for TORN City players. If you don't know what TORN 
 ![](tll1.jpg)
 
 ![](tll2.jpg)
+
+![](tll3.jpg)
 
 
 
