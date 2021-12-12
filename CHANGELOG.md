@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/juzraai/torn-losers-log/compare/v1.5.0...v1.6.0) (2021-12-12)
+
+
+### Features
+
+* added dark mode ([e508869](https://github.com/juzraai/torn-losers-log/commit/e508869ab64e3b5c91b502c3220d9db98ed8e622))
+
 ## [1.5.0](https://github.com/juzraai/torn-losers-log/compare/v1.4.2...v1.5.0) (2021-06-11)
 
 
