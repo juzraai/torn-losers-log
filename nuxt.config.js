@@ -1,3 +1,9 @@
+import fs from 'fs';
+
+const packageJson = fs.readFileSync('./package.json', 'utf8');
+const changelog = fs.readFileSync('./CHANGELOG.md', 'utf8');
+const { version } = JSON.parse(packageJson);
+
 export default {
 	// Target: https://go.nuxtjs.dev/config-target
 	target: 'static',
@@ -30,7 +36,9 @@ export default {
 	css: ['@/assets/style.scss'],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [],
+	plugins: [
+		'@/plugins/timeago.js',
+	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -48,6 +56,12 @@ export default {
 		// https://go.nuxtjs.dev/axios
 		'@nuxtjs/axios',
 	],
+
+	publicRuntimeConfig: {
+		APP_VERSION: JSON.stringify(version),
+		BUILD_TIMESTAMP: new Date().getTime(),
+		CHANGELOG: JSON.stringify(changelog)
+	},
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
 	axios: {},
