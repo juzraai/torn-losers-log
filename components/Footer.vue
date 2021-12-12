@@ -1,8 +1,33 @@
 <template>
-	<div class="bg-dark py-2 text-light">
+	<div class="bg-dark py-3 text-light">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-4 col-md-6">
+					<ul class="list-unstyled">
+						<li><a href="#">Log</a></li>
+						<li><a href="#">Settings</a></li>
+						<li>
+							<a
+								href="https://github.com/juzraai/torn-losers-log/blob/main/README.md"
+								target="_blank"
+							>About</a>
+						</li>
+						<li>
+							<a
+								href="https://www.torn.com/forums.php#/p=threads&f=67&t=16219540"
+								target="_blank"
+							>Forum thread</a>
+						</li>
+						<li><a href="#">Changelog</a></li>
+						<li>
+							<a
+								href="https://github.com/juzraai/torn-losers-log"
+								target="_blank"
+							>Source code</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col">
 					<p>
 						<strong>TORN City Losers' Log (TLL)</strong>
 						<br>
@@ -14,24 +39,11 @@
 						/>)
 					</p>
 					<p>
-						<i class="fab fa-github fa-fw mr-1" />
 						<a
-							href="https://github.com/juzraai/torn-losers-log"
+							href="https://www.torn.com/profiles.php?XID=2413874"
 							target="_blank"
-						>Source code on GitHub</a>
-					</p>
-				</div>
-				<div class="col">
-					<p>
-						<strong>
-							Created by <a
-								href="https://www.torn.com/profiles.php?XID=2413874"
-								target="_blank"
-							>[2413874]</a>,
-						</strong>
+						>Created by [2413874]</a>,
 						please feel free to contact me in game if you have any questions, issues, ideas or feature requests.
-					</p>
-					<p>
 						In-game donations and <a
 							href="https://www.torn.com/forums.php#/p=threads&f=67&t=16219540"
 							target="_blank"
@@ -52,9 +64,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 a {
 	color: white;
 	font-weight: bold;
+}
+
+ul > li {
+	padding: 0.25rem 0;
+
+	> a {
+		font-weight: normal;
+	}
 }
 </style>
