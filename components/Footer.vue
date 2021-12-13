@@ -1,6 +1,6 @@
 <template>
-	<div class="bg-dark py-3 text-light">
-		<div class="container">
+	<div class="bg-dark text-light">
+		<div class="border-top container my-3 py-3">
 			<div class="row">
 				<div class="col-sm-4 col-md-6">
 					<p class="d-sm-none font-weight-bold">
@@ -88,7 +88,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 a {
 	color: white;
 	font-weight: bold;

@@ -55,6 +55,10 @@ export default {
 		'bootstrap-vue/nuxt',
 		// https://go.nuxtjs.dev/axios
 		'@nuxtjs/axios',
+		['nuxt-vuex-localstorage', {
+			localStorage: ['settings'],
+			sessionStorage: [],
+		}],
 	],
 
 	publicRuntimeConfig: {
@@ -71,9 +75,9 @@ export default {
 		bootstrapVueCSS: false,
 		componentPlugins: [
 			// 'LayoutPlugin',
-			// 'FormPlugin',
+			'FormPlugin',
 			// 'FormCheckboxPlugin',
-			// 'FormInputPlugin',
+			'FormInputPlugin',
 			// 'FormRadioPlugin',
 			// 'ToastPlugin',
 			// 'ModalPlugin'
@@ -83,6 +87,9 @@ export default {
 			'VBTooltipPlugin',
 			// 'VBScrollspyPlugin',
 		],
+		components: [
+			'BButton',
+		]
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build

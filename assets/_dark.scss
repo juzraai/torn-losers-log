@@ -1,0 +1,11 @@
+.dark {
+	.border,
+	.border-bottom,
+	.border-top {
+		border-color: $dark-border-color !important;
+	}
+
+	.card {
+		background-color: $dark-card-bg;
+	}
+}
