@@ -2,52 +2,55 @@
 	<div class="bg-dark py-3 text-light">
 		<div class="container">
 			<div class="row">
-				<div class="col-4 col-md-6">
-					<ul class="list-unstyled">
-						<li><a href="#">Log</a></li>
-						<li><a href="#">Settings</a></li>
-						<li>
+				<div class="col-sm-4 col-md-6">
+					<p class="d-sm-none font-weight-bold">
+						TORN City Losers' Log (TLL)
+					</p>
+					<ul class="d-flex d-sm-block flex-wrap list-unstyled">
+						<li
+							v-for="a in links"
+							:key="a.label"
+							class="mb-3 mb-sm-2 mr-3 mr-sm-0"
+						>
+							<NuxtLink
+								v-if="a.to"
+								class="font-weight-normal"
+								:to="a.to || ''"
+							>
+								{{ a.label }}
+							</NuxtLink>
 							<a
-								href="https://github.com/juzraai/torn-losers-log/blob/main/README.md"
-								target="_blank"
-							>About</a>
-						</li>
-						<li>
-							<a
-								href="https://www.torn.com/forums.php#/p=threads&f=67&t=16219540"
-								target="_blank"
-							>Forum thread</a>
-						</li>
-						<li><a href="#">Changelog</a></li>
-						<li>
-							<a
-								href="https://github.com/juzraai/torn-losers-log"
-								target="_blank"
-							>Source code</a>
+								v-else
+								class="font-weight-normal"
+								:href="a.href || '#'"
+								:target="a.target"
+							>{{ a.label }}</a>
 						</li>
 					</ul>
 				</div>
 				<div class="col">
-					<p>
-						<strong>TORN City Losers' Log (TLL)</strong>
-						<br>
-						<strong>v{{ $config.APP_VERSION }}</strong>
-						(released
-						<Timeago
-							:auto-update="60"
-							:datetime="$config.BUILD_TIMESTAMP"
-						/>)
+					<p class="d-none d-sm-block font-weight-bold">
+						TORN City Losers' Log (TLL)
 					</p>
-					<p>
+					<p class="text-justify">
+						Created and being developed by
 						<a
 							href="https://www.torn.com/profiles.php?XID=2413874"
 							target="_blank"
-						>Created by [2413874]</a>,
-						please feel free to contact me in game if you have any questions, issues, ideas or feature requests.
+						>[2413874]</a>.
+						Please feel free to contact me in game if you have any questions, issues, ideas or feature requests.
 						In-game donations and <a
 							href="https://www.torn.com/forums.php#/p=threads&f=67&t=16219540"
 							target="_blank"
 						>forum thread</a> upvotes are much appreciated.
+					</p>
+					<p class="text-secondary">
+						<span class="badge badge-light mr-2">v{{ $config.APP_VERSION }}</span>
+						Built
+						<Timeago
+							:auto-update="60"
+							:datetime="$config.BUILD_TIMESTAMP"
+						/>
 					</p>
 				</div>
 			</div>
@@ -58,6 +61,27 @@
 <script>
 export default {
 	data: () => ({
+		links: [
+			{ label: 'Log', to: '/' },
+			{ label: 'Settings', to: '/settings' },
+			{
+				label: 'About',
+				href: 'https://github.com/juzraai/torn-losers-log/blob/main/README.md',
+				target: '_blank',
+			},
+			{
+				label: 'Forum thread',
+				href: 'https://www.torn.com/forums.php#/p=threads&f=67&t=16219540',
+				target: '_blank',
+			},
+			{ label: 'Changelog' },
+			{
+				label: 'Source code',
+
+				href: 'https://github.com/juzraai/torn-losers-log',
+				target: '_blank',
+			},
+		],
 		buildTime: 0,
 		version: process.env.APP_VERSION,
 	}),
@@ -68,13 +92,5 @@ export default {
 a {
 	color: white;
 	font-weight: bold;
-}
-
-ul > li {
-	padding: 0.25rem 0;
-
-	> a {
-		font-weight: normal;
-	}
 }
 </style>
