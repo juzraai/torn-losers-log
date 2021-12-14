@@ -7,6 +7,12 @@
 			<Nuxt />
 		</div>
 		<Footer />
+		<b-overlay
+			no-wrap
+			:show="loading"
+			spinner-variant="white"
+			variant="dark"
+		/>
 	</div>
 </template>
 
@@ -14,8 +20,15 @@
 import { mapState } from 'vuex';
 
 export default {
+	data: () => ({
+		loading: true,
+	}),
 	computed: {
 		...mapState('settings', ['darkMode']),
+	},
+	mounted() {
+		this.$loadPreviousState();
+		this.loading = false;
 	},
 };
 </script>
