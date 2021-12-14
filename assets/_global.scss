@@ -4,3 +4,7 @@ div#__nuxt,
 #app {
 	min-height: 100vh;
 }
+
+.transitions {
+	transition: all 150ms;
+}
