@@ -87,6 +87,8 @@ export default {
 		components: [
 			'BButton',
 			'BOverlay',
+			'BFormGroup',
+			'BFormInput',
 		]
 	},
 
@@ -95,5 +97,5 @@ export default {
 		babel: {
 			compact: true,
 		},
-	},
+	}
 };

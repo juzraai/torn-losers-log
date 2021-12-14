@@ -93,4 +93,8 @@ a {
 	color: white;
 	font-weight: bold;
 }
+
+.lite .border-top {
+	border-color: transparent !important;
+}
 </style>

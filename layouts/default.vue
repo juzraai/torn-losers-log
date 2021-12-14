@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="d-flex flex-column transitions"
-		:class="{ dark: darkMode }"
+		:class="{ dark: darkMode, lite: !darkMode }"
 	>
 		<div class="flex-grow-1 py-5">
 			<Nuxt />
