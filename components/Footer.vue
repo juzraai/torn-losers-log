@@ -88,10 +88,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/variables";
+
 a {
 	color: white;
 	font-weight: bold;
+}
+
+p {
+	color: $gray-400;
 }
 
 .lite .border-top {

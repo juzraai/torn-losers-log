@@ -89,6 +89,9 @@ export default {
 			'BOverlay',
 			'BFormGroup',
 			'BFormInput',
+			'BNavbar',
+			'BNavbarNav',
+			'BNavItem',
 		]
 	},
 
