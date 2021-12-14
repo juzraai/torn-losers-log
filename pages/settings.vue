@@ -1,9 +1,11 @@
 <template>
-	<div class="card shadow">
-		<div class="card-body">
-			<h1>Settings</h1>
-			<p>darkMode = {{ darkMode }}</p>
-			<b-button @click="SET_DARK_MODE(!darkMode)">toggle</b-button>
+	<div class="container">
+		<div class="card shadow">
+			<div class="card-body">
+				<h1>Settings</h1>
+				<p>darkMode = {{ darkMode }}</p>
+				<b-button @click="SET_DARK_MODE(!darkMode)">toggle</b-button>
+			</div>
 		</div>
 	</div>
 </template>

@@ -3,7 +3,7 @@
 		class="d-flex flex-column transitions"
 		:class="{ dark: darkMode }"
 	>
-		<div class="container flex-grow-1 py-5">
+		<div class="flex-grow-1 py-5">
 			<Nuxt />
 		</div>
 		<Footer />

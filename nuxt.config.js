@@ -10,7 +10,7 @@ export default {
 
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
-		title: 'TORN City Losers\' Log',
+		title: 'TLL',
 		htmlAttrs: {
 			lang: 'en'
 		},
