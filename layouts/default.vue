@@ -21,9 +21,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "~/assets/variables";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import '~/assets/variables';
 
 .layout.dark {
 	background-color: $dark-body-bg;

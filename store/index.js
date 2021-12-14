@@ -1,8 +1,6 @@
-export const plugins = [
-	store => {
-		// TODO load persisted state, call store.replaceState(Object.assign(store.state), loadedState)
-		store.subscribe((mutation, state) => {
-			// TODO store state.settings, state.ui, ...
-		});
+export const mutations = {
+	INIT(state, newState) {
+		const mergedState = Object.assign(state, newState);
+		this.replaceState(mergedState);
 	}
-];
+};
