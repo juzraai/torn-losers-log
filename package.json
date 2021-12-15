@@ -12,6 +12,7 @@
 		"bootstrap": "^4.6.0",
 		"bootstrap-vue": "^2.21.2",
 		"core-js": "^3.9.1",
+		"dexie": "^3.2.0",
 		"fibers": "^5.0.0",
 		"nuxt": "^2.15.3",
 		"vue-timeago": "^5.1.3"
