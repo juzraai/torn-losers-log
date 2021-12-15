@@ -77,6 +77,8 @@ export default {
 			// TODO if v1 not imported yet -> /migrate
 			// TODO if no API key in store -> /login
 			// TODO else -> /log
+
+			this.$router.push('/connect');
 		},
 	},
 };
