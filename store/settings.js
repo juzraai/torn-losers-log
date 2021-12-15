@@ -1,6 +1,7 @@
 export const state = () => ({
 	apiKey: '',
 	darkMode: false,
+	playerId: 0, // automatically set on /connect
 });
 
 export const mutations = {
@@ -9,5 +10,8 @@ export const mutations = {
 	},
 	SET_DARK_MODE(state, darkMode) {
 		state.darkMode = darkMode;
-	}
+	},
+	SET_PLAYER_ID(state, playerId) {
+		state.playerId = playerId;
+	},
 };

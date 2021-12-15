@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
 	data: () => ({
 		features: [
@@ -75,13 +77,18 @@ export default {
 	head: {
 		title: 'Welcome!',
 	},
+	computed: {
+		...mapState('settings', ['apiKey']),
+	},
 	methods: {
 		start() {
 			// TODO if v1 not imported yet -> /migrate
-			// TODO if no API key in store -> /login
-			// TODO else -> /log
 
-			this.$router.push('/connect');
+			if (this.apiKey) {
+				this.$router.push('/log');
+			} else {
+				this.$router.push('/connect');
+			}
 		},
 	},
 };

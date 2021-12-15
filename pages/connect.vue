@@ -22,8 +22,6 @@
 			<strong>TLL</strong> needs a key with <span class="font-weight-bold text-warning">Limited access</span>, you can create one using the link below.
 		</p>
 
-		<div class="bg-light">Just a test: <Player :id="idTest" /></div>
-
 		<template #footer>
 			<b-button
 				href="https://www.torn.com/preferences.php#tab=api?&step=addNewKey&title=TLL&type=3"
@@ -50,7 +48,6 @@ import { mapMutations } from 'vuex';
 export default {
 	data: () => ({
 		apiKeyInput: '',
-		idTest: 0,
 	}),
 	head: {
 		title: 'Connect to TORN',
@@ -59,6 +56,7 @@ export default {
 		this.$refs.apiKeyInput?.focus();
 	},
 	methods: {
+		...mapMutations('settings', ['SET_API_KEY', 'SET_PLAYER_ID']),
 		...mapMutations('ui', ['SET_LOADING']),
 		async pasteApiKey() {
 			if (this.apiKeyInput.length === 0) {
@@ -81,16 +79,15 @@ export default {
 					throw new Error('Invalid response or API key.');
 				}
 
-				this.idTest = basic.player_id;
-
-				// TODO store player ID in settings
+				this.SET_API_KEY(this.apiKeyInput);
+				this.SET_PLAYER_ID(basic.player_id);
 
 				await this.$db.players.put({
 					id: basic.player_id,
 					name: basic.name
 				});
 
-				// TODO navigate to /log (attacks will be fetched there)
+				this.$router.push('/log');
 			} catch (error) {
 				this.apiKeyInput = '';
 				if (error.message) {
