@@ -11,6 +11,7 @@ export default {
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		title: 'TLL',
+		titleTemplate: '%s | TLL',
 		htmlAttrs: {
 			lang: 'en'
 		},
@@ -39,6 +40,8 @@ export default {
 	plugins: [
 		'@/plugins/storage.client.js',
 		'@/plugins/timeago.js',
+		'@/plugins/toasts.client.js',
+		'@/plugins/torn.client.js',
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
@@ -65,7 +68,9 @@ export default {
 	},
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
-	axios: {},
+	axios: {
+		baseURL: 'https://api.torn.com'
+	},
 
 	bootstrapVue: {
 		bootstrapCSS: false,
@@ -76,7 +81,7 @@ export default {
 			// 'FormCheckboxPlugin',
 			'FormInputPlugin',
 			// 'FormRadioPlugin',
-			// 'ToastPlugin',
+			'ToastPlugin',
 			// 'ModalPlugin'
 		],
 		directivePlugins: [

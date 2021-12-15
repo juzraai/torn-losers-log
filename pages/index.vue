@@ -72,6 +72,9 @@ export default {
 			},
 		],
 	}),
+	head: {
+		title: 'Welcome!',
+	},
 	methods: {
 		start() {
 			// TODO if v1 not imported yet -> /migrate

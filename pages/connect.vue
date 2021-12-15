@@ -34,7 +34,7 @@
 			<b-button
 				:disabled="!isValidApiKey(apiKeyInput)"
 				variant="primary"
-				@click="login"
+				@click="connect"
 			>
 				Log
 				<i class="fas fa-sign-in-alt ml-1" />
@@ -44,14 +44,19 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
 	data: () => ({
 		apiKeyInput: '',
 	}),
+	head: {
+		title: 'Connect to TORN',
+	},
 	mounted() {
 		this.$refs.apiKeyInput?.focus();
 	},
 	methods: {
+		...mapMutations('ui', ['SET_LOADING']),
 		async pasteApiKey() {
 			if (this.apiKeyInput.length === 0) {
 				try {
@@ -65,7 +70,23 @@ export default {
 		isValidApiKey(apiKey) {
 			return apiKey.match(/[0-9A-Za-z]{16}/);
 		},
-		login() {
+		async connect() {
+			try {
+				this.SET_LOADING(true);
+				const basic = await this.$torn.basic(this.apiKeyInput);
+				if (!basic.player_id || !basic.name) {
+					throw new Error('Invalid response or API key.');
+				}
+			} catch (error) {
+				this.apiKeyInput = '';
+				if (error.message) {
+					this.errorToast(error.message);
+				} else {
+					throw error;
+				}
+			} finally {
+				this.SET_LOADING(false);
+			}
 			// TODO loading:=true, fetch basic info
 			// TODO if somethings wrong, alert user, remove api key input
 			// TODO else load attacks and -> /log

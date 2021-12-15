@@ -21,18 +21,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
-	data: () => ({
-		loading: true,
-	}),
 	computed: {
 		...mapState('settings', ['darkMode']),
+		...mapState('ui', ['loading']),
 	},
 	mounted() {
 		this.$loadPreviousState();
-		this.loading = false;
+		this.SET_LOADING(false);
+	},
+	methods: {
+		...mapMutations('ui', ['SET_LOADING']),
 	},
 };
 </script>
