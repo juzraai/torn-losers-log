@@ -28,8 +28,12 @@ export default {
 		...mapState('settings', ['darkMode']),
 		...mapState('ui', ['loading']),
 	},
+	beforeCreate() {
+		if (this.$loadPreviousState) {
+			this.$loadPreviousState();
+		}
+	},
 	mounted() {
-		this.$loadPreviousState();
 		this.SET_LOADING(false);
 	},
 	methods: {

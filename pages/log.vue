@@ -13,9 +13,10 @@
 
 <script>
 export default {
-	middleware: ['ensureApiKey'],
-	mounted() {
-		console.log('LOG MOUNTED');
+	beforeMount() {
+		if (!this.$store.state.settings.apiKey) {
+			this.$router.push('/connect');
+		}
 	},
 };
 </script>
