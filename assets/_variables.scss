@@ -20,10 +20,15 @@ $enable-responsive-font-sizes: true;
 $enable-shadows: true;
 $enable-validation-icons: true;
 $light: $gray-200;
+$warning: #edb100; // 1-step darker than original $warning
 
 // Custom stuff
 $dark-body-bg: $gray-900;
 $dark-body-color: $light;
 $dark-border-color: $gray-700;
 $dark-card-bg: $gray-800;
+$dark-input-bg: $gray-900;
+$dark-input-border-color: $gray-600;
+$dark-input-color: white;
+$dark-link-color: #3395ff; // 2-step lighter than original $primary
 

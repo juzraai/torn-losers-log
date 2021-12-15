@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-sm-4 col-md-6">
 					<p class="d-sm-none font-weight-bold">
-						TLL (TORN City Losers' Log)
+						<NuxtLink to="/">TLL (TORN City Losers' Log)</NuxtLink>
 					</p>
 					<ul class="d-flex d-sm-block flex-wrap list-unstyled">
 						<li
@@ -30,7 +30,7 @@
 				</div>
 				<div class="col">
 					<p class="d-none d-sm-block font-weight-bold">
-						TLL (TORN City Losers' Log)
+						<NuxtLink to="/">TLL (TORN City Losers' Log)</NuxtLink>
 					</p>
 					<p class="text-justify">
 						Created and being developed by
@@ -62,8 +62,7 @@
 export default {
 	data: () => ({
 		links: [
-			{ label: 'Log', to: '/' },
-			{ label: 'Settings', to: '/settings' },
+			{ label: 'Log', to: '/log' },
 			{
 				label: 'About',
 				href: 'https://github.com/juzraai/torn-losers-log/blob/main/README.md',
@@ -92,7 +91,7 @@ export default {
 @import "@/assets/variables";
 
 a {
-	color: white;
+	color: white !important;
 	font-weight: bold;
 }
 

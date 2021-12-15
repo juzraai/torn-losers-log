@@ -2,6 +2,11 @@
 	background-color: $dark-body-bg;
 	color: $dark-body-color;
 
+	p > a,
+	.btn-link {
+		color: $dark-link-color;
+	}
+
 	.border,
 	.border-bottom,
 	.border-top {
@@ -10,5 +15,11 @@
 
 	.card {
 		background-color: $dark-card-bg;
+	}
+
+	input.form-control {
+		background-color: $dark-input-bg;
+		border-color: $dark-input-border-color;
+		color: $dark-input-color;
 	}
 }

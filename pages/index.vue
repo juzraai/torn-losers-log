@@ -1,6 +1,6 @@
 <template>
 	<Screen title="Welcome to TLL!">
-		<p><strong>TLL</strong> aims to help your loss selling/buying activity, as it can</p>
+		<p><strong>TLL</strong> aims to help you with loss selling or buying. It can</p>
 		<ul class="list-unstyled mb-md-4 ml-3">
 			<li
 				v-for="f in features"
@@ -37,7 +37,7 @@
 				variant="primary"
 				@click="start"
 			>
-				Get started!
+				Start
 				<i class="fas fa-sign-in-alt fa-fw ml-1" />
 			</b-button>
 		</template>

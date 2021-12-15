@@ -100,5 +100,9 @@ export default {
 		babel: {
 			compact: true,
 		},
+	},
+
+	loading: {
+		color: '#007bff', // $primary
 	}
 };
