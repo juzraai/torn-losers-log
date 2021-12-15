@@ -1,41 +1,83 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h1 class="border-bottom mb-5">
-					<small>Welcome to</small>
-					<strong>TLL</strong>!
-				</h1>
-			</div>
-			<div class="col-md-6">
-				<p class="mb-4 text-justify"><strong>TLL</strong> (short for <strong>TORN City Losers' Log</strong>) was originally designed for only loss sellers, but now aims to help the loss selling and buying activity of citizens, as it can</p>
-				<ul class="list-unstyled mb-4 ml-3">
-					<li class="d-flex align-items-center mb-3">
-						<i class="fas fa-list fa-fw mr-2" />
-						<i class="far fa-chart-bar fa-fw mr-3" />
-						<span>list, filter, group, count, plot,</span>
-					</li>
-					<li class="d-flex align-items-center mb-3">
-						<i class="fas fa-tag fa-fw mr-2" />
-						<i class="fas fa-check fa-fw mr-3" />
-						store price and paid status
-					</li>
-					<li class="d-flex align-items-center mb-3">
-						<i class="fas fa-skull fa-fw mr-2" />
-						<i class="fas fa-running fa-fw mr-3" />
-						<span>of losses <strong>and escapes</strong><span class="badge badge-success ml-2">NEW!</span></span>
-					</li>
-					<li class="d-flex align-items-center mb-3">
-						<i class="fas fa-crosshairs fa-fw mr-2" />
-						<i class="fas fa-shield-alt fa-fw mr-3" />
-						<span>you made <strong>or received!</strong><span class="badge badge-success ml-2">NEW!</span></span>
-					</li>
-				</ul>
-				<p class="text-justify"><strong>TLL</strong> does all this entirely in your browser, which means your API key won't be sent out nor stored on a 3rd party server. (In fact, TLL doesn't have any server-side code or database, it's a static website.) However, this also means that you have to carry over your data manually, if you decide to switch browsers. <strong>TLL</strong> provides export and import mechanisms to help with that.</p>
-			</div>
-			<div class="col-md-6 col-lg-5 ml-auto">
-				<LoginCard />
-			</div>
-		</div>
-	</div>
+	<Screen title="Welcome to TLL!">
+		<p><strong>TLL</strong> aims to help your loss selling/buying activity, as it can</p>
+		<ul class="list-unstyled mb-md-4 ml-3">
+			<li
+				v-for="f in features"
+				:key="f.texts[0]"
+				class="d-flex align-items-center mb-sm-3"
+			>
+				<div>
+					<i
+						class="fa-fw mr-2"
+						:class="f.icons[0]"
+					/>
+					<br class="d-sm-none">
+					<i
+						class="fa-fw mr-3"
+						:class="f.icons[1]"
+					/>
+				</div>
+				<div>
+					<span v-html="f.texts[0]" />
+					<br class="d-sm-none">
+					<span v-html="f.texts[1]" />
+				</div>
+			</li>
+		</ul>
+		<template #footer>
+			<b-button
+				href="https://github.com/juzraai/torn-losers-log/blob/main/README.md"
+				target="_blank"
+				variant="link"
+			>
+				Read more
+			</b-button>
+			<b-button
+				variant="primary"
+				@click="start"
+			>
+				Get started!
+				<i class="fas fa-sign-in-alt fa-fw ml-1" />
+			</b-button>
+		</template>
+	</Screen>
 </template>
+
+<script>
+export default {
+	data: () => ({
+		features: [
+			{
+				icons: ['fas fa-list', 'far fa-chart-bar'],
+				texts: ['list, filter, group,', 'count, plot,'],
+			},
+			{
+				icons: ['fas fa-tag', 'fas fa-check'],
+				texts: ['store price', 'and paid status'],
+			},
+			{
+				icons: ['fas fa-skull', 'fas fa-running'],
+				texts: [
+					'of losses',
+					'<strong>and escapes</strong><span class="badge badge-success ml-2">NEW!</span>',
+				],
+			},
+			{
+				icons: ['fas fa-crosshairs', 'fas fa-shield-alt'],
+				texts: [
+					'you made',
+					'<strong>or received!</strong><span class="badge badge-success ml-2">NEW!</span>',
+				],
+			},
+		],
+	}),
+	methods: {
+		start() {
+			// TODO if v1 not imported yet -> /migrate
+			// TODO if no API key in store -> /login
+			// TODO else -> /log
+		},
+	},
+};
+</script>

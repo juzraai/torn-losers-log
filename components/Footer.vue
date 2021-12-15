@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-sm-4 col-md-6">
 					<p class="d-sm-none font-weight-bold">
-						TORN City Losers' Log (TLL)
+						TLL (TORN City Losers' Log)
 					</p>
 					<ul class="d-flex d-sm-block flex-wrap list-unstyled">
 						<li
@@ -30,7 +30,7 @@
 				</div>
 				<div class="col">
 					<p class="d-none d-sm-block font-weight-bold">
-						TORN City Losers' Log (TLL)
+						TLL (TORN City Losers' Log)
 					</p>
 					<p class="text-justify">
 						Created and being developed by

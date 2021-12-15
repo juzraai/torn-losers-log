@@ -7,7 +7,8 @@ body {
 div#__nuxt,
 #__layout,
 #__layout > div,
-#app {
+#app,
+.h-full {
 	min-height: 100vh;
 }
 
