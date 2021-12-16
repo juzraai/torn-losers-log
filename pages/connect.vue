@@ -45,6 +45,8 @@
 
 <script>
 import { mapMutations } from 'vuex';
+import TORN from '@/services/torn';
+
 export default {
 	data: () => ({
 		apiKeyInput: '',
@@ -74,7 +76,7 @@ export default {
 		async connect() {
 			try {
 				this.SET_LOADING(true);
-				const basic = await this.$torn.basic(this.apiKeyInput);
+				const basic = await TORN.basic(this.apiKeyInput);
 				if (!basic.player_id || !basic.name) {
 					throw new Error('Invalid response or API key.');
 				}

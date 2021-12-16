@@ -70,7 +70,7 @@ export default {
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
 	axios: {
-		baseURL: 'https://api.torn.com'
+		baseURL: 'https://api.torn.com' // axios is the only API we use, in services/torn.js
 	},
 
 	bootstrapVue: {
