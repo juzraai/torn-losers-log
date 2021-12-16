@@ -19,9 +19,14 @@ It does all this entirely in your browser, which means your API key won't be sen
 (Soon...)
 
 
+## License
+
+MIT, please see the `LICENSE` file!
+
+
 ## Developer notes
 
-**TLL** is Nuxt project with `static` target.
+**TLL** is a Nuxt project with `static` target.
 
 ```
 # Setup
@@ -37,7 +42,6 @@ yarn run build
 yarn run release && git push --follow-tags origin main
 ```
 
+Screens:
 
-## License
-
-MIT, please see the `LICENSE` file!
+![](gfx/screens.png)

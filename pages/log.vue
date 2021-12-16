@@ -15,7 +15,7 @@
 export default {
 	beforeMount() {
 		if (!this.$store.state.settings.apiKey) {
-			this.$router.push('/connect');
+			this.$router.replace('/migrate');
 		}
 	},
 };

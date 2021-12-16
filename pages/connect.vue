@@ -54,6 +54,11 @@ export default {
 	head: {
 		title: 'Connect to TORN',
 	},
+	beforeMount() {
+		if (this.$store.state.settings.apiKey) {
+			this.$router.replace('/log');
+		}
+	},
 	mounted() {
 		this.$refs.apiKeyInput?.focus();
 	},

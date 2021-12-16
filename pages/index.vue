@@ -34,8 +34,8 @@
 				Read more
 			</b-button>
 			<b-button
+				to="/migrate"
 				variant="primary"
-				@click="start"
 			>
 				Start
 				<i class="fas fa-sign-in-alt fa-fw ml-1" />
@@ -45,8 +45,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
 	data: () => ({
 		features: [
@@ -76,20 +74,6 @@ export default {
 	}),
 	head: {
 		title: 'Welcome!',
-	},
-	computed: {
-		...mapState('settings', ['apiKey']),
-	},
-	methods: {
-		start() {
-			// TODO if v1 not imported yet -> /migrate
-
-			if (this.apiKey) {
-				this.$router.push('/log');
-			} else {
-				this.$router.push('/connect');
-			}
-		},
 	},
 };
 </script>
