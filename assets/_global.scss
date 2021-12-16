@@ -12,6 +12,10 @@ div#__nuxt,
 	min-height: 100vh;
 }
 
+.gap {
+	gap: 1rem;
+}
+
 .page-enter-active,
 .page-leave-active {
 	transition: opacity 150ms;

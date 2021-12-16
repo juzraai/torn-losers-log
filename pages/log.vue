@@ -1,11 +1,15 @@
 <template>
 	<div class="container-fluid">
 		<div class="d-flex flex-column flex-lg-row gap">
-			<div class="mb-4 mb-lg-0">
-				<RoleFilter />
+			<div>
+				<client-only>
+					<LogFilters />
+				</client-only>
 			</div>
 			<div class="flex-grow-1">
-				<LogList />
+				<client-only>
+					<LogList />
+				</client-only>
 			</div>
 		</div>
 	</div>
@@ -23,9 +27,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-.gap {
-	gap: 1rem;
-}
-</style>

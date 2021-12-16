@@ -1,5 +1,7 @@
 # v2 TODOs
 
+- groupID: use timestamp instead of code?
+- migrate: names & attacks - should use transaction: https://dexie.org/docs/Dexie/Dexie.transaction() and maybe bulkAdd/bulkPut
 - log screen
 - charts - where? separate page?
 - settings page
