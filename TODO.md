@@ -2,7 +2,6 @@
 
 - log screen
 - charts - where? separate page?
-- navbar center: show name - maybe this will be link to settings
 - settings page
 	- show database metrics, record count, timespan
 	- API key change - verify player ID!

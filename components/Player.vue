@@ -1,9 +1,12 @@
 <template>
-	<a
-		v-if="id"
-		:href="url"
-		target="_blank"
-	>{{ name }} [{{ id }}]</a>
+	<span v-if="id">
+		<a
+			v-if="link"
+			:href="url"
+			target="_blank"
+		>{{ name }} [{{ id }}]</a>
+		<span v-else>{{ name }} [{{ id }}]</span>
+	</span>
 </template>
 
 <script>
@@ -14,6 +17,10 @@ export default {
 		id: {
 			type: Number,
 			default: null,
+		},
+		link: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	data: () => ({
