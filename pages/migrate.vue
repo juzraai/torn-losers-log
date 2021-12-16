@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import V1 from '@/services/v1-storage';
+import { mapMutations, mapState } from 'vuex';
+import v1Storage from '@/services/v1-storage';
 
 export default {
 	head: {
@@ -14,14 +14,67 @@ export default {
 		...mapState('settings', ['apiKey']),
 	},
 	beforeMount() {
-		const v1 = V1.load();
-		if (v1) {
-			// TODO migrate
-		} else if (this.apiKey) {
+		this.migrate();
+		if (this.apiKey) {
 			this.$router.replace('/log');
 		} else {
 			this.$router.replace('/connect');
 		}
+	},
+	methods: {
+		...mapMutations('log', ['SET_LAST_UPDATED']),
+		...mapMutations('settings', [
+			'SET_API_KEY',
+			'SET_DARK_MODE',
+			'SET_PLAYER_ID',
+		]),
+		migrate() {
+			const v1 = v1Storage.load();
+			if (!v1) {
+				return; // nothing to migrate
+			}
+
+			console.log('[TLL] Migrating V1 store...');
+
+			this.SET_API_KEY(v1.apiKey);
+			this.SET_DARK_MODE(v1.dark);
+			this.SET_LAST_UPDATED(v1.lastUpdate);
+			this.SET_PLAYER_ID(v1.playerId);
+
+			Object.entries(v1.names).forEach(([playerId, name]) => {
+				const id = Number('0' + playerId);
+				if (id) {
+					this.$db.players.put({ id, name });
+				}
+			});
+
+			v1.losses.sort((a, b) => a.timestamp_ended - b.timestamp_ended);
+
+			for (let i = 0; i < v1.losses.length; i++) {
+				const a = v1.losses[i];
+				delete a.oldest; // no need for this
+				a.attacker_id = v1.playerId;
+				a.result = 'Lost'; // v1 only handled "Lost" and "Timeout", without distinction
+
+				// v1 dumped `paid` and `price` fields too for some reason
+
+				const p = i === 0 ? a : v1.losses[i - 1]; // previous attack
+				a.group =
+					a.attacker_id === p.attacker_id &&
+					a.defender_id === p.defender_id &&
+					a.paid === p.paid &&
+					a.price === p.price &&
+					// no need to check `result`, it's the same (see above)
+					p.group
+						? p.group
+						: a.code;
+
+				this.$db.attacks.put(a);
+			}
+			v1Storage.clear();
+
+			console.log('[TLL] Migrating of V1 store finished');
+		},
 	},
 };
 </script>

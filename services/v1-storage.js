@@ -14,9 +14,9 @@ export default {
 	},
 
 	/**
-	 * @return {{ apiKey: String, lastUpdate: Number, losses: {}[], names: Object<Number, String> }}
+	 * @return {{ apiKey: String, dark: Boolean, lastUpdate: Number, losses: { code: String, defender_id: Number, paid: Boolean, price: Number, timestamp_ended: Number }[], names: Object<Number, String>, paidUntil: Object<Number, Number>, playerId: Number, prices: Object<Number,{ timestamp: Number, price: Number }[]> }}
 	 */
-	load() { // TODO add returned schema to JSDoc (paidUntil, playerId, prices)
+	load() {
 		const json = this.loadRaw();
 		if (json) {
 			return JSON.parse(json);

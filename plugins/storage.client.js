@@ -1,18 +1,26 @@
 const LOCALE_STORAGE_KEY = 'TLLv2';
 
 const PERSISTED_MODULES = [
-	'settings'
+	'log',
+	'settings',
 ];
+
+let saveTimeout = null;
 
 export default ({ store }, inject) => {
 	store.subscribe((mutation, state) => {
 		if (PERSISTED_MODULES.includes(mutation.type.split('/')[0])) {
-			const persistedState = {};
-			for (const key of PERSISTED_MODULES) {
-				persistedState[key] = state[key];
+			if (saveTimeout) {
+				clearTimeout(saveTimeout);
 			}
-			console.log('[TLL] Saving state', persistedState);
-			window.localStorage.setItem(LOCALE_STORAGE_KEY, JSON.stringify(persistedState));
+			saveTimeout = setTimeout(() => {
+				const persistedState = {};
+				for (const key of PERSISTED_MODULES) {
+					persistedState[key] = state[key];
+				}
+				console.log('[TLL] Saving state', persistedState);
+				window.localStorage.setItem(LOCALE_STORAGE_KEY, JSON.stringify(persistedState));
+			}, 1000);
 		}
 	});
 
