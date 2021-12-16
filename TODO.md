@@ -1,13 +1,25 @@
 # v2 TODOs
 
+- log controls: all should be in one container
+	- refresh btn
+	- role: PC: radio group stacked buttons, below lg: single toggle button
+	- result: PC: radio group stacked buttons, below lg: single toggle button
+	- show paid (default false) (checkbox)
+	- show hidden (default false) (checkbox) icon???
 - groupID: use timestamp instead of code?
 	- **YEP! Because then I can do this:** `await this.$db.attacks.orderBy('group').reverse().uniqueKeys(keys => console.log(keys));`
-- migrate: names & attacks - should use transaction: https://dexie.org/docs/Dexie/Dexie.transaction() and maybe bulkAdd/bulkPut
-- log screen
-- charts - where? separate page?
+	- And this: `await this.$db.attacks.orderBy('group').reverse().filter(a => a.timestamp_ended >= 1636112055).uniqueKeys(keys => console.log(keys));`
+	- **refactor migration + reimport sample data**
+- log items:
+	- always group! collapsible will show individual events
+- log paging
+	- where?
+	- maybe just add a "Show more" on the bottom to get +10 items
 - settings page
 	- show database metrics, record count, timespan
 	- API key change - verify player ID!
 	- export/import feature
 	- clear feature
 - import feature should be accessible from the start screens, between migrate and connect
+- migrate & import should use transaction: https://dexie.org/docs/Dexie/Dexie.transaction() and maybe bulkAdd/bulkPut
+- charts - where? separate page?

@@ -38,7 +38,7 @@ export default {
 			const verb = this.result === 'Lost' ? 'lost to' : 'escaped from';
 			return this.role === 'attacker'
 				? `You haven't ${verb} anyone recently.`
-				: `Nobody ${verb} you recently.`;
+				: `Nobody has ${verb} you recently.`;
 		},
 		thingsThatTriggerUpdate() {
 			return [this.lastUpdated, this.result, this.role].join(';');

@@ -1,5 +1,15 @@
 <template>
 	<div class="container-fluid">
+		<client-only>
+			<p>
+				Database updated
+				<timeago
+					:auto-update="10"
+					class="font-weight-bold"
+					:datetime="lastUpdated"
+				/>
+			</p>
+		</client-only>
 		<div class="d-flex flex-column flex-lg-row gap">
 			<client-only>
 				<div class="d-flex flex-row flex-lg-column gap">
@@ -17,9 +27,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
 	head: {
 		title: 'Log',
+	},
+	computed: {
+		...mapState('log', ['lastUpdated']),
 	},
 	beforeMount() {
 		if (!this.$store.state.settings.apiKey) {

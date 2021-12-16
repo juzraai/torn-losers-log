@@ -13,6 +13,7 @@
 					name="role-filter"
 					:options="roleOptions"
 					size="lg"
+					stacked
 				/>
 			</b-form-group>
 			<b-form-group
@@ -27,6 +28,7 @@
 					name="result-filter"
 					:options="resultOptions"
 					size="lg"
+					stacked
 				/>
 			</b-form-group>
 		</div>
