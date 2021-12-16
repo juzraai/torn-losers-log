@@ -1,5 +1,5 @@
 <template>
-	<div class="card shadow">
+	<Card>
 		<div class="card-body d-flex flex-row flex-lg-column flex-wrap gap">
 			<b-form-group
 				v-slot="{ ariaDescribedby }"
@@ -30,7 +30,7 @@
 				/>
 			</b-form-group>
 		</div>
-	</div>
+	</Card>
 </template>
 
 <script>

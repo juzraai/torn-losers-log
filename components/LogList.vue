@@ -1,5 +1,5 @@
 <template>
-	<div class="card shadow">
+	<Card>
 		<ul class="list-group list-group-flush">
 			<li
 				v-if="loading"
@@ -20,7 +20,7 @@
 				class="list-group-item"
 			>{{ i }}</li>
 		</ul>
-	</div>
+	</Card>
 </template>
 
 <script>

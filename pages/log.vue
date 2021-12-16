@@ -3,7 +3,10 @@
 		<div class="d-flex flex-column flex-lg-row gap">
 			<div>
 				<client-only>
-					<LogFilters />
+					<div class="d-flex flex-wrap gap">
+						<LogRefresh />
+						<LogFilters />
+					</div>
 				</client-only>
 			</div>
 			<div class="flex-grow-1">

@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col col-md-10 col-lg-8 col-xl-7 mx-auto">
-				<div class="border-0 card shadow">
+				<Card>
 					<div
 						v-if="showBack"
 						class="card-header py-1"
@@ -24,7 +24,7 @@
 					<div class="card-footer d-flex justify-content-between">
 						<slot name="footer" />
 					</div>
-				</div>
+				</Card>
 			</div>
 		</div>
 	</div>
