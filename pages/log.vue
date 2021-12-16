@@ -1,11 +1,11 @@
 <template>
 	<div class="container-fluid">
-		<div class="row">
-			<div class="bg-info col-lg-3 mb-4 mb-lg-0">
-				filters
+		<div class="d-flex flex-column flex-lg-row gap">
+			<div class="mb-4 mb-lg-0">
+				<RoleFilter />
 			</div>
-			<div class="col">
-				log
+			<div class="flex-grow-1">
+				<LogList />
 			</div>
 		</div>
 	</div>
@@ -13,6 +13,9 @@
 
 <script>
 export default {
+	head: {
+		title: 'Log',
+	},
 	beforeMount() {
 		if (!this.$store.state.settings.apiKey) {
 			this.$router.replace('/migrate');
@@ -20,3 +23,9 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.gap {
+	gap: 1rem;
+}
+</style>

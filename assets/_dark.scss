@@ -13,7 +13,8 @@
 		border-color: $dark-border-color !important;
 	}
 
-	.card {
+	.card,
+	.list-group-item {
 		background-color: $dark-card-bg;
 	}
 

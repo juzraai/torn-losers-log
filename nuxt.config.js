@@ -30,6 +30,7 @@ export default {
 			'BOverlay',
 			'BFormGroup',
 			'BFormInput',
+			'BFormRadioGroup',
 		],
 	},
 	build: {
