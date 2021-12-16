@@ -1,14 +1,12 @@
 <template>
 	<div class="container-fluid">
 		<div class="d-flex flex-column flex-lg-row gap">
-			<div>
-				<client-only>
-					<div class="d-flex flex-wrap gap">
-						<LogRefresh />
-						<LogFilters />
-					</div>
-				</client-only>
-			</div>
+			<client-only>
+				<div class="d-flex flex-row flex-lg-column gap">
+					<LogRefresh />
+					<LogFilters />
+				</div>
+			</client-only>
 			<div class="flex-grow-1">
 				<client-only>
 					<LogList />
