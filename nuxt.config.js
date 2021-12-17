@@ -27,10 +27,11 @@ export default {
 		],
 		components: [
 			'BButton',
+			'BButtonGroup',
 			'BOverlay',
 			'BFormGroup',
 			'BFormInput',
-			'BFormRadioGroup',
+			// 'BFormRadioGroup',
 		],
 	},
 	build: {

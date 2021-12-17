@@ -11,12 +11,11 @@
 			</p>
 		</client-only>
 		<div class="d-flex flex-column flex-lg-row gap">
-			<client-only>
-				<div class="d-flex flex-row flex-lg-column gap">
-					<LogRefresh />
-					<LogFilters />
-				</div>
-			</client-only>
+			<div>
+				<client-only>
+					<LogControls />
+				</client-only>
+			</div>
 			<div class="flex-grow-1">
 				<client-only>
 					<LogList />

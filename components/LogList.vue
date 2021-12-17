@@ -31,7 +31,7 @@ export default {
 		items: [],
 	}),
 	computed: {
-		...mapState('log', ['lastUpdated', 'result', 'role']),
+		...mapState('log', ['lastUpdated', 'paid', 'result', 'role']),
 		...mapState('settings', ['playerId']),
 		...mapState('ui', ['loading']),
 		notFoundMessage() {
@@ -41,7 +41,7 @@ export default {
 				: `Nobody has ${verb} you recently.`;
 		},
 		thingsThatTriggerUpdate() {
-			return [this.lastUpdated, this.result, this.role].join(';');
+			return [this.lastUpdated, this.paid, this.result, this.role].join(';');
 		},
 	},
 	watch: {
@@ -63,7 +63,9 @@ export default {
 				.reverse()
 				.filter(
 					a =>
-						a[`${this.role}_id`] === this.playerId && a.result === this.result
+						a[`${this.role}_id`] === this.playerId &&
+						a.result === this.result &&
+						a.paid === this.paid
 				)
 				.limit(10)
 				.toArray(); // TODO offset (don't add to store :))
