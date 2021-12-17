@@ -12,11 +12,13 @@
 			<SwitchButton
 				v-model="roleFilter"
 				:options="roleOptions"
+				:tooltip="'Your role:<br><strong>attacker</strong> or <strong>defender</strong>'"
 			/>
 
 			<SwitchButton
 				v-model="resultFilter"
 				:options="resultOptions"
+				:tooltip="'Attack result:<br><strong>Lost</strong> or <strong>Escape</strong>'"
 			/>
 
 			<SwitchButton

@@ -1,8 +1,10 @@
 <template>
 	<div>
 		<b-button
+			v-b-tooltip.html.bottom
 			class="d-lg-none"
 			size="lg"
+			:title="tooltip"
 			:variant="variant(option)"
 			@click="toggle(option, true)"
 		>
@@ -13,7 +15,9 @@
 		</b-button>
 		<div class="d-none d-lg-block">
 			<b-button-group
+				v-b-tooltip.html.right
 				size="lg"
+				:title="tooltip ? `<div class='text-left'>${tooltip}</div>` : undefined"
 				vertical
 			>
 				<b-button
@@ -41,6 +45,10 @@ export default {
 		options: {
 			type: Array,
 			default: () => [],
+		},
+		tooltip: {
+			type: String,
+			default: undefined,
 		},
 		value: {
 			type: [Boolean, String],

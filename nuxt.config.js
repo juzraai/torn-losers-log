@@ -32,6 +32,7 @@ export default {
 			'BFormGroup',
 			'BFormInput',
 			// 'BFormRadioGroup',
+			// 'BTooltip',
 		],
 	},
 	build: {
