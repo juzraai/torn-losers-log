@@ -18,7 +18,9 @@
 				v-else
 				:key="i.code || i.group"
 				class="list-group-item"
-			>{{ i }}</li>
+			>
+				<LogListItem :attacks="i" />
+			</li>
 		</ul>
 	</Card>
 </template>
@@ -56,16 +58,9 @@ export default {
 		...mapMutations('ui', ['SET_LOADING']),
 		async query() {
 			this.SET_LOADING(true);
-			/*
-				Grouping:
-					await this.$db.attacks
-						.orderBy('group').reverse()
-						.filter(a => a.timestamp_ended >= 1636112055)
-						.uniqueKeys(keys => console.log(keys));
-					+ get attacks for each group
-			*/
-			this.items = await this.$db.attacks
-				.orderBy('timestamp_ended')
+			const groups = [];
+			await this.$db.attacks
+				.orderBy('group')
 				.reverse()
 				.filter(
 					a =>
@@ -73,8 +68,18 @@ export default {
 						a.result === this.result &&
 						a.paid === this.paid
 				)
-				.limit(10)
-				.toArray(); // TODO offset (don't add to store :))
+				.limit(10) // TODO offset (don't add to store :))
+				.uniqueKeys(g => groups.push(...g));
+			this.items = await Promise.all(
+				groups.map(async g => {
+					const attacks = await this.$db.attacks
+						.orderBy('timestamp_ended')
+						.reverse()
+						.filter(a => a.group === g)
+						.toArray();
+					return attacks;
+				})
+			);
 			this.SET_LOADING(false);
 		},
 	},
