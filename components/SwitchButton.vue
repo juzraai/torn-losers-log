@@ -1,12 +1,13 @@
 <template>
-	<div>
+	<div v-if="options.length">
 		<b-button
-			v-b-tooltip.html.bottom
+			v-if="option"
+			v-b-tooltip.bottom
 			class="d-lg-none"
 			size="lg"
-			:title="tooltip"
+			:title="option.tooltip"
 			:variant="variant(option)"
-			@click="toggle(option, true)"
+			@click="toggle(option, true, $event)"
 		>
 			<i
 				class="fa-fw"
@@ -15,17 +16,17 @@
 		</b-button>
 		<div class="d-none d-lg-block">
 			<b-button-group
-				v-b-tooltip.html.right
 				size="lg"
-				:title="tooltip ? `<div class='text-left'>${tooltip}</div>` : undefined"
 				vertical
 			>
 				<b-button
 					v-for="o in options"
 					:key="o.value"
+					v-b-tooltip.right
 					:active="o.value === option.value"
+					:title="o.tooltip"
 					:variant="variant(o)"
-					@click="toggle(o)"
+					@click="toggle(o, false, $event)"
 				>
 					<i
 						class="fa-fw"
@@ -61,12 +62,14 @@ export default {
 				return this.options[0];
 			} else {
 				// radio mode: show selected option
-				return this.options.filter(o => o.value === this.value)[0];
+				return (
+					this.options.filter(o => o.value === this.value)[0] || {}
+				);
 			}
 		},
 	},
 	methods: {
-		toggle(option, allowRotation) {
+		toggle(option, allowRotation, e) {
 			if (this.options.length === 1) {
 				// checkbox
 				this.$emit('input', !this.value);
@@ -80,6 +83,7 @@ export default {
 				// radio, traditional mechanism
 				this.$emit('input', option.value);
 			}
+			(e?.path || []).forEach(el => el.blur && el.blur());
 		},
 		variant(option) {
 			const ov = this.options.length === 1 ? true : option.value;

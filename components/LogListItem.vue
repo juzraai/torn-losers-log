@@ -1,6 +1,7 @@
 <template>
 	<div class="d-flex align-items-center gap">
 		<div
+			v-if="group !== 'event'"
 			class="font-weight-bold lead text-right"
 			style="min-width: 35px;"
 		>
@@ -60,7 +61,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapState('log', ['role']),
+		...mapState('log', ['group', 'role']),
 	},
 };
 </script>

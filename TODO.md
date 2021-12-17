@@ -1,11 +1,9 @@
 # v2 TODOs
 
+- contract grouping: need another key, like `contract`? (then rename `group` to `session`)
 - log items:
-	- always group! collapsible will show individual events
-	- number in the beginnning of line, bigger font, clickin on it will open collapsible
-	- **how TF I will do contract grouping w/ Dexie? :D**
-		- maybe we'll need another key for that?
-		- then rename "group" to "session" and add new "contract"
+	- events mode: hide number
+	- group mode: show events in collapsible (or modal?)
 - log paging
 	- where?
 	- maybe just add a "Show more" on the bottom to get +10 items
@@ -22,7 +20,6 @@
 - refresh logic - watch out for group ID generation!
 - charts - where? separate page?
 - log controls:
-	- group criteria: consecutives / contract
-
 	- show hidden (default false) (checkbox) icon???
 	- on mobile, some buttons can go into a dropdown button
+- will need an auto name resolver mechanism: like every 2secs a scheduled thing grabs an unresolved name from db and fetches the name from API

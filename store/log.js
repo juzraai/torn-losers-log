@@ -1,4 +1,5 @@
 export const state = () => ({
+	group: 'event',
 	lastUpdated: 0,
 	paid: true,
 	result: 'Lost',
@@ -6,6 +7,11 @@ export const state = () => ({
 });
 
 export const mutations = {
+	SET_GROUP(state, group) {
+		if ('event|session|contract'.includes(group)) {
+			state.group = group;
+		}
+	},
 	SET_LAST_UPDATED(state, lastUpdated) {
 		state.lastUpdated = lastUpdated;
 	},
@@ -13,9 +19,13 @@ export const mutations = {
 		state.paid = paid;
 	},
 	SET_RESULT(state, result) {
-		state.result = result;
+		if ('Lost|Escape'.includes(result)) {
+			state.result = result;
+		}
 	},
 	SET_ROLE(state, role) {
-		state.role = role;
+		if ('attacker|defender'.includes(role)) {
+			state.role = role;
+		}
 	},
 };

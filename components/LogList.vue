@@ -33,7 +33,7 @@ export default {
 		items: [],
 	}),
 	computed: {
-		...mapState('log', ['lastUpdated', 'paid', 'result', 'role']),
+		...mapState('log', ['group', 'lastUpdated', 'paid', 'result', 'role']),
 		...mapState('settings', ['playerId']),
 		...mapState('ui', ['loading']),
 		notFoundMessage() {
@@ -43,7 +43,13 @@ export default {
 				: `Nobody has ${verb} you recently.`;
 		},
 		thingsThatTriggerUpdate() {
-			return [this.lastUpdated, this.paid, this.result, this.role].join(';');
+			return [
+				this.group,
+				this.lastUpdated,
+				this.paid,
+				this.result,
+				this.role,
+			].join(';');
 		},
 	},
 	watch: {
@@ -58,9 +64,17 @@ export default {
 		...mapMutations('ui', ['SET_LOADING']),
 		async query() {
 			this.SET_LOADING(true);
-			const groups = [];
-			await this.$db.attacks
-				.orderBy('group')
+			if (this.group === 'event') {
+				await this.eventQuery();
+			} else {
+				const key = 'group'; // TODO handle session and contract mode
+				await this.groupedQuery(key);
+			}
+			this.SET_LOADING(false);
+		},
+		async eventQuery() {
+			const attacks = await this.$db.attacks
+				.orderBy('timestamp_ended')
 				.reverse()
 				.filter(
 					a =>
@@ -68,7 +82,22 @@ export default {
 						a.result === this.result &&
 						a.paid === this.paid
 				)
-				.limit(10) // TODO offset (don't add to store :))
+				.limit(10) // TODO offset? (don't add to store)
+				.toArray();
+			this.items = attacks.map(a => ([a]));
+		},
+		async groupedQuery(key) {
+			const groups = [];
+			await this.$db.attacks
+				.orderBy(key)
+				.reverse()
+				.filter(
+					a =>
+						a[`${this.role}_id`] === this.playerId &&
+						a.result === this.result &&
+						a.paid === this.paid
+				)
+				.limit(10) // TODO offset? (don't add to store)
 				.uniqueKeys(g => groups.push(...g));
 			this.items = await Promise.all(
 				groups.map(async g => {
@@ -80,7 +109,6 @@ export default {
 					return attacks;
 				})
 			);
-			this.SET_LOADING(false);
 		},
 	},
 };
