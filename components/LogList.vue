@@ -56,8 +56,14 @@ export default {
 		...mapMutations('ui', ['SET_LOADING']),
 		async query() {
 			this.SET_LOADING(true);
-			const criteria = {};
-			criteria[`${this.role}_id`] = this.playerId;
+			/*
+				Grouping:
+					await this.$db.attacks
+						.orderBy('group').reverse()
+						.filter(a => a.timestamp_ended >= 1636112055)
+						.uniqueKeys(keys => console.log(keys));
+					+ get attacks for each group
+			*/
 			this.items = await this.$db.attacks
 				.orderBy('timestamp_ended')
 				.reverse()

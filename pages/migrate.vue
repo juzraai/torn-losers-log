@@ -13,8 +13,8 @@ export default {
 	computed: {
 		...mapState('settings', ['apiKey']),
 	},
-	beforeMount() {
-		this.migrate();
+	async beforeMount() {
+		await this.migrate();
 		if (this.apiKey) {
 			this.$router.replace('/log');
 		} else {
@@ -28,7 +28,7 @@ export default {
 			'SET_DARK_MODE',
 			'SET_PLAYER_ID',
 		]),
-		migrate() {
+		async migrate() {
 			const v1 = v1Storage.load();
 			if (!v1) {
 				return; // nothing to migrate
@@ -41,12 +41,14 @@ export default {
 			this.SET_LAST_UPDATED(v1.lastUpdate);
 			this.SET_PLAYER_ID(v1.playerId);
 
+			const importedPlayers = [];
 			Object.entries(v1.names).forEach(([playerId, name]) => {
 				const id = Number('0' + playerId);
 				if (id) {
-					this.$db.players.put({ id, name });
+					importedPlayers.push({ id, name });
 				}
 			});
+			await this.$db.players.bulkAdd(importedPlayers);
 
 			v1.losses.sort((a, b) => a.timestamp_ended - b.timestamp_ended);
 
@@ -64,13 +66,13 @@ export default {
 					a.defender_id === p.defender_id &&
 					a.paid === p.paid &&
 					a.price === p.price &&
-					// no need to check `result`, it's the same (see above)
+					// no need to check `result` here, it's the same (see above)
 					p.group
 						? p.group
-						: a.code;
-
-				this.$db.attacks.put(a);
+						: a.timestamp_ended; // group ID = first attack's timestamp_ended
 			}
+			await this.$db.attacks.bulkAdd(v1.losses);
+
 			v1Storage.clear();
 
 			console.log('[TLL] Migrating of V1 store finished');

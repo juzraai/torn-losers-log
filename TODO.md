@@ -1,9 +1,5 @@
 # v2 TODOs
 
-- groupID: use timestamp instead of code?
-	- **YEP! Because then I can do this:** `await this.$db.attacks.orderBy('group').reverse().uniqueKeys(keys => console.log(keys));`
-	- And this: `await this.$db.attacks.orderBy('group').reverse().filter(a => a.timestamp_ended >= 1636112055).uniqueKeys(keys => console.log(keys));`
-	- **refactor migration + reimport sample data**
 - log items:
 	- always group! collapsible will show individual events
 	- number in the beginnning of line, bigger font, clickin on it will open collapsible
@@ -17,7 +13,6 @@
 	- clear feature
 - import feature should be accessible from the start screens, between migrate and connect
 - refresh logic - watch out for group ID generation!
-- migrate, import, refresh should use transaction: https://dexie.org/docs/Dexie/Dexie.transaction() and maybe bulkAdd/bulkPut
 - charts - where? separate page?
 - log controls:
 	- group criteria: consecutives / contract
