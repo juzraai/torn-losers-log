@@ -6,7 +6,7 @@
 
 		<client-only>
 			<NavbarButton class="ml-auto" disabled>
-				<Player :id="playerId" />
+				<Player :xid="playerId" />
 			</NavbarButton>
 		</client-only>
 		<NavbarButton @click="SET_DARK_MODE(!darkMode)">

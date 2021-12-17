@@ -38,8 +38,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
 	props: {
 		options: {
@@ -56,7 +54,6 @@ export default {
 		},
 	},
 	computed: {
-		...mapState('settings', ['darkMode']),
 		option() {
 			// option to show in single button mode
 			if (this.options.length === 1) {
@@ -87,7 +84,7 @@ export default {
 		variant(option) {
 			const ov = this.options.length === 1 ? true : option.value;
 			const outline = ov === this.value ? '' : 'outline-';
-			const theme = this.darkMode ? 'secondary' : 'primary';
+			const theme = 'primary';
 			return `${outline}${theme}`;
 		},
 	},

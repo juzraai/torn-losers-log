@@ -4,7 +4,7 @@
 			<b-button
 				disabled
 				size="lg"
-				:variant="darkMode ? 'secondary' : 'primary'"
+				variant="primary"
 			>
 				<i class="fas fa-sync fa-fw" />
 			</b-button>
@@ -62,7 +62,6 @@ export default {
 	}),
 	computed: {
 		...mapState('log', ['paid', 'result', 'role']),
-		...mapState('settings', ['darkMode']),
 		resultFilter: {
 			get() {
 				return this.result;

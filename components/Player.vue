@@ -1,11 +1,11 @@
 <template>
-	<span v-if="id">
+	<span v-if="xid">
 		<a
 			v-if="link"
 			:href="url"
 			target="_blank"
-		>{{ name }} [{{ id }}]</a>
-		<span v-else>{{ name }} [{{ id }}]</span>
+		>{{ name }} [{{ xid }}]</a>
+		<span v-else>{{ name }} [{{ xid }}]</span>
 	</span>
 </template>
 
@@ -14,13 +14,13 @@ import { liveQuery } from 'dexie';
 
 export default {
 	props: {
-		id: {
-			type: Number,
-			default: null,
-		},
 		link: {
 			type: Boolean,
 			default: false,
+		},
+		xid: {
+			type: Number,
+			default: null,
 		},
 	},
 	data: () => ({
@@ -28,11 +28,11 @@ export default {
 	}),
 	computed: {
 		url() {
-			return `https://www.torn.com/profiles.php?XID=${this.id}`;
+			return `https://www.torn.com/profiles.php?XID=${this.xid}`;
 		},
 	},
 	watch: {
-		id() {
+		xid() {
 			this.init();
 		},
 	},
@@ -41,8 +41,8 @@ export default {
 	},
 	methods: {
 		init() {
-			if (this.id) {
-				liveQuery(() => this.$db.players.get(this.id)).subscribe(player => {
+			if (this.xid) {
+				liveQuery(() => this.$db.players.get(this.xid)).subscribe(player => {
 					this.name = player?.name;
 				});
 			}

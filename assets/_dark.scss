@@ -2,9 +2,24 @@
 	background-color: $dark-body-bg;
 	color: $dark-body-color;
 
-	p > a,
+	p a {
+		color: white;
+	}
+
 	.btn-link {
 		color: $dark-link-color;
+	}
+
+	.btn-outline-primary {
+		border-color: $dark-link-color;
+		color: $dark-link-color;
+	}
+
+	.btn-primary,
+	.btn-outline-primary:hover {
+		background-color: $dark-link-color;
+		border-color: $dark-link-color;
+		color: white;
 	}
 
 	.border,
