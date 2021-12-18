@@ -31,6 +31,7 @@ import { mapMutations, mapState } from 'vuex';
 export default {
 	data: () => ({
 		items: [],
+		limit: 10, // TODO offset?
 	}),
 	computed: {
 		...mapState('log', ['group', 'lastUpdated', 'paid', 'result', 'role']),
@@ -63,12 +64,12 @@ export default {
 	methods: {
 		...mapMutations('ui', ['SET_LOADING']),
 		async query() {
+			// TODO limit & offset setting (NOT in store, just here on page), pass to query methods
 			this.SET_LOADING(true);
 			if (this.group === 'event') {
 				await this.eventQuery();
-			} else {
-				const key = 'group'; // TODO handle session and contract mode
-				await this.groupedQuery(key);
+			} else if (this.group === 'session') {
+				await this.sessionQuery();
 			}
 			this.SET_LOADING(false);
 		},
@@ -82,33 +83,52 @@ export default {
 						a.result === this.result &&
 						a.paid === this.paid
 				)
-				.limit(10) // TODO offset? (don't add to store)
+				.limit(this.limit)
 				.toArray();
-			this.items = attacks.map(a => ([a]));
+			this.items = attacks.map(a => [a]);
 		},
-		async groupedQuery(key) {
+		async sessionQuery() {
+			const limit = this.limit;
 			const groups = [];
-			await this.$db.attacks
-				.orderBy(key)
-				.reverse()
-				.filter(
-					a =>
-						a[`${this.role}_id`] === this.playerId &&
-						a.result === this.result &&
-						a.paid === this.paid
-				)
-				.limit(10) // TODO offset? (don't add to store)
-				.uniqueKeys(g => groups.push(...g));
-			this.items = await Promise.all(
-				groups.map(async g => {
-					const attacks = await this.$db.attacks
-						.orderBy('timestamp_ended')
-						.reverse()
-						.filter(a => a.group === g)
-						.toArray();
-					return attacks;
-				})
-			);
+			const batch = 100;
+			for (let page = 0; groups.length < limit + 1; page++) {
+				// we need to start (N+1)th group to know Nth group is complete
+
+				const attacks = await this.$db.attacks
+					.orderBy('timestamp_ended')
+					.reverse()
+					.filter(
+						a =>
+							a[`${this.role}_id`] === this.playerId &&
+							a.result === this.result &&
+							a.paid === this.paid
+					)
+					.offset(page * batch)
+					.limit(batch)
+					.toArray();
+				if (attacks.length) {
+					attacks.forEach(attack => {
+						if (!groups.length) {
+							groups.push([]);
+						}
+						const group = groups[groups.length - 1];
+						const prev = group[group.length - 1] || attack;
+						if (
+							attack.attacker_id === prev.attacker_id &&
+							attack.defender_id === prev.defender_id &&
+							attack.paid === prev.paid &&
+							attack.price === prev.price
+						) {
+							group.push(attack);
+						} else {
+							groups.push([attack]);
+						}
+					});
+				} else {
+					break;
+				}
+			}
+			this.items = groups.slice(0, limit); // crop the last incomplete group');
 		},
 	},
 };

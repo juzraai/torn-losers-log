@@ -5,7 +5,7 @@ export const db = new Dexie('TLL');
 // TODO add new db versions here, keep the old ones!
 
 db.version(1).stores({
-	attacks: 'code,attacker_id,defender_id,group,paid,result,timestamp_ended',
+	attacks: 'code,attacker_id,defender_id,paid,result,timestamp_ended',
 	players: 'id',
 });
 

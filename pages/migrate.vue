@@ -57,19 +57,7 @@ export default {
 				delete a.oldest; // no need for this
 				a.attacker_id = v1.playerId;
 				a.result = 'Lost'; // v1 only handled "Lost" and "Timeout", without distinction
-
 				// v1 dumped `paid` and `price` fields too for some reason
-
-				const p = i === 0 ? a : v1.losses[i - 1]; // previous attack
-				a.group =
-					a.attacker_id === p.attacker_id &&
-					a.defender_id === p.defender_id &&
-					a.paid === p.paid &&
-					a.price === p.price &&
-					// no need to check `result` here, it's the same (see above)
-					p.group
-						? p.group
-						: a.timestamp_ended; // group ID = first attack's timestamp_ended
 			}
 			await this.$db.attacks.bulkAdd(v1.losses);
 
