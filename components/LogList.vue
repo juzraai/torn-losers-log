@@ -67,32 +67,46 @@ export default {
 		async query() {
 			// TODO limit & offset setting (NOT in store, just here on page), pass to query methods
 			this.SET_LOADING(true);
+			console.time('QUERY');
 			if (this.group === 'event') {
 				await this.eventQuery();
 			} else if (this.group === 'session') {
 				await this.sessionQuery();
 			}
+			console.timeEnd('QUERY');
 			this.SET_LOADING(false);
 		},
-		_baseQuery() {
-			return this.$db.attacks
-				.orderBy('timestamp_ended')
-				.reverse()
-				.filter(
-					a =>
-						!TORN.NPCs.includes(a.attacker_id) &&
-						!TORN.NPCs.includes(a.defender_id) &&
-						a[`${this.role}_id`] === this.playerId && a.result === this.result
-				);
+		_filter(a) {
+			return (
+				!TORN.NPCs.includes(a.attacker_id) &&
+				!TORN.NPCs.includes(a.defender_id) &&
+				a[`${this.role}_id`] === this.playerId &&
+				a.result === this.result
+			);
 		},
 		async eventQuery() {
-			const attacks = await this._baseQuery()
-				.filter(a => !a.paid || this.paid)
+			const attacks = await this.$db.attacks
+				.orderBy('timestamp_ended')
+				.reverse()
+				.filter(a => this._filter(a) && (!a.paid || this.paid))
 				.limit(this.limit)
 				.toArray();
 			this.items = attacks.map(a => [a]);
 		},
 		async sessionQuery() {
+			let minTs = 0;
+			if (!this.paid) {
+				// we want to list only unpaid ones
+				// lets help main query by giving a
+				// starting point (oldest unpaid):
+				const lastUnpaid = await this.$db.attacks
+					.orderBy('timestamp_ended')
+					.filter(a => this._filter(a) && !a.paid)
+					.limit(1)
+					.toArray()[0];
+				minTs = lastUnpaid?.timestamp_ended || new Date().getTime();
+			}
+
 			const limit = this.limit;
 			const groups = [];
 			const batch = 100;
@@ -101,11 +115,13 @@ export default {
 				groups.filter(g => !g[0].paid || this.paid).length < limit + 1;
 				page++
 			) {
-				console.log('Page', page, 'Groups', groups.length);
 				// we need to start (N+1)th group to know Nth group is complete
 				// we also need to apply `paid` filter to groups
 
-				const attacks = await this._baseQuery()
+				const attacks = await this.$db.attacks
+					.orderBy('timestamp_ended')
+					.reverse()
+					.filter(a => this._filter(a) && a.timestamp_ended >= minTs)
 					.offset(page * batch)
 					.limit(batch)
 					.toArray();
