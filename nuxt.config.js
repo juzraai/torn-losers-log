@@ -78,11 +78,10 @@ export default {
 		'@nuxtjs/axios',
 	],
 	plugins: [
-		'@/plugins/database.client.js',
+		'@/plugins/init.client.js',
 		'@/plugins/storage.client.js',
 		'@/plugins/timeago.js',
 		'@/plugins/toasts.client.js',
-		'@/plugins/torn.client.js',
 	],
 	publicRuntimeConfig: {
 		APP_VERSION: JSON.stringify(version),

@@ -27,7 +27,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
-import TORN from '@/services/torn';
+import DB from '@/services/database';
 
 export default {
 	data: () => ({
@@ -70,85 +70,22 @@ export default {
 			console.time('QUERY');
 			if (this.group === 'event') {
 				await this.eventQuery();
-			} else if (this.group === 'session') {
-				await this.sessionQuery();
+				/* } else if (this.group === 'session') {
+				await this.sessionQuery(); */
 			}
 			console.timeEnd('QUERY');
 			this.SET_LOADING(false);
 		},
-		_filter(a) {
-			return (
-				!TORN.NPCs.includes(a.attacker_id) &&
-				!TORN.NPCs.includes(a.defender_id) &&
-				a[`${this.role}_id`] === this.playerId &&
-				a.result === this.result
-			);
-		},
 		async eventQuery() {
-			const attacks = await this.$db.attacks
-				.orderBy('timestamp_ended')
-				.reverse()
-				.filter(a => this._filter(a) && (!a.paid || this.paid))
-				.limit(this.limit)
-				.toArray();
+			const attacks = await DB.query(
+				'timestamp_ended',
+				this.role === 'attacker' ? this.playerId : false,
+				this.role === 'defender' ? this.playerId : false,
+				this.result,
+				this.paid,
+				10
+			);
 			this.items = attacks.map(a => [a]);
-		},
-		async sessionQuery() {
-			let minTs = 0;
-			if (!this.paid) {
-				// we want to list only unpaid ones
-				// lets help main query by giving a
-				// starting point (oldest unpaid):
-				const lastUnpaid = await this.$db.attacks
-					.orderBy('timestamp_ended')
-					.filter(a => this._filter(a) && !a.paid)
-					.limit(1)
-					.toArray()[0];
-				minTs = lastUnpaid?.timestamp_ended || new Date().getTime();
-			}
-
-			const limit = this.limit;
-			const groups = [];
-			const batch = 100;
-			for (
-				let page = 0;
-				groups.filter(g => !g[0].paid || this.paid).length < limit + 1;
-				page++
-			) {
-				// we need to start (N+1)th group to know Nth group is complete
-				// we also need to apply `paid` filter to groups
-
-				const attacks = await this.$db.attacks
-					.orderBy('timestamp_ended')
-					.reverse()
-					.filter(a => this._filter(a) && a.timestamp_ended >= minTs)
-					.offset(page * batch)
-					.limit(batch)
-					.toArray();
-				if (attacks.length) {
-					attacks.forEach(attack => {
-						if (!groups.length) {
-							groups.push([attack]);
-							return;
-						}
-						const group = groups[groups.length - 1];
-						const prev = group[group.length - 1] || attack;
-						if (
-							attack.attacker_id === prev.attacker_id &&
-							attack.defender_id === prev.defender_id &&
-							attack.paid === prev.paid &&
-							attack.price === prev.price
-						) {
-							group.push(attack);
-						} else {
-							groups.push([attack]);
-						}
-					});
-				} else {
-					break;
-				}
-			}
-			this.items = groups.filter(g => !g[0].paid || this.paid).slice(0, limit); // crop the last incomplete group');
 		},
 	},
 };

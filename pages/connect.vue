@@ -45,6 +45,7 @@
 
 <script>
 import { mapMutations } from 'vuex';
+import DB from '@/services/database';
 import TORN from '@/services/torn';
 
 export default {
@@ -89,10 +90,12 @@ export default {
 				this.SET_API_KEY(this.apiKeyInput);
 				this.SET_PLAYER_ID(basic.player_id);
 
-				await this.$db.players.put({
-					id: basic.player_id,
-					name: basic.name
-				});
+				await DB.addPlayers([
+					{
+						id: basic.player_id,
+						name: basic.name,
+					},
+				]);
 
 				this.$router.push('/log');
 			} catch (error) {

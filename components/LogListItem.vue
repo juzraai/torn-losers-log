@@ -30,18 +30,13 @@
 				you
 			</span>
 			<br>
-			<small>
-				<span
-					v-if="attacks[0].price"
-					:class="attacks[0].paid ? 'text-success' : 'text-danger'"
-				>
+			<small :class="attacks[0].paid ? 'text-success' : 'text-danger'">
+				<span v-if="attacks[0].price">
 					${{ attacks[0].price * attacks.length }} (${{ attacks[0].price }} each)
 				</span>
-				<span
-					v-else
-					class="text-muted"
-				>
-					(No price set)
+				<span v-else>
+					{{ attacks[0].paid ? 'Paid' : 'Unpaid' }}
+					<span class="text-muted">(No price set)</span>
 				</span>
 			</small>
 		</p>

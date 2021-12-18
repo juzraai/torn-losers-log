@@ -11,6 +11,7 @@
 
 <script>
 import { liveQuery } from 'dexie';
+import DB from '@/services/database';
 
 export default {
 	props: {
@@ -42,7 +43,7 @@ export default {
 	methods: {
 		init() {
 			if (this.xid) {
-				liveQuery(() => this.$db.players.get(this.xid)).subscribe(player => {
+				liveQuery(() => DB.getPlayer(this.xid)).subscribe(player => {
 					this.name = player?.name;
 				});
 			}

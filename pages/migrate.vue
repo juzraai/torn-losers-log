@@ -4,6 +4,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import DB from '@/services/database';
 import v1Storage from '@/services/v1-storage';
 
 export default {
@@ -48,7 +49,7 @@ export default {
 					importedPlayers.push({ id, name });
 				}
 			});
-			await this.$db.players.bulkAdd(importedPlayers);
+			await DB.addPlayers(importedPlayers);
 
 			v1.losses.sort((a, b) => a.timestamp_ended - b.timestamp_ended);
 
@@ -58,8 +59,9 @@ export default {
 				a.attacker_id = v1.playerId;
 				a.result = 'Lost'; // v1 only handled "Lost" and "Timeout", without distinction
 				// v1 dumped `paid` and `price` fields too for some reason
+				a.session = 0;
 			}
-			await this.$db.attacks.bulkAdd(v1.losses);
+			await DB.addAttacks(v1.losses);
 
 			v1Storage.clear();
 
