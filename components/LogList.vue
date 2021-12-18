@@ -81,7 +81,7 @@ export default {
 					a =>
 						a[`${this.role}_id`] === this.playerId &&
 						a.result === this.result &&
-						a.paid === this.paid
+						(!a.paid || this.paid)
 				)
 				.limit(this.limit)
 				.toArray();
@@ -101,7 +101,7 @@ export default {
 						a =>
 							a[`${this.role}_id`] === this.playerId &&
 							a.result === this.result &&
-							a.paid === this.paid
+							(!a.paid || this.paid)
 					)
 					.offset(page * batch)
 					.limit(batch)
