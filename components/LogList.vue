@@ -27,6 +27,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import TORN from '@/services/torn';
 
 export default {
 	data: () => ({
@@ -73,16 +74,20 @@ export default {
 			}
 			this.SET_LOADING(false);
 		},
-		async eventQuery() {
-			const attacks = await this.$db.attacks
+		_baseQuery() {
+			return this.$db.attacks
 				.orderBy('timestamp_ended')
 				.reverse()
 				.filter(
 					a =>
-						a[`${this.role}_id`] === this.playerId &&
-						a.result === this.result &&
-						(!a.paid || this.paid)
-				)
+						!TORN.NPCs.includes(a.attacker_id) &&
+						!TORN.NPCs.includes(a.defender_id) &&
+						a[`${this.role}_id`] === this.playerId && a.result === this.result
+				);
+		},
+		async eventQuery() {
+			const attacks = await this._baseQuery()
+				.filter(a => !a.paid || this.paid)
 				.limit(this.limit)
 				.toArray();
 			this.items = attacks.map(a => [a]);
@@ -91,25 +96,24 @@ export default {
 			const limit = this.limit;
 			const groups = [];
 			const batch = 100;
-			for (let page = 0; groups.length < limit + 1; page++) {
+			for (
+				let page = 0;
+				groups.filter(g => !g[0].paid || this.paid).length < limit + 1;
+				page++
+			) {
+				console.log('Page', page, 'Groups', groups.length);
 				// we need to start (N+1)th group to know Nth group is complete
+				// we also need to apply `paid` filter to groups
 
-				const attacks = await this.$db.attacks
-					.orderBy('timestamp_ended')
-					.reverse()
-					.filter(
-						a =>
-							a[`${this.role}_id`] === this.playerId &&
-							a.result === this.result &&
-							(!a.paid || this.paid)
-					)
+				const attacks = await this._baseQuery()
 					.offset(page * batch)
 					.limit(batch)
 					.toArray();
 				if (attacks.length) {
 					attacks.forEach(attack => {
 						if (!groups.length) {
-							groups.push([]);
+							groups.push([attack]);
+							return;
 						}
 						const group = groups[groups.length - 1];
 						const prev = group[group.length - 1] || attack;
@@ -128,7 +132,7 @@ export default {
 					break;
 				}
 			}
-			this.items = groups.slice(0, limit); // crop the last incomplete group');
+			this.items = groups.filter(g => !g[0].paid || this.paid).slice(0, limit); // crop the last incomplete group');
 		},
 	},
 };

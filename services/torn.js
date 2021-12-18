@@ -42,4 +42,14 @@ export default {
 	basic(apiKey, playerId) {
 		return tornApiCall(apiKey, `/user/${playerId || ''}?selections=basic`);
 	},
+
+	NPCs: [
+		4, // Duke
+		7, // Amanda
+		10, // Scrooge
+		15, // Leslie
+		17, // Easter Bunny
+		19, // Jimmy
+		20, // Fernando
+	],
 };
