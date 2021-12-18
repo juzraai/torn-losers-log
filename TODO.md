@@ -2,15 +2,12 @@
 
 - contract grouping: need another key, like `contract`? (then rename `group` to `session`)
 - log items:
-	- events mode: hide number
 	- group mode: show events in collapsible (or modal?)
 - log paging
 	- where?
 	- maybe just add a "Show more" on the bottom to get +10 items
 - paid/unpaid logic
-	- will be tricky, I have to regenerate group IDs, starting right after the previous newest unmodified attack and CANNOT filter records for this, I have to iterate all... (or else I mess up sessions in case there's something else in between)
 - set price logic
-	- this will need group ID regeneration too...
 - settings page
 	- show database metrics, record count, timespan
 	- API key change - verify player ID!

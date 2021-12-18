@@ -62,6 +62,8 @@ export default {
 				a.session = 0;
 			}
 			await DB.addAttacks(v1.losses);
+			await DB.updateSessions(v1.playerId, null, 'Lost', 0);
+			// no need to call for other defender/result combinations here
 
 			v1Storage.clear();
 

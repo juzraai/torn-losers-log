@@ -70,14 +70,15 @@ export default {
 			console.time('QUERY');
 			if (this.group === 'event') {
 				await this.eventQuery();
-				/* } else if (this.group === 'session') {
-				await this.sessionQuery(); */
+			} else {
+				// session|contract
+				await this.groupedQuery(this.group);
 			}
 			console.timeEnd('QUERY');
 			this.SET_LOADING(false);
 		},
 		async eventQuery() {
-			const attacks = await DB.query(
+			const attacks = await DB.getAttacks(
 				'timestamp_ended',
 				this.role === 'attacker' ? this.playerId : false,
 				this.role === 'defender' ? this.playerId : false,
@@ -86,6 +87,20 @@ export default {
 				10
 			);
 			this.items = attacks.map(a => [a]);
+		},
+		async groupedQuery(key) {
+			const groups = [];
+			await DB.attacksQuery(
+				key,
+				this.role === 'attacker' ? this.playerId : false,
+				this.role === 'defender' ? this.playerId : false,
+				this.result,
+				this.paid,
+				10
+			).uniqueKeys(g => groups.push(...g));
+			this.items = await Promise.all(
+				groups.map(g => DB.getAttacksForKey(key, g))
+			);
 		},
 	},
 };

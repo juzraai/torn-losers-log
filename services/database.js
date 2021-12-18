@@ -26,6 +26,36 @@ export default {
 		return db.players.bulkPut(players);
 	},
 
+	attackFilter(attacker, defender, result, includePaid) {
+		return a =>
+			!TORN.NPCs.includes(a.attacker_id) &&
+			!TORN.NPCs.includes(a.defender_id) &&
+			(a.attacker_id === attacker || !attacker) &&
+			(a.defender_id === defender || !defender) &&
+			a.result === result &&
+			(!a.paid || includePaid);
+	},
+
+	attacksQuery(key, attacker, defender, result, includePaid, limit) {
+		return db.attacks
+			.orderBy(key)
+			.reverse()
+			.filter(this.attackFilter(attacker, defender, result, includePaid))
+			.limit(limit);
+	},
+
+	getAttacks(key, attacker, defender, result, includePaid, limit) {
+		return this.attacksQuery(key, attacker, defender, result, includePaid, limit).toArray();
+	},
+
+	getAttacksForKey(keyPath, key) {
+		return db.attacks
+			.orderBy('timestamp_ended')
+			.reverse()
+			.filter(a => a[keyPath] === key)
+			.toArray();
+	},
+
 	/**
 	 * @param {Number} id
 	 * @returns {{ id: Number, name: String }}
@@ -34,19 +64,39 @@ export default {
 		return db.players.get(id);
 	},
 
-	query(key, attacker, defender, result, includePaid, limit) {
-		return db.attacks
-			.orderBy(key)
-			.reverse()
-			.filter(a =>
-				!TORN.NPCs.includes(a.attacker_id) &&
-				!TORN.NPCs.includes(a.defender_id) &&
-				(!attacker || a.attacker_id === attacker) &&
-				(!defender || a.defender_id === defender) &&
-				a.result === result &&
-				(!a.paid || includePaid)
-			)
-			.limit(limit)
-			.toArray();
+	isSameSession(a, b) {
+		return a.attacker_id === b.attacker_id &&
+			a.defender_id === b.defender_id &&
+			a.paid === b.paid &&
+			a.price === b.price;
 	},
+
+	async updateSessions(attacker, defender, result, minTs) {
+		if (!minTs) {
+			// oldest attack where session=0
+			const first = await db.attacks
+				.orderBy('timestamp_ended')
+				.filter(a => this.attackFilter(attacker, defender, result, true) && !a.session)
+				.limit(1)
+				.first();
+			minTs = first ? first.timestamp_ended : 0;
+		}
+
+		// newest attack before minTs, used as first prev
+		let last = await db.attacks
+			.orderBy('timestamp_ended')
+			.reverse()
+			.filter(a => this.attackFilter(attacker, defender, result, true) && a.timestamp_ended < minTs)
+			.limit(1)
+			.first();
+		await db.attacks
+			.orderBy('timestamp_ended')
+			.filter(a => this.attackFilter(attacker, defender, result, true) && a.timestamp_ended >= minTs)
+			.modify(a => {
+				const prev = last || a;
+				a.session = this.isSameSession(a, prev) ? prev.session : a.timestamp_ended;
+				last = a;
+			});
+	},
+
 };
