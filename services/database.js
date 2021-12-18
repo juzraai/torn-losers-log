@@ -48,12 +48,9 @@ export default {
 		return this.attacksQuery(key, attacker, defender, result, includePaid, limit).toArray();
 	},
 
-	getAttacksForKey(keyPath, key) {
-		return db.attacks
-			.orderBy('timestamp_ended')
-			.reverse()
-			.filter(a => a[keyPath] === key)
-			.toArray();
+	async getAttacksForKey(keyPath, key) {
+		const attacks = await db.attacks.where(keyPath).equals(key).toArray();
+		return attacks.sort((a, b) => b.timestamp_ended - a.timestamp_ended); // desc
 	},
 
 	/**
