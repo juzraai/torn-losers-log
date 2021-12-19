@@ -6,21 +6,31 @@
 		<div
 			v-if="group !== 'event'"
 			class="font-weight-bold lead text-right"
-			style="min-width: 35px;"
+			style="min-width: 45px;"
 		>
 			{{ attacks.length }}x
 		</div>
+		<div
+			class="d-none d-md-block text-muted"
+			style="min-width: 200px;"
+		>
+			{{ $timestamp(attacks[0].timestamp_ended) }}
+			<span v-if="attacks.length > 1">
+				<br>
+				{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
+			</span>
+		</div>
 		<div class="d-flex flex-column flex-grow-1">
-			<div class="small">
+			<div class="d-md-none small text-muted">
 				{{ $timestamp(attacks[0].timestamp_ended) }}
-				<span v-if="attacks.length > 1">
-					- {{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
-				</span>
 			</div>
 			<div>
 				<span v-if="role === 'attacker'">
-					You
-					{{ attacks[0].result === 'Lost' ? 'lost to' : 'escaped from' }}
+					<span class="d-none d-md-inline">
+						You
+						{{ attacks[0].result === 'Lost' ? 'lost to' : 'escaped from' }}
+						<br>
+					</span>
 					<Player
 						class="font-weight-bold"
 						link
@@ -33,20 +43,46 @@
 						link
 						:xid="attacks[0].attacker_id"
 					/>
-					{{ attacks[0].result === 'Lost' ? 'lost to' : 'escaped from' }}
-					you
+					<span class="d-none d-md-inline">
+						<br>
+						{{ attacks[0].result === 'Lost' ? 'lost to' : 'escaped from' }}
+						you
+					</span>
 				</span>
-				<br>
-				<small :class="attacks[0].paid ? 'text-success' : 'text-danger'">
-					<span v-if="attacks[0].price">
-						$ {{ $price(attacks[0].price * attacks.length) }} ({{ $price(attacks[0].price) }} each)
-					</span>
-					<span v-else>
-						{{ attacks[0].paid ? 'Paid' : 'Unpaid' }}
-						<span class="text-muted">(No price set)</span>
-					</span>
-				</small>
 			</div>
+			<div
+				class="d-md-none small"
+				:class="attacks[0].paid ? 'text-success' : 'text-danger'"
+			>
+				<span v-if="attacks[0].price">
+					<strong>$ {{ $price(attacks[0].price * attacks.length) }}</strong>
+					({{ $price(attacks[0].price) }}/ea)
+				</span>
+				<span
+					v-else
+					v-b-tooltip.left
+					title="No price set"
+				>
+					{{ attacks[0].paid ? 'Paid' : 'Unpaid' }}
+				</span>
+			</div>
+		</div>
+		<div
+			class="d-none d-md-block text-right"
+			:class="attacks[0].paid ? 'text-success' : 'text-danger'"
+		>
+			<span v-if="attacks[0].price">
+				<strong>$ {{ $price(attacks[0].price * attacks.length) }}</strong>
+				<br>
+				({{ $price(attacks[0].price) }}/ea)
+			</span>
+			<span
+				v-else
+				v-b-tooltip.left
+				title="No price set"
+			>
+				{{ attacks[0].paid ? 'Paid' : 'Unpaid' }}
+			</span>
 		</div>
 		<b-button variant="link">
 			<i class="fas fa-ellipsis-v" />

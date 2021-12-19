@@ -2,19 +2,8 @@
 
 ## 1. Reimplement V1 features
 
-- condensed font
-- log item design:
-	- how about gaining inspiration from stocks3?
-	- cols:
-		- count
-		- timestamps (2 row)
-		- event (2 row) - this is the variable length one
-		- price (2 row)
-		- options
-	- on mobile:
-		- only display attacks[0] timestamp
-		- only display total price
-		- event can be reduced to the player only - we can add list header to tell what we are listing
+- log item design: reduce redundancy with components and conditional <br>s
+- add list header: "Incoming/outgoing losses/escapes"
 - contract grouping
 - log list paging: where? maybe just a "show more?" (+10) at the end + a default item count in settings?
 - log list controls: some of them can be combined into a dropdown on really small screens
