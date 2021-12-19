@@ -17,7 +17,7 @@
 				v-for="i in items"
 				v-else
 				:key="i.code || i.group"
-				class="list-group-item"
+				class="list-group-item pl-2 pr-1"
 			>
 				<LogListItem :attacks="i" />
 			</li>

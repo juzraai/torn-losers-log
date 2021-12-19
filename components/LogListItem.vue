@@ -1,89 +1,58 @@
 <template>
 	<div
 		v-if="attacks[0]"
-		class="d-flex align-items-center gap"
+		class="align-items-center d-flex gap"
 	>
-		<div
-			v-if="group !== 'event'"
-			class="font-weight-bold lead text-right"
-			style="min-width: 45px;"
-		>
-			{{ attacks.length }}x
-		</div>
-		<div
-			class="d-none d-md-block text-muted"
-			style="min-width: 200px;"
-		>
-			{{ $timestamp(attacks[0].timestamp_ended) }}
-			<span v-if="attacks.length > 1">
-				<br>
-				{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
-			</span>
-		</div>
-		<div class="d-flex flex-column flex-grow-1">
-			<div class="d-md-none small text-muted">
-				{{ $timestamp(attacks[0].timestamp_ended) }}
+		<!-- xs & sm -->
+		<div class="d-flex d-md-none flex-column flex-grow-1">
+			<div class="font-weight-bold">
+				{{ attacks.length }}x
+				<Player
+					link
+					:xid="xid"
+				/>
 			</div>
-			<div>
-				<span v-if="role === 'attacker'">
-					<span class="d-none d-md-inline">
-						You
-						{{ attacks[0].result === 'Lost' ? 'lost to' : 'escaped from' }}
-						<br>
-					</span>
-					<Player
-						class="font-weight-bold"
-						link
-						:xid="attacks[0].defender_id"
-					/>
-				</span>
-				<span v-else>
-					<Player
-						class="font-weight-bold"
-						link
-						:xid="attacks[0].attacker_id"
-					/>
-					<span class="d-none d-md-inline">
-						<br>
-						{{ attacks[0].result === 'Lost' ? 'lost to' : 'escaped from' }}
-						you
-					</span>
-				</span>
+			<div style="font-size: 90%;">
+				<span class="d-sm-none text-muted">{{ $timestamp(attacks[0].timestamp_ended).replace(/^\w+ |\/\d+$/g, '') }} |</span>
+				<span class="d-none d-sm-inline text-muted">{{ $timestamp(attacks[0].timestamp_ended) }} |</span>
+				<LogItemPrice :attacks="attacks" />
+			</div>
+		</div>
+
+		<!-- md and up -->
+		<div class="align-items-center d-none d-md-flex flex-grow-1 gap">
+			<div
+				v-if="group !== 'event'"
+				class="font-weight-bold lead text-right"
+				style="min-width: 45px;"
+				v-text="`${attacks.length}x`"
+			/>
+			<div
+				class="d-flex flex-column text-muted"
+				style="min-width: 200px;"
+			>
+				<div>{{ $timestamp(attacks[0].timestamp_ended) }}</div>
+				<div v-if="attacks.length > 1">
+					{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
+				</div>
 			</div>
 			<div
-				class="d-md-none small"
-				:class="attacks[0].paid ? 'text-success' : 'text-danger'"
+				class="d-flex flex-grow-1"
+				:class="role === 'attacker' ? 'flex-column' : 'flex-column-reverse'"
 			>
-				<span v-if="attacks[0].price">
-					<strong>$ {{ $price(attacks[0].price * attacks.length) }}</strong>
-					({{ $price(attacks[0].price) }}/ea)
-				</span>
-				<span
-					v-else
-					v-b-tooltip.left
-					title="No price set"
-				>
-					{{ attacks[0].paid ? 'Paid' : 'Unpaid' }}
-				</span>
+				<div>{{ phrase }}</div>
+				<Player
+					class="font-weight-bold"
+					link
+					:xid="xid"
+				/>
 			</div>
+			<LogItemPrice
+				:attacks="attacks"
+				class="text-right"
+			/>
 		</div>
-		<div
-			class="d-none d-md-block text-right"
-			:class="attacks[0].paid ? 'text-success' : 'text-danger'"
-		>
-			<span v-if="attacks[0].price">
-				<strong>$ {{ $price(attacks[0].price * attacks.length) }}</strong>
-				<br>
-				({{ $price(attacks[0].price) }}/ea)
-			</span>
-			<span
-				v-else
-				v-b-tooltip.left
-				title="No price set"
-			>
-				{{ attacks[0].paid ? 'Paid' : 'Unpaid' }}
-			</span>
-		</div>
+
 		<b-button variant="link">
 			<i class="fas fa-ellipsis-v" />
 		</b-button>
@@ -101,6 +70,16 @@ export default {
 	},
 	computed: {
 		...mapState('log', ['group', 'role']),
+		phrase() {
+			const action =
+				this.attacks[0].result === 'Lost' ? 'lost to' : 'escaped from';
+			return this.role === 'attacker' ? `You ${action}` : `${action} you`;
+		},
+		xid() {
+			return this.role === 'attacker'
+				? this.attacks[0].defender_id
+				: this.attacks[0].attacker_id;
+		},
 	},
 };
 </script>
