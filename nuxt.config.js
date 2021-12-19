@@ -47,6 +47,11 @@ export default {
 	css: [
 		'@/assets/style.scss'
 	],
+	dayjs: {
+		plugins: [
+			'utc',
+		],
+	},
 	head: {
 		title: 'TLL',
 		titleTemplate: '%s | TLL',
@@ -76,8 +81,10 @@ export default {
 	modules: [
 		'bootstrap-vue/nuxt',
 		'@nuxtjs/axios',
+		'@nuxtjs/dayjs',
 	],
 	plugins: [
+		'@/plugins/formatters.client.js',
 		'@/plugins/init.client.js',
 		'@/plugins/storage.client.js',
 		'@/plugins/timeago.js',
