@@ -1,5 +1,9 @@
 import Dexie from 'dexie';
 import TORN from './torn';
+// eslint-disable-next-line no-unused-vars
+import { TLLAttack } from '@/models/Attack';
+// eslint-disable-next-line no-unused-vars
+import Player from '@/models/Player';
 
 let db = null;
 
@@ -15,17 +19,29 @@ export default {
 		// Docs: https://dexie.org/docs/Version/Version.stores()
 	},
 
+	/**
+	 * @param {TLLAttack[]} attacks
+	 * @returns {Promise}
+	 */
 	addAttacks(attacks) {
 		return db.attacks.bulkAdd(attacks);
 	},
 
 	/**
-	 * @param {{ id: Number, name: String }[]} players
+	 * @param {Player[]} players
+	 * @returns {Promise}
 	 */
 	addPlayers(players) {
 		return db.players.bulkPut(players);
 	},
 
+	/**
+	 * @param {Number} attacker
+	 * @param {Number} defender
+	 * @param {String} result
+	 * @param {Boolean} includePaid
+	 * @returns {Function<TLLAttack, Boolean>}
+	 */
 	attackFilter(attacker, defender, result, includePaid) {
 		return a =>
 			!TORN.NPCs.includes(a.attacker_id) &&
@@ -36,6 +52,15 @@ export default {
 			(!a.paid || includePaid);
 	},
 
+	/**
+	 * @param {String} key
+	 * @param {Number} attacker
+	 * @param {Number} defender
+	 * @param {String} result
+	 * @param {Boolean} includePaid
+	 * @param {Number} limit
+	 * @returns {Dexie.Collection}
+	 */
 	attacksQuery(key, attacker, defender, result, includePaid, limit) {
 		return db.attacks
 			.orderBy(key)
@@ -44,10 +69,24 @@ export default {
 			.limit(limit);
 	},
 
+	/**
+	 * @param {String} key
+	 * @param {Number} attacker
+	 * @param {Number} defender
+	 * @param {String} result
+	 * @param {Boolean} includePaid
+	 * @param {Number} limit
+	 * @returns {Promise<TLLAttack[]>}
+	 */
 	getAttacks(key, attacker, defender, result, includePaid, limit) {
 		return this.attacksQuery(key, attacker, defender, result, includePaid, limit).toArray();
 	},
 
+	/**
+	 * @param {String} keyPath
+	 * @param {Number} key
+	 * @returns {Promise<TLLAttack[]>}
+	 */
 	async getAttacksForKey(keyPath, key) {
 		const attacks = await db.attacks.where(keyPath).equals(key).toArray();
 		return attacks.sort((a, b) => b.timestamp_ended - a.timestamp_ended); // desc
@@ -55,12 +94,17 @@ export default {
 
 	/**
 	 * @param {Number} id
-	 * @returns {{ id: Number, name: String }}
+	 * @returns {Promise<Player>}
 	 */
 	getPlayer(id) {
 		return db.players.get(id);
 	},
 
+	/**
+	 * @param {TLLAttack} a
+	 * @param {TLLAttack} b
+	 * @returns {Boolean}
+	 */
 	isSameSession(a, b) {
 		return a.attacker_id === b.attacker_id &&
 			a.defender_id === b.defender_id &&
@@ -68,7 +112,15 @@ export default {
 			a.price === b.price;
 	},
 
+	/**
+	 * @param {Number} attacker
+	 * @param {Number} defender
+	 * @param {String} result
+	 * @param {Number} minTs
+	 * @returns {Promise}
+	 */
 	async updateSessions(attacker, defender, result, minTs) {
+		console.time('[TLL] Updated sessions in');
 		if (!minTs) {
 			// oldest attack where session=0
 			const first = await db.attacks
@@ -94,6 +146,7 @@ export default {
 				a.session = this.isSameSession(a, prev) ? prev.session : a.timestamp_ended;
 				last = a;
 			});
+		console.timeEnd('[TLL] Updated sessions in');
 	},
 
 };

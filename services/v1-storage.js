@@ -5,6 +5,8 @@
 */
 
 import LZString from 'lz-string';
+// eslint-disable-next-line no-unused-vars
+import V1Store from '@/models/V1Store';
 
 const LOCAL_STORAGE_KEY = 'store';
 
@@ -14,7 +16,7 @@ export default {
 	},
 
 	/**
-	 * @return {{ apiKey: String, dark: Boolean, lastUpdate: Number, losses: { code: String, defender_id: Number, paid: Boolean, price: Number, timestamp_ended: Number }[], names: Object<Number, String>, paidUntil: Object<Number, Number>, playerId: Number, prices: Object<Number,{ timestamp: Number, price: Number }[]> }}
+	 * @returns {V1Store}
 	 */
 	load() {
 		const json = this.loadRaw();
@@ -24,6 +26,9 @@ export default {
 		return false;
 	},
 
+	/**
+	 * @returns {String}
+	 */
 	loadRaw() {
 		const lz = localStorage.getItem(LOCAL_STORAGE_KEY);
 		if (lz) {
@@ -32,8 +37,11 @@ export default {
 		return false;
 	},
 
-	save(object) {
-		const json = JSON.stringify(object);
+	/**
+	 * @param {V1Store} store
+	 */
+	save(store) {
+		const json = JSON.stringify(store);
 		const lz = LZString.compressToUTF16(json);
 		localStorage.setItem(LOCAL_STORAGE_KEY, lz);
 	},

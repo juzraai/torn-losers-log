@@ -1,8 +1,17 @@
 # v2 TODOs
 
+- live search:
+	- input for player name or ID
+	- runs search in players db -> ID list
+	- filters for defender/attacker ID (in attacker/defender mode)
+- name resolver service:
+	- init from init.client.js
+	- setInterval, 5s
+	- find (somehow) 1 unresolved player ID
+	- resolve it
 - contract grouping: need another key, like `contract`? (then rename `group` to `session`)
 - log items:
-	- group mode: show events in collapsible (or modal?)
+	- group mode: show events in collapsible (or modal with event mode list items?)
 - log paging
 	- where?
 	- maybe just add a "Show more" on the bottom to get +10 items
@@ -19,4 +28,4 @@
 - log controls:
 	- show hidden (default false) (checkbox) icon???
 	- on mobile, some buttons can go into a dropdown button
-- will need an auto name resolver mechanism: like every 2secs a scheduled thing grabs an unresolved name from db and fetches the name from API
+

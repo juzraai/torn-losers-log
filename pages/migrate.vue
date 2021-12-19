@@ -36,6 +36,7 @@ export default {
 			}
 
 			console.log('[TLL] Migrating V1 store...');
+			console.time('[TLL] Migrating of V1 store finished in');
 
 			this.SET_API_KEY(v1.apiKey);
 			this.SET_DARK_MODE(v1.dark);
@@ -51,8 +52,6 @@ export default {
 			});
 			await DB.addPlayers(importedPlayers);
 
-			v1.losses.sort((a, b) => a.timestamp_ended - b.timestamp_ended);
-
 			for (let i = 0; i < v1.losses.length; i++) {
 				const a = v1.losses[i];
 				delete a.oldest; // no need for this
@@ -67,7 +66,7 @@ export default {
 
 			v1Storage.clear();
 
-			console.log('[TLL] Migrating of V1 store finished');
+			console.timeEnd('[TLL] Migrating of V1 store finished in');
 		},
 	},
 };

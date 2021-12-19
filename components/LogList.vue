@@ -67,14 +67,14 @@ export default {
 		async query() {
 			// TODO limit & offset setting (NOT in store, just here on page), pass to query methods
 			this.SET_LOADING(true);
-			console.time('QUERY');
+			console.time('[TLL] LogList query runtime:');
 			if (this.group === 'event') {
 				await this.eventQuery();
 			} else {
 				// session|contract
 				await this.groupedQuery(this.group);
 			}
-			console.timeEnd('QUERY');
+			console.timeEnd('[TLL] LogList query runtime:');
 			this.SET_LOADING(false);
 		},
 		async eventQuery() {

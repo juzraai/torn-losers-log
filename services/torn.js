@@ -1,5 +1,12 @@
+// eslint-disable-next-line no-unused-vars
+import { TornAttack, TornAttackWithNames } from '@/models/Attack';
+
 let $axios = null;
 
+/**
+ * @param {String} apiKey
+ * @param {String} request Route and querystring, starting with slash
+ */
 function tornApiCall(apiKey, request) {
 	if (!$axios) {
 		throw new Error('Call init($axios) first!');
@@ -18,7 +25,7 @@ export default {
 
 	/**
 	 * @param {String} apiKey
-	 * @returns {{attacker_id: Number, attacker_name: String, code: String, defender_id: Number, defender_name: String, result: String, timestamp_ended: Number}[]}
+	 * @returns {Promise<TornAttackWithNames[]>}
 	 */
 	async attacks(apiKey) {
 		const res = await tornApiCall(apiKey, '/user/?selections=attacks');
@@ -27,7 +34,7 @@ export default {
 
 	/**
 	 * @param {String} apiKey
-	 * @returns {{attacker_id: Number, code: String, defender_id: Number, result: String, timestamp_ended: Number}[]}
+	 * @returns {Promise<TornAttack[]>}
 	 */
 	async attacksfull(apiKey) {
 		const res = await tornApiCall(apiKey, '/user/?selections=attacksfull');
@@ -37,7 +44,7 @@ export default {
 	/**
 	 * @param {String} apiKey
 	 * @param {Number} playerId
-	 * @returns {{ level: Number, name: String, player_id: Number }}
+	 * @returns {Promise<{ level: Number, name: String, player_id: Number }>}
 	 */
 	basic(apiKey, playerId) {
 		return tornApiCall(apiKey, `/user/${playerId || ''}?selections=basic`);
