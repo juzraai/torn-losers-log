@@ -2,8 +2,6 @@
 
 ## 1. Reimplement V1 features
 
-- log item design: reduce redundancy with components and conditional <br>s
-- add list header: "Incoming/outgoing losses/escapes"
 - contract grouping
 - log list paging: where? maybe just a "show more?" (+10) at the end + a default item count in settings?
 - log list controls: some of them can be combined into a dropdown on really small screens

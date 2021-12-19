@@ -2,6 +2,7 @@
 	background-color: $dark-body-bg;
 	color: $dark-body-color;
 
+	.list-group-item a,
 	p a {
 		color: white;
 	}
@@ -37,5 +38,9 @@
 		background-color: $dark-input-bg;
 		border-color: $dark-input-border-color;
 		color: $dark-input-color;
+	}
+
+	.text-muted {
+		color: $dark-text-muted !important;
 	}
 }
