@@ -42,6 +42,7 @@ export default {
 	},
 	buildModules: [
 		'@nuxtjs/eslint-module',
+		'@nuxtjs/google-fonts'
 	],
 	components: true,
 	css: [
@@ -74,6 +75,12 @@ export default {
 			}
 		],
 		// TODO favicon, fonts, rewrite description
+	},
+	googleFonts: {
+		display: 'swap',
+		families: {
+			'Roboto+Condensed': [400, 700],
+		},
 	},
 	loading: {
 		color: '#007bff', // $primary
