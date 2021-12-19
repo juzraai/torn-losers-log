@@ -1,5 +1,41 @@
 # v2 TODOs
 
+## 1. Reimplement V1 features
+
+- contract grouping
+- log list paging: where? maybe just a "show more?" (+10) at the end + a default item count in settings?
+- log list controls: some of them can be combined into a dropdown on really small screens
+- log items in group mode: show events in collapsible (or modal with event mode list items with full functionality?)
+- paid/unpaid logic
+- set price logic
+- refresh logic
+	- call group ID update mechanism
+	- call attacks+attacksfull too, to resolve names automatically
+- settings page
+	- show database metrics, record count, timespan
+	- export/import feature
+	- clear feature
+- import feature should be accessible from the start screens, between migrate and connect
+- charts - where? separate page?
+- changelog display (make it so it splits commit lines into multiple list items: `; ` -> `\n- `)
+- new version notifier
+- forum thread alert, above 1500 attack records
+- **at the end** remove old code
+- merge to main with commit message:
+
+```md
+feat: added handling of escapes; added handling of incoming attacks; added auto name resolving; redesigned UI is better optimized for smaller screens; [...]
+
+BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest change is that it now uses IndexedDB to store attacks and resolved names.
+```
+
+
+## 2. Implement new features
+
+- hiding feature
+	- hide attack / hide user
+	- this should exclude attacks from groups, charts, counts
+	- need another checkbox in log controls to "Show hidden"
 - live search:
 	- input for player name or ID
 	- runs search in players db -> ID list
@@ -9,23 +45,4 @@
 	- setInterval, 5s
 	- find (somehow) 1 unresolved player ID
 	- resolve it
-- contract grouping: need another key, like `contract`? (then rename `group` to `session`)
-- log items:
-	- group mode: show events in collapsible (or modal with event mode list items?)
-- log paging
-	- where?
-	- maybe just add a "Show more" on the bottom to get +10 items
-- paid/unpaid logic
-- set price logic
-- settings page
-	- show database metrics, record count, timespan
-	- API key change - verify player ID!
-	- export/import feature
-	- clear feature
-- import feature should be accessible from the start screens, between migrate and connect
-- refresh logic - watch out for group ID generation!
-- charts - where? separate page?
-- log controls:
-	- show hidden (default false) (checkbox) icon???
-	- on mobile, some buttons can go into a dropdown button
-
+- API key change feature in settings - verify player ID!
