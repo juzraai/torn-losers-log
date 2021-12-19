@@ -39,7 +39,7 @@
 				<br>
 				<small :class="attacks[0].paid ? 'text-success' : 'text-danger'">
 					<span v-if="attacks[0].price">
-						${{ attacks[0].price * attacks.length }} (${{ attacks[0].price }} each)
+						$ {{ $price(attacks[0].price * attacks.length) }} ({{ $price(attacks[0].price) }} each)
 					</span>
 					<span v-else>
 						{{ attacks[0].paid ? 'Paid' : 'Unpaid' }}
