@@ -113,6 +113,38 @@ export default {
 	},
 
 	/**
+	 * @param {TLLAttack[]} attacks
+	 * @returns {Promise}
+	 */
+	async markPaidUntil(attacks) {
+		const current = attacks[0];
+		await db.attacks
+			.where('timestamp_ended')
+			.belowOrEqual(current.timestamp_ended)
+			.filter(this.attackFilter(current.attacker_id, current.defender_id, current.result, false))
+			.modify(a => {
+				a.paid = true;
+			});
+		await this.updateSessions(current.attacker_id, current.defender_id, current.result, current.session);
+	},
+
+	/**
+	 * @param {TLLAttack[]} attacks
+	 * @returns {Promise}
+	 */
+	async markUnpaidFrom(attacks) {
+		const current = attacks[0];
+		await db.attacks
+			.where('timestamp_ended')
+			.aboveOrEqual(current.timestamp_ended)
+			.filter(this.attackFilter(current.attacker_id, current.defender_id, current.result, true))
+			.modify(a => {
+				a.paid = false;
+			});
+		await this.updateSessions(current.attacker_id, current.defender_id, current.result, current.session);
+	},
+
+	/**
 	 * @param {Number} attacker
 	 * @param {Number} defender
 	 * @param {String} result

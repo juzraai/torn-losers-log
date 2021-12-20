@@ -35,6 +35,7 @@
 				<div v-if="attacks.length > 1">
 					{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
 				</div>
+				<div class="text-danger">{{ attacks[0].session % 10000 }}</div>
 			</div>
 			<div
 				class="d-flex flex-grow-1"
@@ -53,14 +54,36 @@
 			/>
 		</div>
 
-		<b-button variant="link">
-			<i class="fas fa-ellipsis-v" />
-		</b-button>
+		<b-dropdown
+			dropleft
+			no-caret
+			variant="link"
+		>
+			<template #button-content>
+				<i class="fas fa-ellipsis-v" />
+			</template>
+			<b-dropdown-item-button
+				v-if="attacks[0].paid"
+				@click="markUnpaidFrom"
+			>
+				Mark this and newer attacks<br>
+				of this player as <strong class="text-danger">unpaid</strong>
+			</b-dropdown-item-button>
+			<b-dropdown-item-button
+				v-else
+				@click="markPaidUntil"
+			>
+				Mark this and older attacks<br>
+				of this player as <strong class="text-success">paid</strong>
+			</b-dropdown-item-button>
+		</b-dropdown>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import DB from '@/services/database';
+
 export default {
 	props: {
 		attacks: {
@@ -79,6 +102,14 @@ export default {
 			return this.role === 'attacker'
 				? this.attacks[0].defender_id
 				: this.attacks[0].attacker_id;
+		},
+	},
+	methods: {
+		markPaidUntil() {
+			DB.markPaidUntil(this.attacks);
+		},
+		markUnpaidFrom() {
+			DB.markUnpaidFrom(this.attacks);
 		},
 	},
 };

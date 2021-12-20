@@ -2,11 +2,11 @@
 
 ## 1. Reimplement V1 features
 
+- paid/unpaid logic - **refresh list**
 - contract grouping
 - log list paging: where? maybe just a "show more?" (+10) at the end + a default item count in settings?
 - log list controls: some of them can be combined into a dropdown on really small screens
 - log items in group mode: show events in collapsible (or modal with event mode list items with full functionality?)
-- paid/unpaid logic
 - set price logic
 - price format with suffixes (K/M/B)
 - refresh logic
@@ -38,8 +38,9 @@ BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest cha
 	- this should exclude attacks from groups, charts, counts
 	- need another checkbox in log controls to "Show hidden"
 - live search:
+	- https://www.npmjs.com/package/vue-typeahead-bootstrap
 	- input for player name or ID
-	- runs search in players db -> ID list
+	- selects ONE player from dropdown
 	- filters for defender/attacker ID (in attacker/defender mode)
 - name resolver service:
 	- init from init.client.js

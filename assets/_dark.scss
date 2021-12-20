@@ -34,6 +34,22 @@
 		background-color: $dark-card-bg;
 	}
 
+	.dropdown-menu {
+		background-color: $dark-dropdown-bg;
+
+		button {
+			color: $light;
+		}
+
+		button:hover,
+		button:focus,
+		.dropdown-item:hover,
+		.dropdown-item:focus {
+			background-color: $dark-dropdown-link-hover-bg;
+			color: white;
+		}
+	}
+
 	input.form-control {
 		background-color: $dark-input-bg;
 		border-color: $dark-input-border-color;

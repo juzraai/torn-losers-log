@@ -29,6 +29,8 @@ export default {
 			'BButton',
 			'BButtonGroup',
 			'BOverlay',
+			'BDropdown',
+			'BDropdownItemButton',
 			'BFormGroup',
 			'BFormInput',
 			// 'BFormRadioGroup',
