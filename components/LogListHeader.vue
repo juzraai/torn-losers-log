@@ -1,8 +1,18 @@
 <template>
 	<div class="d-flex p-2 px-lg-3">
-		<div class="flex-grow-1 font-weight-bold">
-			{{ role === 'attacker' ? 'Outgoing' : 'Incoming' }}
-			{{ result === 'Lost' ? 'losses' : 'escapes' }}
+		<div class="d-flex flex-column flex-grow-1 ">
+			<strong>
+				{{ role === 'attacker' ? 'Outgoing' : 'Incoming' }}
+				{{ paid ? '' : 'unpaid' }}
+				{{ result === 'Lost' ? 'losses' : 'escapes' }}
+			</strong>
+			<small class="text-muted">
+				updated
+				<timeago
+					:auto-update="10"
+					:datetime="lastUpdated"
+				/>
+			</small>
 		</div>
 		<div
 			v-if="unpaid"
@@ -23,7 +33,7 @@ export default {
 		unpaid: 0,
 	}),
 	computed: {
-		...mapState('log', ['result', 'role']),
+		...mapState('log', ['lastUpdated', 'paid', 'result', 'role']),
 		...mapState('settings', ['playerId']),
 		updateTrigger() {
 			return [this.result, this.role].join(';');

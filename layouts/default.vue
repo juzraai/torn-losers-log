@@ -5,7 +5,7 @@
 	>
 		<div class="d-flex flex-column h-full">
 			<Navbar />
-			<div class="flex-grow-1 py-3 py-md-5">
+			<div class="flex-grow-1 py-3 py-md-4">
 				<Nuxt />
 			</div>
 		</div>
