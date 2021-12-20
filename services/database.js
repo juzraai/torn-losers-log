@@ -131,9 +131,7 @@ export default {
 				minTs = Math.min(minTs, a.timestamp_ended);
 			});
 
-		const a = role === 'attacker' ? current.attacker_id : null;
-		const d = role === 'attacker' ? null : current.defender_id;
-		await this.updateSessions(a, d, current.result, minTs);
+		await this.updateSessions(role, current[role + '_id'], current.result, minTs);
 	},
 
 	/**
@@ -142,6 +140,7 @@ export default {
 	 */
 	async markUnpaidFrom(attacks, role) {
 		const current = attacks[0];
+
 		await db.attacks
 			.where('timestamp_ended')
 			.aboveOrEqual(attacks.length === 1 ? current.timestamp_ended : current.session)
@@ -150,19 +149,23 @@ export default {
 				a.paid = false;
 			});
 
-		const a = role === 'attacker' ? current.attacker_id : null;
-		const d = role === 'attacker' ? null : current.defender_id;
-		await this.updateSessions(a, d, current.result, current.session);
+		await this.updateSessions(role, current[role + '_id'], current.result, current.session);
 	},
 
+	// TODO contracts will be with attacker, defender args tho
+
 	/**
-	 * @param {Number} attacker
-	 * @param {Number} defender
+	 * @param {String} role
+	 * @param {Number} playerId
 	 * @param {String} result
 	 * @param {Number} minTs
 	 * @returns {Promise}
 	 */
-	async updateSessions(attacker, defender, result, minTs) {
+	async updateSessions(role, playerId, result, minTs) {
+		const r = { attacker: null, defender: null };
+		r[role] = playerId;
+		const { attacker, defender } = r;
+
 		console.time('[TLL] Updated sessions in');
 		if (!minTs) {
 			// oldest attack where session=0
