@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import DB from '@/services/database';
 
 export default {
@@ -105,11 +105,18 @@ export default {
 		},
 	},
 	methods: {
+		...mapMutations('ui', ['SET_LOADING']),
 		markPaidUntil() {
+			this.SET_LOADING(true);
 			DB.markPaidUntil(this.attacks);
+			this.$emit('attacksUpdated');
+			this.SET_LOADING(false);
 		},
 		markUnpaidFrom() {
+			this.SET_LOADING(true);
 			DB.markUnpaidFrom(this.attacks);
+			this.$emit('attacksUpdated');
+			this.SET_LOADING(false);
 		},
 	},
 };
