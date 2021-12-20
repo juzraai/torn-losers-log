@@ -12,6 +12,7 @@
 		<Footer />
 		<b-overlay
 			class="position-fixed"
+			no-fade
 			no-wrap
 			:show="loading"
 			spinner-variant="white"

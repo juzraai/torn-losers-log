@@ -32,10 +32,9 @@
 				style="min-width: 200px;"
 			>
 				<div>{{ $timestamp(attacks[0].timestamp_ended) }}</div>
-				<!--<div v-if="attacks.length > 1">
+				<div v-if="attacks.length > 1">
 					{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
-				</div>-->
-				<div class="text-danger">{{ attacks[0].session % 10000 }}</div>
+				</div>
 			</div>
 			<div
 				class="d-flex flex-grow-1"

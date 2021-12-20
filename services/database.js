@@ -121,23 +121,19 @@ export default {
 	async markPaidUntil(attacks, role) {
 		const current = attacks[0];
 
-		const last = await db.attacks
-			.where('timestamp_ended')
-			.belowOrEqual(current.timestamp_ended)
-			.filter(a => this.attackFilter(current.attacker_id, current.defender_id, current.result, false)(a) && !a.paid)
-			.first();
-
+		let minTs = current.session;
 		await db.attacks
 			.where('timestamp_ended')
 			.belowOrEqual(current.timestamp_ended)
 			.filter(this.attackFilter(current.attacker_id, current.defender_id, current.result, false))
 			.modify(a => {
 				a.paid = true;
+				minTs = Math.min(minTs, a.timestamp_ended);
 			});
 
 		const a = role === 'attacker' ? current.attacker_id : null;
 		const d = role === 'attacker' ? null : current.defender_id;
-		await this.updateSessions(a, d, current.result, last?.timestamp_ended || 1);
+		await this.updateSessions(a, d, current.result, minTs);
 	},
 
 	/**
