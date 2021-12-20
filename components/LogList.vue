@@ -17,7 +17,7 @@
 				v-for="attacks in items"
 				v-else
 				:key="`${attacks[0].code}/${attacks[0].session}`"
-				class="list-group-item pl-2 pr-1"
+				class="list-group-item pl-2 pl-lg-3 pr-1"
 			>
 				<LogListItem
 					:attacks="attacks"
