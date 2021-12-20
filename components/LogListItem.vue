@@ -1,81 +1,92 @@
 <template>
-	<div
-		v-if="attacks[0]"
-		class="align-items-center d-flex gap"
-	>
+	<div v-if="attacks[0]">
 		<!-- xs & sm -->
-		<div class="d-flex d-md-none flex-column flex-grow-1">
-			<div class="font-weight-bold">
-				{{ attacks.length }}x
-				<Player
-					link
-					:xid="xid"
-				/>
-			</div>
-			<div style="font-size: 90%;">
-				<span class="d-sm-none text-muted">{{ $timestamp(attacks[0].timestamp_ended).replace(/^\w+ |\/\d+$/g, '') }} |</span>
-				<span class="d-none d-sm-inline text-muted">{{ $timestamp(attacks[0].timestamp_ended) }} |</span>
-				<LogItemPrice :attacks="attacks" />
-			</div>
+		<div class="d-flex d-md-none flex-grow-1">
+			<LogItemCell grow>
+				<div class="d-flex flex-column">
+					<div class="font-weight-bold">
+						<span v-if="group !== 'event'">{{ attacks.length }}x</span>
+						<Player
+							link
+							:xid="xid"
+						/>
+					</div>
+					<div style="font-size: 90%;">
+						<span class="d-sm-none text-muted">{{ $timestamp(attacks[0].timestamp_ended).replace(/^\w+ |\/\d+$/g, '') }} |</span>
+						<span class="d-none d-sm-inline text-muted">{{ $timestamp(attacks[0].timestamp_ended) }} |</span>
+						<LogItemPrice :attacks="attacks" />
+					</div>
+				</div>
+			</LogItemCell>
+			<b-dropdown
+				dropleft
+				no-caret
+				variant="link"
+			>
+				<template #button-content>
+					<i class="fas fa-ellipsis-v" />
+				</template>
+				<b-dropdown-item-button
+					v-if="attacks[0].paid"
+					@click="markUnpaidFrom"
+				>
+					Mark this and newer attacks<br>
+					of this player as <strong class="text-danger">unpaid</strong>
+				</b-dropdown-item-button>
+				<b-dropdown-item-button
+					v-else
+					@click="markPaidUntil"
+				>
+					Mark this and older attacks<br>
+					of this player as <strong class="text-success">paid</strong>
+				</b-dropdown-item-button>
+			</b-dropdown>
 		</div>
 
 		<!-- md and up -->
-		<div class="align-items-center d-none d-md-flex flex-grow-1 gap">
-			<div
-				v-if="group !== 'event'"
-				class="font-weight-bold lead text-right"
-				style="min-width: 45px;"
-				v-text="`${attacks.length}x`"
-			/>
-			<div
-				class="d-flex flex-column text-muted"
-				style="min-width: 200px;"
-			>
-				<div>{{ $timestamp(attacks[0].timestamp_ended) }}</div>
-				<div v-if="attacks.length > 1">
-					{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
-				</div>
-			</div>
-			<div
-				class="d-flex flex-grow-1"
-				:class="role === 'attacker' ? 'flex-column' : 'flex-column-reverse'"
-			>
-				<div>{{ phrase }}</div>
-				<Player
-					class="font-weight-bold"
-					link
-					:xid="xid"
+		<div class="d-none d-md-flex flex-grow-1">
+			<LogItemCell clickable>
+				<div
+					v-if="group !== 'event'"
+					class="font-weight-bold lead text-right"
+					style="min-width: 45px;"
+					v-text="`${attacks.length}x`"
 				/>
-			</div>
-			<LogItemPrice
+				<div
+					class="d-flex flex-column text-muted"
+					style="min-width: 200px;"
+				>
+					<div>{{ $timestamp(attacks[0].timestamp_ended) }}</div>
+					<div v-if="attacks.length > 1">
+						{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
+					</div>
+				</div>
+			</LogItemCell>
+			<LogItemCell grow>
+				<div
+					class="d-flex"
+					:class="role === 'attacker' ? 'flex-column' : 'flex-column-reverse'"
+				>
+					<div>{{ phrase }}</div>
+					<Player
+						class="font-weight-bold"
+						link
+						:xid="xid"
+					/>
+				</div>
+			</LogItemCell>
+			<LogItemCell clickable>
+				<LogItemPrice
+					:attacks="attacks"
+					class="text-right"
+					style="min-width: 100px;"
+				/>
+			</LogItemCell>
+			<LogItemPaidButton
 				:attacks="attacks"
-				class="text-right"
+				@click="togglePaid"
 			/>
 		</div>
-
-		<b-dropdown
-			dropleft
-			no-caret
-			variant="link"
-		>
-			<template #button-content>
-				<i class="fas fa-ellipsis-v" />
-			</template>
-			<b-dropdown-item-button
-				v-if="attacks[0].paid"
-				@click="markUnpaidFrom"
-			>
-				Mark this and newer attacks<br>
-				of this player as <strong class="text-danger">unpaid</strong>
-			</b-dropdown-item-button>
-			<b-dropdown-item-button
-				v-else
-				@click="markPaidUntil"
-			>
-				Mark this and older attacks<br>
-				of this player as <strong class="text-success">paid</strong>
-			</b-dropdown-item-button>
-		</b-dropdown>
 	</div>
 </template>
 
@@ -116,6 +127,13 @@ export default {
 			await DB.markUnpaidFrom(this.attacks, this.role);
 			this.$emit('attacksUpdated');
 			this.SET_LOADING(false);
+		},
+		togglePaid() {
+			if (this.attacks[0].paid) {
+				this.markUnpaidFrom();
+			} else {
+				this.markPaidUntil();
+			}
 		},
 	},
 };

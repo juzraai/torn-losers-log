@@ -2,8 +2,8 @@
 	<Card>
 		<div class="card-header d-flex py-2">
 			<div class="flex-grow-1 font-weight-bold">
-				{{ this.role === 'attacker' ? 'Incoming' : 'Outgoing' }}
-				{{ this.result === 'Lost' ? 'losses' : 'escapes' }}:
+				{{ role === 'attacker' ? 'Outgoing' : 'Incoming' }}
+				{{ result === 'Lost' ? 'losses' : 'escapes' }}:
 			</div>
 		</div>
 		<ul class="list-group list-group-flush">
@@ -17,7 +17,7 @@
 				v-for="attacks in items"
 				v-else
 				:key="`${attacks[0].code}/${attacks[0].session}`"
-				class="list-group-item pl-2 pl-lg-3 pr-1"
+				class="list-group-item p-0"
 			>
 				<LogListItem
 					:attacks="attacks"
