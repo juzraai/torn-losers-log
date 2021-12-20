@@ -17,6 +17,8 @@ export default {
 		});
 		// Syntax: 'PK,key,key,...'
 		// Docs: https://dexie.org/docs/Version/Version.stores()
+
+		window.DB = this;
 	},
 
 	/**
@@ -116,8 +118,15 @@ export default {
 	 * @param {TLLAttack[]} attacks
 	 * @returns {Promise}
 	 */
-	async markPaidUntil(attacks) {
+	async markPaidUntil(attacks, role) {
 		const current = attacks[0];
+
+		const last = await db.attacks
+			.where('timestamp_ended')
+			.belowOrEqual(current.timestamp_ended)
+			.filter(a => this.attackFilter(current.attacker_id, current.defender_id, current.result, false)(a) && !a.paid)
+			.first();
+
 		await db.attacks
 			.where('timestamp_ended')
 			.belowOrEqual(current.timestamp_ended)
@@ -125,23 +134,29 @@ export default {
 			.modify(a => {
 				a.paid = true;
 			});
-		await this.updateSessions(current.attacker_id, current.defender_id, current.result, current.session);
+
+		const a = role === 'attacker' ? current.attacker_id : null;
+		const d = role === 'attacker' ? null : current.defender_id;
+		await this.updateSessions(a, d, current.result, last?.timestamp_ended || 1);
 	},
 
 	/**
 	 * @param {TLLAttack[]} attacks
 	 * @returns {Promise}
 	 */
-	async markUnpaidFrom(attacks) {
+	async markUnpaidFrom(attacks, role) {
 		const current = attacks[0];
 		await db.attacks
 			.where('timestamp_ended')
-			.aboveOrEqual(current.timestamp_ended)
+			.aboveOrEqual(attacks.length === 1 ? current.timestamp_ended : current.session)
 			.filter(this.attackFilter(current.attacker_id, current.defender_id, current.result, true))
 			.modify(a => {
 				a.paid = false;
 			});
-		await this.updateSessions(current.attacker_id, current.defender_id, current.result, current.session);
+
+		const a = role === 'attacker' ? current.attacker_id : null;
+		const d = role === 'attacker' ? null : current.defender_id;
+		await this.updateSessions(a, d, current.result, current.session);
 	},
 
 	/**
@@ -157,7 +172,7 @@ export default {
 			// oldest attack where session=0
 			const first = await db.attacks
 				.orderBy('timestamp_ended')
-				.filter(a => this.attackFilter(attacker, defender, result, true) && !a.session)
+				.filter(a => this.attackFilter(attacker, defender, result, true)(a) && !a.session)
 				.limit(1)
 				.first();
 			minTs = first ? first.timestamp_ended : 0;
@@ -165,14 +180,17 @@ export default {
 
 		// newest attack before minTs, used as first prev
 		let last = await db.attacks
-			.orderBy('timestamp_ended')
+			.where('timestamp_ended')
+			.below(minTs)
 			.reverse()
-			.filter(a => this.attackFilter(attacker, defender, result, true) && a.timestamp_ended < minTs)
+			.filter(this.attackFilter(attacker, defender, result, true))
 			.limit(1)
 			.first();
+
 		await db.attacks
-			.orderBy('timestamp_ended')
-			.filter(a => this.attackFilter(attacker, defender, result, true) && a.timestamp_ended >= minTs)
+			.where('timestamp_ended')
+			.aboveOrEqual(minTs)
+			.filter(this.attackFilter(attacker, defender, result, true))
 			.modify(a => {
 				const prev = last || a;
 				a.session = this.isSameSession(a, prev) ? prev.session : a.timestamp_ended;

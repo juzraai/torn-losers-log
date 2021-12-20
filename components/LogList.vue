@@ -8,25 +8,19 @@
 		</div>
 		<ul class="list-group list-group-flush">
 			<li
-				v-if="loading"
-				class="list-group-item"
-			>
-				Loading...
-			</li>
-			<li
-				v-else-if="!items.length"
+				v-if="!items.length"
 				class="list-group-item"
 			>
 				{{ notFoundMessage }}
 			</li>
 			<li
-				v-for="i in items"
+				v-for="attacks in items"
 				v-else
-				:key="i.code || i.group"
+				:key="`${attacks[0].code}/${attacks[0].session}`"
 				class="list-group-item pl-2 pr-1"
 			>
 				<LogListItem
-					:attacks="i"
+					:attacks="attacks"
 					@attacksUpdated="query"
 				/>
 			</li>

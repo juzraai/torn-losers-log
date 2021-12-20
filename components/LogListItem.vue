@@ -32,9 +32,9 @@
 				style="min-width: 200px;"
 			>
 				<div>{{ $timestamp(attacks[0].timestamp_ended) }}</div>
-				<div v-if="attacks.length > 1">
+				<!--<div v-if="attacks.length > 1">
 					{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
-				</div>
+				</div>-->
 				<div class="text-danger">{{ attacks[0].session % 10000 }}</div>
 			</div>
 			<div
@@ -106,15 +106,15 @@ export default {
 	},
 	methods: {
 		...mapMutations('ui', ['SET_LOADING']),
-		markPaidUntil() {
+		async markPaidUntil() {
 			this.SET_LOADING(true);
-			DB.markPaidUntil(this.attacks);
+			await DB.markPaidUntil(this.attacks, this.role);
 			this.$emit('attacksUpdated');
 			this.SET_LOADING(false);
 		},
-		markUnpaidFrom() {
+		async markUnpaidFrom() {
 			this.SET_LOADING(true);
-			DB.markUnpaidFrom(this.attacks);
+			await DB.markUnpaidFrom(this.attacks, this.role);
 			this.$emit('attacksUpdated');
 			this.SET_LOADING(false);
 		},
