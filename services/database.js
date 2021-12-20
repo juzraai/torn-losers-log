@@ -152,6 +152,30 @@ export default {
 		await this.updateSessions(role, current[role + '_id'], current.result, current.session);
 	},
 
+	/**
+	 * @param {String} role
+	 * @param {Number} playerId
+	 * @param {String} result
+	 * @returns {Promise<Number>}
+	 */
+	async sumOfUnpaid(role, playerId, result) {
+		const r = { attacker: null, defender: null };
+		r[role] = playerId;
+		const { attacker, defender } = r;
+
+		let sum = 0;
+		console.time('[TLL] Summed unpaids in');
+		await db.attacks
+			.where('result')
+			.equals(result)
+			.filter(this.attackFilter(attacker, defender, result, false))
+			.each(a => {
+				sum += a.price;
+			});
+		console.timeEnd('[TLL] Summed unpaids in');
+		return sum;
+	},
+
 	// TODO contracts will be with attacker, defender args tho
 
 	/**

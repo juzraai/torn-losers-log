@@ -1,10 +1,7 @@
 <template>
 	<Card>
-		<div class="card-header d-flex py-2">
-			<div class="flex-grow-1 font-weight-bold">
-				{{ role === 'attacker' ? 'Outgoing' : 'Incoming' }}
-				{{ result === 'Lost' ? 'losses' : 'escapes' }}:
-			</div>
+		<div class="card-header p-0">
+			<LogListHeader />
 		</div>
 		<ul class="list-group list-group-flush">
 			<li
