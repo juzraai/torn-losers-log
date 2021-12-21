@@ -1,5 +1,5 @@
 export const state = () => ({
-	group: 'event',
+	group: 'session',
 	lastUpdated: 0,
 	paid: true,
 	result: 'Lost',
