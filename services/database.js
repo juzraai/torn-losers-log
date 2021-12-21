@@ -64,7 +64,7 @@ export default {
 	 * @returns {Promise}
 	 */
 	addAttacks(role, result, attacks) {
-		return this.table(role, result).bulkAdd(attacks.filter(a => !TORN.NPCs.includes(a.opponentId)));
+		return this.table(role, result).bulkAdd(attacks.filter(a => !TORN.NPCs.includes(a.opponentId))); // don't even store those NPC attacks
 	},
 
 	/**
@@ -167,11 +167,13 @@ export default {
 	 */
 	async sumOfUnpaid(role, result) {
 		let sum = 0;
+		console.time('[TLL] Summed unpaids in');
 		await this.table(role, result)
 			.where('paid').equals(0)
 			.each(a => {
 				sum += a.price;
 			});
+		console.timeEnd('[TLL] Summed unpaids in');
 		return sum;
 	},
 
