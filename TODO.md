@@ -2,10 +2,7 @@
 
 ## 1. Reimplement V1 features
 
-- log list paging:
-	- show (limit+10) / show only (limit+10) buttons
-	- show (limit+10) appears if: items.length === limit
-	- show (limit-10) appears if limit > limit-10 && items.length > limit-10
+- Tiny (21) lost attack is there in my test database - try remigrate
 - contract grouping
 - log list controls on XS:
 	- hide entirely

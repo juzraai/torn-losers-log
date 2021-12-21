@@ -22,6 +22,22 @@
 				/>
 			</li>
 		</ul>
+		<div class="border-top card-footer d-flex justify-content-center py-2">
+			<b-button
+				v-if="limit > 10"
+				class="mx-3"
+				variant="link"
+				@click="limit -= 10"
+				v-text="'-10 entry'"
+			/>
+			<b-button
+				v-if="items.length === limit"
+				class="mx-3"
+				variant="link"
+				@click="limit += 10"
+				v-text="'+10 entry'"
+			/>
+		</div>
 	</Card>
 </template>
 
@@ -46,7 +62,9 @@ export default {
 		},
 		thingsThatTriggerUpdate() {
 			return [
+				//
 				this.group,
+				this.limit,
 				this.paid,
 				this.result,
 				this.role,
@@ -71,7 +89,7 @@ export default {
 				this.result,
 				this.paid,
 				this.group,
-				10
+				this.limit
 			);
 			this.SET_LOADING(false);
 		},
