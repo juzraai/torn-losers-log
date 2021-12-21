@@ -87,7 +87,7 @@ export default {
 	 * @returns {TLLAttack[][]}
 	 */
 	async queryAttacks(role, result, includePaid, grouping, limit) {
-		let r;
+		let r = [];
 
 		// NPCs are excluded when importing, but new NPCs can be
 		// added in the future, hence we filter here too
@@ -104,7 +104,7 @@ export default {
 			r = attacks.map(a => [a]);
 		} else if (grouping === 'session') {
 			const sessions = [];
-			const sessionFilter = s => !s[0].paid || includePaid;
+			const sessionFilter = s => s[0] && (!s[0].paid || includePaid);
 			await query
 				.filter(a => !npcAttack(a))
 				.until(() => sessions.filter(sessionFilter).length > limit)
@@ -119,6 +119,22 @@ export default {
 					}
 				});
 			r = sessions.filter(sessionFilter).slice(0, limit);
+		} else if (grouping === 'contract') {
+			const contracts = [];
+			const contractFilter = c => c[0] && (!c[0].paid || includePaid);
+			await query
+				.filter(a => !npcAttack(a))
+				.until(() => contracts.filter(contractFilter).length > limit)
+				.each(a => {
+					!contracts.length && contracts.push([]);
+					const i = contracts.findIndex(c => c[0] && this.isSameGroup(a, c[0]));
+					if (i > -1) {
+						contracts[i].push(a);
+					} else {
+						contracts.push([a]);
+					}
+				});
+			r = contracts.filter(contractFilter).slice(0, limit);
 		}
 		console.timeEnd(`[TLL] Attack query (${grouping}) completed in`);
 		return r;

@@ -48,11 +48,11 @@ export default {
 				tooltip: 'Sessions',
 				value: 'session',
 			},
-			/* {
+			{
 				icon: 'fas fa-users',
 				tooltip: 'Contracts',
 				value: 'contract',
-			}, */
+			},
 		],
 		paidOptions: [
 			{
