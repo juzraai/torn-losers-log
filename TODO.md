@@ -6,7 +6,6 @@
 	- hide entirely
 	- show hamburger menu (dropdown) on the right side of list header
 - refresh logic
-	- call group ID update mechanism
 	- call attacks+attacksfull too, to resolve names automatically
 - log items in group mode: show events in collapsible (or modal with event mode list items with full functionality?)
 - settings page
