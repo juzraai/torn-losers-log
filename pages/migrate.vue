@@ -4,6 +4,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import {TLLAttack} from '@/models/Attack';
 import DB from '@/services/database';
 import v1Storage from '@/services/v1-storage';
 
@@ -52,17 +53,19 @@ export default {
 			});
 			await DB.addPlayers(importedPlayers);
 
+			// modifying array in-place
 			for (let i = 0; i < v1.losses.length; i++) {
-				const a = v1.losses[i];
-				delete a.oldest; // no need for this
-				a.attacker_id = v1.playerId;
-				a.result = 'Lost'; // v1 only handled "Lost" and "Timeout", without distinction
-				// v1 dumped `paid` and `price` fields too for some reason
-				a.session = 0;
+				// eslint-disable-next-line camelcase
+				const { code, defender_id, paid, price, timestamp_ended } = v1.losses[i];
+				v1.losses[i] = new TLLAttack({
+					code,
+					opponentId: defender_id,
+					paid,
+					price,
+					timestamp: timestamp_ended
+				});
 			}
-			await DB.addAttacks(v1.losses);
-			await DB.updateSessions('attacker', v1.playerId, 'Lost', 0);
-			// no need to call for other defender/result combinations here
+			await DB.addAttacks('attacker', 'Lost', v1.losses);
 
 			v1Storage.clear();
 

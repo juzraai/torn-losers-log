@@ -34,6 +34,9 @@ class V1Loss {
 	/** @type {Number} */
 	defender_id;
 
+	/** @type {Boolean} */
+	oldest;
+
 	/** @type {Boolean,} */
 	paid;
 

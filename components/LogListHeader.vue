@@ -34,7 +34,6 @@ export default {
 	}),
 	computed: {
 		...mapState('log', ['lastUpdated', 'paid', 'result', 'role']),
-		...mapState('settings', ['playerId']),
 		updateTrigger() {
 			return [this.result, this.role].join(';');
 		},
@@ -51,9 +50,8 @@ export default {
 		init() {
 			this.unpaid = 0;
 			liveQuery(() =>
-				DB.sumOfUnpaid(this.role, this.playerId, this.result)
+				DB.sumOfUnpaid(this.role, this.result)
 			).subscribe(unpaid => {
-				console.log('LISTHEADER liveQuery', unpaid);
 				this.unpaid = unpaid;
 			});
 		},

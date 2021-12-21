@@ -8,12 +8,12 @@
 						<span v-if="group !== 'event'">{{ attacks.length }}x</span>
 						<Player
 							link
-							:xid="xid"
+							:xid="attacks[0].opponentId"
 						/>
 					</div>
 					<div style="font-size: 90%;">
-						<span class="d-sm-none text-muted">{{ $timestamp(attacks[0].timestamp_ended).replace(/^\w+ |\/\d+$/g, '') }} |</span>
-						<span class="d-none d-sm-inline text-muted">{{ $timestamp(attacks[0].timestamp_ended) }} |</span>
+						<span class="d-sm-none text-muted">{{ $timestamp(attacks[0].timestamp).replace(/^\w+ |\/\d+$/g, '') }} |</span>
+						<span class="d-none d-sm-inline text-muted">{{ $timestamp(attacks[0].timestamp) }} |</span>
 						<LogItemPrice :attacks="attacks" />
 					</div>
 				</div>
@@ -56,9 +56,9 @@
 					class="d-flex flex-column text-muted"
 					style="min-width: 200px;"
 				>
-					<div>{{ $timestamp(attacks[0].timestamp_ended) }}</div>
+					<div>{{ $timestamp(attacks[0].timestamp) }}</div>
 					<div v-if="attacks.length > 1">
-						{{ $timestamp(attacks[attacks.length - 1].timestamp_ended) }}
+						{{ $timestamp(attacks[attacks.length - 1].timestamp) }}
 					</div>
 				</div>
 			</LogItemCell>
@@ -71,7 +71,7 @@
 					<Player
 						class="font-weight-bold"
 						link
-						:xid="xid"
+						:xid="attacks[0].opponentId"
 					/>
 				</div>
 			</LogItemCell>
@@ -102,29 +102,24 @@ export default {
 		},
 	},
 	computed: {
-		...mapState('log', ['group', 'role']),
+		...mapState('log', ['group', 'result', 'role']),
 		phrase() {
 			const action =
-				this.attacks[0].result === 'Lost' ? 'lost to' : 'escaped from';
+				this.result === 'Lost' ? 'lost to' : 'escaped from';
 			return this.role === 'attacker' ? `You ${action}` : `${action} you`;
-		},
-		xid() {
-			return this.role === 'attacker'
-				? this.attacks[0].defender_id
-				: this.attacks[0].attacker_id;
 		},
 	},
 	methods: {
 		...mapMutations('ui', ['SET_LOADING']),
 		async markPaidUntil() {
 			this.SET_LOADING(true);
-			await DB.markPaidUntil(this.attacks, this.role);
+			await DB.markPaidUntil(this.role, this.result, this.attacks);
 			this.$emit('attacksUpdated');
 			this.SET_LOADING(false);
 		},
 		async markUnpaidFrom() {
 			this.SET_LOADING(true);
-			await DB.markUnpaidFrom(this.attacks, this.role);
+			await DB.markUnpaidFrom(this.role, this.result, this.attacks);
 			this.$emit('attacksUpdated');
 			this.SET_LOADING(false);
 		},

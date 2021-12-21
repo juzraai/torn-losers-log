@@ -47,7 +47,6 @@ export default {
 		thingsThatTriggerUpdate() {
 			return [
 				this.group,
-				this.lastUpdated,
 				this.paid,
 				this.result,
 				this.role,
@@ -67,40 +66,14 @@ export default {
 		async query() {
 			// TODO limit & offset setting (NOT in store, just here on page), pass to query methods
 			this.SET_LOADING(true);
-			console.time('[TLL] LogList query runtime:');
-			if (this.group === 'event') {
-				await this.eventQuery();
-			} else {
-				// session|contract
-				await this.groupedQuery(this.group);
-			}
-			console.timeEnd('[TLL] LogList query runtime:');
+			this.items = await DB.queryAttacks(
+				this.role,
+				this.result,
+				this.paid,
+				this.group,
+				10
+			);
 			this.SET_LOADING(false);
-		},
-		async eventQuery() {
-			const attacks = await DB.getAttacks(
-				'timestamp_ended',
-				this.role === 'attacker' ? this.playerId : false,
-				this.role === 'defender' ? this.playerId : false,
-				this.result,
-				this.paid,
-				10
-			);
-			this.items = attacks.map(a => [a]);
-		},
-		async groupedQuery(key) {
-			const groups = [];
-			await DB.attacksQuery(
-				key,
-				this.role === 'attacker' ? this.playerId : false,
-				this.role === 'defender' ? this.playerId : false,
-				this.result,
-				this.paid,
-				10
-			).uniqueKeys(g => groups.push(...g));
-			this.items = await Promise.all(
-				groups.map(g => DB.getAttacksForKey(key, g))
-			);
 		},
 	},
 };
