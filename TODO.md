@@ -2,17 +2,21 @@
 
 ## 1. Reimplement V1 features
 
+- refactor
+	- TORN service can get store instace too, read apiKey & playerId from there
+	- define constants in DB for roles & results - e.g. `const ROLES = Object.freeze({ ATTACKER: {...}, ...})`
+	- use those constants everywhere, migrate, LogControl, etc.
 - log list controls on XS:
 	- hide entirely
 	- show hamburger menu (dropdown) on the right side of list header
 - log items in group mode: show events in collapsible (or modal with event mode list items with full functionality?)
 - settings page
-	- list item count (10/20...)
-	- auto update settings:
-		- update when opened: on/off
-		- update interval: 0 (off), or X minutes
-		- if interval is OFF, the refresh button is showing, otherwise hidden
 	- show database metrics, record count, timespan
+	- default list item count (10/15/20)
+	- auto update settings:
+		- update when opened (layout beforeCreate!): on/off
+		- update interval: 0 (off), or X minutes - when it's running, don't show loading screen
+		- if interval is OFF, the refresh button is showing, otherwise hidden
 	- export/import feature
 	- clear feature
 - import feature should be accessible from the start screens, between migrate and connect
@@ -33,7 +37,7 @@
 - merge to main with commit message:
 
 ```md
-feat: added handling of escapes; added handling of incoming attacks; added auto name resolving; redesigned UI, better optimized for smaller screens; rewritten storage engine to be faster; [...]
+feat: added handling of escapes; added handling of incoming attacks; added automatic player name resolving; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster; [...]
 
 BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest change is that it now manages attacks & names in IndexedDB (instead of in-memory Vuex store).
 ```

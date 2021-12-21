@@ -30,7 +30,8 @@ export default {
 
 		for (const role of ['attacker', 'defender']) {
 			for (const result of ['Lost', 'Escape']) {
-				const last = await DB.mostRecentAttack(role, result);
+				const last = await DB.getMostRecentAttack(role, result);
+				const lastPrices = await DB.getLastPricesPerOpponent(role, result);
 				const minTs = last?.timestamp || 0;
 				const attacks = attacksfull
 					.filter(a =>
@@ -39,11 +40,12 @@ export default {
 						a.timestamp_ended > minTs
 					)
 					.map(({ attacker_id, code, defender_id, timestamp_ended }) => {
+						const opponentId = role === 'attacker' ? defender_id : attacker_id;
 						return new TLLAttack({
 							code,
-							opponentId: role === 'attacker' ? defender_id : attacker_id,
+							opponentId,
 							paid: 0,
-							price: 0,
+							price: lastPrices[opponentId] || 0,
 							timestamp: timestamp_ended,
 						});
 					});

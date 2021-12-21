@@ -81,9 +81,32 @@ export default {
 	/**
 	 * @param {String} role attacker|defender
 	 * @param {String} result Lost|Escape
+	 * @returns {Promise<Object<Number, Number>[]>}
+	 */
+	async getLastPricesPerOpponent(role, result) {
+		const r = {};
+		const ids = [];
+		console.time('[TLL] Last prices/opponent queried in');
+		await this.table(role, result)
+			.orderBy('opponentId').uniqueKeys(opponentIds => {
+				ids.push(...opponentIds);
+			});
+		await Promise.all(ids.map(async id => {
+			const attacks = await this.table(role, result)
+				.where('opponentId').equals(id)
+				.sortBy('timestamp');
+			r[id] = attacks.length ? attacks[attacks.length - 1].price : 0;
+		}));
+		console.timeEnd('[TLL] Last prices/opponent queried in');
+		return r;
+	},
+
+	/**
+	 * @param {String} role attacker|defender
+	 * @param {String} result Lost|Escape
 	 * @returns {Promise<TLLAttack>}
 	 */
-	mostRecentAttack(role, result) {
+	getMostRecentAttack(role, result) {
 		return this.table(role, result).orderBy('timestamp').reverse().first();
 	},
 
@@ -91,7 +114,7 @@ export default {
 	 * @param {String} role attacker|defender
 	 * @param {String} result Lost|Escape
 	 * @param {Boolean} includePaid
-	 * @param {String} grouping event|session
+	 * @param {String} grouping event|session|contract
 	 * @param {Number} limit
 	 * @returns {Promise<TLLAttack[][]>}
 	 */
