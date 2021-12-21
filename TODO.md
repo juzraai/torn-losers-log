@@ -2,7 +2,6 @@
 
 ## 1. Reimplement V1 features
 
-- contract grouping
 - log list controls on XS:
 	- hide entirely
 	- show hamburger menu (dropdown) on the right side of list header

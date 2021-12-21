@@ -104,29 +104,25 @@ export default {
 			r = attacks.map(a => [a]);
 		} else if (grouping === 'session') {
 			const sessions = [];
-			const sessionFilter = s => s[0] && (!s[0].paid || includePaid);
 			await query
 				.filter(a => !npcAttack(a))
-				.until(() => sessions.filter(sessionFilter).length > limit)
+				.until(() => sessions.length > limit)
 				.each(a => {
-					!sessions.length && sessions.push([]);
-					const s = sessions[sessions.length - 1];
-					const p = s[s.length - 1] || a;
-					if (this.isSameGroup(a, p)) {
+					const s = sessions.length ? sessions[sessions.length - 1] : [];
+					const p = s[s.length - 1];
+					if (p && this.isSameGroup(a, p)) {
 						s.push(a);
-					} else {
+					} else if (!a.paid || includePaid) {
 						sessions.push([a]);
 					}
 				});
-			r = sessions.filter(sessionFilter).slice(0, limit);
+			r = sessions.slice(0, limit);
 		} else if (grouping === 'contract') {
 			const contracts = [];
-			const contractFilter = c => c[0] && (!c[0].paid || includePaid);
 			await query
-				.filter(a => !npcAttack(a))
-				.until(() => contracts.filter(contractFilter).length > limit)
+				.filter(a => (!a.paid || includePaid) && !npcAttack(a))
+				.until(() => contracts.length > limit)
 				.each(a => {
-					!contracts.length && contracts.push([]);
 					const i = contracts.findIndex(c => c[0] && this.isSameGroup(a, c[0]));
 					if (i > -1) {
 						contracts[i].push(a);
@@ -134,7 +130,7 @@ export default {
 						contracts.push([a]);
 					}
 				});
-			r = contracts.filter(contractFilter).slice(0, limit);
+			r = contracts.slice(0, limit);
 		}
 		console.timeEnd(`[TLL] Attack query (${grouping}) completed in`);
 		return r;
