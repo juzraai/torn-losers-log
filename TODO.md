@@ -2,10 +2,6 @@
 
 ## 1. Reimplement V1 features
 
-- refactor
-	- TORN service can get store instace too, read apiKey & playerId from there
-	- define constants in DB for roles & results - e.g. `const ROLES = Object.freeze({ ATTACKER: {...}, ...})`
-	- use those constants everywhere, migrate, LogControl, etc.
 - log list controls on XS:
 	- hide entirely
 	- show hamburger menu (dropdown) on the right side of list header

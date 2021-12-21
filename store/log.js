@@ -1,3 +1,5 @@
+import { GROUPING, RESULT, ROLE } from '@/services/database';
+
 export const state = () => ({
 	group: 'session',
 	lastUpdated: 0,
@@ -8,7 +10,7 @@ export const state = () => ({
 
 export const mutations = {
 	SET_GROUP(state, group) {
-		if ('event|session|contract'.includes(group)) {
+		if (Object.values(GROUPING).includes(group)) {
 			state.group = group;
 		}
 	},
@@ -19,12 +21,12 @@ export const mutations = {
 		state.paid = paid;
 	},
 	SET_RESULT(state, result) {
-		if ('Lost|Escape'.includes(result)) {
+		if (Object.values(RESULT).includes(result)) {
 			state.result = result;
 		}
 	},
 	SET_ROLE(state, role) {
-		if ('attacker|defender'.includes(role)) {
+		if (Object.values(ROLE).includes(role)) {
 			state.role = role;
 		}
 	},

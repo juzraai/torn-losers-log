@@ -34,6 +34,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import { GROUPING, RESULT, ROLE } from '@/services/database';
 import UPDATER from '@/services/updater';
 
 export default {
@@ -42,17 +43,17 @@ export default {
 			{
 				icon: 'fas fa-bars',
 				tooltip: 'Events',
-				value: 'event',
+				value: GROUPING.EVENT,
 			},
 			{
 				icon: 'fas fa-th-list',
 				tooltip: 'Sessions',
-				value: 'session',
+				value: GROUPING.SESSION,
 			},
 			{
 				icon: 'fas fa-users',
 				tooltip: 'Contracts',
-				value: 'contract',
+				value: GROUPING.CONTRACT,
 			},
 		],
 		paidOptions: [
@@ -65,24 +66,24 @@ export default {
 			{
 				icon: 'fas fa-skull',
 				tooltip: 'List losses',
-				value: 'Lost',
+				value: RESULT.LOST,
 			},
 			{
 				icon: 'fas fa-running',
 				tooltip: 'List escapes',
-				value: 'Escape',
+				value: RESULT.ESCAPE,
 			},
 		],
 		roleOptions: [
 			{
 				icon: 'fas fa-crosshairs',
 				tooltip: 'You attack',
-				value: 'attacker',
+				value: ROLE.ATTACKER,
 			},
 			{
 				icon: 'fas fa-shield-alt',
 				tooltip: 'You defend',
-				value: 'defender',
+				value: ROLE.DEFENDER,
 			},
 		],
 	}),

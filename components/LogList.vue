@@ -43,7 +43,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
-import DB from '@/services/database';
+import DB, { RESULT, ROLE } from '@/services/database';
 
 export default {
 	data: () => ({
@@ -55,8 +55,8 @@ export default {
 		...mapState('settings', ['playerId']),
 		...mapState('ui', ['loading']),
 		notFoundMessage() {
-			const verb = this.result === 'Lost' ? 'lost to' : 'escaped from';
-			return this.role === 'attacker'
+			const verb = this.result === RESULT.LOST ? 'lost to' : 'escaped from';
+			return this.role === ROLE.ATTACKER
 				? `You haven't ${verb} anyone recently.`
 				: `Nobody has ${verb} you recently.`;
 		},

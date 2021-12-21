@@ -2,9 +2,7 @@
 	<div class="d-flex p-2 px-lg-3">
 		<div class="d-flex flex-column flex-grow-1 ">
 			<strong>
-				{{ role === 'attacker' ? 'Outgoing' : 'Incoming' }}
-				{{ paid ? '' : 'unpaid' }}
-				{{ result === 'Lost' ? 'losses' : 'escapes' }}
+				{{ phrase }}
 				<span v-if="unpaid" class="d-md-none ml-2">
 					<span class="text-danger">$&nbsp;{{ $price(unpaid) }}</span>
 				</span>
@@ -29,7 +27,7 @@
 <script>
 import { liveQuery } from 'dexie';
 import { mapState } from 'vuex';
-import DB from '@/services/database';
+import DB, { RESULT, ROLE } from '@/services/database';
 
 export default {
 	data: () => ({
@@ -37,6 +35,12 @@ export default {
 	}),
 	computed: {
 		...mapState('log', ['lastUpdated', 'paid', 'result', 'role']),
+		phrase() {
+			const direction = this.role === ROLE.ATTACKER ? 'Outgoing' : 'Incoming';
+			const unpaid = this.paid ? '' : 'unpaid';
+			const outcome = this.result === RESULT.LOST ? 'losses' : 'escapes';
+			return `${direction} ${unpaid} ${outcome}`;
+		},
 		updateTrigger() {
 			return [this.result, this.role].join(';');
 		},

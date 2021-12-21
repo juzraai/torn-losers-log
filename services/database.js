@@ -128,13 +128,13 @@ export default {
 		console.time(`[TLL] Attack query (${grouping}) completed in`);
 		const query = this.table(role, result)
 			.orderBy('timestamp').reverse();
-		if (grouping === 'event') {
+		if (grouping === GROUPING.EVENT) {
 			const attacks = await query
 				.filter(a => (!a.paid || includePaid) && !npcAttack(a))
 				.limit(limit)
 				.toArray();
 			r = attacks.map(a => [a]);
-		} else if (grouping === 'session') {
+		} else if (grouping === GROUPING.SESSION) {
 			const sessions = [];
 			await query
 				.filter(a => !npcAttack(a))
@@ -149,7 +149,7 @@ export default {
 					}
 				});
 			r = sessions.slice(0, limit);
-		} else if (grouping === 'contract') {
+		} else if (grouping === GROUPING.CONTRACT) {
 			const contracts = [];
 			await query
 				.filter(a => (!a.paid || includePaid) && !npcAttack(a))
@@ -235,4 +235,35 @@ export default {
 		return sum;
 	},
 
+};
+
+export const GROUPING = {
+	/**
+	 * Listing attacks individually in 1-element groups.
+	 */
+	EVENT: 'event',
+
+	/**
+	 * Grouping together consecutive attacks with same opponent, price and paid status.
+	 */
+	SESSION: 'session',
+
+	/**
+	 * Grouping together attacks with same opponent, price and paid status, regardless of their timestamp.
+	 */
+	CONTRACT: 'contract',
+};
+
+export const RESULT = {
+	ESCAPE: 'Escape',
+	LOST: 'Lost',
+	// don't change the values here, these
+	// are values returned by TORN API
+};
+
+export const ROLE = {
+	ATTACKER: 'attacker',
+	DEFENDER: 'defender',
+	// don't change the values here, they are
+	// used to build TORN attack field names :)
 };

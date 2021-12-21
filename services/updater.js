@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import DB from './database';
+import DB, { RESULT, ROLE } from './database';
 import TORN from './torn';
 import { TLLAttack } from '~/models/Attack';
 
@@ -28,8 +28,8 @@ export default {
 				return a;
 			});
 
-		for (const role of ['attacker', 'defender']) {
-			for (const result of ['Lost', 'Escape']) {
+		for (const role of Object.values(ROLE)) {
+			for (const result of Object.values(RESULT)) {
 				const last = await DB.getMostRecentAttack(role, result);
 				const lastPrices = await DB.getLastPricesPerOpponent(role, result);
 				const minTs = last?.timestamp || 0;
@@ -40,7 +40,7 @@ export default {
 						a.timestamp_ended > minTs
 					)
 					.map(({ attacker_id, code, defender_id, timestamp_ended }) => {
-						const opponentId = role === 'attacker' ? defender_id : attacker_id;
+						const opponentId = role === ROLE.ATTACKER ? defender_id : attacker_id;
 						return new TLLAttack({
 							code,
 							opponentId,
@@ -58,7 +58,7 @@ export default {
 		const attacks = await TORN.attacks(apiKey);
 		const players = [];
 		attacks.filter(globalAttackFilter).forEach(a => {
-			for (const role of ['attacker', 'defender']) {
+			for (const role of Object.values(ROLE)) {
 				const id = a[`${role}_id`];
 				const name = a[`${role}_name`];
 				if (id && name) {

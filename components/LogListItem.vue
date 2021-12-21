@@ -5,7 +5,7 @@
 			<LogItemCell grow>
 				<div class="d-flex flex-column">
 					<div class="font-weight-bold">
-						<span v-if="group !== 'event'">{{ attacks.length }}x</span>
+						<span v-if="!isEvent">{{ attacks.length }}x</span>
 						<Player
 							link
 							:xid="attacks[0].opponentId"
@@ -28,7 +28,7 @@
 		<div class="d-none d-md-flex flex-grow-1">
 			<LogItemCell clickable>
 				<div
-					v-if="group !== 'event'"
+					v-if="!isEvent"
 					class="font-weight-bold lead text-right"
 					style="min-width: 45px;"
 					v-text="`${attacks.length}x`"
@@ -46,7 +46,7 @@
 			<LogItemCell grow>
 				<div
 					class="d-flex"
-					:class="role === 'attacker' ? 'flex-column' : 'flex-column-reverse'"
+					:class="isAttacker ? 'flex-column' : 'flex-column-reverse'"
 				>
 					<div>{{ phrase }}</div>
 					<Player
@@ -87,8 +87,7 @@
 			<template #default="{ ok }">
 				<p class="text-justify">
 					Specify a new price for
-					{{ role === 'attacker' ? 'outgoing' : 'incoming' }}
-					{{ result === 'Lost' ? 'losses' : 'escapes' }}
+					{{ priceModalPhrase }}
 					of
 					<Player
 						class="font-weight-bold"
@@ -129,7 +128,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
-import DB from '@/services/database';
+import DB, { GROUPING, RESULT, ROLE } from '@/services/database';
 
 export default {
 	props: {
@@ -144,9 +143,20 @@ export default {
 	computed: {
 		...mapState('log', ['group', 'result', 'role']),
 		...mapState('settings', ['darkMode']),
+		isAttacker() {
+			return this.role === ROLE.ATTACKER;
+		},
+		isEvent() {
+			return this.group === GROUPING.EVENT;
+		},
 		phrase() {
-			const action = this.result === 'Lost' ? 'lost to' : 'escaped from';
-			return this.role === 'attacker' ? `You ${action}` : `${action} you`;
+			const action = this.result === RESULT.LOST ? 'lost to' : 'escaped from';
+			return this.role === ROLE.ATTACKER ? `You ${action}` : `${action} you`;
+		},
+		priceModalPhrase() {
+			const direction = this.role === ROLE.ATTACKER ? 'outgoing' : 'incoming';
+			const outcome = this.result === RESULT.LOST ? 'losses' : 'escapes';
+			return `${direction} ${outcome}`;
 		},
 	},
 	methods: {

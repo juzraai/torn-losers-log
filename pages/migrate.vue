@@ -4,8 +4,8 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
-import {TLLAttack} from '@/models/Attack';
-import DB from '@/services/database';
+import { TLLAttack } from '@/models/Attack';
+import DB, { RESULT, ROLE } from '@/services/database';
 import v1Storage from '@/services/v1-storage';
 
 export default {
@@ -56,16 +56,17 @@ export default {
 			// modifying array in-place
 			for (let i = 0; i < v1.losses.length; i++) {
 				// eslint-disable-next-line camelcase
-				const { code, defender_id, paid, price, timestamp_ended } = v1.losses[i];
+				const { code, defender_id, paid, price, timestamp_ended } =
+					v1.losses[i];
 				v1.losses[i] = new TLLAttack({
 					code,
 					opponentId: defender_id,
 					paid,
 					price,
-					timestamp: timestamp_ended
+					timestamp: timestamp_ended,
 				});
 			}
-			await DB.addAttacks('attacker', 'Lost', v1.losses);
+			await DB.addAttacks(ROLE.ATTACKER, RESULT.LOST, v1.losses);
 
 			v1Storage.clear();
 
