@@ -1,7 +1,10 @@
 .dark {
-	background-color: $dark-body-bg;
-	color: $dark-body-color;
+	&:not(.modal) { // don't mess up modal overlay
+		background-color: $dark-body-bg;
+		color: $dark-body-color;
+	}
 
+	.close,
 	.list-group-item a,
 	p a {
 		color: white;
@@ -27,13 +30,18 @@
 	.border-bottom,
 	.border-left,
 	.border-right,
-	.border-top {
+	.border-top,
+	.modal-content,
+	.modal-footer,
+	.modal-header {
 		border-color: $dark-border-color !important;
 	}
 
 	.card,
-	.list-group-item {
+	.list-group-item,
+	.modal-content {
 		background-color: $dark-card-bg;
+		color: $dark-body-color; // needed for modal only
 	}
 
 	.dropdown-menu {
@@ -56,6 +64,16 @@
 		background-color: $dark-input-bg;
 		border-color: $dark-input-border-color;
 		color: $dark-input-color;
+	}
+
+	.input-group-text {
+		background-color: $dark-input-group-addon-bg;
+		border-color: $dark-input-border-color;
+		color: $dark-input-color;
+	}
+
+	.text-danger {
+		color: $dark-danger !important;
 	}
 
 	.text-muted {

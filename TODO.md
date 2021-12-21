@@ -5,7 +5,6 @@
 - log list controls on XS:
 	- hide entirely
 	- show hamburger menu (dropdown) on the right side of list header
-- set price logic
 - refresh logic
 	- call group ID update mechanism
 	- call attacks+attacksfull too, to resolve names automatically

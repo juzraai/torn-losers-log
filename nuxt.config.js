@@ -17,8 +17,8 @@ export default {
 			// 'FormCheckboxPlugin',
 			'FormInputPlugin',
 			// 'FormRadioPlugin',
+			'ModalPlugin',
 			'ToastPlugin',
-			// 'ModalPlugin'
 		],
 		directivePlugins: [
 			// 'VBPopoverPlugin',
@@ -33,8 +33,8 @@ export default {
 			'BDropdownItemButton',
 			'BFormGroup',
 			'BFormInput',
-			// 'BFormRadioGroup',
-			// 'BTooltip',
+			'BInputGroup',
+			'BModal',
 		],
 	},
 	build: {

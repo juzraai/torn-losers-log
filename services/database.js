@@ -180,6 +180,23 @@ export default {
 	/**
 	 * @param {String} role attacker|defender
 	 * @param {String} result Lost|Escape
+	 * @param {TLLAttack[]} attacks
+	 * @param {Number} price
+	 * @returns {Promise}
+	 */
+	setPriceFrom(role, result, attacks, price) {
+		const current = attacks[attacks.length - 1];
+		return this.table(role, result)
+			.where('opponentId').equals(current.opponentId)
+			.filter(a => a.timestamp >= current.timestamp && a.price !== price)
+			.modify(a => {
+				a.price = price;
+			});
+	},
+
+	/**
+	 * @param {String} role attacker|defender
+	 * @param {String} result Lost|Escape
 	 * @param {String} result
 	 * @returns {Promise<Number>}
 	 */

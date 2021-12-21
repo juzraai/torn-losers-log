@@ -56,7 +56,10 @@
 					/>
 				</div>
 			</LogItemCell>
-			<LogItemCell clickable>
+			<LogItemCell
+				clickable
+				@click="$refs.priceModal.show()"
+			>
 				<LogItemPrice
 					:attacks="attacks"
 					class="text-right"
@@ -68,6 +71,59 @@
 				@click="togglePaid"
 			/>
 		</div>
+
+		<b-modal
+			ref="priceModal"
+			centered
+			footer-class="d-flex justify-content-between py-2"
+			header-class="py-2"
+			:modal-class="darkMode ? 'dark' : null"
+			:ok-disabled="priceInput * 1000 === attacks[0].price"
+			size="sm"
+			title="Set price"
+			@ok="updatePrices"
+			@shown="initializePriceModal"
+		>
+			<template #default="{ ok }">
+				<p class="text-justify">
+					Specify a new price for
+					{{ role === 'attacker' ? 'outgoing' : 'incoming' }}
+					{{ result === 'Lost' ? 'losses' : 'escapes' }}
+					of
+					<Player
+						class="font-weight-bold"
+						:xid="attacks[0].opponentId"
+					/>
+					starting
+					<strong>
+						from
+						{{ $timestamp(attacks[attacks.length - 1].timestamp) }}.
+					</strong>
+				</p>
+				<form @submit.prevent="ok">
+					<b-form-group>
+						<b-input-group
+							append="k"
+							prepend="$"
+							size="lg"
+						>
+							<b-form-input
+								v-model="priceInput"
+								autofocus
+								class="text-center"
+								max="9999"
+								min="0"
+								type="number"
+							/>
+						</b-input-group>
+					</b-form-group>
+				</form>
+				<p
+					v-if="priceInput * 1000 !== attacks[0].price"
+					class="text-danger text-justify"
+				>Prices of similar and newer attacks will be <strong>overwritten!</strong></p>
+			</template>
+		</b-modal>
 	</div>
 </template>
 
@@ -82,8 +138,12 @@ export default {
 			default: () => [],
 		},
 	},
+	data: () => ({
+		priceInput: 0,
+	}),
 	computed: {
 		...mapState('log', ['group', 'result', 'role']),
+		...mapState('settings', ['darkMode']),
 		phrase() {
 			const action = this.result === 'Lost' ? 'lost to' : 'escaped from';
 			return this.role === 'attacker' ? `You ${action}` : `${action} you`;
@@ -91,6 +151,9 @@ export default {
 	},
 	methods: {
 		...mapMutations('ui', ['SET_LOADING']),
+		initializePriceModal() {
+			this.priceInput = this.attacks[0].price / 1000;
+		},
 		async markPaidUntil() {
 			this.SET_LOADING(true);
 			await DB.markPaidUntil(this.role, this.result, this.attacks);
@@ -108,6 +171,15 @@ export default {
 				this.markUnpaidFrom();
 			} else {
 				this.markPaidUntil();
+			}
+		},
+		async updatePrices() {
+			const newPrice = Math.max(0, this.priceInput) * 1000;
+			if (this.attacks[0].price !== newPrice) {
+				this.SET_LOADING(true);
+				await DB.setPriceFrom(this.role, this.result, this.attacks, newPrice);
+				this.$emit('attacksUpdated');
+				this.SET_LOADING(false);
 			}
 		},
 	},

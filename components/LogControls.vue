@@ -1,6 +1,6 @@
 <template>
 	<Card>
-		<div class="card-body d-flex flex-row flex-lg-column flex-wrap gap">
+		<div class="card-body d-flex flex-row flex-lg-column flex-wrap gap p-2">
 			<b-button
 				disabled
 				size="lg"
