@@ -18,29 +18,10 @@
 					</div>
 				</div>
 			</LogItemCell>
-			<b-dropdown
-				dropleft
-				no-caret
-				variant="link"
-			>
-				<template #button-content>
-					<i class="fas fa-ellipsis-v" />
-				</template>
-				<b-dropdown-item-button
-					v-if="attacks[0].paid"
-					@click="markUnpaidFrom"
-				>
-					Mark this and newer attacks<br>
-					of this player as <strong class="text-danger">unpaid</strong>
-				</b-dropdown-item-button>
-				<b-dropdown-item-button
-					v-else
-					@click="markPaidUntil"
-				>
-					Mark this and older attacks<br>
-					of this player as <strong class="text-success">paid</strong>
-				</b-dropdown-item-button>
-			</b-dropdown>
+			<LogItemDropdown
+				:attacks="attacks"
+				@togglePaid="togglePaid"
+			/>
 		</div>
 
 		<!-- md and up -->
@@ -104,8 +85,7 @@ export default {
 	computed: {
 		...mapState('log', ['group', 'result', 'role']),
 		phrase() {
-			const action =
-				this.result === 'Lost' ? 'lost to' : 'escaped from';
+			const action = this.result === 'Lost' ? 'lost to' : 'escaped from';
 			return this.role === 'attacker' ? `You ${action}` : `${action} you`;
 		},
 	},

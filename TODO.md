@@ -2,7 +2,6 @@
 
 ## 1. Reimplement V1 features
 
-- list item on mobile screens: ellipsis menu should be a "clickable" slot
 - list header on mobile screens:
 	- unpaid sum should go into left cell in parens
 	- hide "updated" word

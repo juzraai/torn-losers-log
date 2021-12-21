@@ -1,7 +1,7 @@
 <template>
 	<LogItemCell
 		v-b-tooltip.html.left
-		class="lead paid-button px-lg-3"
+		class="lead px-lg-3"
 		clickable
 		:title="tooltip"
 		@click="$emit('click', $event)"
@@ -39,6 +39,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-</style>
