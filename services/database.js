@@ -87,13 +87,18 @@ export default {
 	 * @returns {TLLAttack[][]}
 	 */
 	async queryAttacks(role, result, includePaid, grouping, limit) {
-		console.time(`[TLL] Attack query (${grouping}) completed in`);
 		let r;
+
+		// NPCs are excluded when importing, but new NPCs can be
+		// added in the future, hence we filter here too
+		const npcAttack = a => TORN.NPCs.includes(a.opponentId);
+
+		console.time(`[TLL] Attack query (${grouping}) completed in`);
 		const query = this.table(role, result)
 			.orderBy('timestamp').reverse();
 		if (grouping === 'event') {
 			const attacks = await query
-				.filter(a => !a.paid || includePaid)
+				.filter(a => (!a.paid || includePaid) && !npcAttack(a))
 				.limit(limit)
 				.toArray();
 			r = attacks.map(a => [a]);
@@ -101,6 +106,7 @@ export default {
 			const sessions = [];
 			const sessionFilter = s => !s[0].paid || includePaid;
 			await query
+				.filter(a => !npcAttack(a))
 				.until(() => sessions.filter(sessionFilter).length > limit)
 				.each(a => {
 					!sessions.length && sessions.push([]);

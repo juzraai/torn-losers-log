@@ -58,5 +58,7 @@ export default {
 		17, // Easter Bunny
 		19, // Jimmy
 		20, // Fernando
+		21, // Tiny
+		// https://wiki.torn.com/wiki/Loot#Lootable_NPCs
 	],
 };
