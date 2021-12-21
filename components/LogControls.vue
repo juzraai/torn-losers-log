@@ -2,9 +2,9 @@
 	<Card>
 		<div class="card-body d-flex flex-row flex-lg-column flex-wrap gap p-2">
 			<b-button
-				disabled
 				size="lg"
 				variant="primary"
+				@click="updateAttacks"
 			>
 				<i class="fas fa-sync fa-fw" />
 			</b-button>
@@ -34,6 +34,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import UPDATER from '@/services/updater';
 
 export default {
 	data: () => ({
@@ -121,7 +122,14 @@ export default {
 		},
 	},
 	methods: {
-		...mapMutations('log', ['SET_GROUP', 'SET_PAID', 'SET_RESULT', 'SET_ROLE']),
+		...mapMutations('log', ['SET_GROUP', 'SET_LAST_UPDATED', 'SET_PAID', 'SET_RESULT', 'SET_ROLE']),
+		...mapMutations('ui', ['SET_LOADING']),
+		async updateAttacks() {
+			this.SET_LOADING(true);
+			await UPDATER.updateAttacks();
+			this.SET_LAST_UPDATED(new Date().getTime());
+			this.SET_LOADING(false);
+		}
 	},
 };
 </script>

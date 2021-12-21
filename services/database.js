@@ -81,10 +81,19 @@ export default {
 	/**
 	 * @param {String} role attacker|defender
 	 * @param {String} result Lost|Escape
+	 * @returns {Promise<TLLAttack>}
+	 */
+	mostRecentAttack(role, result) {
+		return this.table(role, result).orderBy('timestamp').reverse().first();
+	},
+
+	/**
+	 * @param {String} role attacker|defender
+	 * @param {String} result Lost|Escape
 	 * @param {Boolean} includePaid
 	 * @param {String} grouping event|session
 	 * @param {Number} limit
-	 * @returns {TLLAttack[][]}
+	 * @returns {Promise<TLLAttack[][]>}
 	 */
 	async queryAttacks(role, result, includePaid, grouping, limit) {
 		let r = [];
@@ -135,15 +144,6 @@ export default {
 		console.timeEnd(`[TLL] Attack query (${grouping}) completed in`);
 		return r;
 	},
-
-	/**
-	 * @param {String} role attacker|defender
-	 * @param {String} result Lost|Escape
-	 * @param {Boolean} includePaid
-	 * @param {String} grouping event|session
-	 * @param {Number} limit
-	 * @returns {TLLAttack[][]}
-	 */
 
 	/**
 	 * @param {String} role attacker|defender

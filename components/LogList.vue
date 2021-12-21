@@ -64,6 +64,7 @@ export default {
 			return [
 				//
 				this.group,
+				this.lastUpdated,
 				this.limit,
 				this.paid,
 				this.result,
