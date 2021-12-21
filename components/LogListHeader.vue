@@ -5,9 +5,12 @@
 				{{ role === 'attacker' ? 'Outgoing' : 'Incoming' }}
 				{{ paid ? '' : 'unpaid' }}
 				{{ result === 'Lost' ? 'losses' : 'escapes' }}
+				<span v-if="unpaid" class="d-md-none ml-2">
+					<span class="text-danger">$&nbsp;{{ $price(unpaid) }}</span>
+				</span>
 			</strong>
 			<small class="text-muted">
-				updated
+				<span class="d-none d-md-inline">updated</span>
 				<timeago
 					:auto-update="10"
 					:datetime="lastUpdated"
@@ -16,9 +19,9 @@
 		</div>
 		<div
 			v-if="unpaid"
-			class="font-weight-bold text-danger"
+			class="d-none d-md-block font-weight-bold text-danger"
 		>
-			$ {{ $price(unpaid) }}
+			$&nbsp;{{ $price(unpaid) }}
 		</div>
 	</div>
 </template>

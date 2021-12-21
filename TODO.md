@@ -2,9 +2,6 @@
 
 ## 1. Reimplement V1 features
 
-- list header on mobile screens:
-	- unpaid sum should go into left cell in parens
-	- hide "updated" word
 - log list paging:
 	- show (limit+10) / show only (limit+10) buttons
 	- show (limit+10) appears if: items.length === limit
