@@ -18,7 +18,7 @@
 			>
 				<LogListItem
 					:attacks="attacks"
-					__attacksUpdated="query"
+					@attacksUpdated="query"
 				/>
 			</li>
 		</ul>
@@ -26,28 +26,18 @@
 </template>
 
 <script>
-import { liveQuery } from 'dexie';
 import { mapMutations, mapState } from 'vuex';
 import DB from '@/services/database';
 
 export default {
 	data: () => ({
+		items: [],
 		limit: 10, // TODO offset?
-		liveQueryInit: 0,
-		liveQueries: {
-			attackerLost: [],
-			attackerEscape: [],
-			defenderLost: [],
-			defenderEscape: [],
-		},
 	}),
 	computed: {
 		...mapState('log', ['group', 'lastUpdated', 'paid', 'result', 'role']),
 		...mapState('settings', ['playerId']),
 		...mapState('ui', ['loading']),
-		items() {
-			return this.liveQueries[`${this.role}${this.result}`];
-		},
 		notFoundMessage() {
 			const verb = this.result === 'Lost' ? 'lost to' : 'escaped from';
 			return this.role === 'attacker'
@@ -56,50 +46,34 @@ export default {
 		},
 		thingsThatTriggerUpdate() {
 			return [
+				this.group,
 				this.paid,
-				// TODO limit, offset
+				this.result,
+				this.role,
 			].join(';');
 		},
 	},
 	watch: {
 		thingsThatTriggerUpdate() {
-			this.init();
+			this.query();
 		},
 	},
 	mounted() {
-		this.init();
+		this.query();
 	},
 	methods: {
 		...mapMutations('ui', ['SET_LOADING']),
-		init() {
-			const liveQueryInit = new Date().getTime();
-			this.liveQueryInit = liveQueryInit;
-			for (const role of ['attacker', 'defender']) {
-				for (const result of ['Lost', 'Escape']) {
-					liveQuery(async () => {
-						if (liveQueryInit !== this.liveQueryInit) {
-							// cancelling live query
-							return false;
-						}
-						console.log('Running live query', role, result);
-						this.SET_LOADING(true);
-						const items = await DB.queryAttacks(
-							role,
-							result,
-							this.paid,
-							this.group,
-							10
-						);
-						return items;
-					}).subscribe(items => {
-						if (items) {
-							this.liveQueries[`${role}${result}`] = items;
-							this.SET_LOADING(false);
-							// wonky a bit: list displays before items are updated
-						}
-					});
-				}
-			}
+		async query() {
+			// TODO limit & offset setting (NOT in store, just here on page), pass to query methods
+			this.SET_LOADING(true);
+			this.items = await DB.queryAttacks(
+				this.role,
+				this.result,
+				this.paid,
+				this.group,
+				10
+			);
+			this.SET_LOADING(false);
 		},
 	},
 };
