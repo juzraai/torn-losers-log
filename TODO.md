@@ -3,8 +3,6 @@
 ## 1. Reimplement V1 features
 
 - invoice: export features
-	- TSV (no, timestamp, code, attacker, defender, result, price)
-	- XLSX (same cols)
 	- PNG - just export the main area of Screen if possible
 		- https://github.com/tsayen/dom-to-image
 - log list controls on XS:
@@ -42,7 +40,7 @@
 - merge to main with commit message:
 
 ```md
-feat: added handling of escapes; added handling of incoming attacks; added automatic player name resolving; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster; [...]
+feat: added handling of escapes; added handling of incoming attacks; added XLSX (Excel) export to proofs/invoices; added automatic player name resolving; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster; [...]
 
 BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest change is that it now manages attacks & names in IndexedDB (instead of in-memory Vuex store).
 ```

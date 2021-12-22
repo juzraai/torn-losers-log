@@ -102,6 +102,9 @@
 							</tbody>
 						</table>
 						<p class="small">
+							All displayed timestamps are in TORN City Time (TCT; same as UTC or GMT).
+						</p>
+						<p class="small">
 							TORN attack logs can be accessed by navigating to
 							<br>
 							https://www.torn.com/loader.php?sid=attackLog&ID=ATTACK_ID
@@ -110,12 +113,24 @@
 				</dl>
 			</div>
 		</div>
+		<template #footer>
+			<b-button
+				variant="primary"
+				@click="exportXLSX"
+			>
+				<i class="fas fa-file-excel fa-fw mr-1" />
+				<span class="d-none d-md-inline">Download in</span>
+				XLSX
+			</b-button>
+		</template>
 	</Screen>
 </template>
 
 <script>
+import writeXlsxFile from 'write-excel-file';
 import { mapState } from 'vuex';
-import { RESULT, ROLE } from '~/services/database';
+import DB, { RESULT, ROLE } from '~/services/database';
+
 export default {
 	head() {
 		return {
@@ -164,6 +179,42 @@ export default {
 		if (!this.attacks || !this.attacks.length || !this.result || !this.role) {
 			this.$router.replace('/log');
 		}
+	},
+	methods: {
+		async exportXLSX() {
+			const playerIds = [this.attacker, this.defender];
+			const playerNames = {};
+			await Promise.all(
+				playerIds.map(async id => {
+					const player = await DB.getPlayer(id);
+					playerNames[id] = player.name;
+				})
+			);
+
+			const header = 'No.|Timestamp (TCT)|Attack log link|Attacker|Defender|Result|Price'
+				.split('|')
+				.map(value => ({ value, fontWeight: 'bold' }));
+
+			const data = [header];
+			this.attacks.forEach((a, i) => {
+				data.push(
+					[
+						this.attacks.length - i,
+						this.$timestamp(a.timestamp),
+						`https://www.torn.com/loader.php?sid=attackLog&ID=${a.code}`,
+						`${playerNames[this.attacker]} [${this.attacker}]`,
+						`${playerNames[this.defender]} [${this.defender}]`,
+						this.result,
+						a.price,
+					].map(value => ({ value }))
+				);
+			});
+
+			await writeXlsxFile(data, {
+				fileName: `tll-invoice-${this.invoiceId}.xlsx`,
+				sheet: `TLL Invoice ${this.invoiceId}`,
+			});
+		},
 	},
 };
 </script>
