@@ -13,7 +13,7 @@
 			<div class="col-12">
 				<p class="small">
 					<strong>Invoice ID:</strong>
-					<span :class="{ censored }">{{ censored ? '000000-000000-abc-abc' : invoiceId }}</span>
+					{{ censored ? '000000-000000-abc-abc' : invoiceId }}
 				</p>
 			</div>
 			<div class="col">
@@ -49,7 +49,7 @@
 					<dt>Price</dt>
 					<dd
 						class="font-weight-bold"
-						:class="[lastAttack.paid ? 'text-success' : 'text-danger', censored ? 'censored' : '']"
+						:class="lastAttack.paid ? 'text-success' : 'text-danger'"
 					>
 						$&nbsp;{{ censored ? 'xxxM' : $price(attacks.length * lastAttack.price) }}
 						({{ censored ? 'xxxk' : $price(lastAttack.price) }}/ea)
@@ -70,7 +70,6 @@
 								{{ $timestamp(a.timestamp) }}
 								<br>
 								<a
-									:class="{ censored }"
 									:href="'https://www.torn.com/loader.php?sid=attackLog&ID=' + a.code"
 									target="_blank"
 								>{{ censored ? 'abcdef0123456789' : a.code }}</a>
@@ -96,7 +95,6 @@
 									<td>{{ $timestamp(a.timestamp) }}</td>
 									<td>
 										<a
-											:class="{ censored }"
 											:href="'https://www.torn.com/loader.php?sid=attackLog&ID=' + a.code"
 											target="_blank"
 										>{{ censored ? 'abcdef012345678xxabcdef012345678' : a.code }}</a>

@@ -1,5 +1,5 @@
 <template>
-	<span v-if="xid" :class="{ censored: blur }">
+	<span v-if="xid">
 		<a
 			v-if="link"
 			:href="url"

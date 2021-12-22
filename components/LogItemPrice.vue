@@ -1,5 +1,5 @@
 <template>
-	<span :class="[attacks[0].paid ? 'text-success' : 'text-danger', censored ? 'censored' : '']">
+	<span :class="attacks[0].paid ? 'text-success' : 'text-danger'">
 		<span v-if="attacks[0].price">
 			<strong>$&nbsp;{{ censored ? 'xxxM' : $price(attacks[0].price * attacks.length) }}</strong>
 			<span v-if="attacks.length > 1">
