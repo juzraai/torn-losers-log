@@ -7,6 +7,7 @@
 	>
 		<div
 			v-if="attacks && attacks.length && result && role"
+			ref="invoice"
 			class="row"
 		>
 			<div class="col-12">
@@ -109,6 +110,14 @@
 							<br>
 							https://www.torn.com/loader.php?sid=attackLog&ID=ATTACK_ID
 						</p>
+						<p class="border-top pt-2 small">
+							Generated via <strong>TLL (TORN City Losers' Log)</strong> developed by
+							<Player
+								class="font-weight-bold"
+								link
+								:xid="2413874"
+							/>
+						</p>
 					</dd>
 				</dl>
 			</div>
@@ -119,14 +128,23 @@
 				@click="exportXLSX"
 			>
 				<i class="fas fa-file-excel fa-fw mr-1" />
-				<span class="d-none d-md-inline">Download in</span>
+				<span class="d-none d-sm-inline">Download in</span>
 				XLSX
+			</b-button>
+			<b-button
+				variant="primary"
+				@click="exportJPG"
+			>
+				<i class="fas fa-file-image fa-fw mr-1" />
+				<span class="d-none d-sm-inline">Download as</span>
+				JPG
 			</b-button>
 		</template>
 	</Screen>
 </template>
 
 <script>
+import domtoimage from 'dom-to-image';
 import writeXlsxFile from 'write-excel-file';
 import { mapState } from 'vuex';
 import DB, { RESULT, ROLE } from '~/services/database';
@@ -155,6 +173,9 @@ export default {
 		firstAttack() {
 			return this.attacks[this.attacks.length - 1];
 		},
+		filename() {
+			return `tll-invoice-${this.invoiceId}`;
+		},
 		invoiceId() {
 			return [
 				this.attacker,
@@ -181,6 +202,18 @@ export default {
 		}
 	},
 	methods: {
+		async exportJPG() {
+			const el = this.$refs.invoice;
+			const dataUrl = await domtoimage.toJpeg(el, {
+				bgcolor: 'white',
+				quality: 0.95,
+				width: 600,
+			});
+			const link = document.createElement('a');
+			link.download = `${this.filename}.jpg`;
+			link.href = dataUrl;
+			link.click();
+		},
 		async exportXLSX() {
 			const playerIds = [this.attacker, this.defender];
 			const playerNames = {};
@@ -191,9 +224,10 @@ export default {
 				})
 			);
 
-			const header = 'No.|Timestamp (TCT)|Attack log link|Attacker|Defender|Result|Price'
-				.split('|')
-				.map(value => ({ value, fontWeight: 'bold' }));
+			const header =
+				'No.|Timestamp (TCT)|Attack log link|Attacker|Defender|Result|Price'
+					.split('|')
+					.map(value => ({ value, fontWeight: 'bold' }));
 
 			const data = [header];
 			this.attacks.forEach((a, i) => {
@@ -211,7 +245,7 @@ export default {
 			});
 
 			await writeXlsxFile(data, {
-				fileName: `tll-invoice-${this.invoiceId}.xlsx`,
+				fileName: `${this.filename}.xlsx`,
 				sheet: `TLL Invoice ${this.invoiceId}`,
 			});
 		},
