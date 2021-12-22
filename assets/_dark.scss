@@ -4,10 +4,13 @@
 		color: $dark-body-color;
 	}
 
-	.close,
-	.list-group-item a,
-	p a {
+	a:not(.btn),
+	button {
 		color: white;
+
+		&:hover {
+			color: $light;
+		}
 	}
 
 	.btn-link {

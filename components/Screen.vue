@@ -10,11 +10,11 @@
 						<b-button
 							class="border-0"
 							size="sm"
-							to="/"
+							:to="backTo"
 							variant="link"
 						>
 							<i class="fas fa-long-arrow-alt-left mr-1" />
-							What is TLL?
+							{{ backLabel }}
 						</b-button>
 					</div>
 					<div class="card-body">
@@ -33,8 +33,22 @@
 <script>
 export default {
 	props: {
-		showBack: { type: Boolean, default: false },
-		title: { type: String, default: '' },
+		backLabel: {
+			type: String,
+			default: 'What is TLL?',
+		},
+		backTo: {
+			type: String,
+			default: '/',
+		},
+		showBack: {
+			type: Boolean,
+			default: false,
+		},
+		title: {
+			type: String,
+			default: '',
+		},
 	},
 };
 </script>

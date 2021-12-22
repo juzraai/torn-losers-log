@@ -2,10 +2,14 @@
 
 ## 1. Reimplement V1 features
 
+- invoice: export features
+	- TSV (no, timestamp, code, attacker, defender, result, price)
+	- XLSX (same cols)
+	- PNG - just export the main area of Screen if possible
+	- PDF - export Screen element as it is, with clickable links
 - log list controls on XS:
 	- hide entirely
 	- show hamburger menu (dropdown) on the right side of list header
-- log items in group mode: show events in collapsible (or modal with event mode list items with full functionality?)
 - settings page
 	- show database metrics, record count, timespan
 	- default list item count (10/15/20)
@@ -29,6 +33,11 @@
 - changelog display (make it so it splits commit lines into multiple list items: `; ` -> `\n- `)
 - new version notifier
 - forum thread alert, above 1500 attack records
+- rewrite README
+- help page in app?
+- review meta description
+- review favicon
+- create & setup OG image: show screenshots of app!!!
 - **at the end** remove old code
 - merge to main with commit message:
 
@@ -63,3 +72,8 @@ BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest cha
 	- selects ONE player from dropdown
 	- filters for defender/attacker ID (in attacker/defender mode)
 - (not important) use 4 item arrays? update only the active one - for extreme fast role/result switches
+- notes:
+	- user can add notes (one text field) to attacks/attack groups
+	- will also be considered when grouping
+	- auto filled on update just like prices
+	- this way contracts with same price can be separated manually

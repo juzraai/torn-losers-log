@@ -9,6 +9,9 @@
 		<template #button-content>
 			<i class="fas fa-ellipsis-v" />
 		</template>
+		<b-dropdown-item-button @click="$emit('openInvoice')">
+			Open invoice
+		</b-dropdown-item-button>
 		<b-dropdown-item-button
 			v-if="attacks[0].paid"
 			@click="$emit('togglePaid')"

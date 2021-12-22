@@ -20,13 +20,19 @@
 			</LogItemCell>
 			<LogItemDropdown
 				:attacks="attacks"
+				@openInvoice="openInvoice"
 				@togglePaid="togglePaid"
 			/>
 		</div>
 
 		<!-- md and up -->
 		<div class="d-none d-md-flex flex-grow-1">
-			<LogItemCell clickable>
+			<LogItemCell
+				v-b-tooltip.right
+				clickable
+				title="Open invoice"
+				@click="openInvoice"
+			>
 				<div
 					v-if="!isEvent"
 					class="font-weight-bold lead text-right"
@@ -57,7 +63,9 @@
 				</div>
 			</LogItemCell>
 			<LogItemCell
+				v-b-tooltip.left
 				clickable
+				title="Set price"
 				@click="$refs.priceModal.show()"
 			>
 				<LogItemPrice
@@ -175,6 +183,16 @@ export default {
 			await DB.markUnpaidFrom(this.role, this.result, this.attacks);
 			this.$emit('attacksUpdated');
 			this.SET_LOADING(false);
+		},
+		openInvoice() {
+			this.$router.push({
+				name: 'invoice',
+				params: {
+					attacks: this.attacks,
+					result: this.result,
+					role: this.role,
+				},
+			});
 		},
 		togglePaid() {
 			if (this.attacks[0].paid) {
