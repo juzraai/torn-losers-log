@@ -13,7 +13,7 @@
 			<div class="col-12">
 				<p class="small">
 					<strong>Invoice ID:</strong>
-					{{ invoiceId }}
+					<span :class="{ censored }">{{ censored ? '000000-000000-abc-abc' : invoiceId }}</span>
 				</p>
 			</div>
 			<div class="col">
@@ -49,10 +49,10 @@
 					<dt>Price</dt>
 					<dd
 						class="font-weight-bold"
-						:class="lastAttack.paid ? 'text-success' : 'text-danger'"
+						:class="[lastAttack.paid ? 'text-success' : 'text-danger', censored ? 'censored' : '']"
 					>
-						$&nbsp;{{ $price(attacks.length * lastAttack.price) }}
-						({{ $price(lastAttack.price) }}/ea)
+						$&nbsp;{{ censored ? 'xxxM' : $price(attacks.length * lastAttack.price) }}
+						({{ censored ? 'xxxk' : $price(lastAttack.price) }}/ea)
 					</dd>
 				</dl>
 			</div>
@@ -70,9 +70,10 @@
 								{{ $timestamp(a.timestamp) }}
 								<br>
 								<a
+									:class="{ censored }"
 									:href="'https://www.torn.com/loader.php?sid=attackLog&ID=' + a.code"
 									target="_blank"
-								>{{ a.code }}</a>
+								>{{ censored ? 'abcdef0123456789' : a.code }}</a>
 							</li>
 						</ul>
 						<table
@@ -95,9 +96,10 @@
 									<td>{{ $timestamp(a.timestamp) }}</td>
 									<td>
 										<a
+											:class="{ censored }"
 											:href="'https://www.torn.com/loader.php?sid=attackLog&ID=' + a.code"
 											target="_blank"
-										>{{ a.code }}</a>
+										>{{ censored ? 'abcdef012345678xxabcdef012345678' : a.code }}</a>
 									</td>
 								</tr>
 							</tbody>
@@ -158,6 +160,7 @@ export default {
 	},
 	computed: {
 		...mapState('settings', ['darkMode', 'playerId']),
+		...mapState('ui', ['censored']),
 		attacks() {
 			return this.$route.params.attacks;
 		},

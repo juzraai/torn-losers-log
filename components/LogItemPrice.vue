@@ -1,11 +1,11 @@
 <template>
-	<span :class="attacks[0].paid ? 'text-success' : 'text-danger'">
+	<span :class="[attacks[0].paid ? 'text-success' : 'text-danger', censored ? 'censored' : '']">
 		<span v-if="attacks[0].price">
-			<strong>$&nbsp;{{ $price(attacks[0].price * attacks.length) }}</strong>
+			<strong>$&nbsp;{{ censored ? 'xxxM' : $price(attacks[0].price * attacks.length) }}</strong>
 			<span v-if="attacks.length > 1">
 				<br class="d-none d-md-inline">
 				<span class="d-none d-sm-inline">
-					({{ $price(attacks[0].price) }}/ea)
+					({{ censored ? 'xxxk' : $price(attacks[0].price) }}/ea)
 				</span>
 			</span>
 		</span>
@@ -17,12 +17,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
 	props: {
 		attacks: {
 			type: Array,
 			default: () => [{ paid: false, price: 0 }],
 		},
+	},
+	computed: {
+		...mapState('ui', ['censored']),
 	},
 };
 </script>

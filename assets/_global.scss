@@ -16,6 +16,10 @@ div#__nuxt,
 	min-height: 100vh;
 }
 
+.censored {
+	filter: blur(1px);
+}
+
 .gap {
 	gap: 1rem;
 }

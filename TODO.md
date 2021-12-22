@@ -2,9 +2,6 @@
 
 ## 1. Reimplement V1 features
 
-- blur names feature - no visual option on UI but provide a toggle function in window
-	- my name should be visible tho :D
-- export a 6 attack invoice -> save it in repo: gfx/invoice.jpg
 - log list controls on XS:
 	- hide entirely
 	- show hamburger menu (dropdown) on the right side of list header

@@ -1,16 +1,17 @@
 <template>
-	<span v-if="xid">
+	<span v-if="xid" :class="{ censored: blur }">
 		<a
 			v-if="link"
 			:href="url"
 			target="_blank"
-		>{{ name }} [{{ xid }}]</a>
-		<span v-else>{{ name }} [{{ xid }}]</span>
+		>{{ label }}</a>
+		<span v-else>{{ label }}]</span>
 	</span>
 </template>
 
 <script>
 import { liveQuery } from 'dexie';
+import { mapState } from 'vuex';
 import DB from '@/services/database';
 
 export default {
@@ -28,6 +29,13 @@ export default {
 		name: null,
 	}),
 	computed: {
+		...mapState('ui', ['censored']),
+		blur() {
+			return this.censored && this.xid !== 2413874;
+		},
+		label() {
+			return `${this.blur ? 'Someone' : (this.name || '')} [${this.blur ? '000000' : this.xid}]`;
+		},
 		url() {
 			return `https://www.torn.com/profiles.php?XID=${this.xid}`;
 		},
