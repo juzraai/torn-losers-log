@@ -1,88 +1,90 @@
-.dark {
-	&:not(.modal) { // don't mess up modal overlay
-		background-color: $dark-body-bg;
-		color: $dark-body-color;
-	}
-
-	a:not(.btn),
-	button {
-		color: white;
-
-		&:hover {
-			color: $light;
+@media screen {
+	.dark {
+		&:not(.modal) { // don't mess up modal overlay
+			background-color: $dark-body-bg;
+			color: $dark-body-color;
 		}
-	}
 
-	.btn-link {
-		color: $dark-link-color;
-	}
-
-	.btn-outline-primary {
-		border-color: $dark-link-color;
-		color: $dark-link-color;
-	}
-
-	.btn-primary,
-	.btn-outline-primary:hover {
-		background-color: $dark-link-color;
-		border-color: $dark-link-color;
-		color: white;
-	}
-
-	.border,
-	.border-bottom,
-	.border-left,
-	.border-right,
-	.border-top,
-	.card-footer,
-	.card-header,
-	.list-group-item,
-	.modal-content,
-	.modal-footer,
-	.modal-header {
-		border-color: $dark-border-color !important;
-	}
-
-	.card,
-	.list-group-item,
-	.modal-content {
-		background-color: $dark-card-bg;
-		color: $dark-body-color; // needed for modal only
-	}
-
-	.dropdown-menu {
-		background-color: $dark-dropdown-bg;
-
+		a:not(.btn),
 		button {
-			color: $light;
+			color: white;
+
+			&:hover {
+				color: $light;
+			}
 		}
 
-		button:hover,
-		button:focus,
-		.dropdown-item:hover,
-		.dropdown-item:focus {
-			background-color: $dark-dropdown-link-hover-bg;
+		.btn-link {
+			color: $dark-link-color;
+		}
+
+		.btn-outline-primary {
+			border-color: $dark-link-color;
+			color: $dark-link-color;
+		}
+
+		.btn-primary,
+		.btn-outline-primary:hover {
+			background-color: $dark-link-color;
+			border-color: $dark-link-color;
 			color: white;
 		}
-	}
 
-	input.form-control {
-		background-color: $dark-input-bg;
-		border-color: $dark-input-border-color;
-		color: $dark-input-color;
-	}
+		.border,
+		.border-bottom,
+		.border-left,
+		.border-right,
+		.border-top,
+		.card-footer,
+		.card-header,
+		.list-group-item,
+		.modal-content,
+		.modal-footer,
+		.modal-header {
+			border-color: $dark-border-color !important;
+		}
 
-	.input-group-text {
-		background-color: $dark-input-group-addon-bg;
-		border-color: $dark-input-border-color;
-		color: $dark-input-color;
-	}
+		.card,
+		.list-group-item,
+		.modal-content {
+			background-color: $dark-card-bg;
+			color: $dark-body-color; // needed for modal only
+		}
 
-	.text-danger {
-		color: $dark-danger !important;
-	}
+		.dropdown-menu {
+			background-color: $dark-dropdown-bg;
 
-	.text-muted {
-		color: $dark-text-muted !important;
+			button {
+				color: $light;
+			}
+
+			button:hover,
+			button:focus,
+			.dropdown-item:hover,
+			.dropdown-item:focus {
+				background-color: $dark-dropdown-link-hover-bg;
+				color: white;
+			}
+		}
+
+		input.form-control {
+			background-color: $dark-input-bg;
+			border-color: $dark-input-border-color;
+			color: $dark-input-color;
+		}
+
+		.input-group-text {
+			background-color: $dark-input-group-addon-bg;
+			border-color: $dark-input-border-color;
+			color: $dark-input-color;
+		}
+
+		.text-danger {
+			color: $dark-danger !important;
+		}
+
+		.text-muted {
+			color: $dark-text-muted !important;
+		}
 	}
 }

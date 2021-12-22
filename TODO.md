@@ -6,7 +6,7 @@
 	- TSV (no, timestamp, code, attacker, defender, result, price)
 	- XLSX (same cols)
 	- PNG - just export the main area of Screen if possible
-	- PDF - export Screen element as it is, with clickable links
+		- https://github.com/tsayen/dom-to-image
 - log list controls on XS:
 	- hide entirely
 	- show hamburger menu (dropdown) on the right side of list header
