@@ -144,9 +144,10 @@
 </template>
 
 <script>
+import sleep from 'await-sleep';
 import domtoimage from 'dom-to-image';
 import writeXlsxFile from 'write-excel-file';
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import DB, { RESULT, ROLE } from '~/services/database';
 
 export default {
@@ -202,13 +203,21 @@ export default {
 		}
 	},
 	methods: {
+		...mapMutations('settings', ['SET_DARK_MODE']),
 		async exportJPG() {
-			const el = this.$refs.invoice;
-			const dataUrl = await domtoimage.toJpeg(el, {
+			const prevDarkMode = this.darkMode;
+			if (prevDarkMode) {
+				this.SET_DARK_MODE(false);
+				await sleep(500); // wait out DOM reaction & transition... not so elegant, I know
+			}
+			const dataUrl = await domtoimage.toJpeg(this.$refs.invoice, {
 				bgcolor: 'white',
 				quality: 0.95,
 				width: 600,
 			});
+			if (prevDarkMode) {
+				this.SET_DARK_MODE(prevDarkMode);
+			}
 			const link = document.createElement('a');
 			link.download = `${this.filename}.jpg`;
 			link.href = dataUrl;
