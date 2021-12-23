@@ -27,25 +27,44 @@
 					Update attacks on page load
 				</b-form-checkbox>
 			</b-form-group>
+			<b-form-group>
+				<b-form-checkbox
+					v-model="updateIntervalMsModel"
+					name="check-button"
+					switch
+				>
+					Update attacks every minute and hide <i class="fas fa-sync fa-fw mx-1" />button
+				</b-form-checkbox>
+			</b-form-group>
 		</b-form-group>
 	</Screen>
 </template>
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import UPDATER from '@/services/updater';
 
 export default {
 	head: {
 		title: 'Settings',
 	},
 	computed: {
-		...mapState('settings', ['darkMode', 'updateOnLoad']),
+		...mapState('settings', ['darkMode', 'updateIntervalMs', 'updateOnLoad']),
 		darkModeModel: {
 			get() {
 				return this.darkMode;
 			},
 			set(value) {
 				this.SET_DARK_MODE(value);
+			},
+		},
+		updateIntervalMsModel: {
+			get() {
+				return !!this.updateIntervalMs; // convert to bool
+			},
+			set(value) {
+				this.SET_UPDATE_INTERVAL_MS(value ? 60000 : 0);
+				UPDATER.schedule();
 			},
 		},
 		updateOnLoadModel: {
@@ -63,7 +82,11 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations('settings', ['SET_DARK_MODE', 'SET_UPDATE_ON_LOAD']),
+		...mapMutations('settings', [
+			'SET_DARK_MODE',
+			'SET_UPDATE_INTERVAL_MS',
+			'SET_UPDATE_ON_LOAD',
+		]),
 	},
 };
 </script>

@@ -5,6 +5,7 @@
 			class="card-body d-flex flex-row flex-lg-column p-0 p-md-2"
 		>
 			<b-button
+				v-if="!updateIntervalMs"
 				class="flex-grow-1"
 				size="lg"
 				variant="primary"
@@ -93,6 +94,7 @@ export default {
 	}),
 	computed: {
 		...mapState('log', ['group', 'paid', 'result', 'role']),
+		...mapState('settings', ['updateIntervalMs']),
 		groupMode: {
 			get() {
 				return this.group;

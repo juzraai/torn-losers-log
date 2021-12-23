@@ -10,6 +10,22 @@ export default {
 		$store = $storeInstance;
 		return this;
 	},
+	schedule() {
+		if (window.tllUpdateTimeout) {
+			console.log('[TLL] Scheduled update cancelled');
+		}
+		clearTimeout(window.tllUpdateTimeout);
+		const interval = $store.state.settings.updateIntervalMs;
+		if (interval) {
+			console.log('[TLL] Scheduled update in ', interval);
+			window.tllUpdateTimeout = setTimeout(async () => {
+				$store.commit('ui/SET_LOADING', true);
+				await this.updateAttacks();
+				$store.commit('ui/SET_LOADING', false);
+				this.schedule(); // reschedule
+			}, interval);
+		}
+	},
 	async updateAttacks() {
 		console.time('[TLL] Updated attacks in');
 		const apiKey = $store.state.settings.apiKey;

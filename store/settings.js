@@ -2,6 +2,7 @@ export const state = () => ({
 	apiKey: '',
 	darkMode: false,
 	playerId: 0, // automatically set on /connect
+	updateIntervalMs: 0,
 	updateOnLoad: false,
 });
 
@@ -14,6 +15,9 @@ export const mutations = {
 	},
 	SET_PLAYER_ID(state, playerId) {
 		state.playerId = playerId;
+	},
+	SET_UPDATE_INTERVAL_MS(state, updateIntervalMs) {
+		state.updateIntervalMs = updateIntervalMs;
 	},
 	SET_UPDATE_ON_LOAD(state, updateOnLoad) {
 		state.updateOnLoad = updateOnLoad;

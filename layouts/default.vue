@@ -39,6 +39,7 @@ export default {
 		if (this.updateOnLoad) {
 			await UPDATER.updateAttacks();
 		}
+		UPDATER.schedule();
 		this.SET_LOADING(false);
 	},
 	methods: {
