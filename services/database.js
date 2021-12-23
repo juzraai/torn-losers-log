@@ -68,7 +68,14 @@ export default {
 	},
 
 	/**
-	 * @returns {Object<String, TLLAttack[]>}
+	 * @returns {Promise}
+	 */
+	deleteDatabase() {
+		db.delete();
+	},
+
+	/**
+	 * @returns {Promise<Object<String, TLLAttack[]>>}
 	 */
 	async dump() {
 		const dump = {};

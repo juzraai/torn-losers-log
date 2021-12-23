@@ -162,19 +162,17 @@ export default {
 		importData() {
 			// TODO create a file input element, click it
 			// TODO read it, check playerId, fail if differs
-			// TODO store current API key
-			// TODO run $eraseData(true) & DB.delete(true)
-			// TODO import stuff into LS & db (names, 4 attack tables)
-			// TODO restore API key
+			// TODO DB.deleteRecords()
+			// TODO import "store" from JSON
+			// TODO import DB stuff (names, 4 attack tables)
 			// TODO support V1 too!
 		},
-		clearData() {
-			if (
-				confirm('Are you sure you wish to erase TLL data from your browser?')
-			) {
-				// TODO call $eraseData(true) - defined in storage.client.js (should just remove from LS)
-				// TODO call  DB.delete(true) - defined in database.js (should call db.delete())
-				// TODO router push /
+		async clearData() {
+			const q = 'Are you sure you wish to erase TLL data from your browser?';
+			if (confirm(q)) {
+				this.$removeStorageEntry();
+				await DB.deleteDatabase();
+				window.location.reload();
 			}
 		},
 	},

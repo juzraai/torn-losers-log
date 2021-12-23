@@ -37,4 +37,6 @@ export default ({ store }, inject) => {
 	});
 
 	inject('exportState', () => exportState(store.state));
+
+	inject('removeStorageEntry', () => window.localStorage.removeItem(LOCALE_STORAGE_KEY));
 };
