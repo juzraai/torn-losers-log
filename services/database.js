@@ -5,6 +5,8 @@ import { TLLAttack } from '@/models/Attack';
 // eslint-disable-next-line no-unused-vars
 import Player from '@/models/Player';
 
+const ONE_DAY_MS = 1000 * 60 * 60 * 24;
+
 let db = null;
 
 export default {
@@ -172,17 +174,16 @@ export default {
 
 		console.time(`[TLL] Attack query (${grouping}) completed in`);
 		const query = this.table(role, result)
-			.orderBy('timestamp').reverse();
+			.orderBy('timestamp').reverse().filter(a => !npcAttack(a));
 		if (grouping === GROUPING.EVENT) {
 			const attacks = await query
-				.filter(a => (!a.paid || includePaid) && !npcAttack(a))
+				.and(a => !a.paid || includePaid)
 				.limit(limit)
 				.toArray();
 			r = attacks.map(a => [a]);
 		} else if (grouping === GROUPING.SESSION) {
 			const sessions = [];
 			await query
-				.filter(a => !npcAttack(a))
 				.until(() => sessions.length > limit)
 				.each(a => {
 					const s = sessions.length ? sessions[sessions.length - 1] : [];
@@ -197,7 +198,7 @@ export default {
 		} else if (grouping === GROUPING.CONTRACT) {
 			const contracts = [];
 			await query
-				.filter(a => (!a.paid || includePaid) && !npcAttack(a))
+				.and(a => !a.paid || includePaid)
 				.until(() => contracts.length > limit)
 				.each(a => {
 					const i = contracts.findIndex(c => c[0] && this.isSameGroup(a, c[0]));
@@ -208,6 +209,14 @@ export default {
 					}
 				});
 			r = contracts.slice(0, limit);
+		} else if (grouping === GROUPING.DAYS) {
+			r = await Promise.all(this.pastDays(limit).map(dayMs => {
+				const dayEndMs = dayMs + ONE_DAY_MS - 1;
+				return this.table(role, result)
+					.where('timestamp')
+					.between(dayMs / 1000, dayEndMs / 1000, true, true)
+					.toArray();
+			}));
 		}
 		console.timeEnd(`[TLL] Attack query (${grouping}) completed in`);
 		return r;
@@ -243,6 +252,19 @@ export default {
 			.modify(a => {
 				a.paid = 0;
 			});
+	},
+
+	/**
+	 * @param {Number} n
+	 * @returns {Number[]} UTC 00:00:00.000 timestamps (milliseconds) of the past N days including today.
+	 */
+	pastDays(n) {
+		const todayMs = new Date().setUTCHours(0, 0, 0, 0); // 00:00:00.000 UTC
+		const days = [];
+		for (let i = 0; i < n; i++) {
+			days.push(todayMs - i * ONE_DAY_MS);
+		}
+		return days;
 	},
 
 	/**
@@ -297,6 +319,11 @@ export const GROUPING = {
 	 * Grouping together attacks with same opponent, price and paid status, regardless of their timestamp.
 	 */
 	CONTRACT: 'contract',
+
+	/**
+	 * Grouping together attacks of the same UTC day. Returning an array entry for every UTC day within the interval.
+	 */
+	DAYS: 'days',
 };
 
 export const RESULT = {
