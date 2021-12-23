@@ -29,8 +29,8 @@ export default ({ store }, inject) => {
 		}
 	});
 
-	inject('loadPreviousState', () => {
-		const previousState = JSON.parse(window.localStorage.getItem(LOCALE_STORAGE_KEY) || '{}');
+	inject('loadPreviousState', importedState => {
+		const previousState = importedState || JSON.parse(window.localStorage.getItem(LOCALE_STORAGE_KEY) || '{}');
 		console.log('[TLL] Loading state', previousState);
 		const mergedState = Object.assign({}, store.state, previousState);
 		store.commit('INIT', mergedState);

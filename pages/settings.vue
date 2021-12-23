@@ -160,12 +160,22 @@ export default {
 			a.click();
 		},
 		importData() {
-			// TODO create a file input element, click it
-			// TODO read it, check playerId, fail if differs
-			// TODO DB.deleteRecords()
-			// TODO import "store" from JSON
-			// TODO import DB stuff (names, 4 attack tables)
-			// TODO support V1 too!
+			const i = document.createElement('input');
+			i.setAttribute('type', 'file');
+			i.addEventListener('change', inputEvent => {
+				const [file] = inputEvent.target.files;
+				const reader = new FileReader();
+				reader.addEventListener('load', _ => {
+					const data = JSON.parse(reader.result);
+					if (data.store) {
+						this.$loadPreviousState(data.store);
+					}
+					// TODO import DB stuff (names, 4 attack tables)
+					// TODO support V1 too!
+				});
+				reader.readAsText(file);
+			});
+			i.click();
 		},
 		async clearData() {
 			const q = 'Are you sure you wish to erase TLL data from your browser?';
