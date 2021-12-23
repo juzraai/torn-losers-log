@@ -2,7 +2,7 @@
 	<div class="bg-dark mt-3 text-light">
 		<div class="border-top container my-3 py-3">
 			<div class="row">
-				<div class="col-sm-4 col-md-6">
+				<div class="col-sm-4 col-md-6 d-print-none">
 					<p class="d-sm-none font-weight-bold">
 						<NuxtLink to="/">TLL (TORN City Losers' Log)</NuxtLink>
 					</p>
@@ -29,7 +29,7 @@
 					</ul>
 				</div>
 				<div class="col">
-					<p class="d-none d-sm-block font-weight-bold">
+					<p class="d-none d-sm-block d-print-block font-weight-bold">
 						<NuxtLink to="/">TLL (TORN City Losers' Log)</NuxtLink>
 					</p>
 					<p class="text-justify">
@@ -46,11 +46,13 @@
 					</p>
 					<p class="text-secondary">
 						<span class="badge badge-light mr-2">v{{ $config.APP_VERSION }}</span>
-						Built
-						<Timeago
-							:auto-update="60"
-							:datetime="$config.BUILD_TIMESTAMP"
-						/>
+						<span class="d-print-none">
+							Built
+							<Timeago
+								:auto-update="60"
+								:datetime="$config.BUILD_TIMESTAMP"
+							/>
+						</span>
 					</p>
 				</div>
 			</div>

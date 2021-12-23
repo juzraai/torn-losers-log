@@ -5,7 +5,7 @@
 				<Card>
 					<div
 						v-if="showBack"
-						class="card-header py-1"
+						class="card-header d-print-none py-1"
 					>
 						<b-button
 							class="border-0"
@@ -21,7 +21,7 @@
 						<h2 class="card-title mb-4">{{ title }}</h2>
 						<slot />
 					</div>
-					<div class="card-footer d-flex justify-content-between">
+					<div class="card-footer d-flex d-print-none justify-content-between">
 						<slot name="footer" />
 					</div>
 				</Card>
@@ -52,3 +52,13 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+@media print {
+	.container > .row > .col {
+		flex: 1;
+		max-width: 100%;
+		width: 100%;
+	}
+}
+</style>

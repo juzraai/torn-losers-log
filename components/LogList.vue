@@ -22,7 +22,7 @@
 				/>
 			</li>
 		</ul>
-		<div class="border-top card-footer d-flex justify-content-center py-2">
+		<div class="border-top card-footer d-flex d-print-none justify-content-center py-2">
 			<b-button
 				v-if="limit > 10"
 				class="mx-3"

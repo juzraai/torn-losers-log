@@ -9,7 +9,7 @@
 				<Player :xid="playerId" />
 			</NavbarButton>
 		</client-only>
-		<NavbarButton @click="SET_DARK_MODE(!darkMode)">
+		<NavbarButton class="d-print-none" @click="SET_DARK_MODE(!darkMode)">
 			<i class="fas fa-lightbulb fa-fw" />
 		</NavbarButton>
 	</div>

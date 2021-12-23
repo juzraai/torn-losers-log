@@ -1,7 +1,7 @@
 <template>
 	<div class="container-fluid">
 		<div class="d-flex flex-column flex-lg-row gap">
-			<div>
+			<div class="d-print-none">
 				<client-only>
 					<LogControls />
 				</client-only>

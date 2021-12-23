@@ -5,7 +5,7 @@
 			:href="url"
 			target="_blank"
 		>{{ label }}</a>
-		<span v-else>{{ label }}]</span>
+		<span v-else>{{ label }}</span>
 	</span>
 </template>
 

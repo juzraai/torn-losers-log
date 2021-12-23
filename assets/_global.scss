@@ -8,12 +8,14 @@ body {
 	}
 }
 
-div#__nuxt,
-#__layout,
-#__layout > div,
-#app,
-.h-full {
-	min-height: 100vh;
+@media screen {
+	div#__nuxt,
+	#__layout,
+	#__layout > div,
+	#app,
+	.h-full {
+		min-height: 100vh;
+	}
 }
 
 .gap {
@@ -31,4 +33,10 @@ div#__nuxt,
 
 .transitions {
 	transition: all 150ms;
+}
+
+@media print {
+	*, .shadow, .shadow-sm {
+		box-shadow: none !important;
+	}
 }
