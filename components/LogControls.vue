@@ -60,6 +60,11 @@ export default {
 				tooltip: 'Contracts',
 				value: GROUPING.CONTRACT,
 			},
+			{
+				icon: 'far fa-chart-bar',
+				tooltip: 'Statistics',
+				value: GROUPING.DAYS,
+			},
 		],
 		paidOptions: [
 			{

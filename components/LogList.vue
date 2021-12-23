@@ -48,11 +48,10 @@ import DB, { RESULT, ROLE } from '@/services/database';
 export default {
 	data: () => ({
 		items: [],
-		limit: 10, // TODO offset?
+		limit: 10,
 	}),
 	computed: {
 		...mapState('log', ['group', 'lastUpdated', 'paid', 'result', 'role']),
-		...mapState('settings', ['playerId']),
 		...mapState('ui', ['loading']),
 		notFoundMessage() {
 			const verb = this.result === RESULT.LOST ? 'lost to' : 'escaped from';
@@ -83,7 +82,6 @@ export default {
 	methods: {
 		...mapMutations('ui', ['SET_LOADING']),
 		async query() {
-			// TODO limit & offset setting (NOT in store, just here on page), pass to query methods
 			this.SET_LOADING(true);
 			this.items = await DB.queryAttacks(
 				this.role,
