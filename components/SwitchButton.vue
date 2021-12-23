@@ -1,8 +1,12 @@
 <template>
-	<div v-if="options.length">
+	<div
+		v-if="options.length"
+		class="flex-grow-1"
+	>
 		<b-button
 			v-if="option"
 			v-b-tooltip.bottom
+			block
 			class="d-lg-none"
 			size="lg"
 			:title="option.tooltip"
@@ -62,9 +66,7 @@ export default {
 				return this.options[0];
 			} else {
 				// radio mode: show selected option
-				return (
-					this.options.filter(o => o.value === this.value)[0] || {}
-				);
+				return this.options.filter(o => o.value === this.value)[0] || {};
 			}
 		},
 	},

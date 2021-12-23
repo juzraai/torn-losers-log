@@ -1,7 +1,11 @@
 <template>
 	<Card>
-		<div class="card-body d-flex flex-row flex-lg-column flex-wrap gap p-2">
+		<div
+			id="log-controls"
+			class="card-body d-flex flex-row flex-lg-column p-0 p-md-2"
+		>
 			<b-button
+				class="flex-grow-1"
 				size="lg"
 				variant="primary"
 				@click="updateAttacks"
@@ -123,14 +127,51 @@ export default {
 		},
 	},
 	methods: {
-		...mapMutations('log', ['SET_GROUP', 'SET_LAST_UPDATED', 'SET_PAID', 'SET_RESULT', 'SET_ROLE']),
+		...mapMutations('log', [
+			'SET_GROUP',
+			'SET_LAST_UPDATED',
+			'SET_PAID',
+			'SET_RESULT',
+			'SET_ROLE',
+		]),
 		...mapMutations('ui', ['SET_LOADING']),
 		async updateAttacks() {
 			this.SET_LOADING(true);
 			await UPDATER.updateAttacks();
 			this.SET_LAST_UPDATED(new Date().getTime());
 			this.SET_LOADING(false);
-		}
+		},
 	},
 };
 </script>
+
+<style lang="scss">
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+#log-controls {
+	@include media-breakpoint-down(xs) {
+		.btn {
+			font-size: 1rem;
+		}
+	}
+
+	@include media-breakpoint-down(sm) {
+		border-radius: $btn-border-radius;
+
+		.btn {
+			border-bottom-width: 0;
+			border-color: $light;
+			border-radius: 0;
+			border-top-width: 0;
+			padding: 0.5rem;
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+		grid-gap: 1rem;
+		gap: 1rem;
+	}
+}
+</style>

@@ -2,9 +2,6 @@
 
 ## 1. Reimplement V1 features
 
-- log list controls on XS:
-	- hide entirely
-	- show hamburger menu (dropdown) on the right side of list header
 - settings page
 	- show database metrics, record count, timespan
 	- default list item count (10/15/20)
@@ -15,16 +12,7 @@
 	- export/import feature
 	- clear feature
 - import feature should be accessible from the start screens, between migrate and connect
-- charts - where? separate page? or **should this be a grouping option??????** sounds awesome at first :D
-	- header: role+result + update, right: lead attacks/day avg
-	- attacks/day chart on top - include 0-attack day too
-		- Chart.js? https://www.chartjs.org/docs/latest/samples/other-charts/combo-bar-line.html
-		- https://vue-chartjs.org/
-	- attacks/day list below - same table as log list, with some mods
-		- phrase slot: You lost to X players (???)
-		- price slot: paid price on top, unpaid price on bottom, no /ea price
-		- NO paid button slot
-	- would be nice if timezone could be set on settings page, for these
+- charts - **figure out how/where**
 - changelog display (make it so it splits commit lines into multiple list items: `; ` -> `\n- `)
 - new version notifier
 - forum thread alert, above 1500 attack records
@@ -33,6 +21,7 @@
 - review meta description
 - review favicon
 - create & setup OG image: show screenshots of app!!!
+- set app base url to "/torn-losers-log": https://nuxtjs.org/docs/configuration-glossary/configuration-router/#base
 - **at the end** remove old code
 - merge to main with commit message:
 
