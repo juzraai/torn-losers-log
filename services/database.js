@@ -68,6 +68,19 @@ export default {
 	},
 
 	/**
+	 * @returns {Object<String, TLLAttack[]>}
+	 */
+	async dump() {
+		const dump = {};
+		for (const role of Object.values(ROLE)) {
+			for (const result of Object.values(RESULT)) {
+				dump[`${role}:${result}`] = await this.table(role, result).toArray();
+			}
+		}
+		return dump;
+	},
+
+	/**
 	 * @param {TLLAttack} a
 	 * @param {TLLAttack} b
 	 * @returns {Boolean}

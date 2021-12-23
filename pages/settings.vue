@@ -35,63 +35,65 @@
 		</b-form-group>
 
 		<h6>API key</h6>
-		<b-form-group>
-			<template #label>
-				TLL is bound to
-				<Player
-					class="font-weight-bold"
-					:xid="playerId"
+		<client-only>
+			<b-form-group>
+				<template #label>
+					TLL is bound to
+					<Player
+						class="font-weight-bold"
+						:xid="playerId"
+					/>
+					via this API key:
+				</template>
+				<b-form-input
+					disabled
+					readonly
+					:value="apiKey.substr(0, 5) + '...'"
 				/>
-				via this API key:
-			</template>
-			<b-form-input
-				disabled
-				readonly
-				:value="apiKey.substr(0, 5) + '...'"
-			/>
-			<template #description>
-				If you wish to change the API key or switch to another player,
-				please use the <strong>Export</strong> and <strong>Clear</strong>
-				buttons below, then you can enter a new API key.
-			</template>
-		</b-form-group>
+				<template #description>
+					If you wish to change the API key or switch to another player,
+					please follow these steps: <strong>Export</strong> -> <strong>Clear</strong> -> enter new API key -> <strong>Import</strong>.
+				</template>
+			</b-form-group>
+		</client-only>
 
 		<h6>TLL data</h6>
-		<b-form-group label="You can download your settings and attacks in a single file, as a complete TLL backup.">
-			<b-button
-				variant="primary"
+		<div class="d-flex flex-column gap">
+			<SettingsButtonSection
+				class="mb-3 mb-sm-0"
+				icon="fas fa-file-download"
+				label="Export"
 				@click="exportData"
 			>
-				<i class="fas fa-file-download fa-fw mr-1" />
-				Export
-			</b-button>
-		</b-form-group>
-		<b-form-group description="You can use exports of TLL v1 too.">
-			<template #label>
-				You can upload a previously downloaded export, to restore a backup. <strong class="text-danger">This will delete your current settings and database first!</strong>
-			</template>
-			<b-button
+				Download your settings and attacks in a single file.
+				Your API key won't be included in the file.
+			</SettingsButtonSection>
+			<SettingsButtonSection
+				class="mb-3 mb-sm-0"
+				icon="fas fa-file-upload"
+				label="Import"
 				variant="danger"
-				@click="exportData"
+				@click="importData"
 			>
-				<i class="fas fa-file-upload fa-fw mr-1" />
-				Import
-			</b-button>
-		</b-form-group>
-		<b-form-group label="You can erase TLL data from your browser. The following button will ask for confirmation first.">
-			<b-button
+				<strong class="text-danger">Erase current settings and attacks, and restore data from an uploaded export.</strong>
+			</SettingsButtonSection>
+			<SettingsButtonSection
+				class="align-items-center"
+				icon="fas fa-trash-alt"
+				label="Clear"
 				variant="danger"
 				@click="clearData"
 			>
-				<i class="fas fa-trash-alt fa-fw mr-1" />
-				Clear
-			</b-button>
-		</b-form-group>
+				<strong class="text-danger">Erase TLL data from your browser.</strong>
+			</SettingsButtonSection>
+		</div>
 	</Screen>
 </template>
 
 <script>
+import dayjs from 'dayjs';
 import { mapMutations, mapState } from 'vuex';
+import DB from '@/services/database';
 import UPDATER from '@/services/updater';
 
 export default {
@@ -143,19 +145,33 @@ export default {
 			'SET_UPDATE_INTERVAL_MS',
 			'SET_UPDATE_ON_LOAD',
 		]),
-		exportData() {
-			// TODO build { store: {}, database: {} } JSON
-			// TODO make it download
+		async exportData() {
+			const store = this.$exportState();
+			const database = await DB.dump();
+			delete store.settings.apiKey;
+
+			const ts = dayjs().format('YYMMDD-HHmmss');
+			const json = JSON.stringify({ store, database });
+			const blob = new Blob([json], { type: 'text/plain' });
+			const file = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.setAttribute('download', `tll-export-${ts}.json`);
+			a.setAttribute('href', file);
+			a.click();
 		},
 		importData() {
 			// TODO create a file input element, click it
-			// TODO read it
+			// TODO read it, check playerId, fail if differs
+			// TODO store current API key
 			// TODO run $eraseData(true) & DB.delete(true)
 			// TODO import stuff into LS & db (names, 4 attack tables)
+			// TODO restore API key
 			// TODO support V1 too!
 		},
 		clearData() {
-			if (confirm('Are you sure you wish to erase TLL data from your browser?')) {
+			if (
+				confirm('Are you sure you wish to erase TLL data from your browser?')
+			) {
 				// TODO call $eraseData(true) - defined in storage.client.js (should just remove from LS)
 				// TODO call  DB.delete(true) - defined in database.js (should call db.delete())
 				// TODO router push /

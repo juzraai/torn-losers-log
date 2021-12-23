@@ -7,6 +7,14 @@ const PERSISTED_MODULES = [
 
 let saveTimeout = null;
 
+function exportState(state) {
+	const persistedState = {};
+	for (const key of PERSISTED_MODULES) {
+		persistedState[key] = JSON.parse(JSON.stringify(state[key]));
+	}
+	return persistedState;
+}
+
 export default ({ store }, inject) => {
 	store.subscribe((mutation, state) => {
 		if (PERSISTED_MODULES.includes(mutation.type.split('/')[0])) {
@@ -14,10 +22,7 @@ export default ({ store }, inject) => {
 				clearTimeout(saveTimeout);
 			}
 			saveTimeout = setTimeout(() => {
-				const persistedState = {};
-				for (const key of PERSISTED_MODULES) {
-					persistedState[key] = state[key];
-				}
+				const persistedState = exportState(state);
 				console.log('[TLL] Saving state', persistedState);
 				window.localStorage.setItem(LOCALE_STORAGE_KEY, JSON.stringify(persistedState));
 			}, 1000);
@@ -30,4 +35,6 @@ export default ({ store }, inject) => {
 		const mergedState = Object.assign({}, store.state, previousState);
 		store.commit('INIT', mergedState);
 	});
+
+	inject('exportState', () => exportState(store.state));
 };
