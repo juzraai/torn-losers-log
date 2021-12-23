@@ -95,6 +95,7 @@ import dayjs from 'dayjs';
 import { mapMutations, mapState } from 'vuex';
 import DB from '@/services/database';
 import UPDATER from '@/services/updater';
+import v1Compat from '@/services/v1-compat';
 
 export default {
 	head: {
@@ -167,19 +168,20 @@ export default {
 				const [file] = inputEvent.target.files;
 				const reader = new FileReader();
 				reader.addEventListener('load', async _ => {
-					const data = JSON.parse(reader.result);
+					let data = JSON.parse(reader.result);
+					if (!data.store && !data.database) {
+						data = v1Compat.convert(data);
+					}
+					delete data.store.settings.apiKey;
+
 					if (data.store.settings.playerId !== this.playerId) {
-						return alert('playerId nem egyezik!');
+						return alert('playerId mismatch! This is someone else\'s export!');
 					}
+
 					this.SET_LOADING(true);
-					if (data.store) {
-						this.$loadPreviousState(data.store);
-					}
-					if (data.database) {
-						await DB.deleteRecords();
-						await DB.loadDump(data.database);
-					}
-					// TODO support V1 too!
+					this.$loadPreviousState(data.store);
+					await DB.deleteRecords();
+					await DB.loadDump(data.database);
 					this.SET_LOADING(false);
 				});
 				reader.readAsText(file);
