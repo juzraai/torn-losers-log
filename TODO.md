@@ -2,7 +2,6 @@
 
 ## 1. Reimplement V1 features
 
-- import: supporting V1 format
 - settings page
 	- show database metrics, record count, timespan
 	- default list item count (10/15/20)

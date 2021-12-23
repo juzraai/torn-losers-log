@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { ROLE, RESULT } from './database';
+import { GROUPING, ROLE, RESULT } from './database';
 import { TLLAttack } from '@/models/Attack';
 // eslint-disable-next-line no-unused-vars
 import V1Store from '@/models/V1Store';
@@ -19,11 +19,22 @@ export default {
 			lastUpdate,
 			losses,
 			names,
-			playerId
+			playerId,
+			tab
 		} = v1Store;
 
+		const tabToGrouping = [
+			/* Losses */ GROUPING.EVENT,
+			/* Sessions */ GROUPING.SESSION,
+			/* Daily */ GROUPING.SESSION,
+			/* Contracts */ GROUPING.CONTRACT,
+			/* Unpaid */ GROUPING.CONTRACT,
+		];
+
 		const log = {
+			group: tabToGrouping[tab] || GROUPING.EVENT,
 			lastUpdated: lastUpdate,
+			paid: tab < 4,
 		};
 		const settings = {
 			apiKey,
