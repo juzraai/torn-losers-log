@@ -31,6 +31,7 @@ export default {
 			'BOverlay',
 			'BDropdown',
 			'BDropdownItemButton',
+			'BFormCheckbox',
 			'BFormGroup',
 			'BFormInput',
 			'BInputGroup',

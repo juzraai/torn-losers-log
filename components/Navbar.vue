@@ -1,15 +1,27 @@
 <template>
 	<div class="align-items-start d-flex my-1">
-		<NavbarButton to="/">
+		<NavbarButton
+			class="mr-auto"
+			to="/"
+		>
 			TLL
 		</NavbarButton>
 
 		<client-only>
-			<NavbarButton class="ml-auto" disabled>
+			<NavbarButton disabled>
 				<Player :xid="playerId" />
 			</NavbarButton>
 		</client-only>
-		<NavbarButton class="d-print-none" @click="SET_DARK_MODE(!darkMode)">
+		<NavbarButton
+			class="d-print-none"
+			to="/settings"
+		>
+			<i class="fas fa-cog fa-fw" />
+		</NavbarButton>
+		<NavbarButton
+			class="d-print-none"
+			@click="SET_DARK_MODE(!darkMode)"
+		>
 			<i class="fas fa-lightbulb fa-fw" />
 		</NavbarButton>
 	</div>

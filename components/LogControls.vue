@@ -129,7 +129,6 @@ export default {
 	methods: {
 		...mapMutations('log', [
 			'SET_GROUP',
-			'SET_LAST_UPDATED',
 			'SET_PAID',
 			'SET_RESULT',
 			'SET_ROLE',
@@ -138,7 +137,6 @@ export default {
 		async updateAttacks() {
 			this.SET_LOADING(true);
 			await UPDATER.updateAttacks();
-			this.SET_LAST_UPDATED(new Date().getTime());
 			this.SET_LOADING(false);
 		},
 	},

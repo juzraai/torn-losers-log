@@ -6,7 +6,6 @@
 	- show database metrics, record count, timespan
 	- default list item count (10/15/20)
 	- auto update settings:
-		- update when opened (layout beforeCreate!): on/off
 		- update interval: 0 (off), or X minutes - when it's running, don't show loading screen
 		- if interval is OFF, the refresh button is showing, otherwise hidden
 	- export/import feature
@@ -26,7 +25,7 @@
 - merge to main with commit message:
 
 ```md
-feat: added handling of escapes; added handling of incoming attacks; added JPG export to proofs/invoices; added XLSX (Excel) export to proofs/invoices; added automatic player name resolving; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster; [...]
+feat: added handling of escapes; added handling of incoming attacks; added JPG export to proofs/invoices; added XLSX (Excel) export to proofs/invoices; added automatic log update on page load (optional); added automatic player name resolving; added settings page; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster; [...]
 
 BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest change is that it now manages attacks & names in IndexedDB (instead of in-memory Vuex store).
 ```

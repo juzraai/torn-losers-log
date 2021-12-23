@@ -68,6 +68,8 @@ export default {
 		});
 		await DB.addPlayers(players);
 
+		$store.commit('log/SET_LAST_UPDATED', new Date().getTime());
+
 		console.timeEnd('[TLL] Updated attacks in');
 	},
 };

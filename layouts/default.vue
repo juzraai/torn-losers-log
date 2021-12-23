@@ -23,10 +23,11 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import UPDATER from '@/services/updater';
 
 export default {
 	computed: {
-		...mapState('settings', ['darkMode']),
+		...mapState('settings', ['darkMode', 'updateOnLoad']),
 		...mapState('ui', ['loading']),
 	},
 	beforeCreate() {
@@ -34,7 +35,10 @@ export default {
 			this.$loadPreviousState();
 		}
 	},
-	mounted() {
+	async mounted() {
+		if (this.updateOnLoad) {
+			await UPDATER.updateAttacks();
+		}
 		this.SET_LOADING(false);
 	},
 	methods: {
