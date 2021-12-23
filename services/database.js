@@ -75,16 +75,41 @@ export default {
 	},
 
 	/**
-	 * @returns {Promise<Object<String, TLLAttack[]>>}
+	 * @returns {Promise}
+	 */
+	async deleteRecords() {
+		for (const role of Object.values(ROLE)) {
+			for (const result of Object.values(RESULT)) {
+				await this.table(role, result).clear();
+			}
+		}
+	},
+
+	/**
+	 * @returns {Promise<Object<String, Player[]|TLLAttack[]>>}
 	 */
 	async dump() {
 		const dump = {};
+		dump.players = await db.players.toArray();
 		for (const role of Object.values(ROLE)) {
 			for (const result of Object.values(RESULT)) {
 				dump[`${role}:${result}`] = await this.table(role, result).toArray();
 			}
 		}
 		return dump;
+	},
+
+	/**
+	 * @param {Object<String, Player[]|TLLAttack[]>}
+	 * @returns {Promise}
+	 */
+	async loadDump(dump) {
+		await this.addPlayers(dump.players || []);
+		for (const role of Object.values(ROLE)) {
+			for (const result of Object.values(RESULT)) {
+				await this.addAttacks(role, result, dump[`${role}:${result}`] || []);
+			}
+		}
 	},
 
 	/**

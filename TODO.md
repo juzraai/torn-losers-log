@@ -2,12 +2,10 @@
 
 ## 1. Reimplement V1 features
 
-- export, import logic, supporting V1 format
+- import: supporting V1 format
 - settings page
 	- show database metrics, record count, timespan
 	- default list item count (10/15/20)
-	- export/import feature
-	- clear feature
 - charts - **figure out how/where**
 - changelog display (make it so it splits commit lines into multiple list items: `; ` -> `\n- `)
 - new version notifier

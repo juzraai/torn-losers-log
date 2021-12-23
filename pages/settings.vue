@@ -145,6 +145,7 @@ export default {
 			'SET_UPDATE_INTERVAL_MS',
 			'SET_UPDATE_ON_LOAD',
 		]),
+		...mapMutations('ui', ['SET_LOADING']),
 		async exportData() {
 			const store = this.$exportState();
 			const database = await DB.dump();
@@ -165,13 +166,21 @@ export default {
 			i.addEventListener('change', inputEvent => {
 				const [file] = inputEvent.target.files;
 				const reader = new FileReader();
-				reader.addEventListener('load', _ => {
+				reader.addEventListener('load', async _ => {
 					const data = JSON.parse(reader.result);
+					if (data.store.settings.playerId !== this.playerId) {
+						return alert('playerId nem egyezik!');
+					}
+					this.SET_LOADING(true);
 					if (data.store) {
 						this.$loadPreviousState(data.store);
 					}
-					// TODO import DB stuff (names, 4 attack tables)
+					if (data.database) {
+						await DB.deleteRecords();
+						await DB.loadDump(data.database);
+					}
 					// TODO support V1 too!
+					this.SET_LOADING(false);
 				});
 				reader.readAsText(file);
 			});
