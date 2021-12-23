@@ -19,7 +19,7 @@
 			<i class="fas fa-cog fa-fw" />
 		</NavbarButton>
 		<NavbarButton
-			class="d-print-none"
+			class="d-none d-sm-block d-print-none"
 			@click="SET_DARK_MODE(!darkMode)"
 		>
 			<i class="fas fa-lightbulb fa-fw" />

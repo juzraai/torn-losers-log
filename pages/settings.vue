@@ -5,37 +5,35 @@
 		show-back
 		title="Settings"
 	>
-		<b-form-group label="UI">
-			<b-form-group>
-				<b-form-checkbox
-					v-model="darkModeModel"
-					name="check-button"
-					switch
-				>
-					Dark mode
-				</b-form-checkbox>
-			</b-form-group>
+		<h6>UI</h6>
+		<b-form-group>
+			<b-form-checkbox
+				v-model="darkModeModel"
+				name="check-button"
+				switch
+			>
+				Dark mode
+			</b-form-checkbox>
 		</b-form-group>
 
-		<b-form-group label="Updates">
-			<b-form-group>
-				<b-form-checkbox
-					v-model="updateOnLoadModel"
-					name="check-button"
-					switch
-				>
-					Update attacks on page load
-				</b-form-checkbox>
-			</b-form-group>
-			<b-form-group>
-				<b-form-checkbox
-					v-model="updateIntervalMsModel"
-					name="check-button"
-					switch
-				>
-					Update attacks every minute and hide <i class="fas fa-sync fa-fw mx-1" />button
-				</b-form-checkbox>
-			</b-form-group>
+		<h6>Updates</h6>
+		<b-form-group>
+			<b-form-checkbox
+				v-model="updateOnLoadModel"
+				name="check-button"
+				switch
+			>
+				Update attacks on page load
+			</b-form-checkbox>
+		</b-form-group>
+		<b-form-group>
+			<b-form-checkbox
+				v-model="updateIntervalMsModel"
+				name="check-button"
+				switch
+			>
+				Update attacks every minute and hide <i class="fas fa-sync fa-fw mx-1" />button
+			</b-form-checkbox>
 		</b-form-group>
 	</Screen>
 </template>
@@ -90,3 +88,10 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+h6 {
+	font-weight: bold;
+	margin-top: 2rem;
+}
+</style>

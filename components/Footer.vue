@@ -65,6 +65,7 @@ export default {
 	data: () => ({
 		links: [
 			{ label: 'Log', to: '/log' },
+			{ label: 'Settings', to: '/settings' },
 			{
 				label: 'About',
 				href: 'https://github.com/juzraai/torn-losers-log/blob/main/README.md',
@@ -90,7 +91,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables";
+@import '@/assets/variables';
 
 a {
 	color: white !important;
