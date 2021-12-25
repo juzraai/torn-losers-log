@@ -1,7 +1,7 @@
 <template>
 	<div class="d-flex flex-column gap">
 		<Card>
-			<div class="card-header font-weight-bold">
+			<div class="border-0 card-header font-weight-bold">
 				{{ total }}
 				{{ title }}
 			</div>

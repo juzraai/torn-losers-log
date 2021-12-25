@@ -52,7 +52,7 @@
 				/>
 				<template #description>
 					If you wish to change the API key or switch to another player,
-					please follow these steps: <strong>Export</strong> -> <strong>Clear</strong> -> enter new API key -> <strong>Import</strong>.
+					please follow these steps: <strong>Export</strong> > <strong>Clear</strong> > enter new API key > <strong>Import</strong>.
 				</template>
 			</b-form-group>
 		</client-only>

@@ -5,7 +5,6 @@
 - settings page
 	- show database metrics, record count, timespan
 	- default list item count (10/15/20)
-- charts - **figure out how/where**
 - changelog display (make it so it splits commit lines into multiple list items: `; ` -> `\n- `)
 - new version notifier
 - forum thread alert, above 1500 attack records

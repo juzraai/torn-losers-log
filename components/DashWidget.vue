@@ -3,6 +3,7 @@
 		<div class="card-body d-flex flex-column">
 			<h6
 				v-if="title"
+				class="text-muted"
 				v-text="title"
 			/>
 			<h1
