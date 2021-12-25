@@ -1,50 +1,50 @@
 <template>
-	<Card>
-		<div class="card-body">
-			<h6 class="mb-4">{{ title }}</h6>
-			<div class="grid">
-				<div class="border-bottom d-flex flex-column justify-content-between px-2 text-muted text-right">
-					<div>{{ max }}</div>
-					<div>0</div>
-				</div>
+	<DashWidget title="Attacks">
+		<div class="grid flex-grow-1">
+			<div class="border-bottom d-flex flex-column justify-content-between px-2 text-muted text-right">
+				<div>{{ max }}</div>
+				<div>0</div>
+			</div>
+			<div
+				class="align-items-end border-bottom border-left d-flex flex-grow-1 flex-row-reverse position-relative"
+				style="min-height: 300px;"
+			>
 				<div
-					class="align-items-end border-bottom border-left d-flex flex-grow-1 flex-row-reverse position-relative"
-					style="height: 300px;"
-				>
-					<div
-						class="avg border-bottom position-absolute px-1 text-info w-100"
-						:style="{ bottom: avg ? (100 * avg / max) + '%' : 0 }"
-						v-text="'Avg'"
-					/>
-					<div
-						v-for="(attacks, i) in items"
-						:key="role+result+i"
-						v-b-tooltip.bottom.html
-						class="bar bg-primary flex-grow-1"
-						:style="{ height: 100 * attacks.length / max + '%' }"
-						:title="labels[i]"
-					/>
-				</div>
+					class="avg border-bottom position-absolute px-1 text-info w-100"
+					:style="{ bottom: avg ? (100 * avg / max) + '%' : 0 }"
+					v-text="'Avg'"
+				/>
 				<div
-					class="border-left d-flex p-2 text-muted"
-					style="grid-column-start: 2"
-				>
-					<div class="d-none d-sm-block mr-auto">{{ format(days[days.length - 1]) }}</div>
-					<div class="d-sm-none mx-auto">Days</div>
-					<div class="d-none d-sm-block ml-auto">{{ format(days[0]) }}</div>
-				</div>
+					v-for="(attacks, i) in items"
+					:key="role+result+i"
+					v-b-tooltip.bottom.html
+					class="bar bg-primary flex-grow-1"
+					:style="{ height: 100 * attacks.length / max + '%' }"
+					:title="labels[i]"
+				/>
+			</div>
+			<div
+				class="border-left d-flex p-2 text-muted"
+				style="grid-column-start: 2"
+			>
+				<div class="d-none d-sm-block mr-auto">{{ format(days[days.length - 1]) }}</div>
+				<div class="d-sm-none mx-auto">Days</div>
+				<div class="d-none d-sm-block ml-auto">{{ format(days[0]) }}</div>
 			</div>
 		</div>
-	</Card>
+	</DashWidget>
 </template>
 
 <script>
 import dayjs from 'dayjs';
 import { mapState } from 'vuex';
-import { RESULT, ROLE } from '@/services/database';
 
 export default {
 	props: {
+		avg: {
+			type: Number,
+			default: 0,
+		},
 		days: {
 			type: Array,
 			default: () => [],
@@ -67,24 +67,8 @@ export default {
 				} on <strong>${d}</strong>`;
 			});
 		},
-		avg() {
-			if (this.items.length) {
-				const lens = this.items
-					.slice(1) // exclude today (incomplete)
-					.map(attacks => attacks.length);
-				const sum = lens.reduce((sum, len) => sum + len);
-				return sum / lens.length;
-			} else {
-				return 0;
-			}
-		},
 		max() {
 			return Math.max(...this.items.map(attacks => attacks.length));
-		},
-		title() {
-			const direction = this.role === ROLE.ATTACKER ? 'Outgoing' : 'Incoming';
-			const outcome = this.result === RESULT.LOST ? 'losses' : 'escapes';
-			return `${direction} ${outcome} in the past ${this.items.length} days`;
 		},
 	},
 	methods: {
