@@ -9,7 +9,7 @@
 		button {
 			color: white;
 
-			&:hover {
+			&:hover:not(:disabled) {
 				color: $light;
 			}
 		}
@@ -25,9 +25,11 @@
 
 		.btn-primary,
 		.btn-outline-primary:hover {
-			background-color: $dark-link-color;
-			border-color: $dark-link-color;
-			color: white;
+			&:not(:disabled) {
+				background-color: $dark-link-color;
+				border-color: $dark-link-color;
+				color: white;
+			}
 		}
 
 		.border,

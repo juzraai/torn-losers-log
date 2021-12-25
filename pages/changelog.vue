@@ -21,6 +21,9 @@
 import { marked } from 'marked';
 
 export default {
+	head: {
+		title: 'Changelog',
+	},
 	computed: {
 		changelog() {
 			const t = this.$config.CHANGELOG.split('\n')

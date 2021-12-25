@@ -16,7 +16,7 @@
 				/>
 				<div
 					v-for="(attacks, i) in items.slice(0, limit)"
-					:key="role+result+i"
+					:key="i+role+result+attacks.length"
 					v-b-tooltip.bottom.html
 					class="bar bg-primary flex-grow-1"
 					:style="{ height: 100 * attacks.length / max + '%' }"
