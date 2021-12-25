@@ -76,7 +76,7 @@ export default {
 				href: 'https://www.torn.com/forums.php#/p=threads&f=67&t=16219540',
 				target: '_blank',
 			},
-			{ label: 'Changelog' },
+			{ label: 'Changelog', to: '/changelog' },
 			{
 				label: 'Source code',
 
@@ -84,8 +84,6 @@ export default {
 				target: '_blank',
 			},
 		],
-		buildTime: 0,
-		version: process.env.APP_VERSION,
 	}),
 };
 </script>
