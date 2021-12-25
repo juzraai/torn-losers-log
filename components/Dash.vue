@@ -90,7 +90,7 @@ export default {
 				sum += priced.reduce((sum, p) => sum + p, 0);
 				count += priced.length;
 			});
-			return sum / count;
+			return count ? sum / count : 0;
 		},
 		opponents() {
 			const ids = {};
@@ -165,9 +165,13 @@ export default {
 
 .grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr;
 
 	@include media-breakpoint-up(sm) {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@include media-breakpoint-up(md) {
 		grid-template-columns: 1fr 1fr 1fr;
 	}
 
