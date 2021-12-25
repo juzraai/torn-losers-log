@@ -15,7 +15,7 @@
 					v-text="'Avg'"
 				/>
 				<div
-					v-for="(attacks, i) in items"
+					v-for="(attacks, i) in items.slice(0, limit)"
 					:key="role+result+i"
 					v-b-tooltip.bottom.html
 					class="bar bg-primary flex-grow-1"
@@ -28,7 +28,7 @@
 				style="grid-column-start: 2"
 			>
 				<div class="d-none d-sm-block mr-auto">{{ format(days[days.length - 1]) }}</div>
-				<div class="d-sm-none mx-auto">Days</div>
+				<div class="d-sm-none mx-auto">Past 7 days</div>
 				<div class="d-none d-sm-block ml-auto">{{ format(days[0]) }}</div>
 			</div>
 		</div>
@@ -70,6 +70,12 @@ export default {
 		max() {
 			return Math.max(...this.items.map(attacks => attacks.length));
 		},
+	},
+	mounted() {
+		window.addEventListener('resize', () => {
+			const w = window.innerWidth;
+			this.limit = w < 576 ? 7 : 31;
+		});
 	},
 	methods: {
 		format(ts) {
