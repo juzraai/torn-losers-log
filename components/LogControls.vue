@@ -31,6 +31,7 @@
 
 			<SwitchButton
 				v-model="showPaid"
+				:disabled="isDaysGrouping"
 				:options="paidOptions"
 			/>
 		</div>
@@ -107,6 +108,9 @@ export default {
 			set(value) {
 				this.SET_GROUP(value);
 			},
+		},
+		isDaysGrouping() {
+			return this.group === GROUPING.DAYS;
 		},
 		resultFilter: {
 			get() {

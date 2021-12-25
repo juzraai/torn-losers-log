@@ -8,6 +8,7 @@
 			v-b-tooltip.bottom
 			block
 			class="d-lg-none"
+			:disabled="disabled"
 			size="lg"
 			:title="option.tooltip"
 			:variant="variant(option)"
@@ -28,6 +29,7 @@
 					:key="o.value"
 					v-b-tooltip.right
 					:active="o.value === option.value"
+					:disabled="disabled"
 					:title="o.tooltip"
 					:variant="variant(o)"
 					@click="toggle(o, false, $event)"
@@ -45,6 +47,10 @@
 <script>
 export default {
 	props: {
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
 		options: {
 			type: Array,
 			default: () => [],

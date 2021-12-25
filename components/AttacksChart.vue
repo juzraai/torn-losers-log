@@ -6,7 +6,7 @@
 				<div>0</div>
 			</div>
 			<div
-				class="align-items-end border-bottom border-left d-flex flex-grow-1 flex-row-reverse position-relative"
+				class="align-items-end border-bottom border-left d-flex flex-row-reverse position-relative"
 				style="min-height: 300px;"
 			>
 				<div
@@ -107,7 +107,7 @@ export default {
 .grid {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	grid-template-rows: auto auto;
+	grid-template-rows: auto min-content;
 	gap: 0px 0px;
 }
 </style>

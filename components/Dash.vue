@@ -1,28 +1,40 @@
 <template>
 	<div class="d-flex flex-column gap">
 		<Card>
-			<div class="card-header font-weight-bold">{{ title }}</div>
+			<div class="card-header font-weight-bold">
+				{{ total }}
+				{{ title }}
+			</div>
 		</Card>
 		<div class="d-flex flex-column flex-lg-row gap">
 			<div class="col col-12 col-lg-5 col-lg-4 gap grid">
-				<DashWidget title="Total attacks">
-					<h1>{{ total }}</h1>
-				</DashWidget>
-				<DashWidget title="Attacks/day">
-					<h1>{{ Math.round(avg * 10) / 10 }}</h1>
-				</DashWidget>
-				<DashWidget title="Total attacks">
-					<h1>{{ total }}</h1>
-				</DashWidget>
-				<DashWidget title="Total attacks">
-					<h1>{{ total }}</h1>
-				</DashWidget>
-				<DashWidget title="Total attacks">
-					<h1>{{ total }}</h1>
-				</DashWidget>
-				<DashWidget title="Total attacks">
-					<h1>{{ total }}</h1>
-				</DashWidget>
+				<DashWidget
+					title="Attacks today"
+					:number="items.length ? items[0].length : 0"
+				/>
+				<DashWidget
+					title="Attacks/day"
+					:number="avg"
+				/>
+				<DashWidget
+					title="Opponents"
+					:number="opponents"
+				/>
+				<DashWidget
+					title="Price/attack"
+					:number="avgPrice"
+					price
+				/>
+				<DashWidget
+					title="Money/day"
+					:number="totalPrice / items.length"
+					price
+				/>
+				<DashWidget
+					title="Money in total"
+					:number="totalPrice"
+					price
+				/>
 			</div>
 			<div class="col d-flex">
 				<AttacksChart
@@ -70,6 +82,25 @@ export default {
 				return 0;
 			}
 		},
+		avgPrice() {
+			let sum = 0;
+			let count = 0;
+			this.items.forEach(attacks => {
+				const priced = attacks.filter(a => a.price).map(a => a.price);
+				sum += priced.reduce((sum, p) => sum + p, 0);
+				count += priced.length;
+			});
+			return sum / count;
+		},
+		opponents() {
+			const ids = {};
+			this.items.forEach(attacks => {
+				attacks.forEach(a => {
+					ids[a.opponentId] = true;
+				});
+			});
+			return Object.keys(ids).length;
+		},
 		thingsThatTriggerUpdate() {
 			return [
 				//
@@ -82,12 +113,18 @@ export default {
 			].join(';');
 		},
 		title() {
-			const direction = this.role === ROLE.ATTACKER ? 'Outgoing' : 'Incoming';
+			const direction = this.role === ROLE.ATTACKER ? 'outgoing' : 'incoming';
 			const outcome = this.result === RESULT.LOST ? 'losses' : 'escapes';
 			return `${direction} ${outcome} in the past ${this.items.length} days`;
 		},
 		total() {
 			return this.items.reduce((sum, attacks) => sum + attacks.length, 0);
+		},
+		totalPrice() {
+			return this.items.reduce(
+				(sum, attacks) => sum + attacks.reduce((s, a) => s + a.price, 0),
+				0
+			);
 		},
 	},
 	watch: {
