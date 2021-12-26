@@ -27,12 +27,17 @@ import UPDATER from '@/services/updater';
 
 export default {
 	computed: {
-		...mapState('settings', ['darkMode', 'updateOnLoad']),
+		...mapState('settings', ['announcedVersion', 'darkMode', 'updateOnLoad']),
 		...mapState('ui', ['loading']),
 	},
 	beforeCreate() {
 		if (this.$loadPreviousState) {
 			this.$loadPreviousState();
+			this.$nextTick(() => {
+				if (this.announcedVersion !== this.$config.APP_VERSION) {
+					this.$router.replace('/update');
+				}
+			});
 		}
 	},
 	async mounted() {

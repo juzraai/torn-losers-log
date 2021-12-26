@@ -2,7 +2,6 @@
 
 ## 2.0.0
 
-- new version notifier
 - forum thread alert, above 1500 attack records
 - tutorial card on log screen, can be closed, but reopened in settings
 	- aware of current screen size

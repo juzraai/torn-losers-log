@@ -49,7 +49,7 @@ export default {
 							.trim()
 							// make major commit message multiline
 							.split('; ')
-							.join('\n')
+							.join('\n* ')
 					);
 				})
 				.join('\n');

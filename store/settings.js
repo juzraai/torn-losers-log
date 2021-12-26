@@ -1,4 +1,5 @@
 export const state = () => ({
+	announcedVersion: '1.6.0',
 	apiKey: '',
 	darkMode: false,
 	listLimit: 10,
@@ -8,6 +9,9 @@ export const state = () => ({
 });
 
 export const mutations = {
+	SET_ANNOUNCED_VERSION(state, announcedVersion) {
+		state.announcedVersion = announcedVersion;
+	},
 	SET_API_KEY(state, apiKey) {
 		state.apiKey = apiKey;
 	},

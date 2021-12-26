@@ -18,7 +18,11 @@
 						</b-button>
 					</div>
 					<div class="card-body">
-						<h2 class="card-title mb-4">{{ title }}</h2>
+						<h2
+							v-if="title"
+							class="card-title mb-4"
+							v-text="title"
+						/>
 						<slot />
 					</div>
 					<div class="card-footer d-flex d-print-none justify-content-between">
