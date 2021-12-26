@@ -46,12 +46,15 @@ import { mapMutations, mapState } from 'vuex';
 import DB, { RESULT, ROLE } from '@/services/database';
 
 export default {
-	data: () => ({
-		items: [],
-		limit: 10,
-	}),
+	data() {
+		return {
+			items: [],
+			limit: 10,
+		};
+	},
 	computed: {
 		...mapState('log', ['group', 'lastUpdated', 'paid', 'result', 'role']),
+		...mapState('settings', ['listLimit']),
 		...mapState('ui', ['loading']),
 		notFoundMessage() {
 			const verb = this.result === RESULT.LOST ? 'lost to' : 'escaped from';
@@ -64,7 +67,7 @@ export default {
 				//
 				this.group,
 				this.lastUpdated,
-				this.limit,
+				// this.limit, // handled separately to optimize
 				this.paid,
 				this.result,
 				this.role,
@@ -72,11 +75,22 @@ export default {
 		},
 	},
 	watch: {
+		limit(newLimit, oldLimit) {
+			if (newLimit < oldLimit) {
+				this.items = this.items.slice(0, newLimit);
+			} else {
+				// TODO pass calculated limit & offset here
+				// offset := oldLimit
+				// limit := newLimit - oldLimit
+				this.query();
+			}
+		},
 		thingsThatTriggerUpdate() {
 			this.query();
 		},
 	},
 	mounted() {
+		this.limit = this.listLimit;
 		this.query();
 	},
 	methods: {

@@ -1,6 +1,7 @@
 export const state = () => ({
 	apiKey: '',
 	darkMode: false,
+	listLimit: 10,
 	playerId: 0, // automatically set on /connect
 	updateIntervalMs: 0,
 	updateOnLoad: false,
@@ -12,6 +13,9 @@ export const mutations = {
 	},
 	SET_DARK_MODE(state, darkMode) {
 		state.darkMode = darkMode;
+	},
+	SET_LIST_LIMIT(state, listLimit) {
+		state.listLimit = listLimit;
 	},
 	SET_PLAYER_ID(state, playerId) {
 		state.playerId = playerId;

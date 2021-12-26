@@ -9,10 +9,17 @@
 		<b-form-group>
 			<b-form-checkbox
 				v-model="darkModeModel"
-				name="check-button"
 				switch
 			>
 				Dark mode
+			</b-form-checkbox>
+		</b-form-group>
+		<b-form-group>
+			<b-form-checkbox
+				v-model="listLimitModel"
+				switch
+			>
+				Show 20 list items by default instead of 10
 			</b-form-checkbox>
 		</b-form-group>
 
@@ -105,6 +112,7 @@ export default {
 		...mapState('settings', [
 			'apiKey',
 			'darkMode',
+			'listLimit',
 			'playerId',
 			'updateIntervalMs',
 			'updateOnLoad',
@@ -115,6 +123,14 @@ export default {
 			},
 			set(value) {
 				this.SET_DARK_MODE(value);
+			},
+		},
+		listLimitModel: {
+			get() {
+				return this.listLimit === 20;
+			},
+			set(value) {
+				this.SET_LIST_LIMIT(value ? 20 : 10);
 			},
 		},
 		updateIntervalMsModel: {
@@ -143,6 +159,7 @@ export default {
 	methods: {
 		...mapMutations('settings', [
 			'SET_DARK_MODE',
+			'SET_LIST_LIMIT',
 			'SET_UPDATE_INTERVAL_MS',
 			'SET_UPDATE_ON_LOAD',
 		]),
