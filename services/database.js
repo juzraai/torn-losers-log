@@ -54,9 +54,9 @@ export default {
 	},
 
 	/**
-		 * @param {Number} id
-		 * @returns {Promise<Player>}
-		 */
+	 * @param {Number} id
+	 * @returns {Promise<Player>}
+	 */
 	getPlayer(id) {
 		return db.players.get(id);
 	},
@@ -67,6 +67,28 @@ export default {
 	 */
 	addAttacks(role, result, attacks) {
 		return this.table(role, result).bulkAdd(attacks.filter(a => !TORN.NPCs.includes(a.opponentId))); // don't even store those NPC attacks
+	},
+
+	/**
+	 * @returns {Promise<Number>}
+	 */
+	async countAllAttacks() {
+		let sum = 0;
+		for (const role of Object.values(ROLE)) {
+			for (const result of Object.values(RESULT)) {
+				sum += await this.countAttacks(role, result);
+			}
+		}
+		return sum;
+	},
+
+	/**
+	 * @param {String} role attacker|defender
+	 * @param {String} result Lost|Escape
+	 * @returns {Promise<Number>}
+	 */
+	countAttacks(role, result) {
+		return this.table(role, result).count();
 	},
 
 	/**

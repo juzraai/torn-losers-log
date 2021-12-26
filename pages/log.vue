@@ -13,6 +13,7 @@
 				</client-only>
 			</div>
 		</div>
+		<ForumThreadModal />
 	</div>
 </template>
 

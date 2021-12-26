@@ -1,6 +1,7 @@
 export const state = () => ({
 	announcedVersion: '1.6.0',
 	apiKey: '',
+	beggedForUpvote: false,
 	darkMode: false,
 	listLimit: 10,
 	playerId: 0, // automatically set on /connect
@@ -14,6 +15,9 @@ export const mutations = {
 	},
 	SET_API_KEY(state, apiKey) {
 		state.apiKey = apiKey;
+	},
+	SET_BEGGED_FOR_UPVOTE(state, beggedForUpvote) {
+		state.beggedForUpvote = beggedForUpvote;
 	},
 	SET_DARK_MODE(state, darkMode) {
 		state.darkMode = darkMode;
