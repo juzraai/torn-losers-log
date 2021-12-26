@@ -3,12 +3,12 @@
 ## 1. Reimplement V1 features
 
 - settings page
-	- show database metrics, record count, timespan
 	- default list item count (10/15/20)
 - new version notifier
 - forum thread alert, above 1500 attack records
 - rewrite README
-- help page in app?
+- tutorial box on log screen, can be closed, but reopened in settings
+	- aware of current screen size
 - review meta description
 - review favicon
 - create & setup OG image: show screenshots of app!!!

@@ -1,4 +1,4 @@
-This tool is being developed for TORN City players. If you don't know what TORN City is and wanna try it out, **[register here](https://www.torn.com/2413874)** so we can both get benefits!
+This tool is being developed for TORN City players. If you don't know what TORN City is and wanna try it out, **[register here](https://www.torn.com/2413874)** so we both can get benefits!
 
 ---
 
@@ -16,7 +16,25 @@ It does all this entirely in your browser, which means your API key won't be sen
 
 ## Screenshots
 
-(Soon...)
+Desktop:
+
+![](gfx/tll-desktop.png)
+
+Desktop, dark mode:
+
+![](gfx/tll-desktop-dark.png)
+
+Mobile:
+
+![](gfx/tll-mobile.png)
+
+Invoice export:
+
+![](gfx/invoice.jpg)
+
+Statistics screen:
+
+![](gfx/tll-stats.png)
 
 
 ## License
