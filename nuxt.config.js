@@ -65,9 +65,13 @@ export default {
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: 'TLL is a tool which aims to help TORN City\'s loss sellers by providing them automatic counting, performance statistics and a proof system.' }
+			{ hid: 'description', name: 'description', content: 'TLL aims to help TORN City players with loss/escape selling/buying: lists, groups, counts your attacks, stores prices & paid status, shows you KPIs.' }
 		],
 		link: [
+			{
+				rel: 'icon',
+				href: 'favicon.ico',
+			},
 			{
 				rel: 'stylesheet',
 				href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'

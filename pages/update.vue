@@ -31,6 +31,9 @@ export default {
 	data: () => ({
 		show: true,
 	}),
+	head: {
+		title: 'New version!',
+	},
 	computed: {
 		changelog() {
 			const t = this.$config.CHANGELOG.split('\n')

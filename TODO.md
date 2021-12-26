@@ -5,10 +5,9 @@
 - tutorial card on log screen, can be closed, but reopened in settings
 	- aware of current screen size
 	- explain switch btn groups, with icons
-- rewrite README - see v1
-- review meta description
-- review favicon
-- create & setup OG image: show screenshots of app!!!
+	- explain groupings, mention example situations
+	- explain TORN API limits (1k attack at once)
+	- suggest checking settings page
 - set app base url to "/torn-losers-log": https://nuxtjs.org/docs/configuration-glossary/configuration-router/#base
 - **at the end** remove old code
 - merge to main with commit message:
@@ -19,20 +18,12 @@ feat: added handling of escapes; added handling of incoming attacks; added JPG &
 BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest change is that it now manages attacks & names in IndexedDB (instead of in-memory Vuex store).
 ```
 
-
-## pr: promo banner/poster to forum topic
-
-- 366 or 602px width
-- highlight main features w/ zoom circles
-	- role switch
-	- result switch
-	- grouping switch
-	- paid button
-	- list count + timestamps
-	- price & paid
-	- dark mode button
-- have transparent background (PNG)
-- host on GitHub
+- release
+- update GH repo description: *"TLL aims to help TORN City players with loss/escape selling/buying: lists, groups, counts your attacks, stores prices & paid status, shows you KPIs."*
+- update forum thread
+	- new title: *"[Site] TLL: best friend of loss/esc sellers/buyers"*
+	- content readme, first 2 sections
+- write post: *"Hey guys, I have big news: I've spent the past 3 weeks rewriting TLL completely and now I'm releasing TLL v2, which now handles escapes and incoming attacks too, and has a few new features as well. Hope you'll enjoy it. :)"*
 
 
 ## feat: name resolver service
@@ -112,3 +103,18 @@ BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest cha
 - auto filled on update just like prices
 - this way contracts with same price can be separated manually
 - **where should it be displayed? new layout looks clean now**
+
+
+## pr: promo banner/poster to forum topic
+
+- 366 or 602px width
+- highlight main features w/ zoom circles
+	- role switch
+	- result switch
+	- grouping switch
+	- paid button
+	- list count + timestamps
+	- price & paid
+	- dark mode button
+- have transparent background (PNG)
+- host on GitHub

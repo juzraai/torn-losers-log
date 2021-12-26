@@ -57,6 +57,10 @@ export default {
 				texts: ['store price', 'and paid status'],
 			},
 			{
+				icons: ['fas fa-receipt', 'fas fa-download'],
+				texts: ['generate and', '<strong>export invoices</strong><span class="badge badge-success ml-2">NEW!</span>'],
+			},
+			{
 				icons: ['fas fa-skull', 'fas fa-running'],
 				texts: [
 					'of losses',

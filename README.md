@@ -4,14 +4,17 @@ This tool is being developed for TORN City players. If you don't know what TORN 
 
 # TLL <small>(TORN City Losers' Log)</small>
 
-**TLL** was originally designed only for loss sellers, but now (v2+) aims to help loss buying activity too, as it can:
+**TLL** was originally designed only for loss sellers, but now (v2+) aims to be the best friend of loss/escape sellers and buyers too!
 
-- 🧾 📊 list, filter, group, count, plot,
-- 🏷️ 💰 store price and paid status
+It can:
+
+- 📋 📊 list, filter, group, count, plot,
+- 💲 ✔️ store price and paid status
+- 🧾 ⬇️ generate and export invoices
 - 💀 🏃 of losses **and escapes (NEW!)**
 - 🎯 🛡️ you made **or received! (NEW!)**
 
-It does all this entirely in your browser, which means your API key won't be sent out nor stored on a 3rd party server. (In fact, TLL doesn't have any server-side code or database, it's a static website.) However, this also means that you have to carry over your data manually, if you decide to switch browsers. **TLL** provides export and import mechanisms to help with that.
+It does all this entirely in your browser, which means your API key won't be sent out nor stored on a 3rd party server. (In fact, TLL doesn't have any server-side code or database, it's a static website.) However, this also means that you have to carry over your data manually, if you decide to switch browsers. **TLL** provides export/import mechanism to help with that.
 
 
 ## Screenshots
