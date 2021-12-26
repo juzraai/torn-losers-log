@@ -17,10 +17,25 @@
 - merge to main with commit message:
 
 ```md
-feat: added handling of escapes; added handling of incoming attacks; added JPG & XLSX export to proofs/invoices; added options for auto-updating of attacks; added automatic player name resolving; added settings page; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster; fixed bar chart to show days with 0 attacks too; added more KPIs
+feat: added handling of escapes; added handling of incoming attacks; added JPG & XLSX export to proofs/invoices; added options for auto-updating of attacks; added automatic player name resolving; added settings page; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster; fixed bar chart to show days with 0 attacks too; fixed bar chart tooltips' date format; added more KPIs
 
 BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest change is that it now manages attacks & names in IndexedDB (instead of in-memory Vuex store).
 ```
+
+
+## pr: promo banner/poster to forum topic
+
+- 366 or 602px width
+- highlight main features w/ zoom circles
+	- role switch
+	- result switch
+	- grouping switch
+	- paid button
+	- list count + timestamps
+	- price & paid
+	- dark mode button
+- have transparent background (PNG)
+- host on GitHub
 
 
 ## feat: name resolver service
@@ -31,6 +46,7 @@ BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest cha
 - let resolvedIds; await db.players.orderBy('id').uniqueKeys(ks => resolvedIds = ks);
 - attacks.where('opponentId').noneOf(resolvedIds).limit(1)
 - resolve it, store it
+
 
 ## feat: API key change in settings
 
@@ -46,14 +62,6 @@ BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest cha
 - need another checkbox in log controls to "Show hidden"
 
 
-## feat: live search:
-
-- https://www.npmjs.com/package/vue-typeahead-bootstrap
-- input for player name or ID
-- selects ONE player from dropdown
-- filters for defender/attacker ID (in attacker/defender mode)
-
-
 ## fix: optimize limit increase
 
 - pass calculated limit & offset to query
@@ -64,6 +72,40 @@ BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest cha
 ## fix: optimize role/result switch
 
 - use 4 item arrays for extreme fast role/result switches
+
+
+## feat: live search
+
+- https://www.npmjs.com/package/vue-typeahead-bootstrap
+- input for player name or ID
+- selects ONE player from dropdown
+- filters for defender/attacker ID (in attacker/defender mode)
+
+
+## feat: start date filter
+
+- filter the whole UI (logs, chart, KPIs)
+- **UI? put it in settings?**
+
+
+## feat: invoice PDF export
+
+- Vue HTML 2 PDF: https://www.npmjs.com/package/vue-html2pdf
+- low level PDF lib: https://github.com/bpampuch/pdfmake
+
+
+## feat: paid+unpaid stacking bar chart
+
+- transform losses chart to stacking bar chart, paid=green, unpaid=blue/red
+
+
+## feat: invoice for multiple contracts
+
+- user can select attack groups to be included
+- invoice will then contain those list items and a total price
+
+
+## feat: display about markdown file in app
 
 
 ## feat: notes to attack groups
