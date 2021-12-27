@@ -154,6 +154,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/variables";
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';

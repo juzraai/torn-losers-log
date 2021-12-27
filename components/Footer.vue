@@ -76,6 +76,10 @@ export default {
 				target: '_blank',
 			},
 			{
+				label: 'Help',
+				to: '/help',
+			},
+			{
 				label: 'Forum thread',
 				href: 'https://www.torn.com/forums.php#/p=threads&f=67&t=16219540',
 				target: '_blank',

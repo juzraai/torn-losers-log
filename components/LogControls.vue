@@ -153,34 +153,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss">
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
-
-#log-controls {
-	@include media-breakpoint-down(xs) {
-		.btn {
-			font-size: 1rem;
-		}
-	}
-
-	@include media-breakpoint-down(sm) {
-		border-radius: $btn-border-radius;
-
-		.btn {
-			border-bottom-width: 0;
-			border-color: $light;
-			border-radius: 0;
-			border-top-width: 0;
-			padding: 0.5rem;
-		}
-	}
-
-	@include media-breakpoint-up(md) {
-		grid-gap: 1rem;
-		gap: 1rem;
-	}
-}
-</style>
