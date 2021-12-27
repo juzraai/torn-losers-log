@@ -40,6 +40,16 @@
 				Update attacks every minute and hide <i class="fas fa-sync fa-fw mx-1" />button
 			</b-form-checkbox>
 		</b-form-group>
+		<b-form-group>
+			<b-form-checkbox
+				v-model="nameResolverIntervalMsModel"
+				switch
+			>
+				Resolve player names in the background (one name every 5 seconds)
+				<br>
+				<small>You should turn this on <strong>only if</strong> you see a player ID without a name in the attack list. If you update your attacks regularly, you won't need to use this feature.</small>
+			</b-form-checkbox>
+		</b-form-group>
 
 		<h6>API key</h6>
 		<client-only>
@@ -101,6 +111,7 @@
 import dayjs from 'dayjs';
 import { mapMutations, mapState } from 'vuex';
 import DB from '@/services/database';
+import NAME_RESOLVER from '@/services/name-resolver';
 import UPDATER from '@/services/updater';
 import v1Compat from '@/services/v1-compat';
 
@@ -113,6 +124,7 @@ export default {
 			'apiKey',
 			'darkMode',
 			'listLimit',
+			'nameResolverIntervalMs',
 			'playerId',
 			'updateIntervalMs',
 			'updateOnLoad',
@@ -131,6 +143,15 @@ export default {
 			},
 			set(value) {
 				this.SET_LIST_LIMIT(value ? 20 : 10);
+			},
+		},
+		nameResolverIntervalMsModel: {
+			get() {
+				return !!this.nameResolverIntervalMs; // convert to bool
+			},
+			set(value) {
+				this.SET_NAME_RESOLVER_INTERVAL_MS(value ? 5000 : 0);
+				NAME_RESOLVER.schedule();
 			},
 		},
 		updateIntervalMsModel: {
@@ -160,6 +181,7 @@ export default {
 		...mapMutations('settings', [
 			'SET_DARK_MODE',
 			'SET_LIST_LIMIT',
+			'SET_NAME_RESOLVER_INTERVAL_MS',
 			'SET_UPDATE_INTERVAL_MS',
 			'SET_UPDATE_ON_LOAD',
 		]),
@@ -192,7 +214,7 @@ export default {
 					delete data.store.settings.apiKey;
 
 					if (data.store.settings.playerId !== this.playerId) {
-						return alert('playerId mismatch! This is someone else\'s export!');
+						return alert("playerId mismatch! This is someone else's export!");
 					}
 
 					this.SET_LOADING(true);

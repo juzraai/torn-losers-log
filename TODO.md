@@ -2,12 +2,10 @@
 
 ## 2.0.0
 
-- set app base url to "/torn-losers-log": https://nuxtjs.org/docs/configuration-glossary/configuration-router/#base
-- remove old code
 - merge to main with commit message:
 
 ```md
-feat: added handling of escapes; added handling of incoming attacks; added JPG & XLSX export to proofs/invoices; added options for auto-updating of attacks; added automatic player name resolving; added settings page; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster; fixed bar chart to show days with 0 attacks too; fixed bar chart tooltips' date format; added more KPIs
+feat: **TLL has been completely rewritten from scratch**; added handling of escapes; added handling of incoming attacks; added JPG & XLSX export to proofs/invoices; added options for auto-updating of attacks; added automatic player name resolving; added settings page; added help page; fixed bar chart to show days with 0 attacks too; fixed bar chart tooltips' date format; added more KPIs; redesigned UI, better optimized for smaller screens; rewritten storage engine to make TLL faster
 
 BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest change is that it now manages attacks & names in IndexedDB (instead of in-memory Vuex store).
 ```
@@ -18,16 +16,6 @@ BREAKING CHANGE: **TLL has been completely rewritten from scratch,** biggest cha
 	- new title: *"[Site] TLL: best friend of loss/esc sellers/buyers"*
 	- content readme, first 2 sections
 - write post: *"Hey guys, I have big news: I've spent the past 3 weeks rewriting TLL completely and now I'm releasing TLL v2, which now handles escapes and incoming attacks too, and has a few new features as well. Hope you'll enjoy it. :)"*
-
-
-## feat: name resolver service
-
-- init from init.client.js
-- setInterval, 5s
-	- this should be configurable in settings: 0=off / X seconds
-- let resolvedIds; await db.players.orderBy('id').uniqueKeys(ks => resolvedIds = ks);
-- attacks.where('opponentId').noneOf(resolvedIds).limit(1)
-- resolve it, store it
 
 
 ## feat: API key change in settings

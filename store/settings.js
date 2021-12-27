@@ -4,6 +4,7 @@ export const state = () => ({
 	beggedForUpvote: false,
 	darkMode: false,
 	listLimit: 10,
+	nameResolverIntervalMs: 0,
 	playerId: 0, // automatically set on /connect
 	updateIntervalMs: 0,
 	updateOnLoad: false,
@@ -24,6 +25,9 @@ export const mutations = {
 	},
 	SET_LIST_LIMIT(state, listLimit) {
 		state.listLimit = listLimit;
+	},
+	SET_NAME_RESOLVER_INTERVAL_MS(state, nameResolverIntervalMs) {
+		state.nameResolverIntervalMs = nameResolverIntervalMs;
 	},
 	SET_PLAYER_ID(state, playerId) {
 		state.playerId = playerId;

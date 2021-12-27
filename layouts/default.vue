@@ -23,6 +23,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import NAME_RESOLVER from '@/services/name-resolver';
 import UPDATER from '@/services/updater';
 
 export default {
@@ -44,6 +45,7 @@ export default {
 		if (this.updateOnLoad) {
 			await UPDATER.updateAttacks();
 		}
+		NAME_RESOLVER.schedule();
 		UPDATER.schedule();
 		this.SET_LOADING(false);
 	},

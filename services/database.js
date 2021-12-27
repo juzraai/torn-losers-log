@@ -180,6 +180,35 @@ export default {
 	},
 
 	/**
+	 * @returns {Promise<Number[]>}
+	 */
+	async getResolvedPlayerIds() {
+		let resolvedIds = [];
+		await db.players.orderBy('id').uniqueKeys(ids => {
+			resolvedIds = ids;
+		});
+		return resolvedIds;
+	},
+
+	/**
+	 * @returns {Promise<Number>}
+	 */
+	async findAnUnresolvedPlayerId() {
+		const resolvedIds = await this.getResolvedPlayerIds();
+		for (const role of Object.values(ROLE)) {
+			for (const result of Object.values(RESULT)) {
+				const foundIds = [];
+				await this.table(role, result).where('opponentId').noneOf(resolvedIds).limit(1).uniqueKeys(ids => foundIds.push(...ids));
+				console.log(foundIds);
+				if (foundIds.length) {
+					return foundIds[0];
+				}
+			}
+		}
+		return null;
+	},
+
+	/**
 	 * @param {String} role attacker|defender
 	 * @param {String} result Lost|Escape
 	 * @param {Boolean} includePaid
