@@ -21,6 +21,7 @@
 			<LogItemDropdown
 				:attacks="attacks"
 				@openInvoice="openInvoice"
+				@setPrice="$refs.priceModal.show()"
 				@togglePaid="togglePaid"
 			/>
 		</div>
