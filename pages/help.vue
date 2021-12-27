@@ -42,6 +42,33 @@
 				</li>
 			</ul>
 		</section>
+
+		<h3>List items</h3>
+
+		<p>List items on the log page display either individual attacks or attack groups. Each list item shows the following:</p>
+		<ul>
+			<li>number of attacks in the group (hidden in "event" mode)</li>
+			<li>timestamps of the first and last attack in the group, most recent timestamp at the top (on smaller screens, only the most recent timestamp is displayed)</li>
+			<li>direction, outcome and opponent of attacks in the group</li>
+			<li>total and per-attack price (if set) of the attack group, <strong><span class="text-danger">red means unpaid,</span> <span class="text-success">green means paid</span></strong></li>
+		</ul>
+		<p>On desktop screens, the list is displayed as a table, where some cells have click actions.</p>
+		<ul>
+			<li>The cell which displays the attack count and timestamps <strong>opens the invoice</strong> for the attack group.</li>
+			<li>Clicking the price cell will display a dialog where you can <strong>set the price for the attack group and all newer attacks of that opponent.</strong></li>
+			<li>There's an addiitonal cell which displays the paid status. Clicking on it will <strong>toggle the paid status</strong> of the attack group and other attacks too. <strong>Setting an attack group paid will set all previous attacks of that type and opponent also as paid. Setting an attack (group) unpaid will set all newer attacks of that type and opponent also as unpaid.</strong></li>
+		</ul>
+		<p>On smaller screens, the list displayed in a compact form and these actions can be accessed via the dropdown menu (<i class="fas fa-ellipsis-v fa-fw" />) on the right.</p>
+
+		<template #footer>
+			<b-button
+				class="mx-auto"
+				to="/log"
+				variant="link"
+			>
+				Back to log
+			</b-button>
+		</template>
 	</Screen>
 </template>
 
@@ -90,22 +117,23 @@ export default {
 				options: [
 					{
 						icon: 'fas fa-bars',
-						description: 'Lists attacks <strong>individually</strong>.',
+						description:
+							'Event mode: lists attacks <strong>individually</strong>.',
 					},
 					{
 						icon: 'fas fa-th-list',
 						description:
-							'Groups <strong>consecutive</strong> attacks with the same opponent, price and paid status are grouped.',
+							'Session mode: groups <strong>consecutive</strong> attacks with the same opponent, price and paid status are grouped.',
 					},
 					{
 						icon: 'fas fa-users',
 						description:
-							'Groups attacks with the same opponent, price and paid status are grouped, <strong>regardless of timestamp.</strong>',
+							'Contract mode: groups attacks with the same opponent, price and paid status are grouped, <strong>regardless of timestamp.</strong>',
 					},
 					{
 						icon: 'far fa-chart-bar',
 						description:
-							'Shows <strong>KPIs</strong> and an attack chart for the past 31 days.',
+							'Statistics mode: shows <strong>KPIs</strong> and an attack chart for the past 31 days.',
 					},
 				],
 			},
@@ -123,6 +151,7 @@ export default {
 </script>
 
 <style scoped>
+li,
 p {
 	text-align: justify;
 }

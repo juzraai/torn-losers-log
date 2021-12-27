@@ -2,14 +2,8 @@
 
 ## 2.0.0
 
-- tutorial card on log screen, can be closed, but reopened in settings
-	- aware of current screen size
-	- explain switch btn groups, with icons
-	- explain groupings, mention example situations
-	- explain TORN API limits (1k attack at once)
-	- suggest checking settings page
 - set app base url to "/torn-losers-log": https://nuxtjs.org/docs/configuration-glossary/configuration-router/#base
-- **at the end** remove old code
+- remove old code
 - merge to main with commit message:
 
 ```md
