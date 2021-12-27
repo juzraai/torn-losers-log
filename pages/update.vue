@@ -36,7 +36,11 @@ export default {
 	},
 	computed: {
 		changelog() {
-			const t = this.$config.CHANGELOG.split('\n')
+			const t = this.$config.CHANGELOG
+				// remove breaking change section
+				.replace(/### ⚠.+?###/gs, '###')
+				// remove headers
+				.split('\n')
 				.slice(5)
 				.map(line => {
 					if (line.startsWith('#')) {
