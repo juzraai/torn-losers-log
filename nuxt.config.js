@@ -109,5 +109,8 @@ export default {
 		BUILD_TIMESTAMP: new Date().getTime(),
 		CHANGELOG: JSON.stringify(changelog)
 	},
+	router: {
+		base: '/torn-losers-log/',
+	},
 	target: 'static',
 };
