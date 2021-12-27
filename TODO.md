@@ -1,12 +1,7 @@
 # v2 TODOs
 
-## 2.0.0
 
-- update GH repo description: *"TLL aims to help TORN City players with loss/escape selling/buying: lists, groups, counts your attacks, stores prices & paid status, shows you KPIs."*
-- update forum thread
-	- new title: *"[Site] TLL: best friend of loss/esc sellers/buyers"*
-	- content readme, first 2 sections
-- write post: *"Hey guys, I have big news: I've spent the past 3 weeks rewriting TLL completely and now I'm releasing TLL v2, which now handles escapes and incoming attacks too, and has a few new features as well. Hope you'll enjoy it. :)"*
+## feat: options for stats day limit 7/14/custom
 
 
 ## feat: API key change in settings

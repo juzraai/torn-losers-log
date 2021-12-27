@@ -10,7 +10,7 @@ It can:
 
 - 📋 📊 list, filter, group, count, plot,
 - 💲 ✔️ store price and paid status
-- 🧾 ⬇️ generate and export invoices
+- 🧾 ⬇️ generate **and export invoices (NEW!)**
 - 💀 🏃 of losses **and escapes (NEW!)**
 - 🎯 🛡️ you made **or received! (NEW!)**
 
