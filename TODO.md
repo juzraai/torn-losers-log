@@ -1,108 +1,58 @@
-# TODO list
+# v2 TODOs
+
+## 2.0.0
+
+- update GH repo description: *"TLL aims to help TORN City players with loss/escape selling/buying: lists, groups, counts your attacks, stores prices & paid status, shows you KPIs."*
+- update forum thread
+	- new title: *"[Site] TLL: best friend of loss/esc sellers/buyers"*
+	- content readme, first 2 sections
+- write post: *"Hey guys, I have big news: I've spent the past 3 weeks rewriting TLL completely and now I'm releasing TLL v2, which now handles escapes and incoming attacks too, and has a few new features as well. Hope you'll enjoy it. :)"*
 
 
-## bug: chart tooltips use different date format
+## feat: API key change in settings
+
+- should verify player ID
 
 
-## bug: chart skips days with no data - should iterate over calendar days
+## feat: hiding attack/user
+
+- hide attack / hide user
+	- mobile: in ellipsis menu
+	- on desktop... need ellipsis menu too I guess
+- this should exclude attacks from groups, charts, counts
+- need another checkbox in log controls to "Show hidden"
 
 
-## feat: save items/page settings
+## fix: optimize limit increase
+
+- pass calculated limit & offset to query
+- offset := oldLimit
+- limit := newLimit - oldLimit
+
+
+## fix: optimize role/result switch
+
+- use 4 item arrays for extreme fast role/result switches
+
+
+## feat: live search
+
+- https://www.npmjs.com/package/vue-typeahead-bootstrap
+- input for player name or ID
+- selects ONE player from dropdown
+- filters for defender/attacker ID (in attacker/defender mode)
 
 
 ## feat: start date filter
 
 - filter the whole UI (logs, chart, KPIs)
-- **this is essential to the defenders version!**
+- **UI? put it in settings?**
 
 
-## epic: defender's log
+## feat: invoice PDF export
 
-A) fork TLL, flip outgoing to incoming
-
-B) extend TLL filters, use one array
-
-- log entries would contain direction: outgoing losses or incoming losses (=defends) (missing = outgoing)
-- grouping should be extended to use this
-- buying and selling could be on separate pages
-
-Either way:
-
-- buyers need different KPIs: defends won, kill streak, war machine
-- maybe a "set goal" feature which saves the timestamp and a defend count goal, and shows progress - should save automatically if reaches 100%, so log rotation won't disturb the progress display
-
-
-## epic: manage escapes too
-
-A) separate "escapes" array besides "losses"
-
-- separate pages too and ALL other computed stuff? seems a lot of work
-
-B) one array for all with extended filters
-
-- log entries would contain outcome (missing = "lost")
-- grouping should use outcome too (for different prices)
-- setting price on individual attack: restrict to same outcome
-- maybe have "Losses" and "Escapes" tab separately, rest is fine
-- what about KPIs and the chart?
-
-
-## feat: income/day stats/chart
-
-
-## feat: proof export
-
-- buttons in top right corner
-- copy to clipboard as unformatted text
-- generate and download PDF - https://github.com/bpampuch/pdfmake
-
-
-## feat: invoice generator in modal/separate page
-
-- list of unpaid contracts with remove from invoice btn
-- calculates ~~subtotals and~~ total
-- formats as PRE for Discord, or maybe provides more format options (screenshot download???)
-- combined proof download options (copy all, PDF all)
-
-
-## pr: promo banner/poster to forum topic
-
-- 366 or 602px width
-- highlight main features, zoom circles
-- have transparent background (PNG)
-- host on GitHub
-
-
-## feat: settings (page)
-
-- on settings page OR on widget top right dropdown menu w/ ellipsis-v icon
-- bar chart options for day limit: 10, 15, 21, 30
-- select log tabs to show/hide with checkboxes
-- set limit for stored losses (lower limit can improve UX)
-- easier API key change
-
-
-## feat: hide certain losses
-
-A) log entry level
-
-- button in log entry - like "Paid/Unpaid" button can be a split button and dropdown could have a "Hide" feature
-- excludes losses from top widgets and Sessions/Clients/Unpaid tabs
-- on Losses tab it can be w/ lighter font color, without Paid button, but with Unhide
-- grouping should consider "hidden" flag too - just jump over it
-
-B) client level
-
-- button on clients tab entry
-- hides from top widgets and all tabs
-- hidden client list and unhide option on settings page
-
-
-## feat: price related KPIs/charts
-
-- earned today/this week/this month
-- daily/weekly earned money chart
-- what else?
+- Vue HTML 2 PDF: https://www.npmjs.com/package/vue-html2pdf
+- low level PDF lib: https://github.com/bpampuch/pdfmake
 
 
 ## feat: paid+unpaid stacking bar chart
@@ -110,26 +60,34 @@ B) client level
 - transform losses chart to stacking bar chart, paid=green, unpaid=blue/red
 
 
+## feat: invoice for multiple contracts
+
+- user can select attack groups to be included
+- invoice will then contain those list items and a total price
+
+
 ## feat: display about markdown file in app
 
 
-## feat: facelift ideas
+## feat: notes to attack groups
 
-price:
-
-- move total price to right (green=paid, red=unpaid), replace Paid button with checkbox
-- nicer editor for price
-
-colors:
-
-- match TORN colors?
-- add dark mode?
-
-log entries:
-
-- stocks3 style design paid button: green circle with "$" symbol, full green on hover
-- "[view]" in log entries for better understanding - needs more space tho
-- entries as cards: vertical inner layout with big number - not ideal for screenshot proof
+- user can add notes (one text field) to attacks/attack groups
+- will also be considered when grouping
+- auto filled on update just like prices
+- this way contracts with same price can be separated manually
+- **where should it be displayed? new layout looks clean now**
 
 
-## env: upgrade stack to Vue CLI 4, Vue 3
+## pr: promo banner/poster to forum topic
+
+- 366 or 602px width
+- highlight main features w/ zoom circles
+	- role switch
+	- result switch
+	- grouping switch
+	- paid button
+	- list count + timestamps
+	- price & paid
+	- dark mode button
+- have transparent background (PNG)
+- host on GitHub

@@ -1,0 +1,40 @@
+// Bootstrap gray (not overriding, just needed)
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+
+// Bootstrap overrides
+$body-bg: $gray-200;
+$border-color: $gray-400;
+$card-border-radius: 0.5rem;
+$dark: $gray-900;
+$enable-deprecation-messages: false;
+$enable-gradients: false;
+$enable-responsive-font-sizes: true;
+$enable-shadows: true;
+$enable-validation-icons: true;
+$font-family-sans-serif: "Roboto Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$light: $gray-200;
+$success: #2dbc4e; // 1-step lighter than original $success
+$warning: #edb100; // 1-step darker than original $warning
+
+// Custom stuff
+$dark-body-bg: $gray-900;
+$dark-body-color: $light;
+$dark-border-color: $gray-700;
+$dark-card-bg: $gray-800;
+$dark-danger: #e04b59; // 1-step lighter than original $danger
+$dark-dropdown-bg: $gray-900;
+$dark-dropdown-link-hover-bg: $gray-800;
+$dark-input-bg: $gray-900;
+$dark-input-border-color: $gray-600;
+$dark-input-color: white;
+$dark-input-group-addon-bg: $gray-700;
+$dark-link-color: #3395ff; // 2-step lighter than original $primary
+$dark-text-muted: $gray-400;

@@ -1,123 +1,68 @@
-This tool is being developed for TORN City players. If you don't know what TORN City is and wanna try it out, **[register here](https://www.torn.com/2413874)** so we can both get benefits!
+This tool is being developed for TORN City players. If you don't know what TORN City is and wanna try it out, **[register here](https://www.torn.com/2413874)** so we both can get benefits!
 
 ---
 
-# [TORN City Losers' Log (TLL)](https://juzraai.github.io/torn-losers-log/)
+# TLL <small>(TORN City Losers' Log)</small>
 
-**TLL** is a tool which **aims to help loss sellers** by providing them
+**TLL** was originally designed only for loss sellers, but now (v2+) aims to be the best friend of loss/escape sellers and buyers too!
 
-- **automatic counting**
-- **performance statistics**
-- and a **proof system**.
+It can:
 
+- 📋 📊 list, filter, group, count, plot,
+- 💲 ✔️ store price and paid status
+- 🧾 ⬇️ generate and export invoices
+- 💀 🏃 of losses **and escapes (NEW!)**
+- 🎯 🛡️ you made **or received! (NEW!)**
 
-
-## Features
-
-- ⚙️ **Manages your last 5000 losses.**
-- 📋 **Lists your losses in 5 ways:**
-	- Individual losses - just like on TORN or YATA
-	- Consecutive losses grouped by client and paid status
-	- Losses grouped by date, client and paid status
-	- Losses grouped by client and paid status
-	- Unpaid losses grouped by client
-- 🧾 **Lists attack log links** for losses and loss groups.
-- 🏷️ **You can set the price for losses** and loss groups, **TLL** calculates totals.
-- 💰 **Losses or loss groups can be easily marked as "paid".**
-- 📊 **Shows bar chart of daily loss counts and calculates average.**
-- 📞 Tooltips tell you if a button will use TORN API, there are no background calls.
-- 🔒 Your API key and data stays in your browser, there's **no server-side code/database,** and no downtime.
-- 💾 You can **export and import** your **TLL** data anytime.
-- 📷 You can hide client names if you want to do a screenshot to show only your stats or **TLL** features.
-- 💡 It has dark mode.
-
+It does all this entirely in your browser, which means your API key won't be sent out nor stored on a 3rd party server. (In fact, TLL doesn't have any server-side code or database, it's a static website.) However, this also means that you have to carry over your data manually, if you decide to switch browsers. **TLL** provides export/import mechanism to help with that.
 
 
 ## Screenshots
 
-![](tll1.jpg)
+Desktop:
 
-![](tll2.jpg)
+![](gfx/tll-desktop.png)
 
-![](tll3.jpg)
+Desktop, dark mode:
 
+![](gfx/tll-desktop-dark.png)
 
+Mobile:
 
-## Compared to YATA
+![](gfx/tll-mobile.png)
 
-[YATA](https://yata.yt/) provides a ton of cool features which help TORN players in various ways. That one set of its functions which are relevant in this comparison are on the **[Targets > Attacks](https://yata.yt/target/attacks)** page.
+Invoice export:
 
-**TLL** focuses only on loss sellers, so it's not a complete replacement for YATA, but may better serve loss sellers due to its additional specific features. However, in some aspects YATA can be still a better choice, that is why I'm writing this chapter and trying to be as objective as I can.
+![](gfx/invoice.jpg)
 
-*Below comparison was written on Mar 21, 2021. If YATA gets relevant updates or you find a mistake here, please contact me.*
+Statistics screen:
 
-
-
-### Limits of counting
-
-TORN API can return your last 1000 attacks. So both YATA and TLL can only display losses from your last 1000 attacks with the first fetch, and they can only process your last 1000 attacks when you update. (So it's recommended to update them regularly.)
-
-YATA **stores attacks** in its database and updates incrementally, with a limitation of **one month history**.
-
-**TLL** also updates incrementally, but only **stores outgoing losses.** The current cap is set to **5000 losses,** but it might change in the future. When the cap is reached, most recent **losses** will kick out the oldest ones when you update.
-
-
-
-### "Paid" marking
-
-YATA allows you to tick a "Paid" checkbox for every attack, **individually.** Actually, this was [my suggestion back then](https://www.torn.com/forums.php#/p=threads&f=67&t=16100118&b=0&a=0&start=200&to=20218792) and its developer implemented it right away. :)
-
-**TLL** makes it more simple. When you mark a loss or loss group as "paid", you **also mark all previous losses to the same defender** with that single click.
-
-
-
-### Loss counting
-
-YATA's "Breakdown" feature **counts your outgoing attacks by defender.** So you have to subtract previous paid contracts to get the count of the current unpaid one.
-
-**TLL** aggregates **by defender and paid status,** this way previous contracts of the same client won't bother you when you check your current unpaid status.
-
-
-
-### Storage & sync
-
-YATA is centralized, it stores your data in a database on its server, so **you can log in from anywhere** to see your data.
-
-**TLL** uses the browser's *local* storage. When you want to use it in another browser, **you have to export and then import your data.**
-
-
-
-### Performance
-
-YATA has a **server and a database** which serves a lot of users, who use a lot of features, often at the same time. You have to connect to the server to access your data.
-
-**TLL** is a **static website,** which means it has no server-side code or centralized database. Your browser can cache the whole site and your data lives in your browser. So, the page and your data loads faster, and there should be less downtime as **TLL** requires much less resources.
-
-
-
-## Developer notes
-
-**TLL** is a SPA built using
-
-- Node v12
-- Yarn
-- Vue CLI v4
-- Vue v2
-- Vue Router
-- Vuex
-- SASS
-- Bootstrap 4
-- Bootstrap-Vue
-
-Commands:
-
-- Setup: `yarn install`
-- Development: `yarn run serve`
-- Build: `yarn run build`
-- Release: `yarn run release && git push --follow-tags origin main`
-
+![](gfx/tll-stats.png)
 
 
 ## License
 
 MIT, please see the `LICENSE` file!
+
+
+## Developer notes
+
+**TLL** is a Nuxt project with `static` target.
+
+```
+# Setup
+yarn
+
+# Start development server
+yarn run serve
+
+# Generate site to "dist/"
+yarn run build
+
+# Release (bump version & push)
+yarn run release && git push --follow-tags origin main
+```
+
+Screens:
+
+![](gfx/screens.png)
