@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
+import { TLLAttack } from '../models/Attack';
+// eslint-disable-next-line no-unused-vars
+import V1Store from '../models/V1Store';
+// eslint-disable-next-line no-unused-vars
+import V2Export from '../models/V2Export';
 import { GROUPING, ROLE, RESULT } from './database';
-import { TLLAttack } from '@/models/Attack';
-// eslint-disable-next-line no-unused-vars
-import V1Store from '@/models/V1Store';
-// eslint-disable-next-line no-unused-vars
-import V2Export from '@/models/V2Export';
 
 export default {
 

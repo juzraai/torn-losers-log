@@ -1,9 +1,9 @@
 import Dexie from 'dexie';
+// eslint-disable-next-line no-unused-vars
+import { TLLAttack } from '../models/Attack';
+// eslint-disable-next-line no-unused-vars
+import Player from '../models/Player';
 import TORN from './torn';
-// eslint-disable-next-line no-unused-vars
-import { TLLAttack } from '@/models/Attack';
-// eslint-disable-next-line no-unused-vars
-import Player from '@/models/Player';
 
 const ONE_DAY_MS = 1000 * 60 * 60 * 24;
 

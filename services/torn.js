@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { TornAttack, TornAttackWithNames } from '@/models/Attack';
+import { TornAttack, TornAttackWithNames } from '../models/Attack';
 
 let $axios = null;
 

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
+import { TLLAttack } from '../models/Attack';
 import DB, { RESULT, ROLE } from './database';
 import TORN from './torn';
-import { TLLAttack } from '~/models/Attack';
 
 let $store = null;
 

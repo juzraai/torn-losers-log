@@ -6,7 +6,7 @@
 
 import LZString from 'lz-string';
 // eslint-disable-next-line no-unused-vars
-import V1Store from '@/models/V1Store';
+import V1Store from '../models/V1Store';
 
 const LOCAL_STORAGE_KEY = 'store';
 
