@@ -12,12 +12,14 @@
 				<Player :xid="playerId" />
 			</NavbarButton>
 		</client-only>
-		<NavbarButton
-			class="d-print-none"
-			to="/settings"
-		>
-			<i class="fas fa-cog fa-fw" />
-		</NavbarButton>
+		<client-only v-if="playerId">
+			<NavbarButton
+				class="d-print-none"
+				to="/settings"
+			>
+				<i class="fas fa-cog fa-fw" />
+			</NavbarButton>
+		</client-only>
 		<NavbarButton
 			class="d-none d-sm-block d-print-none"
 			@click="SET_DARK_MODE(!darkMode)"

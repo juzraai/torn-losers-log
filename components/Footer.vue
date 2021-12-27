@@ -61,11 +61,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-	data: () => ({
-		links: [
+	data() {
+		const playerIdRelated = [
 			{ label: 'Log', to: '/log' },
 			{ label: 'Settings', to: '/settings' },
+		];
+		const staticLinks = [
 			{
 				label: 'About',
 				href: 'https://github.com/juzraai/torn-losers-log/blob/main/README.md',
@@ -79,12 +83,34 @@ export default {
 			{ label: 'Changelog', to: '/changelog' },
 			{
 				label: 'Source code',
-
 				href: 'https://github.com/juzraai/torn-losers-log',
 				target: '_blank',
 			},
-		],
-	}),
+		];
+		return {
+			playerIdRelated,
+			staticLinks,
+			links: staticLinks,
+		};
+	},
+	computed: {
+		...mapState('settings', ['playerId']),
+	},
+	watch: {
+		playerId() {
+			this.init();
+		},
+	},
+	mounted() {
+		this.init();
+	},
+	methods: {
+		init() {
+			this.links = this.playerId
+				? this.playerIdRelated.concat(this.staticLinks)
+				: this.staticLinks;
+		},
+	},
 };
 </script>
 

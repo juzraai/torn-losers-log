@@ -47,6 +47,7 @@
 import { mapMutations } from 'vuex';
 import DB from '@/services/database';
 import TORN from '@/services/torn';
+import UPDATER from '@/services/updater';
 
 export default {
 	data: () => ({
@@ -96,6 +97,8 @@ export default {
 						name: basic.name,
 					},
 				]);
+
+				await UPDATER.updateAttacks();
 
 				this.$router.push('/log');
 			} catch (error) {
