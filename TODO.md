@@ -1,6 +1,14 @@
 # v2 TODOs
 
 
+## fix: IDB cursor bug on Safari, app is dead
+
+- read: https://dexie.org/docs/IndexedDB-on-Safari
+- there's a polyfill/shim thing, we can include it
+
+## fix: try .container instead of .container-fluid on log page
+
+
 ## feat: options for stats day limit 7/14/custom
 
 
