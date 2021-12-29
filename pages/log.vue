@@ -38,3 +38,9 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.container-fluid {
+	max-width: 1000px;
+}
+</style>

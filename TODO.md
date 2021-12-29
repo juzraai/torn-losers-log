@@ -1,9 +1,6 @@
 # v2 TODOs
 
 
-## fix: try .container instead of .container-fluid on log page
-
-
 ## fix: IDB cursor bug on Safari
 
 - red error toast appears: "Unable to open cursor Unknown Error: Unable to open cursor"
