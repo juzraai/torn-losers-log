@@ -1,20 +1,6 @@
 # v2 TODOs
 
 
-## fix: IDB cursor bug on Safari
-
-- red error toast appears: "Unable to open cursor Unknown Error: Unable to open cursor"
-- "was having the same issue like [...] but later it would load but **won't refresh.** Data are still from old version. Happens on Safari v13.5.1. On Chrome on another device it's cool"
-- so migration could finish, it's not IDB as a whole, it's specific bug
-- oh, error toast is my thing, it's only called in connect.vue, there are 2 DB related things there
-	- adding the player
-	- and **updating**
-- **Ok, so it's a bug around updating (fetching attacks)**
-- read: https://dexie.org/docs/IndexedDB-on-Safari - for older browsers there's a polyfill, maybe we can force it for Safari?
-- Possibly related:
-	- https://github.com/dexie/Dexie.js/issues/1030 - cursor error when calling uniqueKeys on an empty table, also parallel operations fail
-
-
 ## feat: options for stats day limit 7/14/custom
 
 
