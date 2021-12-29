@@ -8,7 +8,7 @@ export default (_, inject) => {
 			price /= 1000;
 			i++;
 		}
-		return Math.round(price * 10) / 10 + suffixes[i];
+		return Math.round(price * 100) / 100 + suffixes[i];
 	});
 	inject('timestamp', tsInSeconds => {
 		return dayjs(tsInSeconds * 1000).utc().format('ddd HH:mm:ss - DD/MM/YY');
