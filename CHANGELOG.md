@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/juzraai/torn-losers-log/compare/v2.0.0...v2.0.1) (2021-12-29)
+
+
+### Bug Fixes
+
+* added width limit to log container ([f0c455e](https://github.com/juzraai/torn-losers-log/commit/f0c455e))
+* added workaround to (hopefully) fix cursor error on Safari ([e06e6f5](https://github.com/juzraai/torn-losers-log/commit/e06e6f5))
+* prices are now displayed with 2 decimals ([d5cfc51](https://github.com/juzraai/torn-losers-log/commit/d5cfc51))
+
 ## [2.0.0](https://github.com/juzraai/torn-losers-log/compare/v1.6.0...v2.0.0) (2021-12-27)
 
 
