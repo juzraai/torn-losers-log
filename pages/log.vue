@@ -1,5 +1,5 @@
 <template>
-	<div class="container-fluid">
+	<div class="container">
 		<div class="d-flex flex-column flex-lg-row gap">
 			<div class="d-print-none">
 				<client-only>
@@ -39,8 +39,15 @@ export default {
 };
 </script>
 
-<style scoped>
-.container-fluid {
-	max-width: 1000px;
+<style lang="scss" scoped>
+@import "@/assets/variables";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.container {
+	@include media-breakpoint-down(md) {
+		max-width: unset;
+	}
 }
 </style>
