@@ -156,16 +156,19 @@ export default {
 		const r = {};
 		const ids = [];
 		console.time('[TLL] Last prices/opponent queried in');
-		await this.table(role, result)
-			.orderBy('opponentId').uniqueKeys(opponentIds => {
-				ids.push(...opponentIds);
-			});
-		await Promise.all(ids.map(async id => {
-			const attacks = await this.table(role, result)
-				.where('opponentId').equals(id)
-				.sortBy('timestamp');
-			r[id] = attacks.length ? attacks[attacks.length - 1].price : 0;
-		}));
+		const c = await this.countAttacks(role, result);
+		if (c > 0) {
+			await this.table(role, result)
+				.orderBy('opponentId').uniqueKeys(opponentIds => {
+					ids.push(...opponentIds);
+				});
+			await Promise.all(ids.map(async id => {
+				const attacks = await this.table(role, result)
+					.where('opponentId').equals(id)
+					.sortBy('timestamp');
+				r[id] = attacks.length ? attacks[attacks.length - 1].price : 0;
+			}));
+		}
 		console.timeEnd('[TLL] Last prices/opponent queried in');
 		return r;
 	},
