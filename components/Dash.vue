@@ -7,7 +7,7 @@
 			</div>
 		</Card>
 		<div class="d-flex flex-column flex-lg-row gap">
-			<div class="col col-12 col-lg-5 col-lg-4 gap grid">
+			<div class="col col-12 col-lg-6 gap grid">
 				<DashWidget
 					title="Attacks today"
 					:number="items.length ? items[0].length : 0"

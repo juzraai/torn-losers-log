@@ -6,7 +6,7 @@
 				class="text-muted"
 				v-text="title"
 			/>
-			<h1
+			<h2
 				v-if="number || number === 0"
 				class="mb-0"
 			>
@@ -17,7 +17,7 @@
 					v-else
 					v-text="v"
 				/>
-			</h1>
+			</h2>
 			<slot v-else />
 		</div>
 	</Card>
