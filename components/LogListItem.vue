@@ -121,6 +121,8 @@
 								class="text-center"
 								max="9999"
 								min="0"
+								placeholder="0"
+								step="10"
 								type="number"
 							/>
 						</b-input-group>
@@ -171,7 +173,9 @@ export default {
 	methods: {
 		...mapMutations('ui', ['SET_LOADING']),
 		initializePriceModal() {
-			this.priceInput = this.attacks[0].price / 1000;
+			this.priceInput = this.attacks[0].price
+				? this.attacks[0].price / 1000
+				: null;
 		},
 		async markPaidUntil() {
 			this.SET_LOADING(true);
