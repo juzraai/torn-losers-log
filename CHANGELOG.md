@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/juzraai/torn-losers-log/compare/v2.0.1...v2.0.2) (2025-04-25)
+
+
+### Bug Fixes
+
+* fixed dashboard layout to avoid line breaks in widgets ([cddc0c2](https://github.com/juzraai/torn-losers-log/commit/cddc0c2ee2de53274228334fdc37866c5413b8a5))
+* fixed log container width to match footer width on large screens ([7c9329f](https://github.com/juzraai/torn-losers-log/commit/7c9329f888e12b2d1540049d8c20da21c6c62bbd))
+* fixed unhandled JS error when getting no attacks (API error) ([abaea0f](https://github.com/juzraai/torn-losers-log/commit/abaea0f6310ef8f92c5e5c59b02675a631a65557))
+* removed annoying 0 from set price dialog ([a608a87](https://github.com/juzraai/torn-losers-log/commit/a608a87b44abe2c849b04b5c418c3defa45884b5))
+* upgraded database handler which should fix some Safari issues ([18892cc](https://github.com/juzraai/torn-losers-log/commit/18892cced9417af11f6736e2368a57c5d00f8643))
+
 ### [2.0.1](https://github.com/juzraai/torn-losers-log/compare/v2.0.0...v2.0.1) (2021-12-29)
 
 
