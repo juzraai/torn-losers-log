@@ -29,7 +29,7 @@ export default {
 	 */
 	async attacks(apiKey) {
 		const res = await tornApiCall(apiKey, '/user/?selections=attacks');
-		return Object.values(res.attacks);
+		return res.attacks ? Object.values(res.attacks) : [];
 	},
 
 	/**
@@ -38,7 +38,7 @@ export default {
 	 */
 	async attacksfull(apiKey) {
 		const res = await tornApiCall(apiKey, '/user/?selections=attacksfull');
-		return Object.values(res.attacks);
+		return res.attacks ? Object.values(res.attacks) : [];
 	},
 
 	/**
