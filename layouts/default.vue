@@ -43,7 +43,9 @@ export default {
 	},
 	async mounted() {
 		if (this.updateOnLoad) {
-			await UPDATER.updateAttacks();
+			if (!await UPDATER.updateAttacks()) {
+				this.errorToast('TORN API returned no attacks. See developer console for error.');
+			}
 		}
 		NAME_RESOLVER.schedule();
 		UPDATER.schedule();

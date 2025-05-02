@@ -21,8 +21,6 @@
 import { mapState } from 'vuex';
 import { GROUPING } from '@/services/database';
 
-// TODO would be nice to detect incorrect API key and show a message
-
 export default {
 	head: {
 		title: 'Log',

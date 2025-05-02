@@ -7,14 +7,18 @@ let $axios = null;
  * @param {String} apiKey
  * @param {String} request Route and querystring, starting with slash
  */
-function tornApiCall(apiKey, request) {
+async function tornApiCall(apiKey, request) {
 	if (!$axios) {
 		throw new Error('Call init($axios) first!');
 	}
 	if (!apiKey) {
 		throw new Error('apiKey is required!');
 	}
-	return $axios.$get(`${request}&key=${apiKey}`); // base URL set in nuxt.config.js
+	const res = await $axios.$get(`${request}&key=${apiKey}`); // base URL set in nuxt.config.js
+	if (res.error) {
+		console.error('[TLL] TORN API error:', JSON.stringify(res.error));
+	}
+	return res;
 }
 
 export default {

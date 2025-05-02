@@ -1,6 +1,15 @@
 # v2 TODOs
 
 
+## fix: attack list update not working
+
+- faulty in Brave, Edge and Safari
+- fine in Chrome and Firefox
+- new API key doesn't solve it
+- it's not API change
+- it's not TORN API cache - it caches only for a few minutes, but hours of missing attacks are reported
+
+
 ## feat: options for stats day limit 7/14/custom
 
 

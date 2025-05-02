@@ -28,7 +28,9 @@ export default {
 			const apiKey = $store.state.settings.apiKey;
 			console.log('[TLL] Resolving name for ID', id);
 			const { name } = await TORN.basic(apiKey, id);
-			return DB.addPlayers([{ id, name }]);
+			if (name) {
+				return DB.addPlayers([{ id, name }]);
+			}
 		} else {
 			console.log('[TLL] All names are resolved, this feature can be turned off!');
 		}

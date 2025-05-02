@@ -98,7 +98,9 @@ export default {
 					},
 				]);
 
-				await UPDATER.updateAttacks();
+				if (!await UPDATER.updateAttacks()) {
+					this.errorToast('TORN API returned no attacks. See developer console (F12 -> Console tab) for error message.');
+				}
 
 				this.$router.push('/log');
 			} catch (error) {

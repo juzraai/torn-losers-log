@@ -37,12 +37,14 @@ export default {
 			['Lost', 'Timeout', 'Escape'].includes(a.result);
 
 		let attacksfull = await TORN.attacksfull(apiKey);
+		const attacksfullLength = attacksfull.length;
 		attacksfull = attacksfull
 			.filter(globalAttackFilter)
 			.map(a => {
 				a.result = a.result.replace('Timeout', 'Lost'); // Timeouts count as Losses
 				return a;
 			});
+		console.log('[TLL] [DEBUG] attacksfull:', attacksfullLength, 'filtered:', attacksfull.length);
 
 		for (const role of Object.values(ROLE)) {
 			for (const result of Object.values(RESULT)) {
@@ -66,26 +68,35 @@ export default {
 						});
 					});
 				if (attacks.length) {
+					console.log('[TLL] [DEBUG] adding', attacks.length, 'attacks, role:', role, 'result:', result);
 					await DB.addAttacks(role, result, attacks);
 				}
 			}
 		}
 
-		const attacks = await TORN.attacks(apiKey);
+		let attacks = await TORN.attacks(apiKey);
+		const attacksLength = attacks.length;
+		attacks = attacks.filter(globalAttackFilter);
+		console.log('[TLL] [DEBUG] attacks:', attacksLength, 'filtered:', attacks.length);
 		const players = [];
-		attacks.filter(globalAttackFilter).forEach(a => {
+		attacks.forEach(a => {
 			for (const role of Object.values(ROLE)) {
 				const id = a[`${role}_id`];
 				const name = a[`${role}_name`];
-				if (id && name) {
+				if (id && name && players.findIndex(p => p.id === id) === -1) {
 					players.push({ id, name });
 				}
 			}
 		});
-		await DB.addPlayers(players);
+		if (players.length) {
+			console.log('[TLL] [DEBUG] adding', players.length, 'players');
+			await DB.addPlayers(players);
+		}
 
 		$store.commit('log/SET_LAST_UPDATED', new Date().getTime());
 
 		console.timeEnd('[TLL] Updated attacks in');
+
+		return attacksfullLength; // for error handling on UI
 	},
 };

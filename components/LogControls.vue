@@ -147,7 +147,9 @@ export default {
 		...mapMutations('ui', ['SET_LOADING']),
 		async updateAttacks() {
 			this.SET_LOADING(true);
-			await UPDATER.updateAttacks();
+			if (!await UPDATER.updateAttacks()) {
+				this.errorToast('TORN API returned no attacks. See developer console for error.');
+			}
 			this.SET_LOADING(false);
 		},
 	},

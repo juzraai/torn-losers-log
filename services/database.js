@@ -155,7 +155,7 @@ export default {
 	async getLastPricesPerOpponent(role, result) {
 		const r = {};
 		const ids = [];
-		console.time('[TLL] Last prices/opponent queried in');
+		// console.time('[TLL] Last prices/opponent queried in');
 		const c = await this.countAttacks(role, result);
 		if (c > 0) {
 			await this.table(role, result)
@@ -169,7 +169,7 @@ export default {
 				r[id] = attacks.length ? attacks[attacks.length - 1].price : 0;
 			}));
 		}
-		console.timeEnd('[TLL] Last prices/opponent queried in');
+		// console.timeEnd('[TLL] Last prices/opponent queried in');
 		return r;
 	},
 
@@ -346,13 +346,13 @@ export default {
 	 */
 	async sumOfUnpaid(role, result) {
 		let sum = 0;
-		console.time('[TLL] Summed unpaids in');
+		// console.time('[TLL] Summed unpaids in');
 		await this.table(role, result)
 			.where('paid').equals(0)
 			.each(a => {
 				sum += a.price;
 			});
-		console.timeEnd('[TLL] Summed unpaids in');
+		// console.timeEnd('[TLL] Summed unpaids in');
 		return sum;
 	},
 
