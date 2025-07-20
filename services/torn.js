@@ -14,7 +14,15 @@ async function tornApiCall(apiKey, request) {
 	if (!apiKey) {
 		throw new Error('apiKey is required!');
 	}
-	const res = await $axios.$get(`${request}&key=${apiKey}`); // base URL set in nuxt.config.js
+
+	const now = new Date();
+	const mm = String(now.getMonth() + 1).padStart(2, '0');
+	const dd = String(now.getDate()).padStart(2, '0');
+	const hh = String(now.getHours()).padStart(2, '0');
+	const min = String(now.getMinutes()).padStart(2, '0');
+	const comment = `TLL-${hh}${min}-${mm}${dd}`;
+
+	const res = await $axios.$get(`${request}&key=${apiKey}&comment=${encodeURIComponent(comment)}`); // base URL set in nuxt.config.js
 	if (res.error) {
 		console.error('[TLL] TORN API error:', JSON.stringify(res.error));
 	}
