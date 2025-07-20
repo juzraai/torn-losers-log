@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/juzraai/torn-losers-log/compare/v2.0.2...v2.1.0) (2025-07-20)
+
+
+### Features
+
+* added comment to API calls (also as a cache buster) ([8faef5b](https://github.com/juzraai/torn-losers-log/commit/8faef5b6be0f64e6eef03e8f4bb080d4a0593e06))
+
+
+### Bug Fixes
+
+* added some error handling and adjusted debug logging ([0987fad](https://github.com/juzraai/torn-losers-log/commit/0987fad6f56b8fa9a3b7e6822510f9f6b32c4927))
+
 ### [2.0.2](https://github.com/juzraai/torn-losers-log/compare/v2.0.1...v2.0.2) (2025-04-25)
 
 
